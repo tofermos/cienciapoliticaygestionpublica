@@ -3,16 +3,16 @@ title: "PUNTOS DE VISTA ACTUALES SOBRE EL PAPEL ECONÓMICO DEL ESTADO"
 author: "Tomàs Ferrandis Moscardó"
 date: "2022-10-15"
 output:
+  pdf_document:
+    latex_engine: pdflatex
+    toc: true
+    keep_tex: true
   html_document:
     toc: true
     toc_float: true
     toc_depth: 4
     df_print: paged
     number_sections: false
-  pdf_document:
-    latex_engine: pdflatex
-    toc: true
-    keep_tex: true
 ---
 
 # 1. INTRODUCCIÓN
