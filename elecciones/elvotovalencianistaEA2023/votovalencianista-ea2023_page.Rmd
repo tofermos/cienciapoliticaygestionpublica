@@ -1,0 +1,1333 @@
+---
+title: "RAZONES DEL VOTO VALENCIANISTA EN LAS ELECCIONES AUTONÓMICAS DEL 2023"
+author: "Tomàs Ferrandis Moscardó"
+date: "2023-12-15"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 4
+    df_print: paged
+    number_sections: false
+  pdf_document:
+    latex_engine: pdflatex
+    toc: true
+    keep_tex: true
+---
+
+```{r setup,echo=FALSE,include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+# Requisitos previos. Paquetes y librerías
+if (!require("dplyr")) {install.packages("dplyr")}
+if (!require("stringr")) {install.packages("stringr")}
+if (!require("tidyverse")){install.packages("tidyverse")}
+library(stringr)
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+```
+
+```{r funcionesGrafico, fig.align='top', fig.pos='h', out.width='80%', out.height='80%', results='asis'}
+# F. IMPRESION GRAFICOS DE BARRAS A PARTIR DE UN DATA FRAME
+f_graficoBarres<-function(dfplot){
+ 
+gr_voto<-ggplot(dfplot,aes(x=factor(x,levels=c(x)),y=y1))+
+   geom_bar(stat = "identity", fill ="blue", position = "dodge")+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))+
+   labs(x = "Comarcas", y = "Votos", title = paste(attr(dfplot,"grafico2"),"Votos por comarcas ordenadas según ",attr(dfplot,"criterio")))+
+   geom_text(aes(label = y1), vjust = -0.5, color = "black", size = 3) 
+
+gr_criterio<-ggplot(dfplot,aes(x=factor(x,levels=c(x)),y=y2))+
+   geom_bar(stat = "identity", fill = "red", position = "dodge")+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))+
+   labs(x = "Comarcas", y = attr(dfplot,"criterio"), title = paste(attr(dfplot,"grafico1"),"Comarcas ordenadas según",attr(dfplot,"criterio")))+
+   geom_text(aes(label = y2), vjust = -0.5, color = "black", size = 3) 
+#Vemos el criterio como evoluciona en las comarcas
+print(gr_criterio)
+#Vemos el resultado de votos según este criterio ( gráfico y tabla)
+print(gr_voto)
+  # imprimir tabla asociada
+colnames(dfplot) <- c("Comarca", "% Votos",attr(dfplot,"criterio"))
+knitr::kable(dfplot, caption = paste(attr(dfplot,"tabla"),"Votos por comarcas ordenadas según ",attr(dfplot,"criterio")))
+  }
+```
+# 1.RESUMEN
+El presente trabajo de investigación estudia porqué el voto a formaciones políticas
+valencianistas en las Elecciones Autonómicas del 2023 se dio de forma desigual en las
+diferentes comarcas valencianas. El estudio se centrará en posibles causas como el idioma
+predominante, el carácter periférico o la ruralidad de la comarca.
+
+## Abstract
+
+This research study studies why the vote for Valencian political formations in the 2023
+autonumous elections of the Valencian Community occurred unequally in the different
+Valencian regions (comarcas). The study will focus on possible causes such as the
+predominant language, the peripheral nature or the rurality of the region.
+
+# 2.PALABRAS CLAVE
+Voto valencianista, elecciones autonómicas valencianas 2023, comarca, ruralidad, centralidad,
+periferia, provincialismo, valencianohablante, castellanohablante.
+
+# 3.JUSTIFICACIÓN DE LA RELEVANCIA DE LA INVESTIGACIÓN
+La presente investigación se centrará en averiguar las razones del voto desigual en las
+elecciones autonómicas del 2023 a lo largo del mapa comarcal de la Comunidad Valenciana
+de las fuerzas políticas estrictamente valencianas cuyo discurso o programa responde
+fundamentalmente al clivaje identitario. Es decir, aquellos partidos que nacen del “conflicto
+entre la cultura central que constituye la nación y la resistencia creciente de las poblaciones
+sometidas de las provincias y las periferias, étnicas, lingüísticas o religiosamente
+diferenciadas” (Lipset y Rokkan). No se pretende diferenciar entre opciones más nacionalistas
+o más regionalistas ni tampoco entrar en otras consideraciones referentes a otros clivajes que
+no sea estrictamente el que atañe al debate “centro-periferia”[^1] entendido como “Estado-
+región”.
+
+## Antecedentes
+
+A grandes rasgos, el sistema de partidos en las Cortes Valencianas ha evolucionado de forma
+similar a como lo ha hecho a nivel nacional. En este sentido, podemos diferenciar una primera
+etapa de bipartidismo que abarca desde el inicio de la autonomía, finalizado el periodo
+preautonómico, hasta las elecciones autonómicas de 2015.
+
+Así podemos hablar de un sistema dominado por el PSOE y el PP hasta 2015 cuando las Corts
+Valencianes se transforman en un parlamento caracterizado por un “multipartidismo limitado”
+(Sartori, 1992) dando paso a la alternancia de coaliciones con la irrupción de nuevos partidos
+que consiguen una representación significativa. Algo similar a lo que ocurriría en el
+Congreso.
+
+Dentro de esta etapa bipartidista, hubo un primer periodo de gobierno monocolor del PSPV-
+PSOE presidido por Joan Lerma y coincidente con el periodo del “felipismo”. Con la crisis
+general del PSOE en 1995 se dio el cambio de ciclo de forma casi premonitoria y el PP de
+Eduardo Zaplana alcanzó una mayoría simple diez meses antes que José María Aznar.
+Se inició una nueva etapa de domino popular en la Comunidad Valenciana que duró hasta
+2015 superando los cambios de ciclo estatales de 2004 y 2011 con J.L Zapatero y M. Rajoy
+respectivamente.
+
+El segundo cambio de color en el Palau de la Generalitat tardaría hasta coincidir con la caída
+del sistema bipartidista en les Corts Valencianes. Si bien el sistema de partidos evolucionó
+como el del conjunto del Estado, los cambios de ciclo, no.
+
+### _El valencianismo en los cambios_
+
+Al analizar el primero de estos cambios históricos del Consell y de les Corts, observamos que
+en 1995 el papel de Unión Valenciana (UV), un partido regionalista de centro-derecha fue
+determinante. El PP pudo obtener la Generalitat y las alcaldías de las principales ciudades
+como fue Valencia con Rita Barberá gracias al pacto de investidura que cerró de forma
+generalizada con UV.
+
+De igual forma, veinte años después, el segundo cambio histórico se produce con el acuerdo
+entre el PSOE, Compromís y Podemos. A diferencia de lo que ocurre en otras autonomías
+donde PSOE y Podemos configuraron gobiernos de izquierda, en el País Valenciano
+Compromís superó a Podemos, entró en el gobierno de coalición PSPV-Compromís (Pacto del
+Botànic I) y la mayor parte de los gobiernos municipales se formaron con ediles de ambas
+fuerzas.
+
+## Relevancia académica
+Sartori estableció unas normas para medir la importancia de los partidos, basadas en los
+siguientes criterios: la fuerza electoral de un partido, la fuerza parlamentaria (una vez
+superado el filtro del sistema electoral), las posibilidades de chantaje y el potencial de
+gobierno al formar parte de una coalición (Sartori, 1992). Atendiendo a lo cual, podemos
+decir que, si bien el valencianismo político no ha estado presente siempre en la cámara
+autonómica, en los dos cambios históricos su representación ha sido determinante.
+
+En las elecciones autonómicas del pasado mes de mayo vemos que, pese al incremento de
+diputados del PSPV, Compromís ha perdido dos diputados pero, sobre todo, la desaparición
+del grupo de Podemos ha facilitado el pacto PP-VOX. Esta vez no ha intervenido ninguna
+opción valencianista en el cambio, pero estamos ya ante un sistema de bloques, un escenario
+donde el valencianismo tendrá su papel que ser tenido en cuenta, independientemente de su
+tamaño si es crucial en la formación de una coalición (Sartori, 1992).
+
+*Tabla 1: Distribución de escaños por legislatura en les Corts Valencianes hasta 2015*
+
+|**Legislatura**|**PSOE**|**PP**|**CDS**|**IU**|**UV**|**COM**|**Gobierno**|
+| :- | :- | :- | :- | :- | :- | :- | :- |
+|**1983-1987**|53|35|-|6|-|-|PSOE|
+|**1987-1991**|42|25|10|6|6|-|PSOE|
+|**1991-1995**|45|31|-|6|7|-|PSOE|
+|**1995-1999**|32|42|-|10|5|-|PP|
+|**1999-2003**|35|49|-|5|-|-|PP|
+|**2003-2007**|35|48|-|6|-|-|PP|
+|**2007-2011**|38|54|-|7|-|-|PP|
+|**2011-2015**|33|55|-|5|-|6|PP|
+Fuente: ARGOS Generalitat Valenciana.
+
+
+*Tabla 2: Distribución de escaños por legislatura en les Corts Valencianes a partir de 2015*
+
+|**Legislatura**|**PSOE**|**PP**|**CDS**|**IU**|**UV**|**COM**|**Gobierno**|
+| :- | :- | :- | :- | :- | :- | :- | :- |
+|2015-2019|23|31|19|13|13|-|PSOE-COM|
+|2019-2023|27|19|17|8|18|10|PSOE-COMP-PODEM|
+|2023-|31|40|15|-|-|13|PP-VOX|
+Fuente: ARGOS Generalitat Valenciana
+
+*Equivalencia de siglas: PP, AP. Federación Popular.*
+
+Con cierta perspectiva histórica se podría decir que el valencianismo político tiene una
+relevancia importante. De hecho, en la etapa de dominio bipartidista está presente como grupo
+parlamentario de les Corts en cuatro de las ocho legislaturas; como partido de centro derecha
+regionalista en tres ocasiones y como coalición federalista con un componente nacionalista
+sería Compromís[^2]. Cabe añadir que, en las elecciones de 1987, el partido representante del nacionalismo de izquierdas, Unitat del Poble Valencià, se presentó en coalición con la ederación de IU (EUPV) de forma que obtuvo dos diputados de los 10 inicialmente adscritos al grupo de EUPV que después ingresaron al Grupo Mixto.
+
+## Relevancia social
+El debate político actual en el País Valenciano está tan polarizado como en el resto del país.
+No obstante, tiene sus particularidades. Algunas de las críticas que podemos recoger a través,
+sobre todo, de las redes sociales más que de los medios de comunicación apuntan o atacan
+directamente acuerdos transversales a lo largo de décadas, consensos políticos del
+autogobierno valenciano consolidados como eran la recuperación del idioma valenciano o la
+vertebración territorial de la comunidad autónoma.
+
+La característica principal de estos nuevos discursos es la falta de rigor en sus argumentos. Se
+basan en una idea absolutamente sesgada cuando no falseada de la realidad social y política
+del país. Un ejemplo de este clima de crispación y contradicción lo vemos cuando se difunde
+la idea de una provincia, Alicante, absolutamente monolingüe a la que se le impone el
+valenciano como idioma extraño[^3]. Otro ejemplo sería la comparación absurda del proceso de
+normalización lingüística en pleno siglo XXI con una supuesta vuelta a “la aldea”[^4], algo que
+pretende recordar la idea de la nostalgia de la Gemeinschaft frente a la industrialización en el
+siglo XIX.
+
+A la vista de este debate social y político es importante ver hasta qué punto el valencianismo
+político, como movimiento que reivindica la lengua o la vertebración regional, se ve
+favorecido en un entorno localista, alejado del cosmopolitismo de la urbe; si existe alguna
+provincia monolingüe oprimida por un valencianismo absolutamente foráneo o si solo están
+dispuestos a votar opciones valencianistas los ciudadanos de comarcas valencianohablantes o
+de comarcas limítrofes con el Cap i casal.
+
+# 4. ÍNDICE
+( En el PDF )
+
+# 5. INVESTIGACIÓN
+
+## Pregunta de investigación
+¿Es la lengua la única razón de un voto valencianista en las elecciones autonómicas?
+
+## Enfoque
+Nuestra investigación tendrá un enfoque cuantitativo en el que se combinarán datos
+estadísticos sobre las comarcas con alguna medición nuestra. Pretendemos analizar las causas
+de los votos valencianistas en los casos concretos de nuestra muestra e inferir
+generalizaciones a toda la autonomía.
+
+## Hipótesis
+El tema de la investigación es el voto a partidos regionalistas y nacionalistas valencianos en
+las elecciones autonómicas del 2023. Nuestro objetivo en esta investigación es responder a la
+pregunta de si el idioma es la única razón que explicaría que las coaliciones y partidos
+valencianistas obtengan más votos en unas comarcas que en otras o si, por contra, hay otros
+factores importantes como son el carácter más urbano o rural de estas o su condición de
+comarca más periférica o central dentro de la región.
+
+A partir de estas proposiciones o ideas plantearemos **tres hipótesis:**
+
+1. **Cuanto mayor sea el dominio del valenciano, mayor es el apoyo al valencianismo
+político**.
+
+2. **Cuanto menor sea la concentración urbana, mayor será el apoyo al valencianismo
+político**.
+
+3. **Cuanto mayor sea la vinculación al centro, València, mayor será el apoyo al
+valencianismo político.**
+
+Cada una de estas hipótesis expone una posible inferencia causal sobre el voto valencianista y
+su estudio se llevará a cabo mediante cuatro hipótesis de trabajo que expondremos en el
+apartado siguiente. La hipótesis sobre la centralidad o vinculación al centro se
+operacionalizará en dos hipótesis de trabajo.
+
+## Modelo teórico de la investigación
+```{r modelo, dev='png'}
+#DIAGRAMA QUE REPRESENTA EL MODELO TEÓRICO DE LA INVESTIGACIÓN
+library("DiagrammeR")
+grViz("
+      digraph test {
+      fontsize=6
+      labelloc='t'
+      fontname = 'DejaVu Sans'
+      label='Figura 1: Modelo teórico de investigación'
+        rankdir= LR
+        node [shape = box, width = 1, height = 0.4, style = filled, color = lightblue, labelloc = c, fixedsize = true, spacing=0.3,fontname = 'DejaVu Sans', fontsize = 6]
+        A[label ='Predominio\nlingüístico\ndel valenciano']
+        B[label='Centralidad']
+        C[label='Ruralidad']
+        node [shape = box, width = 1,fontname = 'DejaVu Sans', fontsize = 6, height = 0.4 ]
+        D[label ='Voto a partidos\n valencianistas'];
+        A -> D [label='+', arrowsize=0.2]
+        B -> D [label='+', arrowsize=0.2]
+        C -> D [label='+', arrowsize=0.2]
+      { rank = same; A; B; C }
+      }
+ ")
+```
+
+
+
+```{r ficherosElecciones, echo=FALSE, message=FALSE, warning=FALSE, error=FALSE}
+# LECTURA DE LOS FICHEROS csv DEL OPEN DATA DE LA GV CON LOS RESULTADOS A NIVEL DE AGREGACIÓN DE MESA ELECTORAL
+# VAMOS A CERAR UN FICHERO CON EL %DE VOTO SOBRE CANDIDATURA A LAS CANDIDATURAS VALENCIANISTAS A NIVEL DE AGREGACIÓN COMARCAL QUE INDIQUE:
+# PROVINCIA, COMARCA, PORCENTAJE DE VOTO
+
+df0<-read.csv("CSV/resultados-elecciones-autonomicas-1-2023.csv", fileEncoding='latin3')
+# Paso 1: Eliminamos las líneas de "Residentes ausentes puesto que no pertenencen a ninguna comarca.
+#nrow(df0[df0$Districte==99,]) #Vemos cuantos hay
+# nrow(df0[df0$Desc_Comarca=="",])
+df0<-df0[!df0$Desc_Comarca=="",] 
+
+# Paso1: Agrupamos a nivel de mesa para poder obtener los datos que se repiten en cara fila (candidatura) por mesa y necesitaremos (Voto en blanco y Voto nulo )
+suppressMessages(df1<-subset(df0,select=c(Desc_Prov,Desc_Comarca,Desc_municipi,Districte,Secció,Mesa,VOTANTS,V_NULS,V_BLANC))%>%group_by(Desc_Prov,Desc_Comarca,Desc_municipi,Districte,Secció,Mesa) %>%summarise(Blancos=unique(V_BLANC),Nulos=first(V_NULS)))
+
+#Paso 2: Ahora sumando estos valores únicos por mesa ya podemos obtener el total de vto en blanco y nulo por comarca
+suppressMessages(df2<-df1%>%group_by(Desc_Prov,Desc_Comarca)%>%summarise(Blancos=sum(Blancos),Nulos=sum(Nulos)))
+
+# Agrupamos a nivel de comarca y sumamos los votos de todas las filas a cualquier partido. Voto a candidatura
+suppressMessages(df3<-df0%>% group_by(Desc_Prov,Desc_Comarca) %>%summarise(VotosCandidatura=sum(V_CAND)))
+# Agrupamos a nivel de comarca, filtrando por la candidatura 3 (Compromís) y sumamos usu votos
+suppressMessages(df4<-subset(df0,df0$CODI_CANDIDATURA==3) %>% group_by(Desc_Prov,Desc_Comarca)%>%summarise(VotoValencianista=sum(V_CAND)))
+#Unimos los dos data frame. La opción ,-1] evita la duplicación de columnas
+dfMatrizInicial<-merge(df2, df3[,-1], by = "Desc_Comarca", all = TRUE)
+dfMatrizInicial<-merge(dfMatrizInicial, df4[,-1], by = "Desc_Comarca", all = TRUE)
+
+#Creamos la primera matriz con porcentajes de voto valencianista por comarca
+df_votoycomarcas<-data.frame(Circunsc.=dfMatrizInicial$Desc_Prov,
+                            Comarca=dfMatrizInicial$Desc_Comarca,
+                            PorcVotoValencianista=round(dfMatrizInicial$VotoValencianista*100/dfMatrizInicial$VotosCandidatura,2))
+#Esta df_votoycomarcas lo usaremos en el siguiente chunck fusionándolo con los df obtenidos de los otros adatos ( lengua, distancia, dendidad poblacional...)
+```
+
+```{r ficherosOtrosdatos}
+df_regionesycomarcas<-read.csv("CSV/Regionesycomarcas.csv",dec=",")
+df_densidad<-read.csv("CSV/Densidadycomarcas.csv",dec=",")
+df_distancia<-read.csv("CSV/Distanciaycomarcas.csv",dec=",")
+
+#Creamos el df de todos los datos. Universo= todas las comarcas
+df_universo<-merge(df_votoycomarcas, df_densidad[,-1],by="Comarca")
+df_universo<-merge(df_universo, df_distancia[,-1],by="Comarca")
+df_universo<-merge(df_universo, df_regionesycomarcas[,-1],by="Comarca")
+
+# Tenemos un csv con las comarcas que queremos estudiar (muestra )
+df_indiceMuestra<-read.csv("CSV/Muestra.csv")
+
+#Filtramos del Universo seleccionando solo las comarcas de nuestra muestra. df_muestra será la MATRIZ de DATOS
+df_muestra<-df_universo[df_universo$Comarca %in% df_indiceMuestra$Comarca,]
+
+# Mejoramos los nombres de campos o columnas
+names(df_muestra)<-c("Comarca","Circunscripción","Voto Valencianista %","Densidad poblacional","Km a València", "Región lingüística","% Valencianoparlantes")
+names(df_universo)<-c("Comarca","Circunscripción","Voto Valencianista %","Densidad poblacional","Km a València", "Región lingüística","% Valencianoparlantes")
+
+#Ordenamos la MATRIZ de DATOS (muestra) por voto valencianista e imprimimos en una tabla
+df_muestra<-df_muestra[order(df_muestra$`Voto Valencianista %`),]
+
+```
+
+## Hipótesis de trabajo
+
+### _Hipótesis de trabajo 1: Sobre el predominio del valenciano_
+
+**“A mayor porcentaje de valencianohablantes en una comarca, mayor porcentaje total de votos de partidos valencianistas”**
+
+La hipótesis asume la evidencia histórica de que todos los nacionalismos reivindicativos
+europeos del siglo XIX y XX han sido nacionalismos lingüísticos quizás con la excepción del
+caso escocés (Mira, 2005). Se entendería así que, en un contexto de diglosia lingüística
+fácilmente perceptible[^5], el nacionalismo tuviese mayor apoyo en las urnas.
+
+Partiendo de la dualidad lingüística actual que ya proviene del antiguo Reino de Valencia
+donde unas comarcas se mantienen como catalanohablantes[^6] desde la conquista cristiana,
+otras pasaron del aragonés al castellano siglos después y algunas se incorporaron al reino
+segregándose en el siglo XIX de Castilla, es de esperar que cualquier ideología que contenga un componente de recuperación lingüística del valenciano-catalán tenga una aceptación
+distinta según el idioma predominante de la comarca.
+
+### _Hipótesis de trabajo 2: Sobre la ruralidad:_
+
+**“A mayor % de densidad de población en una comarca, menor % total de votos de
+partidos valencianistas”**
+
+Partimos de la idea defendida en foros públicos y en el debate político sobre el modelo
+territorial o lingüístico según la cual en los núcleos poblacionales que han tenido un mayor
+mestizaje cultural y carácter más cosmopolita se abandona la visión localista. Por el contrario,
+en aquellos entornos donde los grupos sociales en contacto son los mismos durante décadas es
+más fácil anclarse en ideologías que contengan un componente de apego sentimental a la
+cultura propia y una visión de los problemas en clave siempre local.
+
+Intentaremos ver si existe una relación causal entre el nacionalismo o regionalismo y las
+sociedades menos cosmopolitas o más locales o rurales.
+
+### _Hipótesis de trabajo 3: Sobre la centralidad. Distancia a la capital_
+
+**“Cuanto más alejada de la capital está una comarca, menor % total de votos de partidos
+valencianistas”**
+
+Asumimos que la mayor cercanía de los ciudadanos al centro de poder donde se deciden las
+líneas generales de la política sanitaria, educativa, social, medioambiental, agrícola etc.
+pueden afectar en su vinculación emocional con la región/país, motivar su “patriotismo”.
+
+Entendemos que la concentración del poder político, social y económico en la capital del
+reino ha podido provocar, a lo largo de la historia, que las personas que viven cerca del Cap i
+Casal sientan una mayor conexión con las instituciones gubernamentales y los eventos
+nacionales. Esto puede generar una mayor confianza en la capacidad del gobierno autónomo
+para resolver sus problemas.
+
+### _Hipótesis de trabajo 4: Sobre la centralidad. División provincial_
+
+**“En las comarcas de la provincia de Valencia los partidos valencianistas tendrán más
+apoyo que en las de Alicante y Castellón”**
+
+En el caso del País Valenciano, la división arbitraria en provincias impuesta a partir de 1833
+generó un “provincialismo” social acompañada de cierto rechazo hacia el centro: València,
+hacia el Cap i casal. A diferencia de otras regiones, la coincidencia en el nombre para la
+capital, la provincia y la región[^7], junto con el retraso con que Valencia ejerció de facto como
+capital (Fuster, 1999) han tenido un impacto negativo en la creación de una consciencia
+unitaria.
+En esta hipótesis partimos del mismo concepto que en la anterior
+“centralidad/periferia” pero expresada en la dimensión de pertenencia o una u otra provincia.
+
+# 6. OPERACIONALIZACIÓN DE LOS CONCEPTOS CLAVE
+
+## Conceptos
+Las hipótesis que hemos planteado se basan en conceptos que tienen que ver con las
+características del entorno social, cultural y la división político-administrativa provincial. Se
+parte de una visión macro para analizar lo que sería una decisión individual como es el voto.
+Estos fenómenos observables se concretarían en los siguientes conceptos claves.
+
+1. Predominio lingüístico del valenciano. Vínculo con el idioma valenciano asumiendo como dimensión su uso social.
+2. Ruralidad. Carácter rural o urbano de una comarca implica una mayor concentración
+de población lo que a determinar las relaciones entre grupos humanos distintos.
+3. Centralidad. Vinculación con el centro de poder de la comunidad autónoma: València.
+4. Valencianismo político. Apoyo a los partidos estrictamente valencianos, nacionalistas y regionalistas.
+
+## Variables
+
+### _Variables independientes_
+1. Concentración urbana. Para determinar el carácter más urbano o no de una comarca observaremos su concentración. En áreas rurales esta es baja mientras que en las urbanas, alta. Se trata de una variable de intervalo. 
+2. Uso social del valenciano-catalán. El hecho de mantener viva la lengua en el día a día y transmitirla a nuevas generaciones implica una vinculación a un colectivo y por tanto una predisposición a apoyar políticas de identidad (Fukuyama, 2019). Usaremos una variable de intervalo.
+3. En el caso de la centralidad/periferia de la comarca, analizaremos dos dimensiones:
+  1. La distancia hasta la capital. Facilidad para acceder al centro de poder. Variable razón.
+  2. Provincia a la que pertenece la comarca. Variable nominal.
+  
+### _Variable dependiente_ 
+
+Suma del porcentaje de voto válido a opciones políticas valencianistas. Variable de
+intervalo para cuyo cálculo se tendrá en cuenta a todas aquellas opciones políticas
+regionalistas o nacionalistas estrictamente valencianas que obtengan un mínimo de
+votos.
+
+## Indicadores
+
+1. **Densidad media de población de la comarca**. 
+Se trata de un dato secundario que obtendremos directamente del Instituto Valenciano de Estadística. Nos dará el número de habitantes por Km2 de la comarca.
+2. **Porcentaje de población que sabe hablar valenciano**. 
+Este valor lo obtendremos de la encuesta oficial de la Conselleria de Educación “Conocimiento y uso social del valenciano. 2021”; se tratará de un dato de secundario. Esta encuesta ofrece observaciones o valores por comarca, provincia y grandes poblaciones. En cada caso, la encuesta nos aporta cuatro indicadores que informan del porcentaje de ciudadanos que, respecto al valenciano, afirma que: Sabe hablar / Sabe leer /Sabe escribir / Entiende. Vamos a clarificar qué puede arrojar cada indicador para ver cuál o cuáles nos pueden resultar más útiles. 
+
+  a. El indicador “Entiende” no nos aporta información válida sobre un vínculo emocional hacia el idioma.
+  b. Los indicadores “Sabe leer” o “Sabe escribir” podrían dar una idea errónea al contemplar ciudadanos que han aprendido en el sistema educativo, de forma obligatoria, sin ningún interés ni apego al idioma y que puede que no lo usen. Al mismo tiempo se excluirían personas que, por falta de estudios, responden
+negativamente a esta encuesta pese a sentirse íntimamente ligados al idioma.
+  c. El indicador “Sabe hablar”, por contra, reflejaría de forma más aproximada que el resto el vínculo de la ciudadanía con el idioma. Las personas que lo han aprendido en su ambiente familiar, social, laboral o educativo.
+Usaremos como indicador el correspondiente a esta encuesta oficial “Sabe hablar”. El indicador será el de “% Población que sabe hablar”.
+
+3. **Distancia en Km de la capital de la comarca a València**. 
+Para construir este indicador a nivel comarcal, tomaremos como observación la distancia
+más corta por carretera desde la capital de la comarca a València. Este dato lo
+obtendremos de una consulta en Google Maps (alternativamente su podría usar otra guía),
+siendo, por lo tanto, un dato primario.
+
+4. **Provincia**.
+Siendo su valor una de las tres: Alicante, Castellón o Valencia.
+
+5. **Suma del porcentaje de voto en las elecciones autonómicas por comarca**.
+En estudio de caso en que nos hemos centrado, Elecciones Autonómicas de 2023. Pese a
+la barrera legal del 5% de voto emitido autonómico[^8], a efectos de nuestro estudio,
+contemplaremos cualquier voto superior al 2% de voto válido como relevante[^9].
+Se trata de un dato primario calculado a partir de la sencilla suma de resultados que
+obtendremos de la base de datos de la Generalitat Valenciana ARGOS. Como hemos
+comentado, esta base de datos nos ofrece una información detallada por comarcas.
+
+Se da la circunstancia que en las Elecciones autonómicas del 2023 solo Compromís, de
+entre las candidaturas autonómicas valencianistas, superó el 2% de los votos, requisito de
+resultado mínimo del que partimos. Para repetir esta comparación síncrona sobre otra
+convocatoria electoral o para una comparación diacrónica, es probable que es probable
+que encontrásemos dos partidos con resultados superiores a un 2% autonómico. Un
+ejemplo sería el de las elecciones autonómicas de 1999 en las que Unión Valenciana y el
+Bloc Nacionalista Valencià quedaron fuera del parlamento con un 4,76% y un 4,60% de
+voto válido respectivamente.
+
+*Tabla 3. Resumen de la operacionalización*
+
+|CONCEPTO|VARIABLE|INDICADORES|
+|--|--|--|
+|PREDOMINIO LINGÜÍSTICO|USO SOCIAL DEL VALENCIANO|% POBLACIÓN VALENCIANOHABLANTES|
+|RURALIDAD|CONCENTRACIÓN URBANA|DENSIDAD MEDIA DE POBLACIÓN DE LA COMARCA|
+|CENTRALIDAD|VÍNCULO CON VALÈNCIA|KM ENTRE LA CAPITAL DE COMARCA Y VALÈNCIA/PROVÍNCIA|
+
+
+## Validez de la medición
+
+En esta investigación se parte de datos secundarios extraídos de fuentes oficiales y de un dato
+primario que sería resultado de una medición entra la distancia de la capital de cada comarca
+de la muestra y la ciudad de València.
+
+Es evidente que la medición a partir de herramientas online como son las de guías de
+carretera, Google Maps presentan una validez manifiesta debemos entender que, aunque no
+haya una exactitud absoluta, lo importante es la validación discriminante al proporcionarnos
+distancias diferentes entre los casos.
+
+El concepto de Centralidad se operacionalizará mediante dos indicadores. Un segundo
+indicador, el de la Provincia, además del visto de Distancia a la capital nos asegurará obtener
+una medida válida.
+
+## Especificaciones de las hipótesis de trabajo
+
+```{r especificacionesHipotesis1, dev='png'}
+library("DiagrammeR")
+grViz("
+      digraph test1 {
+      style='invis'
+      labelloc='t'
+      fontsize=16
+      fontname = 'DejaVu Sans'
+      label='Figura 2: Hipótesis de trabajo 1'
+      ranksep=0.1
+        node [shape = rectangle, width = 3.6, height = 0.6, style = filled, color = lightblue, labelloc = c,fontname = 'DejaVu Sans',fontsize=14]
+        subgraph cluster1 {
+        A[label='CONCEPTO: \n Predominio lingüístico']
+        B[label='PROPOSICIÓN: \n Cuanto mayor sea \n el vínculo con el idioma, \n más consciencia valencianista']
+        C[label='CONCEPTO: \n Consciencia valencianista']
+        A -> B-> C
+      { rank = same; A; B; C }
+        }
+        
+        subgraph cluster2 {
+        
+        D[label='VARIABLE: \n Uso social del \n valenciano']
+        E[label='HIPÓTESIS: \n Cuanto mayor sea \n el dominio del valenciano, \n mayor apoyo al valencianismo']
+        F[label='VARIABLE: \n Voto valencianista']
+        D->E->F
+      { rank = same; D;E;F }
+        }
+        subgraph cluster3 {
+        
+        G[label ='INDICADOR: \n %Población valencianohablante']
+        H[label='HIPÓTESIS DE TRABAJO: \n Cuanto más valencianohablantes, \n más votos valencianistas']
+        I[label='INDICADOR: \n Suma de % de votos \n a opciones valencianistas']
+        G->H->I
+      { rank = same; G;H;I }
+        }
+        
+        A->D->G[style=invis];
+      }")
+```
+    
+```{r especificacionesHipotesis2, dev='png'}
+library("DiagrammeR")
+grViz("
+      digraph test2 {
+      style='invis'
+      labelloc='t'
+      fontsize=16
+      fontname = 'DejaVu Sans'
+      label='Figura 3: Hipótesis de trabajo 2.'
+      ranksep=0.1
+      node [shape = rectangle, width = 3.6, height = 0.6, style = filled, color = lightblue, labelloc = c, fontname = 'DejaVu Sans', fontsize = 14]
+        subgraph cluster1 {
+        A[label='CONCEPTO: \n Ruralidad']
+        B[label='PROPOSICIÓN: \n Cuanto más rural sea un entorno \n más consciencia valencianista habrá']
+        C[label='CONCEPTO: \n Consciencia valencianista']
+        A -> B-> C
+        { rank = same; A; B; C }
+        }
+        
+        subgraph cluster2 {
+        
+        D[label ='VARIABLE: \n Concentración urbana']
+        E[label='HIPÓTESIS: \n Cuanto menor sea \n la concentración urbana, \n más apoyo al valencianismo político']
+        F[label='VARIABLE: \n Voto valencianista']
+        D->E->F
+      { rank = same; D;E;F }
+        }
+        subgraph cluster3 {
+        
+        G[label ='INDICADOR: \n Densidad de población média \n por comarca']
+        H[label='HIPÓTESIS DE TRABAJO: \n A mayor % de pobación \n menor % de voto valencianista']
+        I[label='INDICADOR: \n Suma de % de votos \n a opciones valencianistas']
+        G->H->I
+      { rank = same; G;H;I }
+        }
+        
+        A->D->G[style=invis];
+      }")
+```
+ 
+ 
+```{r especificacionesHipotesis3, dev='png'}
+library("DiagrammeR")
+grViz("
+      digraph test3 {
+      style='invis'
+      labelloc='t'
+      fontsize=16
+      fontname = 'DejaVu Sans'
+      label='Figura 4: Hipótesis de trabajo 3.'
+      ranksep=0.1
+        node [shape = rectangle, width = 3.6, height = 0.6, style = filled, color = lightblue, labelloc = c, fontname = 'DejaVu Sans', fontsize = 14]
+        subgraph cluster1 {
+        A[label='CONCEPTO: \n Centralidad']
+        B[label='PROPOSICIÓN: \n A mayor centralidad, \n mayor consciencia valencianista']
+        C[label='CONCEPTO: \n Cosnciencia valencianista']
+        A -> B-> C
+      { rank = same; A; B; C }
+        }
+        
+        subgraph cluster2 {
+        
+        D[label ='VARIABLE: \n Vínculo con València']
+        E[label='HIPÓTESIS: \n Cuanto menor sea \n la vinculación con València, \n mayor será el apoyo al \n valencianismo']
+        F[label='VARIABLE: \n Voto valencianista']
+        D->E->F
+      { rank = same; D;E;F }
+        }
+        subgraph cluster3 {
+        
+        G[label ='INDICADOR: \n KM ENTRE LA CAPITAL \n DE LA COMARCA Y VALÈNCIA']
+        H[label='HIPÓTESIS DE TRABAJO: \n Cuanto más alejada de la capital \n está una comarca,\n menor es el % de votos \n a partidos valencianistas']
+        I[label='INDICADOR: \n Suma de % de votos \n a opciones valencianistas']
+        G->H->I
+      { rank = same; G;H;I }
+        }
+        
+        A->D->G[style=invis];
+      }")
+
+```
+    
+
+```{r especificacionesHipotesis4, dev='png'}
+
+grViz("
+      digraph test4 {
+      style='invis'
+      labelloc='t'
+      fontsize=16
+      fontname = 'DejaVu Sans'
+      label='Figura 5: Hipótesis de trabajo 4.'
+      ranksep=0.1
+        node [shape = rectangle, width = 3.6, height = 0.6, style = filled, color = lightblue, labelloc = c, fontname = 'DejaVu Sans', fontsize = 14]
+        subgraph cluster1 {
+        A[label='CONCEPTO: \n Centralidad']
+        B[label='PROPOSICIÓN: \n A mayor centralidad, \n mayor consciencia valencianista']
+        C[label='CONCEPTO: \n Consciencia valencianista']
+        A -> B-> C
+      { rank = same; A; B; C }
+        }
+        
+        subgraph cluster2 {
+        
+        D[label ='VARIABLE: \n VÍNCULO CON VALÈNCIA']
+        E[label='HIPÓTESIS: \n Cuanto menor sea \n la vinculación con València, \n más apoyo temdrá el valencianismo']
+        F[label='VARIABLE: \n Voto valencianista']
+        D->E->F
+      { rank = same; D;E;F }
+        }
+        subgraph cluster3 {
+        
+        G[label ='INDICADOR: \n PROVINCIA']
+        H[label='HIPÓTESIS DE TRABAJO: \n En comarcas de la \n provincia de Valencia habrá  \n un % mayor de voto valencianista']
+        I[label='INDICADOR: \n Suma de % de votos \n a opciones valencianistas']
+        G->H->I
+      { rank = same; G;H;I }
+        }
+        
+        A->D->G[style=invis];
+      }")
+#dev.off()
+
+```
+ 
+ 
+ 
+# 7. NIVEL DE AGREGACIÓN Y UNIDAD DE ANÁLISIS
+ 
+## Justificación del nivel de análisis
+
+Estamos habituados a la presentación y estudio de los resultados electorales a nivel de nación,
+autonomía, provincia y municipio. Estos dos últimos niveles de agregación tienen su
+importancia y utilidad sobre todo a efectos de estudiar o prever resultados parlamentarios o
+cambios de gobiernos. En ayuntamientos y diputaciones provinciales conviene estudiar a
+nivel de agregación municipal. En cálculos parlamentarios, tanto autonómicos como en
+Cortes Generales, interesa el nivel de agregación provincial debido a que el sistema electoral
+español se basa en la circunscripción provincial.
+En nuestro estudio explicativo de comparación nos interesa un nivel de agregación que se
+corresponda a las características culturales y sociales que hemos expuesto en las hipótesis
+como posibles causas o variables independientes del voto valencianista y que sea, a su vez,
+manejable.
+
+Por una parte, cada comarca atiende a una realidad sociolingüística, aunque cabe señalar que
+no se trata de realidades absolutamente homogéneas. Los datos publicados de la última
+encuesta de la Generalitat sobre uso del valenciano del 2021 arrojan valores medios por
+provincia, comarca y una agrupación de estas (regiones lingüísticas). Podemos enfocar
+nuestro estudio en el nivel más micro o segregado que sería el de la comarca.
+La estadística oficial nos proporciona un valor de densidad de población media por municipio,
+comarca o provincia. Evidentemente el nivel macro de provincia no nos aporta información
+útil para nuestro trabajo. La duda estaría en decidir entre un nivel de análisis más concreto o
+micro que sería el de municipio o el de comarca.
+
+El argumento teórico que queremos comprobar es si una sociedad arraigada en su entorno
+local como son las zonas menos pobladas se inclina por unas opciones políticas y si, por el
+contrario, una sociedad que vive en un ambiente más proclive al intercambio cultural y el
+trasiego de gentes diferentes opta por otras. Para esta investigación, si tomamos como unidad
+de análisis el municipio (nivel de análisis micro) podríamos encontrarnos casos con
+observaciones (valores de habitantes/Km2) similares en municipios pertenecientes a una
+comarca rural y localidades más cercanas a grandes urbes y mejor comunicadas con estas. Es
+decir, tendríamos mediciones inapropiadas.
+
+Por el contrario, el nivel de análisis superior, el de la comarca, en su observación nos aporta
+esa información del carácter urbano o rural del municipio y a su vez de la comarca que es más
+correcta para nuestro trabajo y, en definitiva, nos aportaría mediciones apropiadas.
+De forma similar, a la hora de estudiar la centralidad, debemos discernir si el nivel de análisis
+tomando como unidad el municipio es más adecuado que el de la comarca. Evidentemente
+que la distancia física entre la capital y los municipios no es exactamente la misma. Pero la
+diferencia de km para llegar a la autovía o estación de tren más cercana en una misma
+comarca no aportaría una información relevante para nuestro propósito. Por innecesariedad,
+ahorro de tiempo y recursos y por coherencia con lo visto para las demás variables, conviene
+mantener como unidad de análisis la comarca y tomar como indicador la distancia de su
+capital a Valencia.
+
+En lo que respeta a la otra dimensión de la centralidad, la pertenencia a la provincia es
+indiferente el nivel de agregación.
+
+## La comarca en la estadística oficial
+
+El Inventario de Operaciones Estadísticas (IOE) como instrumento básico del Plan Estadístico
+Nacional que incluye todo el abanico de operaciones estadísticas del Instituto Nacional de
+Estadística entre otras entidades tiene el siguiente rango de desagregación: Nacional,
+autonómico, provincial y municipal o inferior u otros.
+Por otra parte, la información electoral que ofrece el Ministerio de Interior es la
+correspondiente a circunscripciones provinciales y municipios.
+Plantear investigaciones donde el nivel de agregación sea comarcal va a implicar, en ciertos
+casos, una complejidad añadida, pero, como hemos tratado de justificar en el apartado
+anterior, merece la pena por el bien el resultado.
+Afortunadamente tenemos la información electoral de la base de datos ARGOS de la
+Generalitat valenciana que ofrece todos los resultados también por comarcas, así como otros
+estudios sociolingüísticos y estadísticos que asumen el nivel de agregación comarcal como
+interesante.
+
+# 8. ESTRATEGIA
+Esta investigación de tipo explicativa tiene como finalidad averiguar cuáles son las causas de
+un voto valencianista desigual en las comarcas valencianas en las elecciones autonómicas del
+2023. Se partirán de las tres posibles inferencias causales y, atendiendo a estas, se
+seleccionará una muestra representativa de casos (comarcas). Mediante técnicas cuantitativas
+se pretende comprobar las hipótesis causales a partir de estos casos concretos. Se trata de una
+comparación síncrona a partir de los resultados de un único proceso electoral en los casos
+(comarcas) y las variables expuestas en apartados anteriores.
+
+## Estudios anteriores
+Antes de afrontar la investigación, como paso previo, hemos recabado información existente
+de otros estudios y fuentes oficiales. Concretamente serán los estudios sobre uso del
+valenciano de la Generalitat Valenciana y los estudios sobre densidad de población del INE.
+El primero nos aportará una subdivisión en regiones que agrupan comarcas desde un punto de
+vista sociolingüístico y, el segundo, nos dará una información gráfica interesante sobre la
+densidad de población. Ambos nos serán de gran ayuda para la construcción de una muestra
+representativa en nuestra investigación como veremos.
+
+## Selección de casos. Criterios, procedimiento y justificación
+
+### _Criterios de la muestra_
+Una vez tenemos definidas qué unidades de análisis usaremos en nuestro trabajo de
+investigación, debemos hacer una selección de los casos ya que, por razones de economía,
+descartaremos estudiar el universo entero de todas las comarcas.
+Se propone un criterio que tenga en cuenta las variables independientes, explicativas, el cual
+nos permitirá una investigación libre de sesgos. El inconveniente de este criterio es que nos
+obligaría a conocer previamente los valores (observaciones) de las variables de todos los
+casos, lo cual sería absurdo además de costoso.
+
+### _Procedimiento_
+
+1. Seleccionamos una región lingüística (Ver Figura 6)
+2. Dentro de la región, comprobando con el mapa de densidad de población del INE, (ver
+Figura 7) seleccionamos dos comarcas con distinta densidad de población. Lo que implicará
+que unas sean más de interior y otras más cercanas al litoral.
+3. Repetimos estos pasos para las 7 regiones lingüísticas.
+
+### _Justificación_
+
+Es obvio que al elegir en todas las regiones lingüísticas obtenemos una muestra representativa
+de la diversidad sociolingüística y que, al ser esta territorializada, estamos contemplando el
+criterio de periferia y provincia (centralidad). Además, la elección atendiendo a la densidad de
+población distinta fuerza a una elección de comarcas tanto del interior como del litoral.
+
+
+*Regiones lingüísticas:*
+
+1. Región de Alicante
+2. Región de Alcoi-Gandia
+3. Región de València y Área Metropolitana
+4. Región de València
+5. Región de Castelló
+6. Región castellanohablante. Zona Requena-Sogorb.
+7. Región castellanohablante. Zona Oriola.
+
+## Muestra propuesta
+
+1. Región de Alicante
+  * L’Alacantí.
+  * Les Valls del Vinalopó
+2. Región de Alcoi-Gandia
+  * La Safor
+  * L’Alcoià
+3. Región de València y Área Metropolitana
+  * València
+  * L’Horta Sud
+4. Región de València
+  * La Ribera Baixa
+  * La Costera
+5. Región de Castelló
+  * La Plana Alta
+  * L’Alt Maestrat
+6. Región castellanohablante. Zona Requena-Sogorb.
+  * La Foya de Bunyol
+  * El Alto Mijares
+7. Región castellanohablante. Zona Oriola.
+  * La Vega Baja
+  * El Vinalopó Medio
+  
+Puesto que vamos a tratar tres variables independientes (cuatro indicadores) en un estudio explicativo, con una muestra de trece casos aseguraremos que el diseño no quede
+indeterminado.
+
+# 9. MATRIZ DE DATOS Y RESULTADOS
+
+## Matriz de datos
+
+```{r, matriz}
+
+library(knitr)
+kable(df_muestra, caption = "Tabla 4. Matriz de datos ordenada por % de votos valencianistas por comarca",col.names = c("Provincia","Comarca","Total % voto valencianista","Densidad poblacional","Km-València","Región lingüística","% Valencianoparlantes"),row.names = FALSE,align= c("l","l","r","r","r","c","r"))
+
+```
+Fuente: ARGOS, Generalitat Valenciana.
+
+Resultados sobre la relación causal del predominio lingüístico
+En este apartado presentamos la matriz ordenada por Porcentaje de valencianohablantes y dos
+gráficos obtenidos a partir de la tabla. De forma que en el eje X siempre tendremos, en orden
+creciente, las comarcas ordenadas por este indicador ( % de valencianohablantes por comarca)
+y en el eje Y, el porcentaje de voto.
+
+## Resultados sobre la relación causal del predominio lingüístico
+En este apartado presentamos la matriz ordenada por Porcentaje de valencianohablantes y dos
+gráficos obtenidos a partir de la tabla. De forma que en el eje X siempre tendremos, en orden
+creciente, las comarcas ordenadas por este indicador ( % de valencianohablantes por comarca)
+y en el eje Y, el porcentaje de voto.
+
+```{r, ordenValencianoparlantes}
+# Ordenamos la matriz de datos según el % de valencianoparlantes.
+df_muestra<-df_muestra[order(df_muestra$`% Valencianoparlantes`),]
+
+# Creamos un data frame con los datos que nos interesan para el gráfico
+dfplot<-data.frame(
+                  x=c(df_muestra$Comarca),
+                  y1=c(df_muestra$`Voto Valencianista %`),
+                  y2=c(df_muestra$`% Valencianoparlantes`)
+                  )
+#asignamos un atributo para el gráfico
+attr(dfplot, "criterio")<-"% de valencianoparlantes"
+attr(dfplot, "grafico1")<-"Gráfico 1: "
+attr(dfplot, "grafico2")<-"Gráfico 2: "
+attr(dfplot, "tabla")<-"Tabla 5: "
+
+#imprimimos el gráfico llamando a la función de generar graficos de barras
+f_graficoBarres(dfplot)
+
+```
+
+## Resultados sobre la relación causal de la ruralidad (dendidad poblacional)
+
+En este apartado presentamos la matriz ordenada por el indicador Habitantes por Km2 y dos
+gráficos obtenidos a partir de la tabla. De forma que en el eje X siempre tendremos, en orden
+creciente, las comarcas ordenadas por este indicador (Habitantes por Km2 por comarca) y en
+el eje Y, el porcentaje de voto
+
+```{r , ordenDensidadpoblacional}
+# Ordenamos la matriz de datos según el % de valencianoparlantes.
+df_muestra<-df_muestra[order(df_muestra$Densidad),]
+
+# Creamos un data frame con los datos que nos interesan para el gráfico
+dfplot<-data.frame(
+                  x=c(df_muestra$Comarca),
+                  y1=c(df_muestra$`Voto Valencianista %`),
+                  y2=c(df_muestra$Densidad)
+                  )
+#asignamos un atributo para el gráfico
+attr(dfplot, "criterio")<-"densidad de población"
+attr(dfplot, "grafico1")<-"Gráfico 3: "
+attr(dfplot, "grafico2")<-"Gráfico 4: "
+attr(dfplot, "tabla")<-"Tabla 6: "
+
+
+#imprimimos el gráfico llamando a la función de generar graficos de barras
+f_graficoBarres(dfplot)
+```
+
+
+## Resultados sobre la relación causal de la centralidad
+Nos centramos en una primera parte en la Hipótesis 3, la que plantea la distancia kilométrica
+entre comarca y la capital del País Valenciano como causa posible de los votos a partidos
+valencianistas.
+En este apartado presentamos la matriz ordenada por el indicador Km a València y dos
+gráficos obtenidos a partir de la tabla. De forma que en el eje X siempre tendremos, en orden
+creciente, las comarcas ordenadas por este indicador (Km a València por comarca) y en el eje
+Y, el porcentaje de voto.
+
+```{r , ordenDistanciacapital}
+# Ordenamos la matriz de datos según los Km entre capital de comarca y el Cap i casal
+df_muestra<-df_muestra[order(df_muestra$`Km a València`),]
+
+# Creamos un data frame con los datos que nos interesan para el gráfico
+dfplot<-data.frame(
+                  x=c(df_muestra$Comarca),
+                  y1=c(df_muestra$`Voto Valencianista %`),
+                  y2=c(df_muestra$`Km a València`)
+                  )
+#asignamos un atributo para el gráfico
+attr(dfplot, "criterio")<-"Km a València"
+attr(dfplot, "grafico1")<-"Gráfico 5: "
+attr(dfplot, "grafico2")<-"Gráfico 6: "
+attr(dfplot, "tabla")<-"Tabla 7: "
+
+
+
+#imprimimos el gráfico llamando a la función de generar graficos de barras
+f_graficoBarres(dfplot)
+```
+
+La otra dimensión de la variable independiente de centralidad corresponde a la Hipótesis 4, la
+que plantea la pertenencia de la comarca a una división provincial u otra como causa de un
+mayor o menor porcentaje de votos a partidos valencianistas.
+Vemos la matriz de resultados clasificada por el indicador Provincia y, dentro de cada
+clasificación, ordenada por el indicador de Km de Valencia.
+El siguiente gráfico obtenido a partir de tabla anterior muestra visualmente la diferencia de %
+de votos para cada valor nominal.
+
+
+```{r funcionesGrafico2, fig.align='top', fig.pos='h', out.width='80%', out.height='80%', results='asis'}
+# FUNCION PARA GRAFICO Y TABLA DE DISPERSION.
+f_graficDispersion<-function(dfplotProv){
+grDispersion<-ggplot(dfplotProv, aes(x = Provincias, y = y1, color = Provincias)) +  
+  geom_point() +
+  labs(title = paste(attr(dfplotProv,"grafico"),"% de voto valencianista en comarcas", attr(dfplotProv,"criterio")),
+                x = "Circunscripciones provinciales",
+                y = "Votos de comarcas")
+
+colnames(dfplotProv) <- c("Provincia","Comarca", "% Votos")
+print(grDispersion)
+# imprimir tabla asociada
+dfplotProv<-dfplotProv[order(dfplotProv$Provincia,dfplotProv$Comarca),]
+knitr::kable(dfplotProv, caption = paste(attr(dfplotProv,"tabla"),"% de voto valencianista en comarcas", attr(dfplotProv,"criterio")),row.names = FALSE)
+}
+
+# Creamos un data frame con los datos que nos interesan para el gráfico
+dfplotProv<-data.frame(
+                  Provincias=df_muestra$Circunscripción,  # El nombre de esta columan aparece en la leyenda de los colores.
+                  y2=df_muestra$Comarca,
+                  y1=df_muestra$`Voto Valencianista %`
+                  
+                  )
+#asignamos atributos para el gráfico y tabla
+attr(dfplotProv, "criterio")<-"agrupadas por provincia"
+attr(dfplotProv, "grafico")<-"Gráfico 7: "
+attr(dfplotProv, "tabla")<-"Tabla 8: "
+f_graficDispersion(dfplotProv)
+
+
+
+
+```
+
+
+Obtener la media de votos por provincia de la Base de Datos ARGOS solo requiere una
+sencilla consulta con lo que podemos hacer una comprobación rápida nuestras medias.
+
+
+
+
+## La província como variable de control
+
+Como hemos visto, el concepto de centralidad, lo hemos operacionalizado con dos indicadores, contemplando así dos dimensiones posibles de la misma variable.
+Resulta interesante comprobar el efecto de cada una de ellas de forma de forma independiente.
+Usaremos la variable de provincia como variable de control manteniendo su valor constante (método _ceteris paribus_) y veremos cómo se comporta la variable dependiente, el porcentaje de voto, en función de la otra variable independiente (distancia kilométrica) entre la capital de
+cada comarca y la capital de la región.
+
+**Variable de control:** la variable independiente “Provincia”.
+
+**Variable independiente:** Distancia a la capital.
+
+### Centralidad desde la provincia de Alicante 
+En este gráfico presentamos en el eje de abscisas las comarcas en orden creciente de distancia
+desde su capital a València. En el eje de ordenadas, tendremos el porcentaje total de votos
+valencianistas para la provincia de Alicante.
+
+
+```{r , ordenDistanciacapitalAlicante}
+# Ordenamos la matriz de datos según los Km entre capital de comarca y el Cap i casal
+#df_muestra<-df_muestra[order(df_muestra$`Km a València`),]
+df_muestraAlacant<-df_muestra[grepl('^Al[ai]cant',df_muestra$Circunscripción),]
+# df_muestraAlacant<-subset(df_muestra,grepl('^Al[ai]cant',df_muestra$Circunscripción)) # Alternativa a ^
+
+# Creamos un data frame con los datos que nos interesan para el gráfico
+dfplot<-data.frame(
+                  x=c(df_muestraAlacant$Comarca),
+                  y1=c(df_muestraAlacant$`Voto Valencianista %`),
+                  y2=c(df_muestraAlacant$`Km a València`)
+                  )
+#asignamos un atributo para el gráfico
+attr(dfplot, "criterio")<-"Km a València"
+attr(dfplot, "grafico1")<-"Gráfico 8: "
+attr(dfplot, "grafico2")<-"Gráfico 9: "
+attr(dfplot, "tabla")<-"Tabla 9: "
+
+
+
+#imprimimos el gráfico llamando a la función de generar graficos de barras
+f_graficoBarres(dfplot)
+```
+
+
+### La centralidad desde la provincia de Castellón
+
+En este gráfico presentamos en el eje de abscisas las comarcas en orden creciente de distancia
+desde su capital a València. En el eje de ordenadas, tendremos el porcentaje total de votos
+valencianistas para la provincia de Castellón.
+
+```{r , ordenDistanciacapitalCastellon}
+# Ordenamos la matriz de datos según los Km entre capital de comarca y el Cap i casal
+#df_muestra<-df_muestra[order(df_muestra$`Km a València`),]
+df_muestraCastellon<-df_muestra[grepl('^Castell',df_muestra$Circunscripción),]
+# df_muestraCastello<-subset(df_muestra,grepl('^Castell',df_muestra$Circunscripción)) # Alternativa a ^
+
+# Creamos un data frame con los datos que nos interesan para el gráfico
+dfplot<-data.frame(
+                  x=c(df_muestraCastellon$Comarca),
+                  y1=c(df_muestraCastellon$`Voto Valencianista %`),
+                  y2=c(df_muestraCastellon$`Km a València`)
+                  )
+#asignamos un atributo para el gráfico
+attr(dfplot, "criterio")<-"Km a València"
+attr(dfplot, "grafico1")<-"Gráfico 9: "
+attr(dfplot, "grafico2")<-"Gráfico 10: "
+attr(dfplot, "tabla")<-"Tabla 11: "
+
+
+
+#imprimimos el gráfico llamando a la función de generar gráficos de barras
+f_graficoBarres(dfplot)
+```
+
+### La centralidad desde la provincia de València
+
+En este gráfico presentamos en el eje de abscisas las comarcas en orden creciente de distancia
+desde su capital a València. En el eje de ordenadas, tendremos el porcentaje total de votos
+valencianistas para la provincia de Valencia.
+
+```{r , ordenDistanciacapitalValencia}
+# Ordenamos la matriz de datos según los Km entre capital de comarca y el Cap i casal
+#df_muestra<-df_muestra[order(df_muestra$`Km a València`),]
+df_muestraValencia<-df_muestra[grepl('^Castell',df_muestra$Circunscripción),]
+# df_muestraValencia<-subset(df_muestra,grepl('^Val[èe]ncia',df_muestra$Circunscripción)) # Alternativa a ^
+
+# Creamos un data frame con los datos que nos interesan para el gráfico
+dfplot<-data.frame(
+                  x=c(df_muestraValencia$Comarca),
+                  y1=c(df_muestraValencia$`Voto Valencianista %`),
+                  y2=c(df_muestraValencia$`Km a València`)
+                  )
+#asignamos un atributo para el gráfico
+attr(dfplot, "criterio")<-"Km a València"
+attr(dfplot, "grafico1")<-"Gráfico 11: "
+attr(dfplot, "grafico2")<-"Gráfico 12: "
+attr(dfplot, "tabla")<-"Tabla 12: "
+
+
+
+#imprimimos el gráfico llamando a la función de generar gráficos de barras
+f_graficoBarres(dfplot)
+```
+
+
+
+El uso de la variable de control Provincia nos ha permitido averiguar que, si bien
+inicialmente, podíamos haber deducido que a mayor distancia a la capital, menor era el voto
+valencianista en toda la Comunidad (ver Gráfico 6) realmente esto no era así.
+
+Mediante el método **ceteris paribus** ( **variable de control**: circunscripción provincial) hemos averiguado que esta hipótesis de trabajo que
+señalaba al indicador de distancia a la capital como causa de un menor voto valencianista (a
+mayor distancia, menor % de votos) se cumpliría, en todo caso, solo en las comarcas del sur, en la provincia de
+Alicante (ver Gráfico 7). De hecho, en las comarcas de Valencia y Castelló se llega a aprceia el efecto contrario (ver Gráficos 9 y Gráfico 11)
+
+
+# 10.CONCLUSIONES
+Respecto al diferente porcentaje de voto por comarcas a Compromís, como única fuerza
+valencianista que obtuvo un porcentaje de votos superior al 2% en las elecciones autonómicas
+del 2023, podemos concluir que:
+
+1. Hay una relación causal entre el predominio del idioma valenciano en la comarca y el
+voto a Compromís: a mayor predomino, más votos. Aun así, en comarcas
+castellanohablantes Compromís obtiene valores por encima del 10%.
+Se cumple la Hipótesis 1.
+
+2. No se puede establecer una relación de causalidad entre ruralidad de la comarca y este
+voto valencianista. 
+La Hipótesis 2 no se cumple
+
+3. Existe una causalidad entre la distancia a la capital y el voto valencianista en la
+Provincia de Alicante; en las comarcas más alejadas de Valencia se obtienen menos
+votos. En la provincia de Valencia, esta causalidad opera en sentido contrario:
+comarcas más alejadas del Cap i casal votan más a Compromís. En Castellón tampoco
+se cumple la hipótesis inicial. 
+La Hipótesis de trabajo 3 no se cumple con lo que la hipótesis 3 no se cumple como tal.
+
+4. La pertenencia a una provincia u otra sí que explica una tendencia al voto
+valencianista. Existe un mayor voto a Compromís en las comarcas de la provincia de
+Valencia y un menor voto en las de Alicante, quedando Castellón en una posición
+intermedia. La Hipótesis de trabajo 4 si cumple.
+
+# 11.LISTA DE REFERENCIAS BIBLIOGRÁFICAS
+* FUKUYAMA, Francis 2019, Identidad. Barcelona: Editorial Planeta.
+* FUSTER, J. 1988 Nosaltres els valencians. València; Edicions 3 i 4
+* LIPSET, Seymour y ROKKAN, Stein, LIPSET, Estructuras de división, sistemas de
+partidos y alineamientos electorales, traducción en español en Diez textos básicos de
+ciencia política, Ariel, Barcelona 2001.
+* MIRA, Joan F. 2005. Crítica de la nació pura. València: Edicions 3 i 4.
+* RODRÍGUEZ-AGUILERA, C. Manual de partidos políticos. Barcelona: Huygens
+Editorial.
+* SARTORI, G. 1992. Partidos y sistemas de partidos. Madrid.
+
+# 12. OTROS RECURSOS
+
+* ARGOS. Base de datos de resultado electorales de la Generalitat Valenciana.
+https://www.argos.gva.es
+* Encuestas sobre la situación del valenciano. Dirección General de Política
+Lingüística.
+https://ceice.gva.es/va/web/dgplgm/enquestes-situacio-valencia
+* Institut Valencià d’Estadística. Generalitat Valenciana.
+https://pegv.gva.es/auto/scpd/web/DBCV/DBCV_2021_C.pdf
+* Instituto Nacional de Estadística
+https://www.ine.es
+* Portal de Dades Obertes de la Generalitat Valenciana.
+https://portaldadesobertes.gva.es/va/
+
+
+
+[^1]: No debe confundirse con el clivaje “centro-periferia” definitorio de un partido nacionalista o federalista.
+[^2]: Compromís es una coalición electoral que se reedita en cada convocatoria formada por un partido
+mayoritario originalmente nacionalista (Més), un partido de izquierda federalista (Iniciativa del Poble
+Valencià) proveniente de una escisión de EUPV y un grupo ecologista.
+[^3]: El PP y VOX, aunque últimamente más esta formación critican la enseñanza del valenciano en
+Alicante que ha existido desde inicio de la autonomía
+[^4]: La exportavoz del Ciudadanos en les Corts Valencianes, Carolina Punset, comparó la recuperación
+del idioma con querer vivir en la aldea.
+[^5]: En el panorama de medios de comunicación, a parte de los medios de ámbito estatal, la única prensa en
+catalán/valenciano son dos periódicos digitales y la TV y radio autonómica
+[^6]: Oficialmente existe una doble denominación para el idioma común (catalán y valenciano) pero parece más
+acertado si nos referimos al momento histórico de la conquista cristiana el término catalán.
+[^7]: Es evidente qué es un andaluz, una catalana, un cántabro...Mientras que el término “valenciano” puede referise
+a tres condiciones distintas a la vez (vecino de València, ciudadano de una provincia o de una región)
+[^8]: La ley electoral valenciana (Ley 1/1987, de 31 de marzo, Electoral Valenciana) establece en su
+artículo 12 a). la exclusión de las fuerzas que no hayan superado el 5% del voto emitido a efectos de
+reparto de escaños.
+[^9]: “Relevante” no en el sentido dado por Sartori u Otero-Díaz de decisivo en la formación de gobierno.
+
+# 13. ANEXO. R Markdown
+
+El presente documento ha sido editado en R Markdown. Los datos obtenidos obtenidos de las fuentes citadas en el anterior apartado han sido procesados mediante el lenguaje de programación R. Tanto para el cálculo de valores numéricos como la elaboración e impresión de tablas, diagramas y gráficos. 
+Veamos por orden de uso en el documento los diferentes *chunks* de R integrados en el documento.
+
+Se ha insertado en este anexo los valores *val=FALSE* para evitar la ejecución del código r y el valor *echo=TRUE* para que sea visible.
+
+## Instalación de paquetes y carga de librerías requeridas
+```{r setupANEXO, echo=TRUE, eval=FALSE}
+# Requisitos previos. Paquetes y librerías
+if (!require("dplyr")) {install.packages("dplyr")}
+if (!require("stringr")) {install.packages("stringr")}
+if (!require("tidyverse")){install.packages("tidyverse")}
+library(stringr)
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+```
+## Funciones para imprimir 2 gráficos y 1 tabla
+```{r funcionesGraficoANEXO, echo=TRUE, eval=FALSE,fig.align='top', fig.pos='h', out.width='80%', out.height='80%', results='asis'}
+# F. IMPRESION GRAFICO DE BARRAS A PARTIR DE UN DATA FRAME
+f_graficoBarres<-function(dfplot){
+ 
+gr_voto<-ggplot(dfplot,aes(x=factor(x,levels=c(x)),y=y1))+
+   geom_bar(stat = "identity", fill ="blue", position = "dodge")+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))+
+   labs(x = "Comarcas", y = "Votos", title = paste(attr(dfplot,"grafico2"),"Votos por comarcas ordenadas según ",attr(dfplot,"criterio")))+
+   geom_text(aes(label = y1), vjust = -0.5, color = "black", size = 3) 
+
+gr_criterio<-ggplot(dfplot,aes(x=factor(x,levels=c(x)),y=y2))+
+   geom_bar(stat = "identity", fill = "red", position = "dodge")+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))+
+   labs(x = "Comarcas", y = attr(dfplot,"criterio"), title = paste(attr(dfplot,"grafico1"),"Comarcas ordenadas según",attr(dfplot,"criterio")))+
+   geom_text(aes(label = y2), vjust = -0.5, color = "black", size = 3) 
+#Vemos el criterio como evoluciona en las comarcas
+print(gr_criterio)
+#Vemos el resultado de votos según este criterio ( gráfico y tabla)
+print(gr_voto)
+  # imprimir tabla asociada
+colnames(dfplot) <- c("Comarca", "% Votos",attr(dfplot,"criterio"))
+knitr::kable(dfplot, caption = paste(attr(dfplot,"tabla"),"Votos por comarcas ordenadas según ",attr(dfplot,"criterio")))
+  }
+```
+
+## Modelo teórico de la investigación
+```{r modeloANEXO, echo=TRUE,eval=FALSE, fig.cap = "Figura 1: Modelo teórico de investigación", dev='png'}
+#DIAGRAMA QUE REPRESENTA EL MODELO TEÓRICO DE LA INVESTIGACIÓN
+library("DiagrammeR")
+grViz("
+      digraph test {
+      labelloc='t'
+      label='Figura 1: Modelo teórico de investigación'
+      fontsize=14
+      fontname = 'DejaVu Sans'
+      
+        rankdir= LR
+        node [shape = box, width = 0.7, height = 0.4, style = filled, color = lightblue, labelloc = c, fixedsize = true, spacing=0.3,fontname = 'DejaVu Sans', fontsize = 4]
+        A[label ='Predominio\nlingüístico\ndel valenciano']
+        B[label='Centralidad']
+        C[label='Ruralidad']
+        node [shape = box, width = 1,fontname = 'sans', fontsize = 6]
+        D[label ='Voto a partidos\n valencianistas'];
+        A -> D [label='+', arrowsize=0.4]
+        B -> D [label='+', arrowsize=0.4]
+        C -> D [label='+', arrowsize=0.4]
+      { rank = same; A; B; C }
+      }
+ ")
+```
+
+## Obtención de data frame a partir de los datos abiertos
+
+A partir de ficheros CSV obtenidos de las diversas fuentes citadas, se procesan en R para crear dos Data Frame (Universo y Muestra ). Las columnas de estos corresponderan a las variables independientes y la dependiente. El Universo contemplará todas la comarcas del País Valenciano mientras que la Muestra solo las seleccionadas. 
+
+```{r ficherosEleccionesANEXO, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE, eval=FALSE}
+# LECTURA DE LOS FICHEROS csv DEL OPEN DATA DE LA GV CON LOS RESULTADOS A NIVEL DE AGREGACIÓN DE MESA ELECTORAL
+# VAMOS A CERAR UN FICHERO CON EL %DE VOTO SOBRE CANDIDATURA A LAS CANDIDATURAS VALENCIANISTAS A NIVEL DE AGREGACIÓN COMARCAL QUE INDIQUE:
+# PROVINCIA, COMARCA, PORCENTAJE DE VOTO
+
+df0<-read.csv("CSV/resultados-elecciones-autonomicas-1-2023.csv", fileEncoding="latin3")
+# Paso 1: Eliminamos las líneas de "Residentes ausentes puesto que no pertenecen a ninguna comarca.
+#nrow(df0[df0$Districte==99,]) #Vemos cuantoss hay
+# nrow(df0[df0$Desc_Comarca=="",])
+df0<-df0[!df0$Desc_Comarca=="",] 
+
+# Paso 2: Agrupamos a nivel de mesa para poder obtener los datos que se repiten en cada fila (candidatura) por mesa y necesitaremos (Voto en blanco y Voto nulo )
+suppressMessages(df1<-subset(df0,select=c(Desc_Prov,Desc_Comarca,Desc_municipi,Districte,Secció,Mesa,VOTANTS,V_NULS,V_BLANC))%>%group_by(Desc_Prov,Desc_Comarca,Desc_municipi,Districte,Secció,Mesa) %>%summarise(Blancos=unique(V_BLANC),Nulos=first(V_NULS)))
+
+# Paso 3: Ahora sumando estos valores únicos por mesa ya podemos obtener el total de vOto en blanco y nulo por comarca
+suppressMessages(df2<-df1%>%group_by(Desc_Prov,Desc_Comarca)%>%summarise(Blancos=sum(Blancos),Nulos=sum(Nulos)))
+
+# Paso 4: Agrupamos a nivel de comarca y sumamos los votos de todas las filas a cualquier partido. Voto a candidatura
+suppressMessages(df3<-df0%>% group_by(Desc_Prov,Desc_Comarca) %>%summarise(VotosCandidatura=sum(V_CAND)))
+
+# Paso 5: Agrupamos a nivel de comarca, filtrando por la candidatura 3 (Compromís) y sumamos usu votos
+suppressMessages(df4<-subset(df0,df0$CODI_CANDIDATURA==3) %>% group_by(Desc_Prov,Desc_Comarca)%>%summarise(VotoValencianista=sum(V_CAND)))
+
+# Paso 6: Unimos los dos data frame. La opción ,-1] evita la duplicación de columnas
+dfMatrizInicial<-merge(df2, df3[,-1], by = "Desc_Comarca", all = TRUE)
+dfMatrizInicial<-merge(dfMatrizInicial, df4[,-1], by = "Desc_Comarca", all = TRUE)
+
+# PAso 7: Creamos la primera matriz con porcentajes de voto valencianista por comarca
+df_votoycomarcas<-data.frame(Circunsc.=dfMatrizInicial$Desc_Prov,
+                            Comarca=dfMatrizInicial$Desc_Comarca,
+                            PorcVotoValencianista=round(dfMatrizInicial$VotoValencianista*100/dfMatrizInicial$VotosCandidatura,2))
+#Este dataframe. df_votoycomarcas, lo usaremos en el siguiente chunck fusionándolo con los datraframes obtenidos de los otros datos (lengua, distancia, densidad poblacional...)
+```
+
+```{r ficherosOtrosdatosANEXO, echo=TRUE,eval=FALSE}
+
+df_regionesycomarcas<-read.csv("CSV/Regionesycomarcas.csv",dec=",")
+df_densidad<-read.csv("CSV/Densidadycomarcas.csv",dec=",")
+df_distancia<-read.csv("CSV/Distanciaycomarcas.csv",dec=",")
+
+# Creamos el dataframe de todos los datos. Universo = todas las comarcas
+df_universo<-merge(df_votoycomarcas, df_densidad[,-1],by="Comarca")
+df_universo<-merge(df_universo, df_distancia[,-1],by="Comarca")
+df_universo<-merge(df_universo, df_regionesycomarcas[,-1],by="Comarca")
+
+# Leemos el un csv con las comarcas que queremos estudiar (muestra.csv)
+df_indiceMuestra<-read.csv("CSV/Muestra.csv")
+
+# Filtramos del Universo seleccionando solo las comarcas de nuestra muestra. df_muestra será la MATRIZ de DATOS de nuestra investigación
+df_muestra<-df_universo[df_universo$Comarca %in% df_indiceMuestra$Comarca,]
+
+# Modificamos los nombres de campos (columnas) hacviéndolos más descriptivos
+names(df_muestra)<-c("Comarca","Circunscripción","Voto Valencianista %","Densidad poblacional","Km a València", "Región lingüística","% Valencianoparlantes")
+names(df_universo)<-c("Comarca","Circunscripción","Voto Valencianista %","Densidad poblacional","Km a València", "Región lingüística","% Valencianoparlantes")
+
+# Ordenamos la MATRIZ de DATOS (muestra) por voto valencianista e imprimimos una tabla
+df_muestra<-df_muestra[order(df_muestra$`Voto Valencianista %`),]
+
+# Comentamos en el ANEXO
+# knitr::kable(df_muestra, caption = "Tabla 2. Muestra", table.env.caption="Fuente: OPEN DATA Generalitat Valenciana",row.names = FALSE)
+```
+## Obtención de un gráfico de dispersión.
+
+```{r funcionesGrafico2ANEXO, eval=FALSE, echo=TRUE, fig.align='top', fig.pos='h', out.width='80%', out.height='80%', results='asis'}
+# FUNCION PARA GRAFICO Y TABLA DE DISPERSION.
+f_graficDispersion<-function(dfplotProv){
+grDispersion<-ggplot(dfplotProv, aes(x = Provincias, y = y1, color = Provincias)) +  
+  geom_point() +
+  labs(title = paste(attr(dfplotProv,"grafico"),"% de voto de comarcas", attr(dfplotProv,"criterio")),
+                x = "Circunscripciones provinciales",
+                y = "Votos de comarcas")
+
+colnames(dfplotProv) <- c("Provincia","Comarca", "% Votos")
+print(grDispersion)
+# imprimir tabla asociada
+dfplotProv<-dfplotProv[order(dfplotProv$Provincia,dfplotProv$Comarca),]
+knitr::kable(dfplotProv, caption = paste(attr(dfplotProv,"tabla"),"% de voto de comarcas", attr(dfplotProv,"criterio")),row.names = FALSE)
+}
+
+# Creamos un data frame con los datos que nos interesan para el gráfico
+dfplotProv<-data.frame(
+                  Provincias=df_muestra$Circunscripción,  # El nombre de esta columan aparece en la leyenda de los colores.
+                  y2=df_muestra$Comarca,
+                  y1=df_muestra$`Voto Valencianista %`
+                  
+                  )
+#asignamos atributos para el gráfico y tabla
+attr(dfplotProv, "criterio")<-"agrupadas por provincia"
+attr(dfplotProv, "grafico")<-"Gráfico 7: "
+attr(dfplotProv, "tabla")<-"Tabla 8: "
+f_graficDispersion(dfplotProv)
+
+```
+## Diagramas de las especificaciones 
+
+```{r especificacionesHipotesis1ANEXO, dev='png', eval=FALSE, echo=TRUE}
+library("DiagrammeR")
+grViz("
+      digraph test1 {
+      style='invis'
+      labelloc='t'
+      label='Figura 2: Hipótesis de trabajo 1'
+      ranksep=0.1
+        node [shape = rectangle, width = 3.2, height = 0.6, style = filled, color = lightblue, labelloc = c, fontname = 'sans', fontsize = 12]
+        subgraph cluster1 {
+        A[label='CONCEPTO: \n Predominio lingüístico']
+        B[label='PROPOSICIÓN: \n Cuanto mayor sea \n el vínculo con el idioma, \n más consciencia valencianista']
+        C[label='CONCEPTO: \n Consciencia valencianista']
+        A -> B-> C
+      { rank = same; A; B; C }
+        }
+        
+        subgraph cluster2 {
+        
+        D[label='VARIABLE: \n Uso social del \n valenciano']
+        E[label='HIPÓTESIS: \n Cuanto mayor sea \n el dominio del valenciano, \n mayor apoyo al valencianismo']
+        F[label='VARIABLE: \n Voto valencianista']
+        D->E->F
+      { rank = same; D;E;F }
+        }
+        subgraph cluster3 {
+        
+        G[label ='INDICADOR: \n %Población valencianohablante']
+        H[label='HIPÓTESIS DE TRABAJO: \n Cuanto más valencianohablantes, \n más votos valencianistas']
+        I[label='INDICADOR: \n Suma de % de votos \n a opciones valencianistas']
+        G->H->I
+      { rank = same; G;H;I }
+        }
+        
+        A->D->G[style=invis];
+      }")
+```
