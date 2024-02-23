@@ -4,8 +4,9 @@ output:
   pdf_document: default
 ---
 # Estudios de ciencia politica
-En este repositorio encontrarás trabajos y artículos relacionados con las asignaturas del Grado Universitario de Ciencia Política y Gestión Pública de la Universidad de Burgos (online). Trabajos, ejerccios, opiniones sobre libros o expresadas en algún debate del foro.
-Algunos de estos trabajos son ejemplos sencillos de aplicación de la metodología y técnicas de estudio en la ciencia política. Para el tratamiento de datos se hace uso del lenguaje de programación R.
+El contenido de este repositorio está relacionado con el _Grado Universitario de Ciencia Política y Gestión Pública_ de la [_Universidad de Burgos (online)._](https://www.ubu.es/) Principalmente trata de trabajos de las asignaturas cursadas y opiniones expresadas en sus foros. Aunque también hay alguna tarea o artículo de opinión personal que no guarda relación con el Grado.
+
+El procesamiento de datos estadísticos se hace mediante el [lenguaje de programación R](https://smowl.net/es/blog/lenguaje-r/) y quedará visible.
 
 ## Economía pública
 
