@@ -14,6 +14,12 @@ output:
     toc: true
     keep_tex: true
 ---
+# EJEMPLO DE USO DE RMARDOWN
+
+## DESCRIPCIÓN
+A continuación veremos un sencillo ejemplo de uso de R Markdown en el que, a partir de un fichero *csv* con resultados electorales, crearemos y manipularemos objetos _data.frame_ para obtener algunas medidas de *tendencia central y dispersión* que representaremos en tablas y gráficos.
+
+### Inclusión de los paquetes ( y sus librerías) que vamos a necesitar.
 
 ```{r 0, include=FALSE}
 # Requisitos previes. Paquetes y librerías
@@ -44,9 +50,6 @@ install.packages("tidyverse")}
 
 ```
 
-# DESCRIPCIÓN
-
-A continuación veremos un sencillo ejemplo de uso de R Markdown en el que, a partir de un fichero *csv* con resultados electorales, crearemos y manipularemos objetos data.frame para obtener algunas medidas de tendencia central y dispersión que representaremos en tablas y gráficos.
 
 ## OBTENCIÓN DE LOS DATOS
 
@@ -54,11 +57,11 @@ A continuación veremos un sencillo ejemplo de uso de R Markdown en el que, a pa
 
 A partir de la base de datos de ARGOS descargamos el resumen de resultados electorales en las distintas convocatorias y procesos electorales en un fichero CSV.
 
-```{r 1, include=TRUE}
-df1<-read.csv("CSV/SAFOR.csv",header=TRUE, sep=",",quote="\"'", dec=",",fill=TRUE,
-              comment.char = "")
-#View(df1) # Para ver en consola
-```
+  ```{r 1, include=TRUE}
+  df1<-read.csv("CSV/SAFOR.csv",header=TRUE, sep=",",quote="\"'", dec=",",fill=TRUE,
+                comment.char = "")
+  #View(df1) # Para ver en consola
+  ```
 
 ### Filtramos por elecciones autonómicas.
 

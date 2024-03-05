@@ -1,0 +1,44 @@
+```{r setup,echo=FALSE,include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+# Requisitos previos. Paquetes y librerías
+if (!require("dplyr")) {install.packages("dplyr")}
+if (!require("stringr")) {install.packages("stringr")}
+if (!require("tidyverse")){install.packages("tidyverse")}
+library(stringr)
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+```
+
+```{r dataframes}
+df_comarques<-read.csv("cifrasdespoblamientocomarcas2018-2022.csv", header= TRUE, sep=";",fileEncoding = "ISO-8859-3")
+df_municipis<-read.csv("cifrasdespoblamientomunicipios2018-2022.csv", header= TRUE, sep=";",fileEncoding = "ISO-8859-3")
+
+#Eliminamos la columna de superficie 2019, 2020, 2021 dejadno solo la primera
+df_comarques<-subset(df_comarques, select = -c(Superfície.en.km2.1, Superfície.en.km2.1, Superfície.en.km2.1))
+df_municipis<-subset(df_municipis, select = -c(Superfície.en.km2.1, Superfície.en.km2.1, Superfície.en.km2.1))
+
+#Eliminamos los campos que no sean de comarcas/municipios ( no usamos "subset" porque eliminaría la fila 0 de nombres de columnas)
+df_comarques <- df_comarques %>% filter(!(grepl("^(Prov|Comuni)", X) | is.na(X) | X == ""))
+df_municipis <-df_comarques%>%filter(!(grepl("^(Prov|Comuni)", X) | is.na(X) | X == ""))
+
+#Arreglamos los nombres de columnas
+names(df_comarques) <- gsub("\\.", " ", names(df_comarques))
+names(df_municipis) <- gsub("\\.", " ", names(df_municipis))
+
+names(df_municipis) <- gsub(" 1$", " 2019", names(df_municipis))
+names(df_municipis) <- gsub(" 2$", " 2020", names(df_municipis))
+names(df_municipis) <- gsub(" 3$", " 2021", names(df_municipis))
+names(df_municipis) <- gsub(" 4$", " 2022", names(df_municipis))
+
+names(df_comarques) <- gsub(" 1$", " 2019", names(df_comarques))
+names(df_comarques) <- gsub(" 2$", " 2020", names(df_comarques))
+names(df_comarques) <- gsub(" 3$", " 2021", names(df_comarques))
+names(df_comarques) <- gsub(" 4$", " 2022", names(df_comarques))
+
+
+
+
+
+
+```

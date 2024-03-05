@@ -9,11 +9,10 @@ El contenido de este repositorio está relacionado con el _Grado Universitario d
 El procesamiento de datos estadísticos se hace mediante el [lenguaje de programación R](https://smowl.net/es/blog/lenguaje-r/) y quedará visible.
 
 ## Resultados electorales
-1.  [El voto valencianista en las Elecciones Autonómicas del 2023](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023_page.html)
-   ([📥 PDF](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023_page.pdf))
-
-2. [Resultados en elecciones autonómicas en la comarca de La Safor (Valencia)](elecciones/lasafor/SAFOR.html)
-   ([📥 PDF](elecciones/lasafor/SAFOR.pdf))
+|||
+|:---|---:|
+|[El voto valencianista en las Elecciones Autonómicas del 2023](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023_page.html)|[📥 PDF](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023_page.pdf)|
+|[Elecciones autonómicas en la comarca de La Safor (Valencia)](elecciones/lasafor/SAFOR.html)|[📥 PDF](elecciones/lasafor/SAFOR.pdf)|
 
 ## Economía pública
 
