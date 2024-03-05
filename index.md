@@ -14,7 +14,7 @@ El procesamiento de datos estadísticos se hace mediante el [lenguaje de program
 
 2. [Resultados en elecciones autonómicas en la comarca de La Safor (Valencia)](elecciones/lasafor/SAFOR.html)
    ([📥 PDF](elecciones/lasafor/SAFOR.pdf))
-3. [El sistema de paertidos políticos alemás tras las elecciones de 2021](elecciones/alemani2021/elsistemaaleman2021.html)
+3. [El sistema de partidos políticos alemás tras las elecciones de 2021](elecciones/alemani2021/elsistemaaleman2021.html)
 4. [La polarización a les Corts Valencies](elecciones/lapolaritzacioalesCortsValencianes.html)
 
 ## Economía pública
