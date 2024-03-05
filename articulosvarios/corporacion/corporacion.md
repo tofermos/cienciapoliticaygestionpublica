@@ -1,5 +1,5 @@
 ---
-title: "LA GOBERNANZA FRENTE A LAS CORPORACIONES. SOBRE EL DOCUMENTAL"
+title: "LA GOBERNANZA FRENTE A LAS CORPORACIONES (Sobre el documental *The corporation*)"
 author: "Tomàs Ferrandis Moscardó"
 date: "2021-11-21"
 output:
@@ -18,7 +18,7 @@ output:
 ---
 ## Resumen
 
-En ese artículo se hace un valoración crítica del documental canadiense "The corporation" ( traducido en España como "La corporación, ¿ instituciones o psicópatas") producido en 2003 por Mark Achbar en cual se refleja el poder alcanzado por las multinacionales a princiìos del siglo XXI. 
+En ese artículo se hace un valoración crítica del documental canadiense "The corporation" (traducido en España como "La corporación, ¿ instituciones o psicópatas") producido en 2003 por Mark Achbar en cual se refleja el poder alcanzado por las multinacionales a princiìos del siglo XXI. 
 
 ## La corporación
 
