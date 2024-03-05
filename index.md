@@ -11,7 +11,6 @@ El procesamiento de datos estadísticos se hace mediante el [lenguaje de program
 ## Resultados electorales
 1. [El voto valencianista en las Elecciones Autonómicas del 2023](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023_page.html)
    ([📥 PDF](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023_page.pdf))
-
 2. [Resultados en elecciones autonómicas en la comarca de La Safor (Valencia)](elecciones/lasafor/SAFOR.html)
    ([📥 PDF](elecciones/lasafor/SAFOR.pdf))
 3. [El sistema de partidos políticos alemás tras las elecciones de 2021](elecciones/alemani2021/elsistemaaleman2021.html)
@@ -34,4 +33,13 @@ El procesamiento de datos estadísticos se hace mediante el [lenguaje de program
 2. [La era de la revolución](articulosvarios/laeradelarevolucion/laeradelarevolucion.html)
 3. [El efecto Guggenheim](articulos/elefectoguggenheim/elefectoguggenheim.html)
 4. [La gobernanza frente a las corporaciones](articulosvarios/corporacion/corporacion.html)
+
+## Administración
+### Informes
+1. [Despoblamiento en el País Valenciano](administracion/despoblamientoPV/Despoblamientoenlacomunidadvalenciana.html)
+
+### Supuestos Derecho Administrativo
+
+2. [Sobre federaciones deportivas](administracion/supuestosderechoadministrativo/Casopractico1.html)
+3. [Sobre orden autonómica de restricción por pandemia](administracion/supuestosderechoadministrativo/Casopractico1.html)
 

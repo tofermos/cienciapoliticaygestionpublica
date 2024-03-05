@@ -48,7 +48,7 @@ De forma análoga, el Instituto de Cartografía de forma complementaria recoge y
 1) Municipios del Fondo de Cooperación AVANT.  Incluye a los municipios de a).
 
 
-![](Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.004.png)
+![](png/Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.004.png)
 
 *Figura 1. Mapa del ICV sobre de Municipios AVANT  y en riesgo de despoblación*
 
@@ -71,7 +71,7 @@ A continuación, explicamos de forma breve estos indicadores. Indicamos su valor
 
 La población de los municipios valencianos varía entre 20 y 792.492 habitantes. Un total de 99 municipios de la Comunidad Valenciana tienen una población inferior a 300 habitantes.
 
-![](Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.005.png)
+![](png/Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.005.png)
 
 *Figura 2. Población a 1/01/2020 según el IVE*
 
@@ -79,7 +79,7 @@ La población de los municipios valencianos varía entre 20 y 792.492 habitantes
 
 Se trata del número de habitantes, por km2. En los municipios valencianos varía entre 0,65 y 27.342,54 habitantes por Km2. Hay 156 municipios con una densidad de población inferior a 20 habitantes/ Km2
 
-![](Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.006.png)
+![](png/Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.006.png)
 
 *Figura 3. Densidad de población a 1/01/2020 según el IVE*
 
@@ -87,7 +87,7 @@ Se trata del número de habitantes, por km2. En los municipios valencianos varí
 
 Tasa de crecimiento de la población en el periodo comprendido en los últimos veinte años. Hay 194 municipios que tienen un crecimiento demográfico negativo durante los 20 años anteriores a 2022. Este varía entre -43,41% y 698,59%.
 
-![](Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.007.png)
+![](png/Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.007.png)
 
 *Figura 4. Crecimiento demográfico, 1/1/2022 según el IVE*
 
@@ -96,7 +96,7 @@ Tasa de crecimiento de la población en el periodo comprendido en los últimos v
 Porcentaje de población mayor de 64 años sobre la población menor de 16 años.
 El número de municipios que se considera que tienen un índice de envejecimiento igual o superior al 250% es de 175. El índice de envejecimiento varía entre 50,69% y 2.600%. 
 
-![](Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.008.png)
+![](png/Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.008.png)
 
 *Figura 5. Índice de dependencia. 01/2022 IVE*
 
@@ -106,7 +106,7 @@ Cociente entre la suma de la población menor de 16 años y mayores de 64 y la p
 
 Hay 194 municipios con un índice de dependencia superior o igual a 60%. El índice de dependencia varía entre 17,39% y 128,57%.
 
-![](Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.009.png)
+![](png/Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.009.png)
 
 *Figura 6. Porcentaje de población menor de 16 años y mayor de 64 sobre población de 16 a 64 años*
 
@@ -117,7 +117,7 @@ Porcentaje que representa el saldo migratorio en el periodo comprendido entre lo
 *Tabla 1. Resumen sobre los indicadores de despoblación.*
 
 |Umbrales sobre indicadores|Municipios que lo superan|
-| - | - |
+| :-- | --: |
 |**Población menor de 300 habitantes (a 1-1-2022)**|99|
 |<b>Densidad menor o igual a 20 hab/km<sup>2</sup> o superficie menor de 1 km<sup>2</sup></b>|165|
 |**Crecimiento demográfico menor o igual a 0% (2002-2021)**|194|
@@ -126,12 +126,15 @@ Porcentaje que representa el saldo migratorio en el periodo comprendido entre lo
 |**Índice de dependencia mayor o igual a 60% (a 1-1-2022)**|194|
 |**Tasa migratoria menor o igual a 0% (2012-2021)**|194|
 
-*Gráfico 1. Municipios que superan el umbral de cada indicador de despoblación. Elaboración propia![](Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.010.png)*
+```{r municipios, echo=FALSE}
+
+```
+*Gráfico 1. Municipios que superan el umbral de cada indicador de despoblación. Elaboración propia![](png/Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.010.png)*
 
 
 A través del portal del IVE podemos realizar consultas personalizadas por indicadores, nivel de agregación o año. 
 
-![](Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.011.png)
+![](png/Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.011.png)
 
 *Figura 7. Herramienta on-line  de consultas online del IVE*
 
@@ -146,18 +149,18 @@ Este aumento de la población se produce de manera continuada tomando como nivel
 Analizándolo a nivel de agregación comarcal, en cambio, vemos que en 31 de las 35 comarcas se produciría un aumento en la población pero en comarcas como el Valle de Cofrentes-Ayora y el Rincón de Ademuz se prevé una disminución de la población. La figura 8 extraída del documento del IVE, refleja esta diferencia entre comarcas. En la figura 9 se detalla por municipio. Vemos que las comarcas del interior muestran cifras negativas o prácticamente nulas (intervalos entre -0,34 y 0,27).
 
 
-|![](Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.012.png)|![](Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.013.png)|
+|![](png/Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.012.png)|![](png/Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.013.png)|
 | - | - |
 |*Figura 8: Incrementos medios de la población por comarcas hasta 2037*|*Figura 9: Incrementos medios de la población por municipios hasta 2037*|
 
 
 
 
-![](Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.014.png)
+![](png/Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.014.png)
 
 *Gráfico 2. Variación de la proyección de población al 2037 por comarcas*
 
-![](Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.015.png)
+![](png/Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.015.png)
 
 *Gráfico3. Variación de la proyección de población al 2037 por provincias y años*
 
@@ -318,14 +321,52 @@ Desde la crisis del 2008, en la Comunidad Valenciana han ido cerrando sucursales
 
 *Tabla 1. Comparación oficinas bancaria abiertas en 2008 y 2018.*
 
-||OFICINAS EN 2008|OFICINAS EN 2018|
-| -- | -- | --:|
-|**ESPAÑA**|5.600|3.100|
-|**COMUNIDAD VALENCIANA**|45.662|26.011|
 
-![](Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.016.png)
+```{r graficoytabla, echo=FALSE, fig.align='top', fig.pos='h', out.width='80%', out.height='80%', results='asis'}
+# Importar el paquete 'tibble' para crear el DataFrame
+suppressMessages({
+if (!require("ggplot2")){install.packages("ggplot2")}
+library(ggplot2)
+if (!require("tibble")){install.packages("tibble")}
+library(tibble)
+})
 
-*Gráfico1: Porcentaje de oficinas bancarias cerradas. Elaboración propia.*
+
+
+# Crear el DataFrame
+dfplot1 <- data.frame(
+  Pais = c("COMUNIDAD VALENCIANA", "ESPAÑA"),
+  Oficinas_2008 = c(5.600, 45.662),
+  Oficinas_2018 = c(3.100, 26.011)
+)
+#Imprimir tabla
+names(dfplot1)<-c("Área","Oficinas en 2008","Oficina en 2018")
+knitr::kable(dfplot1, caption = "")
+
+#Cálculo reducción
+
+dfReducciones <- data.frame(
+  Área = dfplot1$Área,
+  Porcentaje = round((dfplot1$`Oficinas en 2008`- dfplot1$`Oficina en 2018`)*100/dfplot1$`Oficinas en 2008`,2)
+)
+
+
+grafico_barras <- ggplot(dfReducciones, aes(x = Área, y = '%')) +
+                  geom_bar(stat = "identity", fill = "blue") +
+                  labs(title = "GRÁFICO 1: % DE OFICINAS CERRADAS ENTRE 2008 Y 2018",size = 16, caption = "Fuente: Elaboración propia")+
+                  geom_text(aes(label = Porcentaje), vjust = -2, color = "black", size = 6)+
+                  theme(axis.text.x = element_text(size = 16),  # Tamaño de fuente del eje x
+                        axis.text.y = element_text(size = 16),
+                        plot.title = element_text(size=16),
+                        axis.title.x=element_blank(),
+                        axis.title.y = element_blank())
+print(grafico_barras)
+
+
+
+```
+
+
 
 Las consecuencias de esta privación de servicios se ven amplificadas en municipios rurales de las comarcas del interior, alejadas de núcleos de población con servicios financieros lo que además de afectar a las condiciones de vida de sus habitantes condiciona enormemente cualquier tentativa de iniciativa económica.
 
@@ -431,7 +472,7 @@ El trámite se realiza on-line.
 - **Visita en el municipio:** Los municipios que participan en la ruta y los profesionales seleccionados, conciertan una visita in situ para ver con qué medios cuentan .
 - **Asesoramiento y acompañamiento:** Los profesionales reciben de la FVMP y de los  Ayuntamientos el asesoramiento necesario para implantar el servicio.
 
-![](Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.017.png)
+![](png/Aspose.Words.9daf951d-86a8-4dfc-b730-879fe787d516.017.png)
 
 *Figura 10. Comarcas en el programa Itinerant. Año 2022*
 ### CIUDADANÍA DIGITAL
@@ -487,7 +528,7 @@ Desde la FVMP se puso en marcha la página web, la App y la credencial. Es un ej
 
 
 
-6. ## NUEVO MARCO JURÍDICO. LA LEY 5/2023, de 13 de ABRIL
+# 7.NUEVO MARCO JURÍDICO. LA LEY 5/2023, de 13 de ABRIL
 
 Este mismo año, las Cortes Valencianas han aprobado la Ley 5/2023, de 13 de abril, integral de medidas contra el despoblamiento y por la equidad territorial en la Comunitat Valenciana tiene. Veamos de forma esquemática sus principales aportaciones.
 
@@ -555,7 +596,7 @@ Un aspecto importante al que la ley da una cobertura cuando habla de promover la
 *Información y sensibilización*
 
 La ley no establece obligación alguna en cuanto a campañas a realizar para la sensibilización,  concienciación debate etc... Queda en una mera declaración de voluntades aunque si que se obliga a la Generalitat a la publicación en formatos abiertos y accesibles de las estadísticas obtenidas.
-#### Estructura
+### Estructura
 De forma esquemática podemos definir los aspectos por bloques temática que regula la ley.
 
 ##### Instrumentos
@@ -619,19 +660,20 @@ Acceso a servicios bancarios. Protección de los derechos de las personas consum
 
 En un segundo bloque podríamos agrupar las medidas dirigidas a la reactivación y la diversificación socio-económicas y la promoción del empleo; constan tanto de medidas transversales de promoción, para la discriminación positiva o de incentivos fiscales, como medidas específicas de ámbito sectorial de mayor relevancia para el territorio, teniendo una especial importancia las medidas en el sector agroalimentario, en el turismo, la innovación, las energías renovables o la gestión forestal sostenible. Por último, se abordan los instrumentos de planeamiento, para su adaptación y simplificación, en consideración de las condiciones particulares de los municipios rurales en riesgo de despoblamiento.
 
-6. ## ESTRATEGIA AVANT 20-30
+# 8. ESTRATEGIA AVANT 20-30
 
 La Estrategia AVANT 20-30 es el resultado del trabajo de investigación dirigido por la Universidad de València y apoyado por las Cátedras AVANT.  El documento final, presentado en junio del 2021, pretende responder a esa necesidad de disponer de una planificación estratégica. Básicamente tiene dos grandes objetivos que cumplir. 
 
 La Estrategia es un proyecto multidimensional que establece unas estrategias generales definidas mediante líneas estratégicas, así como unas propuestas concretas destinadas a combatir la despoblación de las áreas rurales valencianas. Reconoceremos en el resumen siguiente del documento, algunas de estas medidas ya aplicadas y explicadas en apartados anteriores de nuestro informe.
 
-### FASES
+## FASES
 
-La Estrategia AVANT 20-30 comprende tres fases diferenciadas: la redacción de un documento técnico, el proceso de participación, y la redacción del documento del Plan Estratégico Valenciano Antidespoblamiento 
-#### Redacción del Documento Técnico
+La Estrategia AVANT 20-30 comprende tres fases diferenciadas: la redacción de un documento técnico, el proceso de participación, y la redacción del documento del Plan Estratégico Valenciano Antidespoblamiento.
+
+### Redacción del Documento Técnico
 Se trata de un informe que recoge el diagnóstico y una estructura de las estrategias. En esta parte tenemos definido el panorama actual de la despoblación valenciana, los problemas amenazantes además de las potencialidades (recursos) y las posibilidades (oportunidades) del territorio afectado.
 
-#### El proceso participativo
+### El proceso participativo
 
 Para la valoración y la incorporación de posibles mejoras al Documento Técnico se han convocado, con la colaboración de la FVMP, reuniones de trabajo con representantes de las siguientes organizaciones, 
 
@@ -657,7 +699,7 @@ Para la valoración y la incorporación de posibles mejoras al Documento Técnic
 
 - Comisión Interdepartamental sobre la Despoblación, del Gobierno Valenciano.
 
-#### Redacción del plan estratégico AVANT
+### Redacción del plan estratégico AVANT
 
 El documento ejecutivo del Plan Estratégico recoge los siguientes puntos:
 
@@ -669,7 +711,7 @@ c. Un cronograma aproximado y un avance de las partidas presupuestarias para cad
 
 d. Una propuesta, consensuada con la Dirección General AVANT, del seguimiento del desarrollo del Plan Estratégico. Recoge tanto un sistema de indicadores para dicho seguimiento, así como una estructura organizativa para llevarlo a cabo.
 
-### RESUMEN POR ÁREAS ESTRATÉGICAS
+## RESUMEN POR ÁREAS ESTRATÉGICAS
 
 Las Estrategia AVANT 20-30 se estructura en cuatro áreas que configuran sus líneas estratégicas y una quinta y transversal sobre Gobernanza política, que afecta a la toma de decisiones y la política que deben guiarlas.
 
@@ -727,7 +769,7 @@ Coherentemente con los dos puntos anteriores, se resalta la importancia de la es
 
 Y por último anotamos la propuesta para evaluar las políticas públicas en materia de despoblación. Se propone un sistema plurianual de seguimiento de los resultados de las acciones de la Administración Autonómica en el programa Plan AVANT.
 
-## 6. CONCLUSIONES
+# 9. CONCLUSIONES
 
 **Sobre el Derecho Administrativo**
 
@@ -749,7 +791,7 @@ La estructura que un Consell obedece a unos criterios programáticos e ideológi
 
 Aun así, sería más prudente esperar a ver el nuevo Plan Estratégico de Subvenciones 2024-2027 aún por publicar a fecha de 30 de diciembre de 2028 en que se concluye este informe.
 
-# 6. LEGISLACIÓN
+# 10. LEGISLACIÓN
 
 - DECRETO 182/2018, de 10 de octubre, del Consell, por el que se regula la línea específica del Fondo de Cooperación Municipal para la Lucha contra el despoblamiento de los Municipios de la Comunitat Valenciana.
 - DECRETO 1/2020, de 6 de febrero, del presidente de la Generalitat, por el que se aprueban las bases reguladoras de las subvenciones destinadas a incentivar y fomentar la prestación de servicios bancarios básicos, a través, principalmente, de la instalación, mantenimiento y puesta en funcionamiento de cajeros automáticos, en determinados municipios y núcleos de población en el ámbito territorial de la Comunitat Valenciana.
@@ -776,7 +818,7 @@ Cooperación Municipal para la Lucha contra el Despoblamiento de los Municipios 
 - RESOLUCIÓN de 30 de mayo de 2023, del president de la Generalitat, por la que se establecen las bases reguladoras y se aprueba la convocatoria de ayudas dirigidas a financiar el mantenimiento, conservación, mejora y promoción de los senderos homologados (GR®, PR® y SL®) existentes, en municipios con riesgo de despoblamiento y en otras entidades locales de las cuales forman parte municipios con riesgo de despoblamiento, en el ámbito de la Comunitat Valenciana, en el marco del Plan de recuperación, transformación y resiliencia.
 - RESOLUCIÓN de 9 de mayo de 2019, del director general de Relaciones con Les Corts, por la que se publica el Convenio marco entre la Generalitat, a través de la Presidencia, la Universitat de València - Estudi General, la Universitat Politècnica de València, la Universitat Jaume I de Castelló y la Universidad de Alicante, para la creación de la Cátedra Avant.
 
-# 7. OTROS RECURSOS
+# 11. OTROS RECURSOS
 
 - Agenda AVANT 	https://avant.gva.es/
 - Estrategia AVANT 20-30  “Plan Estratégico  valenciano antidespoblamiento” https://avant.gva.es/documents/173292247/173293721/ESTRATEGIA\_AVANT\_20-30\_c.pdf/9f4c4e85-4248-4d1f-955c-b2ae0669fa7b
