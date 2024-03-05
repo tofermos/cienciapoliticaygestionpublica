@@ -16,7 +16,6 @@ output:
     toc: true
     keep_tex: true
 ---
-# SUFRAGISMO
 
 A cierta edad, al volver a estudiar Historia Contemporánea te encuentras protagonistas que en tu juventud quedaron fuera de los libros de texto. Impresiona ver hasta qué punto se ha tergiversado u ocultado el papel de la mujer. Comenta un compañero que la misma imagen de la Revolución Industrial, por ejemplo, es la de un obrero varón. ¿Acaso no trabajaban hasta los niños?, ¿quién, tras la interminable jornada laboral tenía una “segunda jornada”? Por no hablar de la iniciativa y el gran papel de las mujeres en las revoluciones o su aportación en todos los campos del conocimiento.  
 
@@ -51,6 +50,8 @@ Además, como una segunda objeción a una visión reduccionista del sufragismo d
 
 En definitiva, el pacifismo y el abolicionismo como respuesta a toda denigración del ser humano (esclavitud o la prostitución) entran en el ideario sufragista o en su visión de la dignidad humana y modelo liberal o republicano de sociedad. 
 
+![Foto: Bibliografía](png/Fuentes.jpg){width=300px}
+
 ### El voto como instrumento 
 
 A la visión sesgada del sufragismo como lucha por el voto de la mujer cabe hacer la siguiente objeción. Si bien el sufragismo reclama el derecho como principio de igualdad es, precisamente, porque lo entiende como una condición imprescindible para conseguir la igualdad en derechos privados y públicos entre hombre y mujer. No se trata de la lucha por un solo derecho sino de un empoderamiento con fin instrumental para poder avanzar hacia la plena igualdad. 
@@ -77,7 +78,9 @@ Se avanzaba paso a paso. En palabras de Garrett: “las mujeres de Nueva Zelanda
 
 Anteriormente he reseñado algunas de las causas que abrazaba el sufragismo. Fuera interesante diferenciar entre ellas, las causas más universales como el pacifismo, antibelicismo, el abolicionismo de la esclavitud, de la prostitución por una parte y, en otro apartado aquellos objetivos o idearios que afectaban de forma particular al conjunto de las mujeres en su época, sobre todo, el marco legal. 
 
-La trifulca entre antisufragismo y sufragismo no representaba una división más en el debate parlamentario, un acalorado debate similar al concerniente al impuesto sobre los cereales. El desacuerdo era una contienda que se libraba de forma muy cruda más allá de las paredes de Westminster; en la calle, en la fábrica y también en el hogar. Un nuevo marco jurídico para la relación familiar especialmente asegurando la custodia de los hijos y el posible divorcio facilitaba, o al menos dejaba de impedir, la militancia en el sufragismo sin miedo a terribles represalias. Este es un tema que queda magníficamente retratado en la película Sufragistas (Gauvan, 2015). 
+La trifulca entre antisufragismo y sufragismo no representaba una división más en el debate parlamentario, un acalorado debate similar al concerniente al impuesto sobre los cereales. El desacuerdo era una contienda que se libraba de forma muy cruda más allá de las paredes de Westminster; en la calle, en la fábrica y también en el hogar. Un nuevo marco jurídico para la relación familiar especialmente asegurando la custodia de los hijos y el posible divorcio facilitaba, o al menos dejaba de impedir, la militancia en el sufragismo sin miedo a terribles represalias. Este es un tema que queda magníficamente retratado en la película de la directora Sarah Gavron *Suffratte* (2015), traducida como *Sufragistas*. 
+
+![Foto: Film *Sufragistas*](png/Sufragistes.jpg){width=300px}
 
 ### Coincidencias y contradicciones 
 
@@ -107,8 +110,8 @@ Por contra, frente a estas premisas que, de forma generalizada, asumían una inc
 
 ## Bibliografía y otros recursos 
 
-* Duby, Georges y Micchel Perrot. Historia de las mujeres en Occidente. Tomo 4 y 5. Grupo Santillana de Ediciones 1993. Madrid. 
-* Campoamor, Clara. El voto femenino y yo. Mi pecado mortal. Unapalabraotra.org 2006
-* Garrett, Millicent. Sufragio femenino. Breve historia de un gran movimiento. Ed Flores raras. Madrid 2019
-* Gauvan, Sarah (Director) 2015. Sufragistas.
+* Duby, Georges y Micchel Perrot. *Historia de las mujeres en Occidente. Tomo 4 y 5*. Grupo Santillana de Ediciones 1993. Madrid. 
+* Campoamor, Clara. *El voto femenino y yo. Mi pecado mortal*. Unapalabraotra.org 2006
+* Garrett, Millicent. *Sufragio femenino. Breve historia de un gran movimiento*. Ed Flores raras. Madrid 2019
+* Gavron, Sarah (Directora) 2015. *Sufragistas*.
     
