@@ -29,6 +29,8 @@ Así pues, los dos primeros apartados tratarán las revoluciones, la industrial 
 
 Para contrastar o ampliar el punto de vista del autor hemos recurrido a la consulta de libros y alguna publicación que detallamos en el apartado de Bibliografía. Dada la extensión limitada del trabajo, se han tenido que omitir algunos comentarios sobre apartados interesantes del libro centrándonos en los cambios sociales y económicos que globalmente dejó la industrialización y la expansión de las ideas de la Ilustración.
 
+![Foto: La era de la revolución, 1789-1848](png/laerallibre.jpeg){width=250px}
+
 
 # 2. LA REVOLUCIÓN INDUSTRIAL
 
