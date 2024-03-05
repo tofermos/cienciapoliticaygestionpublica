@@ -31,7 +31,7 @@ El procesamiento de datos estadísticos se hace mediante el [lenguaje de program
 ## Artículos varios
 
 1. [Sufragismo](articulosvarios/sufragismo/sufragismo.html)
-2. [La era de la revolución](articulosvarios/hobsbawm/laeradelarevolucion.html)
+2. [La era de la revolución](articulosvarios/laeradelarevolucion/laeradelarevolucion.html)
 3. [El efecto Guggenheim](articulos/elefectoguggenheim/elefectoguggenheim.html)
 4. [La gobernanza frente a las corporaciones](articulosvarios/corporacion/corporacion.html)
 
