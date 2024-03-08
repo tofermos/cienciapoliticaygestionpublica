@@ -3,18 +3,18 @@ title: "SUFRAGISMO"
 author: "Tomàs Ferrandis Moscardó"
 date: "2023-11-19"
 output:
+  pdf_document:
+    latex_engine: pdflatex
+    toc: true
+    keep_tex: true
+  word_document:
+    toc: true
   html_document:
     toc: true
     toc_float: true
     toc_depth: 4
     df_print: paged
     number_sections: false
-  word_document:
-    toc: true
-  pdf_document:
-    latex_engine: pdflatex
-    toc: true
-    keep_tex: true
 ---
 
 A cierta edad, al volver a estudiar Historia Contemporánea te encuentras protagonistas que en tu juventud quedaron fuera de los libros de texto. Impresiona ver hasta qué punto se ha tergiversado u ocultado el papel de la mujer. Comenta un compañero que la misma imagen de la Revolución Industrial, por ejemplo, es la de un obrero varón. ¿Acaso no trabajaban hasta los niños?, ¿quién, tras la interminable jornada laboral tenía una “segunda jornada”? Por no hablar de la iniciativa y el gran papel de las mujeres en las revoluciones o su aportación en todos los campos del conocimiento.  
@@ -26,15 +26,16 @@ A cierta edad, al volver a estudiar Historia Contemporánea te encuentras protag
 
 Recuerdo, por ejemplo, cómo aprendí el concepto de sufragio universal frente al sufragio censitario en mi niñez. Aquel “universal” sin más dejaba fuera a medio universo; se consiguió el sufragio universal y lo de la mujer vino después, como remate a la faena. 
 
-Una vez despertado el interés por el sufragismo me decidí por la lectura de dos libros autobiográficos como forma de rescatar mujeres del silencio de historia: “El voto femenino y yo. Mi pecado mortal” de Clara Campoamor y “Sufragio femenino. Breve historia de un gran movimiento” de Millicent Garrett, menos conocido. Pese a la diferencia de casi medio siglo entre ambas sufragistas y la diferencia de años en la legalización del voto femenino en España e Inglaterra, los dos testimonios coinciden en muchos aspectos desdibujando la imagen que tenemos del sufragismo. Veamos. 
+
+Tras despertarse en mi el interés por el sufragismo me decidí por la lectura de dos libros autobiográficos como forma de rescatar mujeres del silencio de historia: “El voto femenino y yo. Mi pecado mortal” de Clara Campoamor y “Sufragio femenino. Breve historia de un gran movimiento” de Millicent Garrett, menos conocido. Pese a la diferencia de casi medio siglo entre ambas sufragistas y la diferencia de años en la legalización del voto femenino en España e Inglaterra, los dos testimonios coinciden en muchos aspectos desdibujando la imagen que tenemos del sufragismo. Veamos. 
 
 ## Sufragismo, más allá del voto de la mujer 
 
-El sufragismo se nos presenta habitualmente como una lucha con un objetivo único, una reivindicación aislada por un derecho fundamental de las mujeres y que se libró en los países occidentales. En este sentido siempre se destacan las sufragistas inglesas presididas por Emmili Pankhurst en la Inglaterra del siglo XIX o en el caso español, las diputadas Clara Campoamor y Victoria Kent en su lucha por el sufragio pasivo femenino en la España de la 2ª República. 
+El sufragismo se nos presenta habitualmente como una lucha con un objetivo único, una reivindicación aislada por un derecho fundamental de las mujeres y que se libró en los países occidentales. En este sentido siempre se destacan las sufragistas inglesas presididas por Emmili Pankhurst en la Inglaterra del siglo XIX o en el caso español, las diputadas Clara Campoamor y Victoria Kent en su batalla por el sufragio pasivo femenino en la España de la 2ª República. 
 
 ### Otras causas de la mujer 
 
-Millicent Garrett en sus memorias (Garret, 2020) explica cómo, si bien las sociedades sufragistas se centraban en el voto femenino, las principales militantes consiguieron mejorar el estado legal de las mujeres con “resultados inesperados” en la década de 1830 consiguiendo la ley de propiedades de la mujer casada, la ley de custodia de menores, el derecho al acceso a estudios universitarios, la mejora de las condiciones laborales discriminatorias de la mujer o el derecho a ejercer la profesión médica.  
+Millicent Garrett en sus memorias (Garret, 2020) explica cómo, si bien las sociedades sufragistas se centraban en el voto femenino, a nivel individual, las principales militantes consiguieron mejorar el estado legal de las mujeres con “resultados inesperados” en la década de 1830 consiguiendo una ley de propiedades de la mujer casada, una ley de custodia de menores, el derecho al acceso a estudios universitarios, la mejora de las condiciones laborales discriminatorias de la mujer o el derecho a ejercer la profesión médica.  
 
 Merece nuestra atención la defensa de la abolición de la prostitución y el combate contra leyes denigrantes hacia las prostitutas de sufragistas como Josephine Butler.  
 
@@ -42,35 +43,36 @@ En la misma línea, casi un siglo después en España, podemos comprobar que el 
 
 La misma Campoamor llevará adelante la iniciativa de un Real Decreto aboliendo la prostitución en la Segunda República y que se llegó a aprobar gracias a su empeño. 
 
-El sufragismo, o al menos, las sufragistas más destacadas no tenían una única causa por la que luchar. 
+Es evidente que el sufragismo, o al menos, las sufragistas más destacadas no tenían una única causa por la que luchar. 
 
 ## Cosmovisión 
 
-Además, como una segunda objeción a una visión reduccionista del sufragismo debemos recabar que, el sufragismo inglés del XIX y el español del siglo XX, tenían una mirada sobre los problemas sociales que abarcaba más allá de su mundo, de los problemas que afectaban a las mujeres de su sociedad. De nuevo podremos establecer paralelismos cuando tomamos nota de la lucha contra el esclavismo en EEUU y el pacifismo antibelicista de aquellas sufragistas inglesas y la lucha contra la pena de muerte de Campoamor y sus propuestas a las Cortes Generales a favor del desarme declarándose “pacifista hasta la intransigencia”. 
+Además, como una segunda objeción a una visión reduccionista del sufragismo debemos recabar que, el sufragismo inglés del XIX y el español del siglo XX, tenían una mirada sobre los problemas sociales que alcanzaba más allá de su mundo, de los problemas que afectaban a las mujeres de su sociedad. De nuevo podremos establecer paralelismos si tomamos nota de la lucha contra el esclavismo en EEUU y el pacifismo antibelicista de aquellas sufragistas inglesas y la lucha contra la pena de muerte de Campoamor y sus propuestas a las Cortes Generales a favor del desarme declarándose “pacifista hasta la intransigencia”. 
 
-En definitiva, el pacifismo y el abolicionismo como respuesta a toda denigración del ser humano (esclavitud o la prostitución) entran en el ideario sufragista o en su visión de la dignidad humana y modelo liberal o republicano de sociedad. 
+En definitiva, el pacifismo y el abolicionismo como respuesta a toda denigración del ser humano (esclavitud o prostitución) entran en el ideario sufragista o en su visión de la dignidad humana y modelo liberal o republicano de sociedad. 
 
 ![Foto: Bibliografía](png/Fuentes.jpg){width=300px}
 
 ### El voto como instrumento 
 
-A la visión sesgada del sufragismo como lucha por el voto de la mujer cabe hacer la siguiente objeción. Si bien el sufragismo reclama el derecho como principio de igualdad es, precisamente, porque lo entiende como una condición imprescindible para conseguir la igualdad en derechos privados y públicos entre hombre y mujer. No se trata de la lucha por un solo derecho sino de un empoderamiento con fin instrumental para poder avanzar hacia la plena igualdad. 
+A la visión sesgada del sufragismo como lucha por el voto de la mujer cabe hacer otra objeción. Si bien el sufragismo reclama el derecho como principio de igualdad es, precisamente, porque lo entiende como una condición imprescindible para conseguir la igualdad en derechos privados y públicos entre hombre y mujer. No se trata de la exigencia de un derecho sino de un empoderamiento con fin instrumental para poder avanzar hacia la plena igualdad. 
 
 ## El sufragio no vino de la noche a la mañana 
 
-Volviendo a la lucha por el objetivo principal, el sufragio femenino, quizás este sea uno de los ejemplos más típicamente usados cuando queremos aleccionar sobre la relación causal entre “reivindicación” y “derechos”: gracias a la tenacidad en la protesta se consiguió el voto de la mujer consiguiendo torcer el brazo de parlamentos masculinos. Ni tan sencillo, ni tan simple. 
+La batalla por el sufragio femenino es, quizás, uno de los ejemplos más típicamente usados cuando queremos aleccionar sobre la relación causal entre “reivindicación tenaz” y “obtención de derechos”: gracias a la constancia en la protesta se consiguió el voto de la mujer. Solo la trenacidad acabó por torcer el brazo de parlamentos masculinos.
+Ni tan sencillo, ni tan simple. 
 
 ### Éxitos parciales 
 
-El sufragismo llega a su objetivo de voto parlamentario y derecho a ser parlamentario tras un rosario de éxitos parciales. Éxitos que desde mi punto de vista pueden verse bajo dos prismas: 
+El sufragismo llega a su objetivo de voto parlamentario y derecho a ser parlamentario tras un rosario de éxitos parciales. Éxitos que, desde mi punto de vista, pueden verse bajo dos prismas: 
 
-Son éxitos en sí, desde el momento que suponen cambios legales o sociales que permiten a las mujeres ejercer un derecho que hasta el momento tenían vetado. Pero son éxitos, además, porqué se abre un campo de oportunidades o fortalezas para poder influir más en el poder legislativo, en los partidos políticos o en la sociedad en aras de conseguir otros objetivos más ambiciosos y el principal de todos.  
+Son éxitos en sí desde el momento que suponen cambios legales o sociales que permiten a las mujeres ejercer un derecho que hasta el momento tenían vetado. Pero son éxitos, además, porqué se abre un campo de oportunidades o fortalezas para poder influir más en el poder legislativo, en los partidos políticos o en la sociedad en aras de conseguir otros objetivos más ambiciosos y, finalemente, el principal de igualdad en derechos políticos.  
 
-Haciendo repaso de estos éxitos tenemos, en primer lugar, el voto y participación en los consejos escolares de Inglaterra a partir de 1870 situación nueva que les permitió ampliar la base del movimiento sufragista llegando a más mujeres (y hombres).  
+Haciendo repaso de estos éxitos tenemos, en primer lugar, el voto y participación en los consejos escolares de Inglaterra a partir de 1870. Una situación nueva que permitió ampliar la base del movimiento sufragista llegando a más mujeres (y hombres).  
 
-Un segundo logro fue poder votar en las elecciones locales, algo que acallaría la voz del antisufragismo. Respecto a este punto es interesante el testimonio de Garrett, según el cual, donde se votaba en elecciones municipales cesaban las protestas en contra del voto femenino al parlamento. Es decir que se desmontaba el argumento tremendista a medida que se normalizaba el voto femenino. 
+Un segundo logro fue la legalización del voto femenino en las elecciones locales, avance que acallaría la voz del antisufragismo. Respecto a este punto es interesante el testimonio de Garrett, según el cual, donde se votaba en elecciones municipales cesaban las protestas en contra del voto femenino al parlamento. Es decir, se desmontaba el argumento tremendista a medida que se normalizaba el voto femenino. 
 
-Un tercer éxito parcial fue la participación de voluntarias en las campañas electorales de conservadores y liberales (la Prime Rose y la Federación de mujeres liberales respectivamente) a partir de la prohibición de contratar personal para campañas (Ley de Reforma 1884 y la Ley de Prácticas Corruptas 1883). Esto facilitó la influencia de la mujer sobre los partidos y, así, en 1892 se presentó (sin éxito) el primer Proyecto de Ley de Sufragio Femenino. 
+Un tercer éxito parcial fue la participación de voluntarias en las campañas electorales de conservadores y liberales (la Prime Rose y la Federación de mujeres liberales respectivamente) a partir de la prohibición a los partidos de contratar personal para campañas (Ley de Reforma 1884 y la Ley de Prácticas Corruptas 1883). Esto facilitó la influencia de la mujer sobre los partidos y, así, en 1892 se presentó al parlamento inglés (aunque sin éxito) el primer Proyecto de Ley de Sufragio Femenino. 
 
 Se avanzaba paso a paso. En palabras de Garrett: “las mujeres de Nueva Zelanda no se despertaron una buena mañana de 1893, como se ha dicho en ciertas ocasiones, y se vieron emancipadas”. Y es que no solo influían los logros que se iban sumando en Inglaterra (o España): hay vida tras el muro del eurocentrismo que todo lo esconde. También el derecho reconocido en otros países (incluso entidades subestatales como la Isla de Man), algunos estados de los EEUU, países del norte de Europa y especialmente en Nueva Zelanda y Australia (dentro del Imperio Británico) fueron decisivos para, al menos, romper el argumento del miedo a ese “experimento” que era como denominaban los antisufragistas al voto femenino.  
 
