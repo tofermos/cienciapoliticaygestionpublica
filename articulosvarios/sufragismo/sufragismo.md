@@ -17,7 +17,7 @@ output:
     number_sections: false
 ---
 
-A cierta edad, al volver a estudiar Historia Contemporánea te encuentras protagonistas que en tu juventud quedaron fuera de los libros de texto. Impresiona ver hasta qué punto se ha tergiversado u ocultado el papel de la mujer. Comenta un compañero que la misma imagen de la Revolución Industrial, por ejemplo, es la de un obrero varón. ¿Acaso no trabajaban hasta los niños?, ¿quién, tras la interminable jornada laboral tenía una “segunda jornada”? Por no hablar de la iniciativa y el gran papel de las mujeres en las revoluciones o su aportación en todos los campos del conocimiento.  
+A cierta edad, al volver a estudiar Historia Contemporánea te encuentras protagonistas que en tu juventud quedaron fuera de los libros de texto. Impresiona ver hasta qué punto se ha tergiversado u ocultado el papel de la mujer. Comenta un compañero que la misma imagen de la Revolución Industrial, por ejemplo, es la de un obrero varón. ¿Acaso no trabajaban hasta los niños?, ¿quién, tras la interminable jornada laboral tenía una “segunda jornada”? Por no hablar de la iniciativa y el gran papel de las mujeres en las revoluciones o su aportación silenciada en tantos campos del conocimiento.  
 
 ![](png/Clara_Campoamor-y-Millicent_Garret.jpg)
 
