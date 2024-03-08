@@ -1,7 +1,7 @@
 ---
 title: "SUFRAGISMO"
 author: "Tomàs Ferrandis Moscardó"
-date: "2023-11-19"
+date: "2022-11-23"
 output:
   pdf_document:
     latex_engine: pdflatex
