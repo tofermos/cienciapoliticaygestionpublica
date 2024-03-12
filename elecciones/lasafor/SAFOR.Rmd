@@ -72,7 +72,7 @@ A partir de la base de datos de ARGOS descargamos el resumen de resultados elect
   # View(df1) # Para ver en consola
 ```
 
-Veamos como ejemplo las primeras líneas...
+Veamos como ejemplo las primeras líneas con la función *head*
 
 ```{r 1b, include=TRUE}
 head(df1)
@@ -157,7 +157,9 @@ df_resultats<-cbind(df_resultats,ESTADÍSTICA=c("MEDIA","MÁXIMO","MÍNIMO","RAN
 df_resultats<-df_resultats %>% select("ESTADÍSTICA",everything())
 ```
 
-## 3.3 Eliminamos la columna de valores de "resto de partidos"
+## 3.3 Eliminamos la columna que no necesitamos
+
+La columna RESTA es la que contiene los datos de el "resto de partidos". Como está en la útlima posición, usamos la función *length* que nos dará su índice y con el *-* se elimina.
 
 ```{r 5d2, include=TRUE}
 df_resultats <- df_resultats[,-length(df_resultats)]

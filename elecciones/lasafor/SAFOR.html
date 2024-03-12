@@ -2804,7 +2804,8 @@ electorales en un fichero <em>CSV</em>.</p>
 <pre class="r"><code>  df1&lt;-read.csv(&quot;CSV/SAFOR.csv&quot;,header=TRUE, sep=&quot;,&quot;,quote=&quot;\&quot;&#39;&quot;, dec=&quot;,&quot;,fill=TRUE,
                 comment.char = &quot;&quot;)
   # View(df1) # Para ver en consola</code></pre>
-<p>Veamos como ejemplo las primeras líneas…</p>
+<p>Veamos como ejemplo las primeras líneas con la función
+<em>head</em></p>
 <pre class="r"><code>head(df1)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -3090,8 +3091,12 @@ df_resultats&lt;-df_resultats %&gt;% mutate_at(partits, as.integer)</code></pre>
 <pre class="r"><code># la resituamos en la posición 1 ( estática)
 df_resultats&lt;-df_resultats %&gt;% select(&quot;ESTADÍSTICA&quot;,everything())</code></pre>
 </div>
-<div id="eliminamos-la-columna-de-valores-de-resto-de-partidos" class="section level2">
-<h2>3.3 Eliminamos la columna de valores de “resto de partidos”</h2>
+<div id="eliminamos-la-columna-que-no-necesitamos" class="section level2">
+<h2>3.3 Eliminamos la columna que no necesitamos</h2>
+<p>La columna RESTA es la que contiene los datos de el “resto de
+partidos”. Como está en la útlima posición, usamos la función
+<em>length</em> que nos dará su índice y con el <em>-</em> se
+elimina.</p>
 <pre class="r"><code>df_resultats &lt;- df_resultats[,-length(df_resultats)]</code></pre>
 </div>
 <div id="imprimimos-en-markdown-una-tabla-con-los-resultados" class="section level2">
