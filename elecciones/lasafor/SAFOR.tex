@@ -143,7 +143,7 @@ la Safor (VALENCIA)}}
 \tableofcontents
 }
 \hypertarget{introducciuxf3n}{%
-\section{INTRODUCCIÓN}\label{introducciuxf3n}}
+\section{1. INTRODUCCIÓN}\label{introducciuxf3n}}
 
 A continuación veremos un sencillo ejemplo de uso de \textbf{R-Markdown}
 en el que, a partir de un fichero de tipo \emph{csv} ( SAFOR.csv )
@@ -155,13 +155,15 @@ Después guardaremos los datos del data\_frame de resultados en ficheros
 de diversos tipos: \emph{csv, xlsx, dta, RData, sav, rds)}
 
 \hypertarget{inclusiuxf3n-de-los-paquetes-y-sus-libreruxedas-que-vamos-a-necesitar}{%
-\subsection{Inclusión de los paquetes ( y sus librerías) que vamos a
+\subsection{1.1 Inclusión de los paquetes ( y sus librerías) que vamos a
 necesitar}\label{inclusiuxf3n-de-los-paquetes-y-sus-libreruxedas-que-vamos-a-necesitar}}
 
 Las librerías se cargan solo si previamente se ha instalado el paquete
 que las contiene. En nuestros \emph{chuncks} ( pedazos de código R),
 comprobaremos si están disponibles. Solo en caso contrario instalaremos
-su paquete correspondiente. Se intenta cargar una librería mediante
+su paquete correspondiente.
+
+Para ello, primero se intenta cargar una librería mediante
 \emph{require()} . Si da error, require devuelve un valor FALSE
 (!require()), entonces se ejecuta la instalación del paquete (que carga
 también la librería).
@@ -184,12 +186,12 @@ también la librería).
 \end{Shaded}
 
 \hypertarget{obtenciuxf3n-y-tratamiento-de-los-datos}{%
-\section{OBTENCIÓN Y TRATAMIENTO DE LOS
+\section{2. OBTENCIÓN Y TRATAMIENTO DE LOS
 DATOS}\label{obtenciuxf3n-y-tratamiento-de-los-datos}}
 
 \hypertarget{resultados-de-todas-las-elecciones-y-convocatorias-a-nivel-de-agregaciuxf3n-comarcal.-caso-de-la-safor.}{%
-\subsection{Resultados de todas las elecciones y convocatorias a nivel
-de agregación comarcal. Caso de La
+\subsection{2.1 Resultados de todas las elecciones y convocatorias a
+nivel de agregación comarcal. Caso de La
 Safor.}\label{resultados-de-todas-las-elecciones-y-convocatorias-a-nivel-de-agregaciuxf3n-comarcal.-caso-de-la-safor.}}
 
 A partir de la base de datos de ARGOS descargamos el resumen de
@@ -223,7 +225,7 @@ Veamos como ejemplo las primeras líneas\ldots{}
 \end{verbatim}
 
 \hypertarget{filtramos-por-elecciones-autonuxf3micas.}{%
-\subsection{Filtramos por elecciones
+\subsection{2.2 Filtramos por elecciones
 autonómicas.}\label{filtramos-por-elecciones-autonuxf3micas.}}
 
 Asumimos como \textbf{universo o población} el conjunto de todas las
@@ -240,7 +242,7 @@ correspondiente}\label{filtraremos-por-el-campo-correspondiente}}
 \end{Shaded}
 
 \hypertarget{vemos-las-primeras-lineas-de-ejemplo}{%
-\subsection{Vemos las primeras lineas de
+\subsection{2.3 Vemos las primeras lineas de
 ejemplo}\label{vemos-las-primeras-lineas-de-ejemplo}}
 
 \begin{Shaded}
@@ -260,7 +262,7 @@ ejemplo}\label{vemos-las-primeras-lineas-de-ejemplo}}
 \end{verbatim}
 
 \hypertarget{tratamiento-de-los-na}{%
-\subsection{Tratamiento de los NA}\label{tratamiento-de-los-na}}
+\subsection{2.4 Tratamiento de los NA}\label{tratamiento-de-los-na}}
 
 En nuestro caso los NA se deben a la ausencia de resultados por no
 haberse presentado la fuerza política en una convocatoria o por haberse
@@ -375,7 +377,7 @@ A-1983 & 94401 & 72681 & 22015 & 30781 & 5823 & 0 & 0 & 0 & 5815 &
 \end{longtable}
 
 \hypertarget{creamos-un-vector-con-las-candidaturas.}{%
-\subsection{Creamos un vector con las
+\subsection{2.5 Creamos un vector con las
 candidaturas.}\label{creamos-un-vector-con-las-candidaturas.}}
 
 \begin{Shaded}
@@ -419,7 +421,7 @@ RESTA \\
 \end{longtable}
 
 \hypertarget{cuxe1lculo-de-valores-de-medidas-de-tendencia-central-y-dispersiuxf3n}{%
-\section{CÁLCULO DE VALORES DE MEDIDAS de TENDENCIA CENTRAL y
+\section{3. CÁLCULO DE VALORES DE MEDIDAS de TENDENCIA CENTRAL y
 DISPERSIÓN}\label{cuxe1lculo-de-valores-de-medidas-de-tendencia-central-y-dispersiuxf3n}}
 
 1.- Media o promedio 2.- Máximos 3.- Míninos 4.- Rango de variación
@@ -434,7 +436,7 @@ DISPERSIÓN}\label{cuxe1lculo-de-valores-de-medidas-de-tendencia-central-y-dispe
 \end{Shaded}
 
 \hypertarget{creamos-un-data-frame.-cada-vector-anterior-seruxe1-una-columna}{%
-\subsection{Creamos un data frame. cada vector anterior será una
+\subsection{3.1 Creamos un data frame. cada vector anterior será una
 columna}\label{creamos-un-data-frame.-cada-vector-anterior-seruxe1-una-columna}}
 
 \begin{Shaded}
@@ -449,8 +451,8 @@ columna}\label{creamos-un-data-frame.-cada-vector-anterior-seruxe1-una-columna}}
 \end{Shaded}
 
 \hypertarget{auxf1adimos-al-final-del-data-frame-una-columna-con-el-nombre-del-cuxe1lculo}{%
-\subsection{Añadimos al final del data frame una columna con el nombre
-del
+\subsection{3.2 Añadimos al final del data frame una columna con el
+nombre del
 ``cálculo''}\label{auxf1adimos-al-final-del-data-frame-una-columna-con-el-nombre-del-cuxe1lculo}}
 
 \begin{Shaded}
@@ -467,7 +469,7 @@ del
 \end{Shaded}
 
 \hypertarget{imprimimos-en-markdown-una-tabla-con-los-resultados}{%
-\subsection{Imprimimos en Markdown una tabla con los
+\subsection{3.3 Imprimimos en Markdown una tabla con los
 resultados}\label{imprimimos-en-markdown-una-tabla-con-los-resultados}}
 
 \begin{Shaded}
@@ -539,11 +541,22 @@ MÍNIMO & 17142 & 18226 & 5823 & 207 & 2234 & 591 & 3129 & 1859 \\
 RANGO & 30271 & 12966 & 18966 & 8075 & 4611 & 11803 & 5913 & 19020 \\
 \end{longtable}
 
-\hypertarget{gruxe1ficos}{%
-\section{GRÁFICOS}\label{gruxe1ficos}}
+\hypertarget{gruxe1ficos-y-tablas}{%
+\section{4. GRÁFICOS Y TABLAS}\label{gruxe1ficos-y-tablas}}
 
 Vemos a continuación los gráficos y tablas de daraso a nivel de
-agregación de candidatura.
+agregación de candidatura. Creamos por cada partido (columna del
+\emph{df\_resultats}):
+
+\begin{itemize}
+\tightlist
+\item
+  Un data\_frame
+\item
+  Un gráfico
+\item
+  Una tabla
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -737,11 +750,11 @@ RANGO & 19020 \\
 \end{longtable}
 
 \hypertarget{guardar-data-frame-en-ficheros-de-diferentes-formatos}{%
-\section{GUARDAR DATA FRAME EN FICHEROS DE DIFERENTES
+\section{5. GUARDAR DATA FRAME EN FICHEROS DE DIFERENTES
 FORMATOS}\label{guardar-data-frame-en-ficheros-de-diferentes-formatos}}
 
 \hypertarget{guardar-datos-en-formato-.xlsx-ms-excel}{%
-\subsection{Guardar datos en formato .xlsx (MS
+\subsection{5.1 Guardar datos en formato .xlsx (MS
 Excel)}\label{guardar-datos-en-formato-.xlsx-ms-excel}}
 
 Se instala el paquete solo si hace falta
@@ -767,7 +780,7 @@ Se creará un fichero de tipo MS Excel: \emph{resultats.xlsx}
 \end{Shaded}
 
 \hypertarget{auxf1adiendo-una-hoja-en-un-ficher-xlsx-existente}{%
-\subsection{Añadiendo una hoja en un ficher xlsx
+\subsection{5.2 Añadiendo una hoja en un ficher xlsx
 existente}\label{auxf1adiendo-una-hoja-en-un-ficher-xlsx-existente}}
 
 Aquí añadiremos una página más a un fichero MS Excel existente
@@ -780,7 +793,7 @@ Aquí añadiremos una página más a un fichero MS Excel existente
 \end{Shaded}
 
 \hypertarget{guardar-datos-en-formato-.dta-stata.}{%
-\subsection{Guardar datos en formato .dta /
+\subsection{5.3 Guardar datos en formato .dta /
 Stata.}\label{guardar-datos-en-formato-.dta-stata.}}
 
 \begin{Shaded}
@@ -791,7 +804,7 @@ Stata.}\label{guardar-datos-en-formato-.dta-stata.}}
 \end{Shaded}
 
 \hypertarget{guardar-datos-en-formato-.csv}{%
-\subsection{Guardar datos en formato
+\subsection{5.4 Guardar datos en formato
 .csv}\label{guardar-datos-en-formato-.csv}}
 
 \begin{Shaded}
@@ -802,7 +815,7 @@ Stata.}\label{guardar-datos-en-formato-.dta-stata.}}
 \end{Shaded}
 
 \hypertarget{guardar-datos-en-formato-.sav-spss}{%
-\subsection{Guardar datos en formato .sav /
+\subsection{5.5 Guardar datos en formato .sav /
 SPSS}\label{guardar-datos-en-formato-.sav-spss}}
 
 \begin{Shaded}
@@ -813,7 +826,7 @@ SPSS}\label{guardar-datos-en-formato-.sav-spss}}
 \end{Shaded}
 
 \hypertarget{guardar-y-abrir-datos-en-formato-rstudio.}{%
-\subsection{Guardar y abrir datos en formato
+\subsection{5.6 Guardar y abrir datos en formato
 RStudio.}\label{guardar-y-abrir-datos-en-formato-rstudio.}}
 
 No es lo más usado, porque la costumbre es compartir los datos en
@@ -833,7 +846,7 @@ RData - permite guardar más de una base de datos en un mismo archivo.
 \end{Shaded}
 
 \hypertarget{lectura-de-datos-rdata}{%
-\subsection{Lectura de datos RData}\label{lectura-de-datos-rdata}}
+\subsection{5.7 Lectura de datos RData}\label{lectura-de-datos-rdata}}
 
 El parámetro \emph{verbose=TRUE} es opcional. Sirve para que en la carga
 (lectura) nos muestre los datos (dataframe en este caso) existentes en
@@ -852,7 +865,7 @@ el dataframe: \emph{df\_resultats}
 \end{verbatim}
 
 \hypertarget{rds---guarda-un-solo-archivo-de-datos}{%
-\subsection{RDS - guarda un solo archivo de
+\subsection{5.8 RDS - guarda un solo archivo de
 datos}\label{rds---guarda-un-solo-archivo-de-datos}}
 
 \begin{Shaded}
@@ -862,7 +875,7 @@ datos}\label{rds---guarda-un-solo-archivo-de-datos}}
 \end{Shaded}
 
 \hypertarget{lectura-de-datos-rds}{%
-\subsection{Lectura de datos RDS}\label{lectura-de-datos-rds}}
+\subsection{5.9 Lectura de datos RDS}\label{lectura-de-datos-rds}}
 
 \begin{Shaded}
 \begin{Highlighting}[]

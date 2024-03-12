@@ -3,30 +3,31 @@ title: "Ejemplo de R Markdown: *El voto autonómico en la comarca de la Safor (V
 author: "Tomàs Ferrandis Moscardó"
 date: "2024-01-26"
 output:
+  pdf_document:
+    latex_engine: pdflatex
+    toc: true
+    keep_tex: true
   html_document:
     toc: true
     toc_float: true
     toc_depth: 4
     df_print: paged
     number_sections: false
-  pdf_document:
-    latex_engine: pdflatex
-    toc: true
-    keep_tex: true
 ---
 
 
-# INTRODUCCIÓN
+# 1. INTRODUCCIÓN
 
 A continuación veremos un sencillo ejemplo de uso de **R-Markdown** en el que, a partir de un fichero de tipo *csv* ( SAFOR.csv ) crearemos y manipularemos objetos _data.frame_.
 Obtendremos algunas medidas de *tendencia central y dispersión* que representaremos en tablas y gráficos.
 
 Después guardaremos los datos del data_frame de resultados en ficheros de diversos tipos:  *csv, xlsx, dta, RData, sav, rds)*
 
-## Inclusión de los paquetes ( y sus librerías) que vamos a necesitar
+## 1.1 Inclusión de los paquetes ( y sus librerías) que vamos a necesitar
 
 Las librerías se cargan solo si previamente se ha instalado el paquete que las contiene. En nuestros *chuncks* ( pedazos de código R), comprobaremos si están disponibles. Solo en caso contrario instalaremos su paquete correspondiente.
-Se intenta cargar una librería mediante *require()* . Si da error, require devuelve un valor FALSE (!require()), entonces se ejecuta la instalación del paquete (que carga también la librería).
+
+Para ello, primero se intenta cargar una librería mediante *require()* . Si da error, require devuelve un valor FALSE (!require()), entonces se ejecuta la instalación del paquete (que carga también la librería).
 
 ```{r 0, include=FALSE,eval=TRUE}
 
@@ -59,9 +60,9 @@ library(dplyr)
 library(ggplot2)
 ```
 
-# OBTENCIÓN Y TRATAMIENTO DE LOS DATOS
+# 2. OBTENCIÓN Y TRATAMIENTO DE LOS DATOS
 
-## Resultados de todas las elecciones y convocatorias a nivel de agregación comarcal. Caso de La Safor.
+## 2.1 Resultados de todas las elecciones y convocatorias a nivel de agregación comarcal. Caso de La Safor.
 
 A partir de la base de datos de ARGOS descargamos el resumen de resultados electorales en las distintas convocatorias y procesos electorales en un fichero *CSV*.
 
@@ -77,7 +78,7 @@ Veamos como ejemplo las primeras líneas...
 head(df1)
 ```
 
-## Filtramos por elecciones autonómicas.
+## 2.2 Filtramos por elecciones autonómicas.
 
 Asumimos como **universo o población** el conjunto de todas las todas elecciones autonómicas. 
 
@@ -87,12 +88,12 @@ Asumimos como **universo o población** el conjunto de todas las todas eleccione
 df_autonomicas<-df1 %>% filter(str_detect(df1$Elecció,"A-"))
 ```
 
-## Vemos las primeras lineas de ejemplo
+## 2.3 Vemos las primeras lineas de ejemplo
 ```{r 2b, include=TRUE}
 head(df_autonomicas)
 ```
 
-## Tratamiento de los NA
+## 2.4 Tratamiento de los NA
 
 En nuestro caso los NA se deben a la ausencia de resultados por no haberse presentado la fuerza política en una convocatoria o por haberse integrado en una coalición electoral. Entendemos que el valor que debe sustituir NA para poder realizar cálculos estadísticos de forma correcta y sin errores de computación es el 0. Podríamos recorrer solo las columnas de partidos pero lo simplificamos y aplicamos la sustitución NA -\> 0 en todo el data frame.
 
@@ -106,7 +107,7 @@ Mostramos los datos en formato de tabla de RMarkdown
 knitr::kable(df_autonomicas, caption = "ELECCIONES AUTONÓMICAS EN LA SAFOR")
 ```
  
-## Creamos un vector con las candidaturas.
+## 2.5 Creamos un vector con las candidaturas.
 
 ```{r 4, include=TRUE}
 # Recogemos los nombres de columnas a partir de la 4ª
@@ -121,7 +122,7 @@ Los visualizamos en formato de tabla de RMarkdown
 knitr::kable(partits, caption = "CANDIDATURAS")
 ```
 
-# CÁLCULO DE VALORES DE MEDIDAS de TENDENCIA CENTRAL y DISPERSIÓN
+# 3. CÁLCULO DE VALORES DE MEDIDAS de TENDENCIA CENTRAL y DISPERSIÓN
 
 1.- Media o promedio
 2.- Máximos
@@ -135,7 +136,7 @@ minims<-summarise_at(df_autonomicas,partits,~min(.[. != 0])) #Descartamos los 0
 rangodevariacion<-maxims - minims
 ```
 
-## Creamos un data frame. cada vector anterior será una columna
+## 3.1 Creamos un data frame. cada vector anterior será una columna
 
 ```{r 5b, include=TRUE}
 df_resultats<-rbind(mitjana)
@@ -145,7 +146,7 @@ df_resultats<-rbind(df_resultats,rangodevariacion)
 #Redondeamos los valores a enteros ( son votos) 
 df_resultats<-df_resultats %>% mutate_at(partits, as.integer)
 ```
-## Añadimos al final del data frame una columna con el nombre del "cálculo"
+## 3.2 Añadimos al final del data frame una columna con el nombre del "cálculo"
 
 ```{r 5c, include=TRUE}
 df_resultats<-cbind(df_resultats,ESTADÍSTICA=c("MEDIA","MÁXIMO","MÍNIMO","RANGO"))
@@ -156,14 +157,20 @@ df_resultats<-cbind(df_resultats,ESTADÍSTICA=c("MEDIA","MÁXIMO","MÍNIMO","RAN
 df_resultats<-df_resultats %>% select("ESTADÍSTICA",everything())
 ```
 
-## Imprimimos en Markdown una tabla con los resultados
+## 3.3 Imprimimos en Markdown una tabla con los resultados
 ```{r 5e, include=TRUE}
 knitr::kable(df_resultats, caption = "ESTADÍSTICA SAFOR")
 ```
 
-# GRÁFICOS 
+# 4. GRÁFICOS Y TABLAS 
 
 Vemos a continuación los gráficos y tablas de daraso a nivel de agregación de candidatura.
+Creamos por cada partido (columna del *df_resultats*):
+
+* Un data_frame
+* Un gráfico
+* Una tabla
+
 
 ```{r 6, results='asis'}
 # Recorremos las columnas del data frame correspondientes a candidaturas ( >2)
@@ -193,12 +200,11 @@ knitr::kable(df_estPartit, caption = paste( "ESTADÍSTICA SAFOR",
 
 }
 
-
 ```
 
-# GUARDAR DATA FRAME EN FICHEROS DE DIFERENTES FORMATOS
+# 5. GUARDAR DATA FRAME EN FICHEROS DE DIFERENTES FORMATOS
 
-## Guardar datos en formato .xlsx (MS Excel)
+## 5.1 Guardar datos en formato .xlsx (MS Excel)
 
 Se instala el paquete solo si hace falta
 ```{r 7, include=TRUE}
@@ -212,7 +218,7 @@ Se creará un fichero de tipo MS Excel: *resultats.xlsx*
 write.xlsx(df_resultats, file = "resultats.xlsx", sheetName = "resultats", append = FALSE)
 ```
 
-## Añadiendo una hoja en un ficher xlsx existente
+## 5.2 Añadiendo una hoja en un ficher xlsx existente
 Aquí añadiremos una página más a un fichero MS Excel existente (append=TRUE). Si *ficheroAnterior.xlsx* no existe dará error.
 
 
@@ -222,7 +228,7 @@ write.xlsx(df_resultats, file = "ficheroAnterior.xlsx", sheetName="resultats", a
 ```
 
 
-## Guardar datos en formato .dta / Stata.
+## 5.3 Guardar datos en formato .dta / Stata.
 ```{r 10, include=FALSE}
 if (!require("foreign")) {install.packages("foreign")}
 write.dta(df_resultats, "resultats.dta")
@@ -233,7 +239,7 @@ if (!require("foreign")) {install.packages("foreign")}
 write.dta(df_resultats, "resultats.dta")
 ```
 
-## Guardar datos en formato .csv
+## 5.4 Guardar datos en formato .csv
 ```{r 11, include=FALSE}
 if (!require("tidyverse")) {install.packages("tidyverse")}
 write_csv(df_resultats, "resultats.csv")
@@ -244,7 +250,7 @@ if (!require("tidyverse")) {install.packages("tidyverse")}
 write_csv(df_resultats, "resultats.csv")
 ```
 
-## Guardar datos en formato .sav / SPSS
+## 5.5 Guardar datos en formato .sav / SPSS
 ```{r 12, include=FALSE}
 if (!require("haven")) {install.packages("haven")}
 write_sav(df_resultats, "resultats.sav")
@@ -254,7 +260,7 @@ write_sav(df_resultats, "resultats.sav")
 if (!require("haven")) {install.packages("haven")}
 write_sav(df_resultats, "resultats.sav")
 ```
-## Guardar y abrir datos en formato RStudio.
+## 5.6 Guardar y abrir datos en formato RStudio.
 
 No es lo más usado, porque la costumbre es compartir los datos en formatos como .csv u otros que sean más comunes. No obstante, conviene conocer estos 
 formatos, que se manejan muy fácilmente. No requieren librería, pues estos comandos trabajan con las funciones que trae **RStudio**.
@@ -265,7 +271,7 @@ formatos, que se manejan muy fácilmente. No requieren librería, pues estos com
 ```{r 13, include=TRUE}
 save(df_resultats, file="resultats.RData")
 ```
-## Lectura de datos RData
+## 5.7 Lectura de datos RData
 El parámetro *verbose=TRUE* es opcional. Sirve para que en la carga (lectura) nos muestre los datos (dataframe en este caso) existentes en el fichero de tipo *.Rdata*.
 en nuestro ejemplo vemos que contiene el dataframe: *df_resultats*
 
@@ -273,12 +279,12 @@ en nuestro ejemplo vemos que contiene el dataframe: *df_resultats*
 load("resultats.RData",verbose=TRUE)
 ```
 
-## RDS - guarda un solo archivo de datos
+## 5.8 RDS - guarda un solo archivo de datos
 ```{r 15, include=TRUE}
 saveRDS(df_resultats, "resultats.rds")
 ```
 
-## Lectura de datos RDS
+## 5.9 Lectura de datos RDS
 ```{r 16, include=TRUE}
 df_resultats2 <- readRDS("resultats.rds")
 ```

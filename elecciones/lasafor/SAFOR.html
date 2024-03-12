@@ -2759,7 +2759,7 @@ autonómico en la comarca de la Safor (VALENCIA)</em></h1>
 
 
 <div id="introducción" class="section level1">
-<h1>INTRODUCCIÓN</h1>
+<h1>1. INTRODUCCIÓN</h1>
 <p>A continuación veremos un sencillo ejemplo de uso de
 <strong>R-Markdown</strong> en el que, a partir de un fichero de tipo
 <em>csv</em> ( SAFOR.csv ) crearemos y manipularemos objetos
@@ -2769,15 +2769,16 @@ central y dispersión</em> que representaremos en tablas y gráficos.</p>
 ficheros de diversos tipos: <em>csv, xlsx, dta, RData, sav,
 rds)</em></p>
 <div id="inclusión-de-los-paquetes-y-sus-librerías-que-vamos-a-necesitar" class="section level2">
-<h2>Inclusión de los paquetes ( y sus librerías) que vamos a
+<h2>1.1 Inclusión de los paquetes ( y sus librerías) que vamos a
 necesitar</h2>
 <p>Las librerías se cargan solo si previamente se ha instalado el
 paquete que las contiene. En nuestros <em>chuncks</em> ( pedazos de
 código R), comprobaremos si están disponibles. Solo en caso contrario
-instalaremos su paquete correspondiente. Se intenta cargar una librería
-mediante <em>require()</em> . Si da error, require devuelve un valor
-FALSE (!require()), entonces se ejecuta la instalación del paquete (que
-carga también la librería).</p>
+instalaremos su paquete correspondiente.</p>
+<p>Para ello, primero se intenta cargar una librería mediante
+<em>require()</em> . Si da error, require devuelve un valor FALSE
+(!require()), entonces se ejecuta la instalación del paquete (que carga
+también la librería).</p>
 <pre class="r"><code># Requisitos previes. Paquetes y librerías
 if (!require(&quot;dplyr&quot;)) {install.packages(&quot;dplyr&quot;)}
 if (!require(&quot;stringr&quot;)) {install.packages(&quot;stringr&quot;)}
@@ -2793,9 +2794,9 @@ library(ggplot2)</code></pre>
 </div>
 </div>
 <div id="obtención-y-tratamiento-de-los-datos" class="section level1">
-<h1>OBTENCIÓN Y TRATAMIENTO DE LOS DATOS</h1>
+<h1>2. OBTENCIÓN Y TRATAMIENTO DE LOS DATOS</h1>
 <div id="resultados-de-todas-las-elecciones-y-convocatorias-a-nivel-de-agregación-comarcal.-caso-de-la-safor." class="section level2">
-<h2>Resultados de todas las elecciones y convocatorias a nivel de
+<h2>2.1 Resultados de todas las elecciones y convocatorias a nivel de
 agregación comarcal. Caso de La Safor.</h2>
 <p>A partir de la base de datos de ARGOS descargamos el resumen de
 resultados electorales en las distintas convocatorias y procesos
@@ -2812,7 +2813,7 @@ electorales en un fichero <em>CSV</em>.</p>
 </div>
 </div>
 <div id="filtramos-por-elecciones-autonómicas." class="section level2">
-<h2>Filtramos por elecciones autonómicas.</h2>
+<h2>2.2 Filtramos por elecciones autonómicas.</h2>
 <p>Asumimos como <strong>universo o población</strong> el conjunto de
 todas las todas elecciones autonómicas.</p>
 </div>
@@ -2821,7 +2822,7 @@ todas las todas elecciones autonómicas.</p>
 <pre class="r"><code>df_autonomicas&lt;-df1 %&gt;% filter(str_detect(df1$Elecció,&quot;A-&quot;))</code></pre>
 </div>
 <div id="vemos-las-primeras-lineas-de-ejemplo" class="section level2">
-<h2>Vemos las primeras lineas de ejemplo</h2>
+<h2>2.3 Vemos las primeras lineas de ejemplo</h2>
 <pre class="r"><code>head(df_autonomicas)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -2830,7 +2831,7 @@ todas las todas elecciones autonómicas.</p>
 </div>
 </div>
 <div id="tratamiento-de-los-na" class="section level2">
-<h2>Tratamiento de los NA</h2>
+<h2>2.4 Tratamiento de los NA</h2>
 <p>En nuestro caso los NA se deben a la ausencia de resultados por no
 haberse presentado la fuerza política en una convocatoria o por haberse
 integrado en una coalición electoral. Entendemos que el valor que debe
@@ -3019,7 +3020,7 @@ columnas de partidos pero lo simplificamos y aplicamos la sustitución NA
 </table>
 </div>
 <div id="creamos-un-vector-con-las-candidaturas." class="section level2">
-<h2>Creamos un vector con las candidaturas.</h2>
+<h2>2.5 Creamos un vector con las candidaturas.</h2>
 <pre class="r"><code># Recogemos los nombres de columnas a partir de la 4ª
 partits&lt;-names(df1[4:length(df1)])
 
@@ -3064,7 +3065,8 @@ partits&lt;-names(df1[4:length(df1)])
 </div>
 </div>
 <div id="cálculo-de-valores-de-medidas-de-tendencia-central-y-dispersión" class="section level1">
-<h1>CÁLCULO DE VALORES DE MEDIDAS de TENDENCIA CENTRAL y DISPERSIÓN</h1>
+<h1>3. CÁLCULO DE VALORES DE MEDIDAS de TENDENCIA CENTRAL y
+DISPERSIÓN</h1>
 <p>1.- Media o promedio 2.- Máximos 3.- Míninos 4.- Rango de
 variación</p>
 <pre class="r"><code>mitjana&lt;-summarise_at(df_autonomicas,partits,mean)
@@ -3072,7 +3074,8 @@ maxims&lt;-summarise_at(df_autonomicas,partits,max)
 minims&lt;-summarise_at(df_autonomicas,partits,~min(.[. != 0])) #Descartamos los 0
 rangodevariacion&lt;-maxims - minims</code></pre>
 <div id="creamos-un-data-frame.-cada-vector-anterior-será-una-columna" class="section level2">
-<h2>Creamos un data frame. cada vector anterior será una columna</h2>
+<h2>3.1 Creamos un data frame. cada vector anterior será una
+columna</h2>
 <pre class="r"><code>df_resultats&lt;-rbind(mitjana)
 df_resultats&lt;-rbind(df_resultats,maxims)
 df_resultats&lt;-rbind(df_resultats,minims)
@@ -3081,14 +3084,14 @@ df_resultats&lt;-rbind(df_resultats,rangodevariacion)
 df_resultats&lt;-df_resultats %&gt;% mutate_at(partits, as.integer)</code></pre>
 </div>
 <div id="añadimos-al-final-del-data-frame-una-columna-con-el-nombre-del-cálculo" class="section level2">
-<h2>Añadimos al final del data frame una columna con el nombre del
+<h2>3.2 Añadimos al final del data frame una columna con el nombre del
 “cálculo”</h2>
 <pre class="r"><code>df_resultats&lt;-cbind(df_resultats,ESTADÍSTICA=c(&quot;MEDIA&quot;,&quot;MÁXIMO&quot;,&quot;MÍNIMO&quot;,&quot;RANGO&quot;))</code></pre>
 <pre class="r"><code># la resituamos en la posición 1 ( estática)
 df_resultats&lt;-df_resultats %&gt;% select(&quot;ESTADÍSTICA&quot;,everything())</code></pre>
 </div>
 <div id="imprimimos-en-markdown-una-tabla-con-los-resultados" class="section level2">
-<h2>Imprimimos en Markdown una tabla con los resultados</h2>
+<h2>3.3 Imprimimos en Markdown una tabla con los resultados</h2>
 <pre class="r"><code>knitr::kable(df_resultats, caption = &quot;ESTADÍSTICA SAFOR&quot;)</code></pre>
 <table>
 <caption>ESTADÍSTICA SAFOR</caption>
@@ -3165,10 +3168,16 @@ df_resultats&lt;-df_resultats %&gt;% select(&quot;ESTADÍSTICA&quot;,everything(
 </table>
 </div>
 </div>
-<div id="gráficos" class="section level1">
-<h1>GRÁFICOS</h1>
+<div id="gráficos-y-tablas" class="section level1">
+<h1>4. GRÁFICOS Y TABLAS</h1>
 <p>Vemos a continuación los gráficos y tablas de daraso a nivel de
-agregación de candidatura.</p>
+agregación de candidatura. Creamos por cada partido (columna del
+<em>df_resultats</em>):</p>
+<ul>
+<li>Un data_frame</li>
+<li>Un gráfico</li>
+<li>Una tabla</li>
+</ul>
 <pre class="r"><code># Recorremos las columnas del data frame correspondientes a candidaturas ( &gt;2)
 # Creamos un data frame en cada iteración
 for ( i in 2:length(df_resultats)){
@@ -3421,9 +3430,9 @@ knitr::kable(df_estPartit, caption = paste( &quot;ESTADÍSTICA SAFOR&quot;,
 </table>
 </div>
 <div id="guardar-data-frame-en-ficheros-de-diferentes-formatos" class="section level1">
-<h1>GUARDAR DATA FRAME EN FICHEROS DE DIFERENTES FORMATOS</h1>
+<h1>5. GUARDAR DATA FRAME EN FICHEROS DE DIFERENTES FORMATOS</h1>
 <div id="guardar-datos-en-formato-.xlsx-ms-excel" class="section level2">
-<h2>Guardar datos en formato .xlsx (MS Excel)</h2>
+<h2>5.1 Guardar datos en formato .xlsx (MS Excel)</h2>
 <p>Se instala el paquete solo si hace falta</p>
 <pre class="r"><code>if (!require(&quot;xlsx&quot;)) {install.packages(&quot;xlsx&quot;)}</code></pre>
 <pre><code>## Loading required package: xlsx</code></pre>
@@ -3433,29 +3442,29 @@ knitr::kable(df_estPartit, caption = paste( &quot;ESTADÍSTICA SAFOR&quot;,
 write.xlsx(df_resultats, file = &quot;resultats.xlsx&quot;, sheetName = &quot;resultats&quot;, append = FALSE)</code></pre>
 </div>
 <div id="añadiendo-una-hoja-en-un-ficher-xlsx-existente" class="section level2">
-<h2>Añadiendo una hoja en un ficher xlsx existente</h2>
+<h2>5.2 Añadiendo una hoja en un ficher xlsx existente</h2>
 <p>Aquí añadiremos una página más a un fichero MS Excel existente
 (append=TRUE). Si <em>ficheroAnterior.xlsx</em> no existe dará
 error.</p>
 <pre class="r"><code>write.xlsx(df_resultats, file = &quot;ficheroAnterior.xlsx&quot;, sheetName=&quot;resultats&quot;, append=TRUE)</code></pre>
 </div>
 <div id="guardar-datos-en-formato-.dta-stata." class="section level2">
-<h2>Guardar datos en formato .dta / Stata.</h2>
+<h2>5.3 Guardar datos en formato .dta / Stata.</h2>
 <pre class="r"><code>if (!require(&quot;foreign&quot;)) {install.packages(&quot;foreign&quot;)}
 write.dta(df_resultats, &quot;resultats.dta&quot;)</code></pre>
 </div>
 <div id="guardar-datos-en-formato-.csv" class="section level2">
-<h2>Guardar datos en formato .csv</h2>
+<h2>5.4 Guardar datos en formato .csv</h2>
 <pre class="r"><code>if (!require(&quot;tidyverse&quot;)) {install.packages(&quot;tidyverse&quot;)}
 write_csv(df_resultats, &quot;resultats.csv&quot;)</code></pre>
 </div>
 <div id="guardar-datos-en-formato-.sav-spss" class="section level2">
-<h2>Guardar datos en formato .sav / SPSS</h2>
+<h2>5.5 Guardar datos en formato .sav / SPSS</h2>
 <pre class="r"><code>if (!require(&quot;haven&quot;)) {install.packages(&quot;haven&quot;)}
 write_sav(df_resultats, &quot;resultats.sav&quot;)</code></pre>
 </div>
 <div id="guardar-y-abrir-datos-en-formato-rstudio." class="section level2">
-<h2>Guardar y abrir datos en formato RStudio.</h2>
+<h2>5.6 Guardar y abrir datos en formato RStudio.</h2>
 <p>No es lo más usado, porque la costumbre es compartir los datos en
 formatos como .csv u otros que sean más comunes. No obstante, conviene
 conocer estos formatos, que se manejan muy fácilmente. No requieren
@@ -3468,7 +3477,7 @@ archivo.</p>
 <pre class="r"><code>save(df_resultats, file=&quot;resultats.RData&quot;)</code></pre>
 </div>
 <div id="lectura-de-datos-rdata" class="section level2">
-<h2>Lectura de datos RData</h2>
+<h2>5.7 Lectura de datos RData</h2>
 <p>El parámetro <em>verbose=TRUE</em> es opcional. Sirve para que en la
 carga (lectura) nos muestre los datos (dataframe en este caso)
 existentes en el fichero de tipo <em>.Rdata</em>. en nuestro ejemplo
@@ -3478,11 +3487,11 @@ vemos que contiene el dataframe: <em>df_resultats</em></p>
 ##   df_resultats</code></pre>
 </div>
 <div id="rds---guarda-un-solo-archivo-de-datos" class="section level2">
-<h2>RDS - guarda un solo archivo de datos</h2>
+<h2>5.8 RDS - guarda un solo archivo de datos</h2>
 <pre class="r"><code>saveRDS(df_resultats, &quot;resultats.rds&quot;)</code></pre>
 </div>
 <div id="lectura-de-datos-rds" class="section level2">
-<h2>Lectura de datos RDS</h2>
+<h2>5.9 Lectura de datos RDS</h2>
 <pre class="r"><code>df_resultats2 &lt;- readRDS(&quot;resultats.rds&quot;)</code></pre>
 </div>
 </div>
