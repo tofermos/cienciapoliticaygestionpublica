@@ -13,7 +13,7 @@
 
 <meta name="date" content="2024-01-26" />
 
-<title>EL VOTO AUTONÓMICO EN LA COMARCA DE LA SAFOR (VALENCIA)</title>
+<title>Ejemplo de R Markdown: El voto autonómico en la comarca de la Safor (VALENCIA)</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -2750,57 +2750,97 @@ border-radius: 0px;
 
 
 
-<h1 class="title toc-ignore">EL VOTO AUTONÓMICO EN LA COMARCA DE LA
-SAFOR (VALENCIA)</h1>
+<h1 class="title toc-ignore">Ejemplo de R Markdown: <em>El voto
+autonómico en la comarca de la Safor (VALENCIA)</em></h1>
 <h4 class="author">Tomàs Ferrandis Moscardó</h4>
 <h4 class="date">2024-01-26</h4>
 
 </div>
 
 
-<div id="descripción" class="section level1">
-<h1>DESCRIPCIÓN</h1>
-<p>A continuación veremos un sencillo ejemplo de uso de R Markdown en el
-que, a partir de un fichero <em>csv</em> con resultados electorales,
-crearemos y manipularemos objetos data.frame para obtener algunas
-medidas de tendencia central y dispersión que representaremos en tablas
-y gráficos.</p>
-<div id="obtención-de-los-datos" class="section level2">
-<h2>OBTENCIÓN DE LOS DATOS</h2>
-<div id="resultados-de-todas-las-elecciones-y-convocatorias-a-nivel-de-agregación-comarcal.-caso-de-la-safor." class="section level3">
-<h3>Resultados de todas las elecciones y convocatorias a nivel de
-agregación comarcal. Caso de La Safor.</h3>
+<div id="introducción" class="section level1">
+<h1>INTRODUCCIÓN</h1>
+<p>A continuación veremos un sencillo ejemplo de uso de
+<strong>R-Markdown</strong> en el que, a partir de un fichero de tipo
+<em>csv</em> ( SAFOR.csv ) crearemos y manipularemos objetos
+<em>data.frame</em>. Obtendremos algunas medidas de <em>tendencia
+central y dispersión</em> que representaremos en tablas y gráficos.</p>
+<p>Después guardaremos los datos del data_frame de resultados en
+ficheros de diversos tipos: <em>csv, xlsx, dta, RData, sav,
+rds)</em></p>
+<div id="inclusión-de-los-paquetes-y-sus-librerías-que-vamos-a-necesitar" class="section level2">
+<h2>Inclusión de los paquetes ( y sus librerías) que vamos a
+necesitar</h2>
+<p>Las librerías se cargan solo si previamente se ha instalado el
+paquete que las contiene. En nuestros <em>chuncks</em> ( pedazos de
+código R), comprobaremos si están disponibles. Solo en caso contrario
+instalaremos su paquete correspondiente. Se intenta cargar una librería
+mediante <em>require()</em> . Si da error, require devuelve un valor
+FALSE (!require()), entonces se ejecuta la instalación del paquete (que
+carga también la librería).</p>
+<pre class="r"><code># Requisitos previes. Paquetes y librerías
+if (!require(&quot;dplyr&quot;)) {install.packages(&quot;dplyr&quot;)}
+if (!require(&quot;stringr&quot;)) {install.packages(&quot;stringr&quot;)}
+if (!require(&quot;curl&quot;)) {install.packages(&quot;curl&quot;)}
+if (!require(&quot;rsconnect&quot;)){install.packages(&quot;rsconnect&quot;)}
+if (!require(&quot;kableExtra&quot;)){install.packages(&quot;kableExtra&quot;)}
+if (!require(&quot;tidyverse&quot;)){install.packages(&quot;tidyverse&quot;)}
+library(data.table)
+library(knitr)
+library(stringr)
+library(dplyr)
+library(ggplot2)</code></pre>
+</div>
+</div>
+<div id="obtención-y-tratamiento-de-los-datos" class="section level1">
+<h1>OBTENCIÓN Y TRATAMIENTO DE LOS DATOS</h1>
+<div id="resultados-de-todas-las-elecciones-y-convocatorias-a-nivel-de-agregación-comarcal.-caso-de-la-safor." class="section level2">
+<h2>Resultados de todas las elecciones y convocatorias a nivel de
+agregación comarcal. Caso de La Safor.</h2>
 <p>A partir de la base de datos de ARGOS descargamos el resumen de
 resultados electorales en las distintas convocatorias y procesos
-electorales en un fichero CSV.</p>
-<pre class="r"><code>df1&lt;-read.csv(&quot;CSV/SAFOR.csv&quot;,header=TRUE, sep=&quot;,&quot;,quote=&quot;\&quot;&#39;&quot;, dec=&quot;,&quot;,fill=TRUE,
-              comment.char = &quot;&quot;)
-#View(df1) # Para ver en consola</code></pre>
+electorales en un fichero <em>CSV</em>.</p>
+<pre class="r"><code>  df1&lt;-read.csv(&quot;CSV/SAFOR.csv&quot;,header=TRUE, sep=&quot;,&quot;,quote=&quot;\&quot;&#39;&quot;, dec=&quot;,&quot;,fill=TRUE,
+                comment.char = &quot;&quot;)
+  # View(df1) # Para ver en consola</code></pre>
+<p>Veamos como ejemplo las primeras líneas…</p>
+<pre class="r"><code>head(df1)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Elecció"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Cens"],"name":[2],"type":["int"],"align":["right"]},{"label":["A.Cand."],"name":[3],"type":["int"],"align":["right"]},{"label":["PP"],"name":[4],"type":["int"],"align":["right"]},{"label":["PSPV"],"name":[5],"type":["int"],"align":["right"]},{"label":["COMPROMÍS"],"name":[6],"type":["int"],"align":["right"]},{"label":["VOX"],"name":[7],"type":["int"],"align":["right"]},{"label":["PODEMOS"],"name":[8],"type":["int"],"align":["right"]},{"label":["Cs"],"name":[9],"type":["int"],"align":["right"]},{"label":["EUPV"],"name":[10],"type":["int"],"align":["right"]},{"label":["RESTA"],"name":[11],"type":["int"],"align":["right"]}],"data":[{"1":"G-2023","2":"124383","3":"90477","4":"29545","5":"31386","6":"15855","7":"12462","8":"NA","9":"NA","10":"NA","11":"1229","_rn_":"1"},{"1":"A-2023","2":"124367","3":"86496","4":"28245","5":"25559","6":"19953","7":"8282","8":"2234","9":"591","10":"NA","11":"1859","_rn_":"2"},{"1":"L-2023","2":"127096","3":"88398","4":"27174","5":"28953","6":"15703","7":"3126","8":"120","9":"364","10":"1143","11":"11795","_rn_":"3"},{"1":"G-2019","2":"121791","3":"86427","4":"19634","5":"23322","6":"10644","7":"14008","8":"11334","9":"5559","10":"NA","11":"1926","_rn_":"4"},{"1":"E-2019","2":"123535","3":"84970","4":"19128","5":"25797","6":"15919","7":"4818","8":"6621","9":"8761","10":"NA","11":"3926","_rn_":"5"},{"1":"L-2019","2":"124552","3":"86268","4":"23328","5":"26289","6":"19803","7":"1910","8":"1155","9":"4541","10":"1197","11":"8044","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
 </div>
-<div id="filtramos-por-elecciones-autonómicas." class="section level3">
-<h3>Filtramos por elecciones autonómicas.</h3>
-<p>Asumimos como universo o población el conjunto de todas las
-elecciones autonómicas.</p>
-<pre class="r"><code>df_autonomicas&lt;-df1 %&gt;% filter(str_detect(df1$Elecció,&quot;A-&quot;))
-# Vemos las 10 primeras lineas de ejemplo
-head(df_autonomicas)</code></pre>
+</div>
+<div id="filtramos-por-elecciones-autonómicas." class="section level2">
+<h2>Filtramos por elecciones autonómicas.</h2>
+<p>Asumimos como <strong>universo o población</strong> el conjunto de
+todas las todas elecciones autonómicas.</p>
+</div>
+<div id="filtraremos-por-el-campo-correspondiente" class="section level2">
+<h2>Filtraremos por el campo correspondiente</h2>
+<pre class="r"><code>df_autonomicas&lt;-df1 %&gt;% filter(str_detect(df1$Elecció,&quot;A-&quot;))</code></pre>
+</div>
+<div id="vemos-las-primeras-lineas-de-ejemplo" class="section level2">
+<h2>Vemos las primeras lineas de ejemplo</h2>
+<pre class="r"><code>head(df_autonomicas)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Elecció"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Cens"],"name":[2],"type":["int"],"align":["right"]},{"label":["A.Cand."],"name":[3],"type":["int"],"align":["right"]},{"label":["PP"],"name":[4],"type":["int"],"align":["right"]},{"label":["PSPV"],"name":[5],"type":["int"],"align":["right"]},{"label":["COMPROMÍS"],"name":[6],"type":["int"],"align":["right"]},{"label":["VOX"],"name":[7],"type":["int"],"align":["right"]},{"label":["PODEMOS"],"name":[8],"type":["int"],"align":["right"]},{"label":["Cs"],"name":[9],"type":["int"],"align":["right"]},{"label":["EUPV"],"name":[10],"type":["int"],"align":["right"]},{"label":["RESTA"],"name":[11],"type":["int"],"align":["right"]}],"data":[{"1":"A-2023","2":"124367","3":"86496","4":"28245","5":"25559","6":"19953","7":"8282","8":"2234","9":"591","10":"NA","11":"1859","_rn_":"1"},{"1":"A-2019","2":"121181","3":"89534","4":"17325","5":"19867","6":"23504","7":"7666","8":"5917","9":"12394","10":"NA","11":"2861","_rn_":"2"},{"1":"A-2015","2":"121362","3":"90086","4":"26377","5":"18226","6":"24789","7":"207","8":"6845","9":"7668","10":"3129","11":"2845","_rn_":"3"},{"1":"A-2011","2":"120877","3":"92475","4":"47413","5":"25159","6":"12366","7":"NA","8":"NA","9":"NA","10":"3323","11":"4214","_rn_":"4"},{"1":"A-2007","2":"119109","3":"90705","4":"46558","5":"29321","6":"11050","7":"NA","8":"NA","9":"NA","10":"NA","11":"3776","_rn_":"5"},{"1":"A-2003","2":"116160","3":"90337","4":"41220","5":"31192","6":"10891","7":"NA","8":"NA","9":"NA","10":"3145","11":"3889","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
-<div id="tratamiento-de-los-na" class="section level3">
-<h3>Tratamiento de los NA</h3>
+<div id="tratamiento-de-los-na" class="section level2">
+<h2>Tratamiento de los NA</h2>
 <p>En nuestro caso los NA se deben a la ausencia de resultados por no
-haberse presentado la fuerza política en una conveocatoria o haberse
+haberse presentado la fuerza política en una convocatoria o por haberse
 integrado en una coalición electoral. Entendemos que el valor que debe
 sustituir NA para poder realizar cálculos estadísticos de forma correcta
 y sin errores de computación es el 0. Podríamos recorrer solo las
 columnas de partidos pero lo simplificamos y aplicamos la sustitución NA
 -&gt; 0 en todo el data frame.</p>
-<pre class="r"><code>df_autonomicas[is.na(df_autonomicas)]&lt;-0
-knitr::kable(df_autonomicas, caption = &quot;ELECCIONES AUTONÓMICAS EN LA SAFOR&quot;)</code></pre>
+<pre class="r"><code>df_autonomicas[is.na(df_autonomicas)]&lt;-0</code></pre>
+<p>Mostramos los datos en formato de tabla de RMarkdown</p>
+<pre class="r"><code>knitr::kable(df_autonomicas, caption = &quot;ELECCIONES AUTONÓMICAS EN LA SAFOR&quot;)</code></pre>
 <table>
 <caption>ELECCIONES AUTONÓMICAS EN LA SAFOR</caption>
 <colgroup>
@@ -2978,40 +3018,78 @@ knitr::kable(df_autonomicas, caption = &quot;ELECCIONES AUTONÓMICAS EN LA SAFOR
 </tbody>
 </table>
 </div>
-</div>
 <div id="creamos-un-vector-con-las-candidaturas." class="section level2">
 <h2>Creamos un vector con las candidaturas.</h2>
 <pre class="r"><code># Recogemos los nombres de columnas a partir de la 4ª
 partits&lt;-names(df1[4:length(df1)])
 
-# O directamente, para nuestro caso
-#partits&lt;-c(&quot;PP&quot;,&quot;PSPV&quot;,&quot;COMPROMÍS&quot;,&quot;VOX&quot;,&quot;PODEMOS&quot;,&quot;Cs&quot;,&quot;EUPV&quot;,&quot;RESTA&quot;)</code></pre>
+# Para nuestro caso podríamos anotarlo directamente
+# partits&lt;-c(&quot;PP&quot;,&quot;PSPV&quot;,&quot;COMPROMÍS&quot;,&quot;VOX&quot;,&quot;PODEMOS&quot;,&quot;Cs&quot;,&quot;EUPV&quot;,&quot;RESTA&quot;)</code></pre>
+<p>Los visualizamos en formato de tabla de RMarkdown</p>
+<pre class="r"><code>knitr::kable(partits, caption = &quot;CANDIDATURAS&quot;)</code></pre>
+<table>
+<caption>CANDIDATURAS</caption>
+<thead>
+<tr class="header">
+<th align="left">x</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">PP</td>
+</tr>
+<tr class="even">
+<td align="left">PSPV</td>
+</tr>
+<tr class="odd">
+<td align="left">COMPROMÍS</td>
+</tr>
+<tr class="even">
+<td align="left">VOX</td>
+</tr>
+<tr class="odd">
+<td align="left">PODEMOS</td>
+</tr>
+<tr class="even">
+<td align="left">Cs</td>
+</tr>
+<tr class="odd">
+<td align="left">EUPV</td>
+</tr>
+<tr class="even">
+<td align="left">RESTA</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="calculamos-algunos-valores-de-medidas-tendencia-central-y-dispersión" class="section level2">
-<h2>Calculamos algunos valores de medidas tendencia central y
-dispersión</h2>
+</div>
+<div id="cálculo-de-valores-de-medidas-de-tendencia-central-y-dispersión" class="section level1">
+<h1>CÁLCULO DE VALORES DE MEDIDAS de TENDENCIA CENTRAL y DISPERSIÓN</h1>
 <p>1.- Media o promedio 2.- Máximos 3.- Míninos 4.- Rango de
 variación</p>
 <pre class="r"><code>mitjana&lt;-summarise_at(df_autonomicas,partits,mean)
 maxims&lt;-summarise_at(df_autonomicas,partits,max)
 minims&lt;-summarise_at(df_autonomicas,partits,~min(.[. != 0])) #Descartamos los 0
-rangodevariacion&lt;-maxims - minims
-
-#Creamos un data frame. cada vector anterior será una columna
-df_resultats&lt;-rbind(mitjana)
+rangodevariacion&lt;-maxims - minims</code></pre>
+<div id="creamos-un-data-frame.-cada-vector-anterior-será-una-columna" class="section level2">
+<h2>Creamos un data frame. cada vector anterior será una columna</h2>
+<pre class="r"><code>df_resultats&lt;-rbind(mitjana)
 df_resultats&lt;-rbind(df_resultats,maxims)
 df_resultats&lt;-rbind(df_resultats,minims)
 df_resultats&lt;-rbind(df_resultats,rangodevariacion)
 #Redondeamos los valores a enteros ( son votos) 
-df_resultats&lt;-df_resultats %&gt;% mutate_at(partits, as.integer)
-
-#Añadimos al final del data frame una columna con el nombre del &quot;cálculo&quot;
-df_resultats&lt;-cbind(df_resultats,ESTADÍSTICA=c(&quot;MEDIA&quot;,&quot;MÁXIMO&quot;,&quot;MÍNIMO&quot;,&quot;RANGO&quot;))
-# la resituamos en la posición 1 ( estética)
-df_resultats&lt;-df_resultats %&gt;% select(&quot;ESTADÍSTICA&quot;,everything())
-
-#Imprimimos en Markdown una tabla con los resultados
-knitr::kable(df_resultats, caption = &quot;ESTADÍSTICA SAFOR&quot;)</code></pre>
+df_resultats&lt;-df_resultats %&gt;% mutate_at(partits, as.integer)</code></pre>
+</div>
+<div id="añadimos-al-final-del-data-frame-una-columna-con-el-nombre-del-cálculo" class="section level2">
+<h2>Añadimos al final del data frame una columna con el nombre del
+“cálculo”</h2>
+<pre class="r"><code>df_resultats&lt;-cbind(df_resultats,ESTADÍSTICA=c(&quot;MEDIA&quot;,&quot;MÁXIMO&quot;,&quot;MÍNIMO&quot;,&quot;RANGO&quot;))</code></pre>
+<pre class="r"><code># la resituamos en la posición 1 ( estática)
+df_resultats&lt;-df_resultats %&gt;% select(&quot;ESTADÍSTICA&quot;,everything())</code></pre>
+</div>
+<div id="imprimimos-en-markdown-una-tabla-con-los-resultados" class="section level2">
+<h2>Imprimimos en Markdown una tabla con los resultados</h2>
+<pre class="r"><code>knitr::kable(df_resultats, caption = &quot;ESTADÍSTICA SAFOR&quot;)</code></pre>
 <table>
 <caption>ESTADÍSTICA SAFOR</caption>
 <colgroup>
@@ -3086,8 +3164,9 @@ knitr::kable(df_resultats, caption = &quot;ESTADÍSTICA SAFOR&quot;)</code></pre
 </tbody>
 </table>
 </div>
-<div id="gráficos" class="section level2">
-<h2>GRÁFICOS</h2>
+</div>
+<div id="gráficos" class="section level1">
+<h1>GRÁFICOS</h1>
 <p>Vemos a continuación los gráficos y tablas de daraso a nivel de
 agregación de candidatura.</p>
 <pre class="r"><code># Recorremos las columnas del data frame correspondientes a candidaturas ( &gt;2)
@@ -3340,6 +3419,71 @@ knitr::kable(df_estPartit, caption = paste( &quot;ESTADÍSTICA SAFOR&quot;,
 </tr>
 </tbody>
 </table>
+</div>
+<div id="guardar-data-frame-en-ficheros-de-diferentes-formatos" class="section level1">
+<h1>GUARDAR DATA FRAME EN FICHEROS DE DIFERENTES FORMATOS</h1>
+<div id="guardar-datos-en-formato-.xlsx-ms-excel" class="section level2">
+<h2>Guardar datos en formato .xlsx (MS Excel)</h2>
+<p>Se instala el paquete solo si hace falta</p>
+<pre class="r"><code>if (!require(&quot;xlsx&quot;)) {install.packages(&quot;xlsx&quot;)}</code></pre>
+<pre><code>## Loading required package: xlsx</code></pre>
+<p>Se creará un fichero de tipo MS Excel: <em>resultats.xlsx</em></p>
+<pre class="r"><code>### Creando un nuevo fichero xlsx
+
+write.xlsx(df_resultats, file = &quot;resultats.xlsx&quot;, sheetName = &quot;resultats&quot;, append = FALSE)</code></pre>
+</div>
+<div id="añadiendo-una-hoja-en-un-ficher-xlsx-existente" class="section level2">
+<h2>Añadiendo una hoja en un ficher xlsx existente</h2>
+<p>Aquí añadiremos una página más a un fichero MS Excel existente
+(append=TRUE). Si <em>ficheroAnterior.xlsx</em> no existe dará
+error.</p>
+<pre class="r"><code>write.xlsx(df_resultats, file = &quot;ficheroAnterior.xlsx&quot;, sheetName=&quot;resultats&quot;, append=TRUE)</code></pre>
+</div>
+<div id="guardar-datos-en-formato-.dta-stata." class="section level2">
+<h2>Guardar datos en formato .dta / Stata.</h2>
+<pre class="r"><code>if (!require(&quot;foreign&quot;)) {install.packages(&quot;foreign&quot;)}
+write.dta(df_resultats, &quot;resultats.dta&quot;)</code></pre>
+</div>
+<div id="guardar-datos-en-formato-.csv" class="section level2">
+<h2>Guardar datos en formato .csv</h2>
+<pre class="r"><code>if (!require(&quot;tidyverse&quot;)) {install.packages(&quot;tidyverse&quot;)}
+write_csv(df_resultats, &quot;resultats.csv&quot;)</code></pre>
+</div>
+<div id="guardar-datos-en-formato-.sav-spss" class="section level2">
+<h2>Guardar datos en formato .sav / SPSS</h2>
+<pre class="r"><code>if (!require(&quot;haven&quot;)) {install.packages(&quot;haven&quot;)}
+write_sav(df_resultats, &quot;resultats.sav&quot;)</code></pre>
+</div>
+<div id="guardar-y-abrir-datos-en-formato-rstudio." class="section level2">
+<h2>Guardar y abrir datos en formato RStudio.</h2>
+<p>No es lo más usado, porque la costumbre es compartir los datos en
+formatos como .csv u otros que sean más comunes. No obstante, conviene
+conocer estos formatos, que se manejan muy fácilmente. No requieren
+librería, pues estos comandos trabajan con las funciones que trae
+<strong>RStudio</strong>.</p>
+<blockquote>
+<p>RData - permite guardar más de una base de datos en un mismo
+archivo.</p>
+</blockquote>
+<pre class="r"><code>save(df_resultats, file=&quot;resultats.RData&quot;)</code></pre>
+</div>
+<div id="lectura-de-datos-rdata" class="section level2">
+<h2>Lectura de datos RData</h2>
+<p>El parámetro <em>verbose=TRUE</em> es opcional. Sirve para que en la
+carga (lectura) nos muestre los datos (dataframe en este caso)
+existentes en el fichero de tipo <em>.Rdata</em>. en nuestro ejemplo
+vemos que contiene el dataframe: <em>df_resultats</em></p>
+<pre class="r"><code>load(&quot;resultats.RData&quot;,verbose=TRUE)</code></pre>
+<pre><code>## Loading objects:
+##   df_resultats</code></pre>
+</div>
+<div id="rds---guarda-un-solo-archivo-de-datos" class="section level2">
+<h2>RDS - guarda un solo archivo de datos</h2>
+<pre class="r"><code>saveRDS(df_resultats, &quot;resultats.rds&quot;)</code></pre>
+</div>
+<div id="lectura-de-datos-rds" class="section level2">
+<h2>Lectura de datos RDS</h2>
+<pre class="r"><code>df_resultats2 &lt;- readRDS(&quot;resultats.rds&quot;)</code></pre>
 </div>
 </div>
 

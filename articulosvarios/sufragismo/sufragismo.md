@@ -98,7 +98,7 @@ Por definición el sufragismo es una lucha para que todos los ciudadanos puedan 
 
 #### El absurdo del antisufragismo 
 
-Visto hoy en día, llama la atención cómo en la República Española se discutía en las Cortes Generales con mujeres parlamentarias, beneficiarias del sufragio pasivo, sobre el derecho de la mujer al sufragio activo. Cierto es que esta situación, que se nos podría antojar surrealista, como tal no se produjo en Inglaterra, pero se puede comparar a otras bien pintorescas que sí se dieron. 
+Visto hoy en día, llama la atención cómo en la República Española se discutía en las Cortes Generales con mujeres parlamentarias, beneficiarias del sufragio pasivo, sobre el derecho de la mujer al sufragio activo. Cierto es que esta situación, que se nos podría antojar surrealista, como tal, no se produjo en Inglaterra pero se puede comparar a otras bien pintorescas que sí se dieron.
 
 Unas décadas antes, las representantes municipales londinenses integraban las mesas electorales de las elecciones al parlamento en las que no podían votar. Otro ejemplo sería el de la participación organizada por los partidos en campañas electorales: las mismas organizaciones que no las consideraban capacitadas para entender las complejas razones de la política estatal y votar, las consideraba preparadas para explicarlas a hombres estas razones y que votasen. Verdaderamente absurdo. 
 

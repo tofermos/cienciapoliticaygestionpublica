@@ -125,12 +125,13 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={EL VOTO AUTONÓMICO EN LA COMARCA DE LA SAFOR ( VALENCIA )},
+  pdftitle={Ejemplo de R Markdown: El voto autonómico en la comarca de la Safor (VALENCIA)},
   pdfauthor={Tomàs Ferrandis Moscardó},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
-\title{EL VOTO AUTONÓMICO EN LA COMARCA DE LA SAFOR ( VALENCIA )}
+\title{Ejemplo de R Markdown: \emph{El voto autonómico en la comarca de
+la Safor (VALENCIA)}}
 \author{Tomàs Ferrandis Moscardó}
 \date{2024-01-26}
 
@@ -141,47 +142,109 @@
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
-\hypertarget{obtenciuxf3n-y-representaciuxf3n-de-algunos-valores-estaduxedsticos.}{%
-\section{OBTENCIÓN Y REPRESENTACIÓN DE ALGUNOS VALORES
-ESTADÍSTICOS.}\label{obtenciuxf3n-y-representaciuxf3n-de-algunos-valores-estaduxedsticos.}}
+\hypertarget{introducciuxf3n}{%
+\section{INTRODUCCIÓN}\label{introducciuxf3n}}
 
-A continuación veremos un sencillo ejemplo de uso de R Markdown en el
-que, a partir de un fichero \emph{csv} con resultados electorales,
-crearemos y manipularemos objetos data.frame para obtener algunas
-medidas de tendencia central y dispersión que representaremos en tablas
-y gráficos.
+A continuación veremos un sencillo ejemplo de uso de \textbf{R-Markdown}
+en el que, a partir de un fichero de tipo \emph{csv} ( SAFOR.csv )
+crearemos y manipularemos objetos \emph{data.frame}. Obtendremos algunas
+medidas de \emph{tendencia central y dispersión} que representaremos en
+tablas y gráficos.
 
-\hypertarget{obtenciuxf3n-de-los-datos}{%
-\subsection{OBTENCIÓN DE LOS DATOS}\label{obtenciuxf3n-de-los-datos}}
+Después guardaremos los datos del data\_frame de resultados en ficheros
+de diversos tipos: \emph{csv, xlsx, dta, RData, sav, rds)}
+
+\hypertarget{inclusiuxf3n-de-los-paquetes-y-sus-libreruxedas-que-vamos-a-necesitar}{%
+\subsection{Inclusión de los paquetes ( y sus librerías) que vamos a
+necesitar}\label{inclusiuxf3n-de-los-paquetes-y-sus-libreruxedas-que-vamos-a-necesitar}}
+
+Las librerías se cargan solo si previamente se ha instalado el paquete
+que las contiene. En nuestros \emph{chuncks} ( pedazos de código R),
+comprobaremos si están disponibles. Solo en caso contrario instalaremos
+su paquete correspondiente. Se intenta cargar una librería mediante
+\emph{require()} . Si da error, require devuelve un valor FALSE
+(!require()), entonces se ejecuta la instalación del paquete (que carga
+también la librería).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Requisitos previes. Paquetes y librerías}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{)) \{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{)\}}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"stringr"}\NormalTok{)) \{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"stringr"}\NormalTok{)\}}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"curl"}\NormalTok{)) \{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"curl"}\NormalTok{)\}}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"rsconnect"}\NormalTok{))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"rsconnect"}\NormalTok{)\}}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"kableExtra"}\NormalTok{))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"kableExtra"}\NormalTok{)\}}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)\}}
+\FunctionTok{library}\NormalTok{(data.table)}
+\FunctionTok{library}\NormalTok{(knitr)}
+\FunctionTok{library}\NormalTok{(stringr)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{obtenciuxf3n-y-tratamiento-de-los-datos}{%
+\section{OBTENCIÓN Y TRATAMIENTO DE LOS
+DATOS}\label{obtenciuxf3n-y-tratamiento-de-los-datos}}
 
 \hypertarget{resultados-de-todas-las-elecciones-y-convocatorias-a-nivel-de-agregaciuxf3n-comarcal.-caso-de-la-safor.}{%
-\subsubsection{Resultados de todas las elecciones y convocatorias a
-nivel de agregación comarcal. Caso de La
+\subsection{Resultados de todas las elecciones y convocatorias a nivel
+de agregación comarcal. Caso de La
 Safor.}\label{resultados-de-todas-las-elecciones-y-convocatorias-a-nivel-de-agregaciuxf3n-comarcal.-caso-de-la-safor.}}
 
 A partir de la base de datos de ARGOS descargamos el resumen de
 resultados electorales en las distintas convocatorias y procesos
-electorales en un fichero CSV.
+electorales en un fichero \emph{CSV}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df1}\OtherTok{\textless{}{-}}\FunctionTok{read.csv}\NormalTok{(}\StringTok{"CSV/SAFOR.csv"}\NormalTok{,}\AttributeTok{header=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{sep=}\StringTok{","}\NormalTok{,}\AttributeTok{quote=}\StringTok{"}\SpecialCharTok{\textbackslash{}"}\StringTok{\textquotesingle{}"}\NormalTok{, }\AttributeTok{dec=}\StringTok{","}\NormalTok{,}\AttributeTok{fill=}\ConstantTok{TRUE}\NormalTok{,}
-              \AttributeTok{comment.char =} \StringTok{""}\NormalTok{)}
-\CommentTok{\#View(df1) \# Para ver en consola}
+\NormalTok{  df1}\OtherTok{\textless{}{-}}\FunctionTok{read.csv}\NormalTok{(}\StringTok{"CSV/SAFOR.csv"}\NormalTok{,}\AttributeTok{header=}\ConstantTok{TRUE}\NormalTok{, }\AttributeTok{sep=}\StringTok{","}\NormalTok{,}\AttributeTok{quote=}\StringTok{"}\SpecialCharTok{\textbackslash{}"}\StringTok{\textquotesingle{}"}\NormalTok{, }\AttributeTok{dec=}\StringTok{","}\NormalTok{,}\AttributeTok{fill=}\ConstantTok{TRUE}\NormalTok{,}
+                \AttributeTok{comment.char =} \StringTok{""}\NormalTok{)}
+  \CommentTok{\# View(df1) \# Para ver en consola}
 \end{Highlighting}
 \end{Shaded}
 
+Veamos como ejemplo las primeras líneas\ldots{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(df1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Elecció   Cens A.Cand.    PP  PSPV COMPROMÍS   VOX PODEMOS   Cs EUPV RESTA
+## 1  G-2023 124383   90477 29545 31386     15855 12462      NA   NA   NA  1229
+## 2  A-2023 124367   86496 28245 25559     19953  8282    2234  591   NA  1859
+## 3  L-2023 127096   88398 27174 28953     15703  3126     120  364 1143 11795
+## 4  G-2019 121791   86427 19634 23322     10644 14008   11334 5559   NA  1926
+## 5  E-2019 123535   84970 19128 25797     15919  4818    6621 8761   NA  3926
+## 6  L-2019 124552   86268 23328 26289     19803  1910    1155 4541 1197  8044
+\end{verbatim}
+
 \hypertarget{filtramos-por-elecciones-autonuxf3micas.}{%
-\subsubsection{Filtramos por elecciones
+\subsection{Filtramos por elecciones
 autonómicas.}\label{filtramos-por-elecciones-autonuxf3micas.}}
 
-Asumimos como universo o población el conjunto de todas las elecciones
-autonómicas.
+Asumimos como \textbf{universo o población} el conjunto de todas las
+todas elecciones autonómicas.
+
+\hypertarget{filtraremos-por-el-campo-correspondiente}{%
+\subsection{Filtraremos por el campo
+correspondiente}\label{filtraremos-por-el-campo-correspondiente}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df\_autonomicas}\OtherTok{\textless{}{-}}\NormalTok{df1 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(}\FunctionTok{str\_detect}\NormalTok{(df1}\SpecialCharTok{$}\NormalTok{Elecció,}\StringTok{"A{-}"}\NormalTok{))}
-\CommentTok{\# Vemos las 10 primeras lineas de ejemplo}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{vemos-las-primeras-lineas-de-ejemplo}{%
+\subsection{Vemos las primeras lineas de
+ejemplo}\label{vemos-las-primeras-lineas-de-ejemplo}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \FunctionTok{head}\NormalTok{(df\_autonomicas)}
 \end{Highlighting}
 \end{Shaded}
@@ -197,10 +260,10 @@ autonómicas.
 \end{verbatim}
 
 \hypertarget{tratamiento-de-los-na}{%
-\subsubsection{Tratamiento de los NA}\label{tratamiento-de-los-na}}
+\subsection{Tratamiento de los NA}\label{tratamiento-de-los-na}}
 
 En nuestro caso los NA se deben a la ausencia de resultados por no
-haberse presentado la fuerza política en una conveocatoria o haberse
+haberse presentado la fuerza política en una convocatoria o por haberse
 integrado en una coalición electoral. Entendemos que el valor que debe
 sustituir NA para poder realizar cálculos estadísticos de forma correcta
 y sin errores de computación es el 0. Podríamos recorrer solo las
@@ -210,6 +273,13 @@ columnas de partidos pero lo simplificamos y aplicamos la sustitución NA
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df\_autonomicas[}\FunctionTok{is.na}\NormalTok{(df\_autonomicas)]}\OtherTok{\textless{}{-}}\DecValTok{0}
+\end{Highlighting}
+\end{Shaded}
+
+Mostramos los datos en formato de tabla de RMarkdown
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(df\_autonomicas, }\AttributeTok{caption =} \StringTok{"ELECCIONES AUTONÓMICAS EN LA SAFOR"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -313,14 +383,44 @@ candidaturas.}\label{creamos-un-vector-con-las-candidaturas.}}
 \CommentTok{\# Recogemos los nombres de columnas a partir de la 4ª}
 \NormalTok{partits}\OtherTok{\textless{}{-}}\FunctionTok{names}\NormalTok{(df1[}\DecValTok{4}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(df1)])}
 
-\CommentTok{\# O directamente, para nuestro caso}
-\CommentTok{\#partits\textless{}{-}c("PP","PSPV","COMPROMÍS","VOX","PODEMOS","Cs","EUPV","RESTA")}
+\CommentTok{\# Para nuestro caso podríamos anotarlo directamente}
+\CommentTok{\# partits\textless{}{-}c("PP","PSPV","COMPROMÍS","VOX","PODEMOS","Cs","EUPV","RESTA")}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{calculamos-algunos-valores-de-medidas-tendencia-central-y-dispersiuxf3n}{%
-\subsection{Calculamos algunos valores de medidas tendencia central y
-dispersión}\label{calculamos-algunos-valores-de-medidas-tendencia-central-y-dispersiuxf3n}}
+Los visualizamos en formato de tabla de RMarkdown
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(partits, }\AttributeTok{caption =} \StringTok{"CANDIDATURAS"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}l@{}}
+\caption{CANDIDATURAS}\tabularnewline
+\toprule\noalign{}
+x \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+x \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+PP \\
+PSPV \\
+COMPROMÍS \\
+VOX \\
+PODEMOS \\
+Cs \\
+EUPV \\
+RESTA \\
+\end{longtable}
+
+\hypertarget{cuxe1lculo-de-valores-de-medidas-de-tendencia-central-y-dispersiuxf3n}{%
+\section{CÁLCULO DE VALORES DE MEDIDAS de TENDENCIA CENTRAL y
+DISPERSIÓN}\label{cuxe1lculo-de-valores-de-medidas-de-tendencia-central-y-dispersiuxf3n}}
 
 1.- Media o promedio 2.- Máximos 3.- Míninos 4.- Rango de variación
 
@@ -330,21 +430,48 @@ dispersión}\label{calculamos-algunos-valores-de-medidas-tendencia-central-y-dis
 \NormalTok{maxims}\OtherTok{\textless{}{-}}\FunctionTok{summarise\_at}\NormalTok{(df\_autonomicas,partits,max)}
 \NormalTok{minims}\OtherTok{\textless{}{-}}\FunctionTok{summarise\_at}\NormalTok{(df\_autonomicas,partits,}\SpecialCharTok{\textasciitilde{}}\FunctionTok{min}\NormalTok{(.[. }\SpecialCharTok{!=} \DecValTok{0}\NormalTok{])) }\CommentTok{\#Descartamos los 0}
 \NormalTok{rangodevariacion}\OtherTok{\textless{}{-}}\NormalTok{maxims }\SpecialCharTok{{-}}\NormalTok{ minims}
+\end{Highlighting}
+\end{Shaded}
 
-\CommentTok{\#Creamos un data frame. cada vector anterior será una columna}
+\hypertarget{creamos-un-data-frame.-cada-vector-anterior-seruxe1-una-columna}{%
+\subsection{Creamos un data frame. cada vector anterior será una
+columna}\label{creamos-un-data-frame.-cada-vector-anterior-seruxe1-una-columna}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{df\_resultats}\OtherTok{\textless{}{-}}\FunctionTok{rbind}\NormalTok{(mitjana)}
 \NormalTok{df\_resultats}\OtherTok{\textless{}{-}}\FunctionTok{rbind}\NormalTok{(df\_resultats,maxims)}
 \NormalTok{df\_resultats}\OtherTok{\textless{}{-}}\FunctionTok{rbind}\NormalTok{(df\_resultats,minims)}
 \NormalTok{df\_resultats}\OtherTok{\textless{}{-}}\FunctionTok{rbind}\NormalTok{(df\_resultats,rangodevariacion)}
 \CommentTok{\#Redondeamos los valores a enteros ( son votos) }
 \NormalTok{df\_resultats}\OtherTok{\textless{}{-}}\NormalTok{df\_resultats }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate\_at}\NormalTok{(partits, as.integer)}
+\end{Highlighting}
+\end{Shaded}
 
-\CommentTok{\#Añadimos al final del data frame una columna con el nombre del "cálculo"}
+\hypertarget{auxf1adimos-al-final-del-data-frame-una-columna-con-el-nombre-del-cuxe1lculo}{%
+\subsection{Añadimos al final del data frame una columna con el nombre
+del
+``cálculo''}\label{auxf1adimos-al-final-del-data-frame-una-columna-con-el-nombre-del-cuxe1lculo}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{df\_resultats}\OtherTok{\textless{}{-}}\FunctionTok{cbind}\NormalTok{(df\_resultats,ESTADÍSTICA}\OtherTok{=}\FunctionTok{c}\NormalTok{(}\StringTok{"MEDIA"}\NormalTok{,}\StringTok{"MÁXIMO"}\NormalTok{,}\StringTok{"MÍNIMO"}\NormalTok{,}\StringTok{"RANGO"}\NormalTok{))}
-\CommentTok{\# la resituamos en la posición 1 ( estética)}
-\NormalTok{df\_resultats}\OtherTok{\textless{}{-}}\NormalTok{df\_resultats }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\StringTok{"ESTADÍSTICA"}\NormalTok{,}\FunctionTok{everything}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
 
-\CommentTok{\#Imprimimos en Markdown una tabla con los resultados}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# la resituamos en la posición 1 ( estática)}
+\NormalTok{df\_resultats}\OtherTok{\textless{}{-}}\NormalTok{df\_resultats }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(}\StringTok{"ESTADÍSTICA"}\NormalTok{,}\FunctionTok{everything}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{imprimimos-en-markdown-una-tabla-con-los-resultados}{%
+\subsection{Imprimimos en Markdown una tabla con los
+resultados}\label{imprimimos-en-markdown-una-tabla-con-los-resultados}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(df\_resultats, }\AttributeTok{caption =} \StringTok{"ESTADÍSTICA SAFOR"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -413,7 +540,7 @@ RANGO & 30271 & 12966 & 18966 & 8075 & 4611 & 11803 & 5913 & 19020 \\
 \end{longtable}
 
 \hypertarget{gruxe1ficos}{%
-\subsection{GRÁFICOS}\label{gruxe1ficos}}
+\section{GRÁFICOS}\label{gruxe1ficos}}
 
 Vemos a continuación los gráficos y tablas de daraso a nivel de
 agregación de candidatura.
@@ -608,5 +735,140 @@ MÁXIMO & 20879 \\
 MÍNIMO & 1859 \\
 RANGO & 19020 \\
 \end{longtable}
+
+\hypertarget{guardar-data-frame-en-ficheros-de-diferentes-formatos}{%
+\section{GUARDAR DATA FRAME EN FICHEROS DE DIFERENTES
+FORMATOS}\label{guardar-data-frame-en-ficheros-de-diferentes-formatos}}
+
+\hypertarget{guardar-datos-en-formato-.xlsx-ms-excel}{%
+\subsection{Guardar datos en formato .xlsx (MS
+Excel)}\label{guardar-datos-en-formato-.xlsx-ms-excel}}
+
+Se instala el paquete solo si hace falta
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"xlsx"}\NormalTok{)) \{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"xlsx"}\NormalTok{)\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: xlsx
+\end{verbatim}
+
+Se creará un fichero de tipo MS Excel: \emph{resultats.xlsx}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# Creando un nuevo fichero xlsx}
+
+\FunctionTok{write.xlsx}\NormalTok{(df\_resultats, }\AttributeTok{file =} \StringTok{"resultats.xlsx"}\NormalTok{, }\AttributeTok{sheetName =} \StringTok{"resultats"}\NormalTok{, }\AttributeTok{append =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{auxf1adiendo-una-hoja-en-un-ficher-xlsx-existente}{%
+\subsection{Añadiendo una hoja en un ficher xlsx
+existente}\label{auxf1adiendo-una-hoja-en-un-ficher-xlsx-existente}}
+
+Aquí añadiremos una página más a un fichero MS Excel existente
+(append=TRUE). Si \emph{ficheroAnterior.xlsx} no existe dará error.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{write.xlsx}\NormalTok{(df\_resultats, }\AttributeTok{file =} \StringTok{"ficheroAnterior.xlsx"}\NormalTok{, }\AttributeTok{sheetName=}\StringTok{"resultats"}\NormalTok{, }\AttributeTok{append=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{guardar-datos-en-formato-.dta-stata.}{%
+\subsection{Guardar datos en formato .dta /
+Stata.}\label{guardar-datos-en-formato-.dta-stata.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"foreign"}\NormalTok{)) \{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"foreign"}\NormalTok{)\}}
+\FunctionTok{write.dta}\NormalTok{(df\_resultats, }\StringTok{"resultats.dta"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{guardar-datos-en-formato-.csv}{%
+\subsection{Guardar datos en formato
+.csv}\label{guardar-datos-en-formato-.csv}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)) \{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)\}}
+\FunctionTok{write\_csv}\NormalTok{(df\_resultats, }\StringTok{"resultats.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{guardar-datos-en-formato-.sav-spss}{%
+\subsection{Guardar datos en formato .sav /
+SPSS}\label{guardar-datos-en-formato-.sav-spss}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"haven"}\NormalTok{)) \{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"haven"}\NormalTok{)\}}
+\FunctionTok{write\_sav}\NormalTok{(df\_resultats, }\StringTok{"resultats.sav"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{guardar-y-abrir-datos-en-formato-rstudio.}{%
+\subsection{Guardar y abrir datos en formato
+RStudio.}\label{guardar-y-abrir-datos-en-formato-rstudio.}}
+
+No es lo más usado, porque la costumbre es compartir los datos en
+formatos como .csv u otros que sean más comunes. No obstante, conviene
+conocer estos formatos, que se manejan muy fácilmente. No requieren
+librería, pues estos comandos trabajan con las funciones que trae
+\textbf{RStudio}.
+
+\begin{quote}
+RData - permite guardar más de una base de datos en un mismo archivo.
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{save}\NormalTok{(df\_resultats, }\AttributeTok{file=}\StringTok{"resultats.RData"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{lectura-de-datos-rdata}{%
+\subsection{Lectura de datos RData}\label{lectura-de-datos-rdata}}
+
+El parámetro \emph{verbose=TRUE} es opcional. Sirve para que en la carga
+(lectura) nos muestre los datos (dataframe en este caso) existentes en
+el fichero de tipo \emph{.Rdata}. en nuestro ejemplo vemos que contiene
+el dataframe: \emph{df\_resultats}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{load}\NormalTok{(}\StringTok{"resultats.RData"}\NormalTok{,}\AttributeTok{verbose=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading objects:
+##   df_resultats
+\end{verbatim}
+
+\hypertarget{rds---guarda-un-solo-archivo-de-datos}{%
+\subsection{RDS - guarda un solo archivo de
+datos}\label{rds---guarda-un-solo-archivo-de-datos}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{saveRDS}\NormalTok{(df\_resultats, }\StringTok{"resultats.rds"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{lectura-de-datos-rds}{%
+\subsection{Lectura de datos RDS}\label{lectura-de-datos-rds}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_resultats2 }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{"resultats.rds"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 
 \end{document}
