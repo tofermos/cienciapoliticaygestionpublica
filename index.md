@@ -1,19 +1,18 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 # Ciencia politica y gestión pública
 |||
 |:----|--:|
-|![](recursos/prestatgeria2.jpeg){width=80%}| <br>Tomàs Ferrandis <br>tomasferrandis@gmail.com <br>  |
+|![](recursos/prestatgeria2.jpeg){width=80%}| <br><br><br>Tomàs Ferrandis Moscardó<br>tomasferrandis@gmail.com <br> ![](recursos/CC_BY-NC-ND.png){width=30%}| |
 
 El contenido de este repositorio está relacionado con el _Grado Universitario de Ciencia Política y Gestión Pública_ de la [_Universidad de Burgos (online)_](https://www.ubu.es/).
 
-Principalmente trata de trabajos de las asignaturas cursadas, aunque también hay alguna modesta tarea de investigación y artículos son relación directa con las actividades propias del Grado.
+Principalmente se trata de trabajos de las asignaturas cursadas, aunque también hay alguna modesta tarea de investigación y artículos sin relación directa con las actividades propias del Grado.
 
-El procesamiento de datos estadísticos se hace mediante el [lenguaje de programación R](https://smowl.net/es/blog/lenguaje-r/) y el código está visible en anexos si no en el propio texto. Los documentos html y pdf han sido generados a partir de originales codificado en Markdown o R-Markdonwm.
-
+El procesamiento de datos se hrealiza mediante el [lenguaje de programación R](https://smowl.net/es/blog/lenguaje-r/) y el código estará visible en anexos, cuando no en el propio texto. Los documentos *html* y *pdf* han sido generados a partir de los originales codificados en Markdown o R-Markdown, estando todos diponibles.
 
 ## Sistema político
 |||
@@ -48,3 +47,8 @@ El procesamiento de datos estadísticos se hace mediante el [lenguaje de program
 2. [Sobre federaciones deportivas](administracion/supuestosderechoadministrativo/Casopractico1.html)
 3. [Sobre orden autonómica de restricción por pandemia](administracion/supuestosderechoadministrativo/Casopractico1.html)
 
+
+ 
+|||
+|:--------|--:|
+| *Ciencia política y gestión pública © 2024 by Tomàs Ferrandis Moscardó is licensed under CC BY-NC-ND 4.0* |![](recursos/CC_BY-NC-ND.png){width=30%}|
