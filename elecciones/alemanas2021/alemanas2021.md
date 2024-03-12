@@ -12,7 +12,7 @@ output:
   word_document:
     toc: true
   pdf_document:
-    latex_engine: pdflatex
+    latex_engine: xelatex
     toc: true
     keep_tex: true
 ---
@@ -34,7 +34,7 @@ En el presente trabajo, a efectos de cálculos para la obtención de indicadores
 En ambos casos tendremos en cuenta los partidos que han obtenido representación en las elecciones del 2021 o las anteriores del 2017.
 En cuanto a los partidos de la democracia-cristiana se consideraran sumados los resultados del partido de ámbito nacional ( CDU ) y el de Baviera ( CSU ).
       
-# FRAGMENTACIÓN PARLAMENTARIA
+# 3. FRAGMENTACIÓN PARLAMENTARIA
 La fragmentación es un valor entre 0 y 1 que indica el número de partidos y el tamaño relativo de éstos. Es decir, nos muestra cómo de fraccionado está el sistema de partidos. Cuando los valores se acercan a 1 se tiende a un sistema más fraccionado mientras que si se acercan a 0, tenderíamos a un partido pocas opciones políticas con posibilidades.
 
 ## Fragmentación parlamentaria 2021:
@@ -65,14 +65,13 @@ Fparlamentario=1−TantoX1escaños2
 En nuestro caso, estamos ante un sistema de partidos bastante fragmentado ( valor de fragmentación más cerca del 1 que del 0 ).
 
 
-
 ## Umbral electoral
 
 La legislación alemana permite acceder al parlamento solo si se supera la **barrera legal** del 5% de los votos, no obstante se exime del cumplimiento de esta condición a los partidos de minorías étnicas como es el  SSW, partido de la minoría danesa de Schleswig-Holstein. Este partido solo se enfrenta pues a una **barrera real**.
 
 Esta consideración con las minorías del sistema electoral alemán contribuye a un parlamento un poco más fragmentado. El sistema alemán apuesta por la calidad democrática en este aspecto ( más representatividad ) frente a la efectividad.
 
-# SISTEMA DE PARTIDOS
+# 4. SISTEMA DE PARTIDOS
 
 Si nos fijamos en los datos de las elecciones del 2017 comparados con estas últimas ( Tabla 2 ), vemos que en 2017 teníamos un **sistema de partidos multipartidista con dos partidos dominantes** según la clasificación de De Ware. En cambio, ahora, con el crecimiento del tercer partido ( Los Verdes ) , incluso del cuarto ( el partido liberal ), el sistema se acerca más a un **multipartidismo segmentado**.
 
@@ -80,7 +79,7 @@ Si nos fijamos en los datos de las elecciones del 2017 comparados con estas últ
 *Tabla2. Comparativa resultados elecciones federales alemanas 2017 y 2021.*
 
 |&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;**2021**|&emsp;&emsp;&emsp;**2017**|||
-| - | :-: | :-: | :- | :- |
+|:-- | :-: | :-: | :- | :- |
 |&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;**Escaños**|&emsp;&emsp;&emsp;**% votos**|&emsp;&emsp;&emsp;**Escaños**|&emsp;&emsp;&emsp;**% votos**|
 |&emsp;&emsp;&emsp;**SPD** |&emsp;&emsp;&emsp;206|&emsp;&emsp;&emsp;25,7|&emsp;&emsp;&emsp;153|&emsp;&emsp;&emsp;20,5|
 |&emsp;&emsp;&emsp;**CDU/CSU** |&emsp;&emsp;&emsp;197|&emsp;&emsp;&emsp;24,07|&emsp;&emsp;&emsp;246|&emsp;&emsp;&emsp;32,9|
@@ -100,7 +99,7 @@ En una primera valoración podemos deducir que el hecho de que socialdemócratas
 
 Así pues, respecto a las anteriores elecciones del 2017, tenemos una evolución del ecologismo que se suma a la competición por el centro, el retroceso de los dos partidos antisistema y el cambio de un sistema de dos partidos predominantes a un sistema de tres. Esto nos permite afirmar que el sistema de partidos alemán ha evolucionado hacia un sistema **más pluralista aunque menos polarizado** y más moderado.
 
-# ANÁLISIS DEL RESULTADO: COMPETITIVIDAD Y CONCENTRACIÓN
+# 5. ANÁLISIS DEL RESULTADO: COMPETITIVIDAD Y CONCENTRACIÓN
 
 ## Competitividad
 
@@ -112,7 +111,7 @@ La competitividad es la diferencia entre los dos primeros partidos. Hablaremos d
  *Tabla3. Comparativa de competitividad en la elecciones federales alemanas 2017 y 2021*
 
 |&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;**COMPETITIVIDAD 2021**|&emsp;&emsp;&emsp;**COMPETITIVIDAD 2017**|
-| - | :-: | :-: |
+| :-- | :-: | :-: |
 |&emsp;&emsp;&emsp;Electoral|&emsp;&emsp;&emsp;1,67 |&emsp;&emsp;&emsp;12,50|
 |&emsp;&emsp;&emsp;Parlamentaria|&emsp;&emsp;&emsp;1,22|&emsp;&emsp;&emsp;13,12|
 
@@ -124,20 +123,20 @@ Para la obtención del valor de competitividad electoral se resta el % de votos 
 
 Para la obtención del valor de competitividad parlamentaria se resta el % de diputados del primer partido y del  segundo.
 
-# CONCENTRACIÓN
+# 6. CONCENTRACIÓN
 
 A partir de la suma del % de votos del primer y segundo partido obtenemos la concentración electoral que nos indica el peso que tiene el bipartidismo. De forma análoga si tomamos los porcentajes de escaños obtendremos la concentración parlamentaria.
 
 *Tabla4. Comparativa de concentración de voto en la elecciones federales alemanas 2017 y 2021*
 
 |&emsp;&emsp;&emsp;|&emsp;&emsp;&emsp;**CONCENTRACIÓN 2021**|&emsp;&emsp;&emsp;**CONCENTRACIÓN 2017**|
-| - | :-: | :-: |
+| :-- | :-: | :-: |
 |&emsp;&emsp;&emsp;Electoral|&emsp;&emsp;&emsp;49,81%|&emsp;&emsp;&emsp;53,50%|
 |&emsp;&emsp;&emsp;Parlamentaria|&emsp;&emsp;&emsp;54,76%|&emsp;&emsp;&emsp;56,28%|
 
 La mayor pluralidad de la que hablábamos antes se ve también reflejada en una menor concentración de votos de los dos principales partidos en las elecciones del 2021 respecto a las anteriores.
 
-# VOLATILIDAD ELECTORAL
+# 7. VOLATILIDAD ELECTORAL
 
 Con la volatilidad se cuantifica el cambio de preferencias partidistas entre elecciones. Para el cálculo de la volatilidad electoral tomaremos los porcentajes de votos de la segunda papeleta, lista cerrada.
 
@@ -148,7 +147,7 @@ La suma del valor absoluto de porcentaje de votos que ha variado para cada parti
 *Tabla 4. Volatilidad en la elecciones federales alemanas 2021 respecto a 2017*
 
 |&emsp;&emsp;|&emsp;&emsp;**% votos 2021**|&emsp;&emsp;**% votos 2017**|&emsp;&emsp;` `**Diferencia**|
-| :- | :-: | :-: | :-: |
+| :-- | :-: | :-: | :-: |
 |&emsp;&emsp;**SPD** |&emsp;&emsp;25,74|&emsp;&emsp;20,5|&emsp;&emsp;5,24|
 |&emsp;&emsp;**CDU/CSU** |&emsp;&emsp;24,07|&emsp;&emsp;32,9|&emsp;&emsp;8,93|
 |&emsp;&emsp;**VERDES** |&emsp;&emsp;14,75|&emsp;&emsp;8,9|&emsp;&emsp;5,85|
@@ -175,11 +174,11 @@ Si comparamos la suma de los votos de las opciones de centro hasta la ultraderec
 *Tabla5. Suma de porcentajes de voto por bloques ideológicos según clivaje socioeconómico “Derecha-Izquierda”.*
 
 |**BLOQUE**|**2021**|**2017**|
-| :- | :-: | :-: |
+| :-- | :-: | :-: |
 |SPD+ VERDES + LA IZQUIERDA|45,38%|38,6%|
 |CDU/CSU+ FPD + AfD|45,87%|56,3%|
 
-# GOBERNABILIDAD Y REPRESENTATIVIDAD
+# 8. GOBERNABILIDAD Y REPRESENTATIVIDAD
 
 Analicemos los factores que favorecen la gobernabilidad y los que la complican así como su relación con la representatividad, especialmente después del 2021.
 
@@ -198,7 +197,7 @@ A pesar de todo, los partidos políticos solucionan de forma responsable esta si
 
 Algo destacable es que en ningún todo momento se ha eludido “toda alianza con partidos y candidatos antidemocráticos” ( Levitsky y Ziblatt: 2018).
 
-# BIBLIOGRAFIA Y WEBGRAFÍA
+# 9. BIBLIOGRAFIA Y WEBGRAFÍA
    
    * Deustcher Bundestag. (s.f ). *Elecciones*. https://www.bundestag.de/es/wahlen
    
