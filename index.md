@@ -10,9 +10,9 @@ output:
 
 El contenido de este repositorio está relacionado con el _Grado Universitario de Ciencia Política y Gestión Pública_ de la [_Universidad de Burgos (online)_](https://www.ubu.es/).
 
-Principalmente trata de trabajos de las asignaturas cursadas y opiniones expresadas en sus foros. Aunque también hay alguna tarea y artículo de opinión personal que no guarda relación con las actividades propias del Grado.
+Principalmente trata de trabajos de las asignaturas cursadas, aunque también hay alguna modesta tarea de investigación y artículos son relación directa con las actividades propias del Grado.
 
-El procesamiento de datos estadísticos se hace mediante el [lenguaje de programación R](https://smowl.net/es/blog/lenguaje-r/) y quedará visible. Los documentos html han sido generados mendiante Markdown o R Markdonwm.
+El procesamiento de datos estadísticos se hace mediante el [lenguaje de programación R](https://smowl.net/es/blog/lenguaje-r/) y el código está visible en anexos si no en el propio texto. Los documentos html y pdf han sido generados a partir de originales codificado en Markdown o R-Markdonwm.
 
 
 ## Sistema político
