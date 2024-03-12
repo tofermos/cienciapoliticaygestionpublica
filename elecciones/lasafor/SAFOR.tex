@@ -468,6 +468,16 @@ nombre del
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{eliminamos-la-columna-de-valores-de-resto-de-partidos}{%
+\subsection{3.3 Eliminamos la columna de valores de ``resto de
+partidos''}\label{eliminamos-la-columna-de-valores-de-resto-de-partidos}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_resultats }\OtherTok{\textless{}{-}}\NormalTok{ df\_resultats[,}\SpecialCharTok{{-}}\FunctionTok{length}\NormalTok{(df\_resultats)]}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{imprimimos-en-markdown-una-tabla-con-los-resultados}{%
 \subsection{3.3 Imprimimos en Markdown una tabla con los
 resultados}\label{imprimimos-en-markdown-una-tabla-con-los-resultados}}
@@ -478,67 +488,22 @@ resultados}\label{imprimimos-en-markdown-una-tabla-con-los-resultados}}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1875}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.0938}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.0938}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1562}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.0781}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1250}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.0938}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.0781}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.0938}}@{}}
+\begin{longtable}[]{@{}lrrrrrrr@{}}
 \caption{ESTADÍSTICA SAFOR}\tabularnewline
 \toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-ESTADÍSTICA
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-PP
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-PSPV
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-COMPROMÍS
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-VOX
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-PODEMOS
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-Cs
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-EUPV
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-RESTA
-\end{minipage} \\
+ESTADÍSTICA & PP & PSPV & COMPROMÍS & VOX & PODEMOS & Cs & EUPV \\
 \midrule\noalign{}
 \endfirsthead
 \toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-ESTADÍSTICA
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-PP
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-PSPV
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-COMPROMÍS
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-VOX
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-PODEMOS
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-Cs
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-EUPV
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
-RESTA
-\end{minipage} \\
+ESTADÍSTICA & PP & PSPV & COMPROMÍS & VOX & PODEMOS & Cs & EUPV \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-MEDIA & 30729 & 26985 & 12094 & 1468 & 1363 & 1877 & 3732 & 7255 \\
-MÁXIMO & 47413 & 31192 & 24789 & 8282 & 6845 & 12394 & 9042 & 20879 \\
-MÍNIMO & 17142 & 18226 & 5823 & 207 & 2234 & 591 & 3129 & 1859 \\
-RANGO & 30271 & 12966 & 18966 & 8075 & 4611 & 11803 & 5913 & 19020 \\
+MEDIA & 30729 & 26985 & 12094 & 1468 & 1363 & 1877 & 3732 \\
+MÁXIMO & 47413 & 31192 & 24789 & 8282 & 6845 & 12394 & 9042 \\
+MÍNIMO & 17142 & 18226 & 5823 & 207 & 2234 & 591 & 3129 \\
+RANGO & 30271 & 12966 & 18966 & 8075 & 4611 & 11803 & 5913 \\
 \end{longtable}
 
 \hypertarget{gruxe1ficos-y-tablas}{%
@@ -727,26 +692,6 @@ MEDIA & 3732 \\
 MÁXIMO & 9042 \\
 MÍNIMO & 3129 \\
 RANGO & 5913 \\
-\end{longtable}
-
-\includegraphics{SAFOR_files/figure-latex/6-8.pdf}
-
-\begin{longtable}[]{@{}lr@{}}
-\caption{ESTADÍSTICA SAFOR RESTA}\tabularnewline
-\toprule\noalign{}
-ESTADÍSTICA & VALORS \\
-\midrule\noalign{}
-\endfirsthead
-\toprule\noalign{}
-ESTADÍSTICA & VALORS \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-MEDIA & 7255 \\
-MÁXIMO & 20879 \\
-MÍNIMO & 1859 \\
-RANGO & 19020 \\
 \end{longtable}
 
 \hypertarget{guardar-data-frame-en-ficheros-de-diferentes-formatos}{%

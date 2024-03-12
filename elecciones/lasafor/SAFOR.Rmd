@@ -157,6 +157,12 @@ df_resultats<-cbind(df_resultats,ESTADÍSTICA=c("MEDIA","MÁXIMO","MÍNIMO","RAN
 df_resultats<-df_resultats %>% select("ESTADÍSTICA",everything())
 ```
 
+## 3.3 Eliminamos la columna de valores de "resto de partidos"
+
+```{r 5d2, include=TRUE}
+df_resultats <- df_resultats[,-length(df_resultats)]
+```
+
 ## 3.3 Imprimimos en Markdown una tabla con los resultados
 ```{r 5e, include=TRUE}
 knitr::kable(df_resultats, caption = "ESTADÍSTICA SAFOR")
