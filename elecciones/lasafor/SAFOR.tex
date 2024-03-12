@@ -206,7 +206,7 @@ electorales en un fichero \emph{CSV}.
 \end{Highlighting}
 \end{Shaded}
 
-Veamos como ejemplo las primeras líneas\ldots{}
+Veamos como ejemplo las primeras líneas con la función \emph{head}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -468,9 +468,13 @@ nombre del
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{eliminamos-la-columna-de-valores-de-resto-de-partidos}{%
-\subsection{3.3 Eliminamos la columna de valores de ``resto de
-partidos''}\label{eliminamos-la-columna-de-valores-de-resto-de-partidos}}
+\hypertarget{eliminamos-la-columna-que-no-necesitamos}{%
+\subsection{3.3 Eliminamos la columna que no
+necesitamos}\label{eliminamos-la-columna-que-no-necesitamos}}
+
+La columna RESTA es la que contiene los datos de el ``resto de
+partidos''. Como está en la útlima posición, usamos la función
+\emph{length} que nos dará su índice y con el \emph{-} se elimina.
 
 \begin{Shaded}
 \begin{Highlighting}[]

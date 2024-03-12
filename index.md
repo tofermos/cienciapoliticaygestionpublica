@@ -19,7 +19,7 @@ El procesamiento de datos estadísticos se hace mediante el [lenguaje de program
 |||
 ------------------------- | -- | --
 1. [Investigación. El voto valencianista en las Elecciones Autonómicas del 2023](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023_page.html)|[![](recursos/iconopdf.png)](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023_page.pdf)|[![](recursos/iconomd.png)](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023_page.md)
-2. [Resultados en elecciones autonómicas en la comarca de La Safor (Valencia)](elecciones/lasafor/SAFOR.html)|[![](recursos/iconopdf.png)](elecciones/lasafor/SAFOR.pdf)|[![](recursos/iconomd.png)](elecciones/lasafor/SAFOR.pdf)
+2. [Ejemplo comentado de *R Markdown*. Resultados en elecciones autonómicas en la comarca de La Safor (Valencia)](elecciones/lasafor/SAFOR.html)|[![](recursos/iconopdf.png)](elecciones/lasafor/SAFOR.pdf)|[![](recursos/iconomd.png)](elecciones/lasafor/SAFOR.pdf)
 3. [El sistema de partidos políticos alemán tras las elecciones de 2021](elecciones/alemania2021/elsistemaaleman2021.html)|[![](recursos/iconopdf.png)](elecciones/alemania2021/elsistemaaleman2021.pdf)|[![](recursos/iconomd.png)](elecciones/Aalemania2021/elsistemaaleman2021.pdf)
 4. [La polarización a les Corts Valencianes](elecciones/lapolaritzacioalesCortsValencianes.html)|[![](recursos/iconopdf.png)](elecciones/.pdf)|[![](recursos/iconomd.png)](elecciones/lapolaritzacioalesCortsValencianes.md)
 ![]()
