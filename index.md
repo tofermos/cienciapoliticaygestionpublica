@@ -3,11 +3,16 @@ output:
   html_document: default
   pdf_document: default
 ---
-# Estudios de ciencia politica y gestión pública
+# Ciencia politica y gestión pública
+|||
+|:--|--:|
+|![](recursos/prestatgeria.jpeg){width=60%}| <br>Tomàs Ferrandis <br>tomasferrandis@gmail.com <br>  |
 
-![](recursos/prestatgeria.jpeg){width=80%;align="center"}|El contenido de este repositorio está relacionado con el _Grado Universitario de Ciencia Política y Gestión Pública_ de la [_Universidad de Burgos (online)._](https://www.ubu.es/) Principalmente trata de trabajos de las asignaturas cursadas y opiniones expresadas en sus foros. Aunque también hay alguna tarea o artículo de opinión personal que no guarda relación con el Grado.
+El contenido de este repositorio está relacionado con el _Grado Universitario de Ciencia Política y Gestión Pública_ de la [_Universidad de Burgos (online)_](https://www.ubu.es/).
 
-El procesamiento de datos estadísticos se hace mediante el [lenguaje de programación R](https://smowl.net/es/blog/lenguaje-r/) y quedará visible.
+Principalmente trata de trabajos de las asignaturas cursadas y opiniones expresadas en sus foros. Aunque también hay alguna tarea y artículo de opinión personal que no guarda relación con las actividades propias del Grado.
+
+El procesamiento de datos estadísticos se hace mediante el [lenguaje de programación R](https://smowl.net/es/blog/lenguaje-r/) y quedará visible. Los documentos html han sido generados mendiante Markdown o R Markdonwm.
 
 
 ## Sistema político
@@ -25,7 +30,7 @@ El procesamiento de datos estadísticos se hace mediante el [lenguaje de program
 1. [El papel del Estado](economiapublica/elpapeleconomicodelestado/Elpapeleconomicodelestado.html)|[![](recursos/iconopdf.png)](economiapublica/elpapeleconomicodelestado/Elpapeleconomicodelestado.pdf)|[![](recursos/iconomd.png)](economiapublica/elpapeleconomicodelestado/Elpapeleconomicodelestado.md)
 2. [La regulación de los monopolios](economiapublica/laregulaciondelosmonopolios/Laregulaciondelosmonopolios.html)|[![](recursos/iconopdf.png)](economiapublica/laregulaciondelosmonopolios/Laregulaciondelosmonopolios.pdf)|[![](recursos/iconomd.png)](economiapublica/laregulaciondelosmonopolios/Laregulaciondelosmonopolios.md)
 3. [El presupuesto local ](economiapublica/elpresupuestolocal/Elpresupuestolocal.html)|[![](recursos/iconopdf.png)](economiapublica/elpresupuestolocal/Elpresupuestolocal.pdf)|[![](recursos/iconomd.png)](economiapublica/elpresupuestolocal/Elpresupuestolocal.md)
-4. [Sobre los principios prespuestarios](economiapublica/losprincipiostributarios/Losprincipiostributarios.html)|[![](recursos/iconopdf.png)](economiapublica/losprincipiostributarios/Losprincipiostributarios.pdf)|[![](recursos/iconomd.png)](economiapublica/losprincipiostributarios/Losprincipiostributarios.md)
+4. [Sobre los principios tributarios](economiapublica/losprincipiostributarios/Losprincipiostributarios.html)|[![](recursos/iconopdf.png)](economiapublica/losprincipiostributarios/Losprincipiostributarios.pdf)|[![](recursos/iconomd.png)](economiapublica/losprincipiostributarios/Losprincipiostributarios.md)
 
 
 ## Artículos varios
