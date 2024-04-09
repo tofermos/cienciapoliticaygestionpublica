@@ -1,0 +1,696 @@
+DATA LIST FILE= 'DA3415'/ESTUDIO 1-4 REGISTRO 5-10 CUES 11-15 CCAA 16-17 PROV 18-19 MUN 20-22 CAPITAL 23 ENTREV 24-27
+TAMUNI 28 TIPO_TEL 29 SEXO 30 EDAD 31-32 P0 33 P0A 34 PROBVOTO 35-36 RAZONESVOTO 37-38 VOTOCORREO 39
+DUDACORREO 40 VOTOCORREOEMITIDO1 41-44 VOTODUDA1 45-48 VOTODUDA2 49-52 VOTOCORREOEMITIDO2 53-56
+VOTOCORREOEMITIDOCONJUNTO 57-60 FIDELVOTOCORREO 61 INTENCIONG 62-65 CORREOEMITIDOINTENCIONGR 66-69
+ESCIDEOL 70-71 PREFPTE 72-73 PARTICIPACIONG 74 RECUVOTOG 75-78 RECUERDO 79-82 CERCANIA 83-86
+ESCUELA 87 NIVELESTENTREV 88-89 ESTUDIOS 90 SITLAB 91 RELALAB 92 CNO11 93-94 CNO11R 95-96 INGRESHOG 97
+CLASESOCIAL 98-99 CLASESUB 100 SINCERIDAD 101 PESO 102-108(5) PESOCCAA 109-115(5) IA_I501 116-118
+IA_I502 119-121 IA_I503 122-124 IA_I504 125-127 IA_I505 128-130 IA_I506 131-133 IA_I507 134-136
+IA_I508 137-139 IA_I509 140-142 IA_I510 143-145 IA_I511 146-148 IA_I512 149-151 IA_I513 152-154
+IA_I514 155-157 IA_I515 158-160 IA_I516 161-163 IA_I517 164-166 IA_I518 167-169 IA_I519 170-172
+IA_I520 173-175 IA_I521 176-178 IA_I522 179-181 IA_I523 182-184 IA_I524 185-187 IA_I525 188-190
+IA_I526 191-193 IA_I528 194-196 IA_I529 197-199 IA_I530 200-202 IA_I531 203-205 IA_I532 206-208
+IA_I533 209-211 IA_I534 212-214 IA_I535 215-217 IA_I536 218-220 IA_I537 221-223 IA_I538 224-226
+IA_I539 227-229 IA_I540 230-232 IA_I541 233-235 IA_I542 236-238 IA_I543 239-241 IA_OBS1 242-243(2)
+IA_OBS2 244-245(2) IA_E1_DIA 246-247 IA_E1_MES 248-249 IA_E1_ANYO 250-251 IA_E2 252 IA_E3 253-255
+IA_E4 256 IA_VALIDA 257 IA_APLAZADA 258 IA_MODIFICADA 259 IA_SUPERVISADA 260 IA_C2 261 IA_C2A 262
+IA_C2B_1 263 IA_C2B_2 264 IA_C2B_3 265 IA_C2B_4 266 IA_C2B_5 267 IA_C2B_6 268 IA_C2B_7 269 IA_C2B_8 270
+IA_C2B_9 271 IA_C2B_10 272 IA_C2B_11 273 IA_C2B_12 274 IA_C2B_13 275 IA_C2B_14 276 IA_C2B_15 277
+IA_C2B_16 278 IA_C2B_17 279 IA_C2B_18 280 IA_C2B_19 281 IA_C2B_20 282 IA_C2B_21 283 IA_C2B_22 284
+IA_C2B_23 285 IA_C2B_24 286 IA_C2B_25 287 IA_C3 288 IA_C4 289-292 RECUVOTOGR 293-296 VOTOCORREOEMITIDO1R 297-300
+VOTODUDA1R 301-304 VOTODUDA2R 305-308 P3A2COM 309-316 VOTOCORREOEMITIDO2R 317-320 INTENCIONGR 321-324
+INTENCIONGRA 325-328 INTENCIONGALTER 329-332 INTENCIONGALTERR 333-336 SIMPATIA 337-340 VOTOSIMG 341-344
+VOTOSIMGCONJUNTO 345-348 .
+
+VARIABLE LABELS
+ESTUDIO 'Código del estudio'
+/REGISTRO 'Número de registro'
+/CUES 'Cuestionario'
+/CCAA 'Comunidad autónoma'
+/PROV 'Provincia'
+/MUN 'Municipio'
+/CAPITAL 'Capital'
+/ENTREV 'Entrevistador/a'
+/TAMUNI 'Tamaño de municipio'
+/TIPO_TEL 'Tipo de teléfono'
+/SEXO 'Sexo de la persona entrevistada'
+/EDAD 'Edad de la persona entrevistada'
+/P0 'Empadronamiento y derecho a voto en el municipio de contacto para las elecciones generales de 2023'
+/P0A 'Nacionalidad de la persona entrevistada'
+/PROBVOTO 'Escala de probabilidad de ir a votar (0-10) en las elecciones generales de 2023'
+/RAZONESVOTO 'Razón más importante para votar a un partido en unas elecciones generales'
+/VOTOCORREO 'Solicitud del voto por correo para las elecciones generales de 2023'
+/DUDACORREO 'Decisión respecto al voto por correo en las elecciones generales de 2023'
+/VOTOCORREOEMITIDO1 'Partido o coalición a la que ha votado por correo en las elecciones generales de 2023'
+/VOTODUDA1 'Partidos políticos entre los que se ha dudado al emitir el voto por correo en las elecciones generales de 2023 (2)'
+/VOTODUDA2 'Partidos políticos entre los que se ha dudado al emitir el voto por correo en las elecciones generales de 2023 (2)'
+/VOTOCORREOEMITIDO2 'Partido que finalmente votó por correo para las elecciones generales de 2023'
+/VOTOCORREOEMITIDOCONJUNTO 'Partido votado por correo en las elecciones generales de 2023'
+/FIDELVOTOCORREO 'Voto hipotético si no hubiera votado por correo en las elecciones generales de 2023'
+/INTENCIONG 'Intención de voto en las elecciones generales de 2023'
+/CORREOEMITIDOINTENCIONGR 'Voto emitido por correo + intención de voto en generales de 2023'
+/ESCIDEOL 'Escala de autoubicación ideológica (1-10)'
+/PREFPTE 'Preferencia personal como presidente del Gobierno central'
+/PARTICIPACIONG 'Participación electoral en las elecciones generales de noviembre de 2019'
+/RECUVOTOG 'Recuerdo de voto en las elecciones generales de noviembre de 2019 de los votantes'
+/RECUERDO 'Recuerdo de voto en las elecciones generales de noviembre de 2019'
+/CERCANIA 'Partido político que considera más cercano a sus ideas'
+/ESCUELA 'Escolarización de la persona entrevistada'
+/NIVELESTENTREV 'Nivel de estudios alcanzado por la persona entrevistada'
+/ESTUDIOS 'Estudios de la persona entrevistada'
+/SITLAB 'Situación laboral de la persona entrevistada'
+/RELALAB 'Situación profesional de la persona entrevistada'
+/CNO11 'Ocupación de la persona entrevistada'
+/CNO11R 'Población activa e inactiva'
+/INGRESHOG 'Nivel de ingresos netos del hogar'
+/CLASESOCIAL 'Clase social subjetiva de la persona entrevistada'
+/CLASESUB 'Identificación subjetiva de clase'
+/SINCERIDAD 'Grado de sinceridad de la persona entrevistada según el/la entrevistador/a'
+/PESO 'Ponderación'
+/PESOCCAA 'Ponderación autonómica'
+/IA_I501 'Dificultad de acceso al edificio, casa, urbanización, etc'
+/IA_I502 'Viviendas en las que no hay nadie'
+/IA_I503 'Viviendas en las que se niegan a recibir ninguna explicación'
+/IA_I504 'Negativas de hombres a realizar la entrevista'
+/IA_I505 'Negativas de mujeres a realizar la entrevista'
+/IA_I506 'Contactos fallidos por no cumplir cuotas'
+/IA_I507 'Contactos fallidos por no ser una vivienda (oficinas, consultas medicas, etc.)'
+/IA_I508 'Viviendas de población extranjera'
+/IA_I509 '01.  No quiere colaborar'
+/IA_I510 '02.  Falta de tiempo. Está muy ocupado/a'
+/IA_I511 '03.  Falta de interés por hacer una encuesta'
+/IA_I512 '04.  Desconfianza hacia las encuestas.'
+/IA_I513 '05.  Desconfianza hacia el CIS'
+/IA_I514 '06.  Rehúsa porque su pareja/familia/hogar no quiere.'
+/IA_I515 '07.  Lo considera una pérdida de tiempo'
+/IA_I516 '08.  No sabe lo suficiente/nada del tema, demasiado difícil'
+/IA_I517 '09.  El tema no le interesa.'
+/IA_I518 '10.  Resulta demasiada larga.'
+/IA_I519 '11.  No le gusta el ordenador.'
+/IA_I520 '96. Otras'
+/IA_I521 '99. No contesta'
+/IA_I522 '00. Error al iniciar'
+/IA_I523 'Teléfono apagado/fuera de cobertura'
+/IA_I524 'Negativas a realizar la entrevista'
+/IA_I525 'Interrupción llamada'
+/IA_I526 'Dificutad con el idioma'
+/IA_I528 'Contacto fallido por no ser una vivienda/persona'
+/IA_I529 'Contacto fallido por no ser elegible'
+/IA_I530 'Incapacidad para responder/ininteligible'
+/IA_I531 'Otras'
+/IA_I532 'No le gusta dar información por teléfono'
+/IA_I533 'No tiene la garantía de la privaciad de sus datos'
+/IA_I534 'Difitultad con el idioma'
+/IA_I535 'Incapacidad para responder/ininteligile'
+/IA_I536 'No elegible'
+/IA_I537 'Rechazo por falta de tiempo o de interés en la encuesta'
+/IA_I538 'Rechazo por desconfianza hacia las encuestas'
+/IA_I539 'Rechazo por desconfianza hacia el CIS'
+/IA_I540 'Rechazo por desconfiar de la llamada o por mantener la privacidad'
+/IA_I541 'Rechaza ser encuestado/a en el idioma del cuestionario'
+/IA_I542 'Rechazo por otras razones o sin dar explicaciones'
+/IA_I543 'Otras incidencias'
+/IA_OBS1 'Pregunta incómoda'
+/IA_OBS2 'Pregunta explicada'
+/IA_E1_DIA 'Día de realización'
+/IA_E1_MES 'Mes de realización'
+/IA_E1_ANYO 'Año de realización'
+/IA_E2 'Día de la semana que se realiza la entrevista'
+/IA_E3 'Duración de la entrevista en minutos'
+/IA_E4 'Hora de realización'
+/IA_VALIDA 'Entrevista válida'
+/IA_APLAZADA 'Entrevista con aplazamientos'
+/IA_MODIFICADA 'Entrevista modificada'
+/IA_SUPERVISADA 'Entrevista supervisada'
+/IA_C2 'Valoración de la supervisión'
+/IA_C2A 'Resultado supervisión'
+/IA_C2B_1 'Motivos entrevista incorrecta: Dirección inexistente (no existe número en la calle, piso, etc...)'
+/IA_C2B_2 'Motivos entrevista incorrecta: Dirección ilocalizable (faltan datos: número, piso, letra, etc...)'
+/IA_C2B_3 'Motivos entrevista incorrecta: No coinciden datos personales y no ha sido realizada en la dirección que se hace constar'
+/IA_C2B_4 'Motivos entrevista incorrecta: Negativa que ofrece dudas. Coinciden datos personales pero niegan haber realizado la entrevista'
+/IA_C2B_5 'Motivos entrevista incorrecta: Realizada a una persona, recogiendo los datos de otra'
+/IA_C2B_6 'Motivos entrevista incorrecta: Realizada cambiando género del entrevistado'
+/IA_C2B_7 'Motivos entrevista incorrecta: Cambio de edad por otra de un tramo contiguo'
+/IA_C2B_8 'Motivos entrevista incorrecta: Cambio de edad por otra de un tramo no contiguo'
+/IA_C2B_9 'Motivos entrevista incorrecta: Realizada fuera de la vivienda pero vive en la sección electoral'
+/IA_C2B_10 'Motivos entrevista incorrecta: Realizada fuera de la vivienda, y no vive en la sección electoral'
+/IA_C2B_11 'Motivos entrevista incorrecta: Realizada en dirección que no corresponde a la sección electoral'
+/IA_C2B_12 'Motivos entrevista incorrecta: Realizada, pero no respeta las normas de ruta'
+/IA_C2B_13 'Motivos entrevista incorrecta: Se detecta que no ha hecho todas las preguntas'
+/IA_C2B_14 'Motivos entrevista incorrecta: Negativa que ofrece dudas: no coincide la dirección ni datos personales. Posibilidad de error en el teléfono'
+/IA_C2B_15 'Motivos entrevista incorrecta: No hay grabación'
+/IA_C2B_16 'Motivos entrevista incorrecta: Realizada en otro idioma'
+/IA_C2B_17 'Motivos entrevista incorrecta: Realizada en un establecimiento o negocio, no es un domicilio'
+/IA_C2B_18 'Motivos entrevista incorrecta: Valores de cuota anotados incorrectamente, distintos de sexo y edad (provincia/municipio/situación laboral)'
+/IA_C2B_19 'Motivos entrevista incorrecta: No se lee el protocolo de inicio o fin de la encuesta'
+/IA_C2B_20 'Motivos entrevista incorrecta: Entrevista interrumpida y autocompletada'
+/IA_C2B_21 'Motivos entrevista incorrecta: No se leen  literalmente las preguntas y/o las opciones de respuesta'
+/IA_C2B_22 'Motivos entrevista incorrecta: Induce las respuestas'
+/IA_C2B_23 'Motivos entrevista incorrecta: No se recogen fielmente las respuestas espontáneas'
+/IA_C2B_24 'Motivos entrevista incorrecta: Lee las categorías de respuesta cuando ésta es espontánea'
+/IA_C2B_25 'Motivos entrevista incorrecta: Codificación incorrecta por parte del entrevistador (Ej. estudios, problemas, preguntas precodificadas…)'
+/IA_C3 'Resultado final'
+/IA_C4 'Supervisor'
+/RECUVOTOGR 'Recuerdo de voto en las elecciones generales de noviembre de 2019 de los votantes [recodificada]'
+/VOTOCORREOEMITIDO1R 'Partido o coalición a la que ha votado por correo en las elecciones generales de 2023  [recodificada]'
+/VOTODUDA1R 'Partidos políticos entre los que se ha dudado al emitir el voto por correo en las elecciones generales de 2023 (2) [recodificada]'
+/VOTODUDA2R 'Partidos políticos entre los que se ha dudado al emitir el voto por correo en las elecciones generales de 2023 (2) [recodificada]'
+/P3A2COM 'Partidos políticos entre los que se ha dudado al emitir el voto por correo en las elecciones generales de 2023 (2) [recodificada]'
+/VOTOCORREOEMITIDO2R 'Partido que finalmente votó por correo para las elecciones generales de 2023 [recodificada]'
+/INTENCIONGR 'Intención de voto en las elecciones generales de 2023 [recodificada]'
+/INTENCIONGRA 'Intención de voto en las elecciones generales de 2023 [agrupada]'
+/INTENCIONGALTER 'Intención de voto alternativo en elecciones generales de 2023'
+/INTENCIONGALTERR 'Intención de voto alternativo en elecciones generales de 2023 [recodificada]'
+/SIMPATIA 'Partido político por el que se siente más simpatía en las elecciones generales de 2023 (con filtro)'
+/VOTOSIMG 'Voto+simpatía en elecciones generales de 2023 (sin voto emitido por correo) [recodificada]'
+/VOTOSIMGCONJUNTO 'Voto+simpatía en elecciones generales de 2023 (con voto emitido por correo) [recodificada]'
+.
+
+VALUE LABELS
+ESTUDIO
+/REGISTRO
+/CUES
+/CCAA
+1 'Andalucía' 2 'Aragón' 3 'Asturias (Principado de)' 4 'Balears (Illes)' 5 'Canarias' 6 'Cantabria'
+7 'Castilla-La Mancha' 8 'Castilla y León' 9 'Cataluña' 10 'Comunitat Valenciana' 11 'Extremadura'
+12 'Galicia' 13 'Madrid (Comunidad de)' 14 'Murcia (Región de)' 15 'Navarra (Comunidad Foral de)'
+16 'País Vasco' 17 'Rioja (La)' 18 'Ceuta (Ciudad Autónoma de)' 19 'Melilla (Ciudad Autónoma de)'
+/PROV
+1 'Araba/Álava' 2 'Albacete' 3 'Alicante/Alacant' 4 'Almería' 33 'Asturias' 5 'Ávila' 6 'Badajoz'
+7 'Balears (Illes)' 8 'Barcelona' 9 'Burgos' 10 'Cáceres' 11 'Cádiz' 39 'Cantabria' 12 'Castellón/Castelló'
+13 'Ciudad Real' 14 'Córdoba' 15 'Coruña (A)' 16 'Cuenca' 17 'Girona' 18 'Granada' 19 'Guadalajara'
+20 'Gipuzkoa' 21 'Huelva' 22 'Huesca' 23 'Jaén' 24 'León' 25 'Lleida' 27 'Lugo' 28 'Madrid'
+29 'Málaga' 30 'Murcia' 31 'Navarra' 32 'Ourense' 34 'Palencia' 35 'Palmas (Las)' 36 'Pontevedra'
+26 'Rioja (La)' 37 'Salamanca' 38 'Santa Cruz de Tenerife' 40 'Segovia' 41 'Sevilla' 42 'Soria'
+43 'Tarragona' 44 'Teruel' 45 'Toledo' 46 'Valencia/València' 47 'Valladolid' 48 'Bizkaia' 49 'Zamora'
+50 'Zaragoza' 51 'Ceuta' 52 'Melilla'
+/MUN
+0 'Mun.<=100.000 hab. no capitales de CA o provincia' 1 'Ceuta / Melilla' 3 'Albacete' 4 'Algeciras'
+5 'Alcalá de Henares' 6 'Alcobendas' 7 'Alcorcón' 12 'Cádiz' 13 'Almería / Barakaldo' 14 'Alicante/Alacant'
+15 'Badalona / Badajoz' 16 'Cartagena / Palmas de Gran Canaria (Las)' 19 'Ávila / Barcelona'
+20 'Bilbao / Jerez de la Frontera' 21 'Córdoba' 23 'La Laguna' 24 'Gijón' 26 'Telde' 28 'Lugo'
+30 'Coruña (A) / Murcia' 34 'Ciudad Real' 37 'Cáceres' 38 'Pontevedra / Santa Cruz de Tenerife / Dos Hermanas'
+40 'Castellón de la Plana/Castelló de la Plana / Palma de Mallorca' 41 'Huelva' 44 'Oviedo'
+50 'Jaén' 54 'Ourense' 57 'Vigo' 58 'Fuenlabrada' 59 'Burgos / Vitoria-Gasteiz' 65 'Elche/Elx / Getafe'
+67 'Málaga' 69 'Donostia/San Sebastián / Marbella' 74 'Leganés' 75 'Santander' 78 'Cuenca / Santiago de Compostela'
+79 'Girona / Madrid / Roquetas de Mar' 83 'Mérida' 87 'Granada' 89 'León / Logroño' 91 'Sevilla'
+92 'Móstoles' 101 'Hospitalet de Llobregat' 106 'Parla' 120 'Lleida / Palencia' 121 'Mataró'
+123 'Reus' 125 'Huesca' 130 'Guadalajara' 148 'Tarragona / Torrejón de Ardoz' 168 'Toledo' 173 'Soria'
+186 'Valladolid' 187 'Sabadell' 194 'Segovia' 201 'Pamplona/Iruña' 216 'Teruel' 245 'Santa Coloma de Gramenet'
+250 'València' 274 'Salamanca' 275 'Zamora' 279 'Terrassa' 297 'Zaragoza'
+/CAPITAL
+1 'Capital de CC.AA.' 2 'Capital de provincia' 3 'Otros municipios'
+/ENTREV
+0 'Anonimizado'
+/TAMUNI
+1 'Menos o igual a 2.000 habitantes' 2 '2.001 a 10.000 habitantes' 3 '10.001 a 50.000 habitantes'
+4 '50.001 a 100.000 habitantes' 5 '100.001 a 400.000 habitantes' 6 '400.001 a 1.000.000 habitantes'
+7 'Más de 1.000.000 habitantes'
+/TIPO_TEL
+1 'Fijo' 2 'Móvil'
+/SEXO
+1 'Hombre' 2 'Mujer'
+/EDAD
+99 'N.C.'
+/P0
+1 'Sí' 2 'No'
+/P0A
+1 'Española' 2 'Española y otra' 3 'Otra nacionalidad'
+/PROBVOTO
+0 '0 Con toda seguridad no iría a votar' 10 '10 Con toda seguridad, iría a votar' 98 'N.S.'
+99 'N.C.'
+/RAZONESVOTO
+1 'Al partido' 2 'Al candidato/a a presidente/a' 3 'Al programa electoral o ideas que defiende el partido'
+4 'A la información que dan los medios de comunicación sobre los partidos' 5 'Al partido que defiende mejor sus intereses'
+6 'A la capacidad de gestión del partido' 7 'A evitar que gane otro partido' 8 'A la tradición de mi familia al votar'
+96 '(NO LEER) Otras razones' 97 '(NO LEER) Ninguna en particular' 98 'N.S.' 99 'N.C.'
+/VOTOCORREO
+1 'Ha solicitado el voto por correo' 2 'Piensa solicitar el voto por correo' 3 'Ya ha votado por correo'
+4 'Va a votar en persona' 5 '(NO LEER) Aún no lo ha decidido' 8 'N.S.' 9 'N.C.'
+/DUDACORREO
+1 'Tenía decidido votar por un partido' 2 'Dudó entre varios partidos' 3 '(NO LEER) Tenía decidido votar en blanco o nulo'
+4 '(NO LEER) Tenía decidido abstenerse' 8 'N.S.' 9 'N.C.' 0 'N.P.'
+/VOTOCORREOEMITIDO1
+1 'PSOE' 2 'PP' 3 'VOX' 21 'Sumar' 6 'PACMA' 101 'Adelante Andalucía' 102 'Jaén Merece Más'
+201 'PAR' 202 'Existe' 502 'Nueva Canarias' 503 'CC' 801 'UPL' 802 'Soria Ya' 803 'Por Ávila'
+808 'España Vaciada' 901 'ERC' 902 'Junts' 904 'CUP' 905 'Espai CiU' 1201 'BNG' 1501 'UPN' 1502 'Geroa Bai'
+1601 'EAJ-PNV' 1602 'EH Bildu' 8995 'Otro partido' 8996 'En blanco' 9977 'Voto nulo' 9999 'N.C.'
+0 'N.P.'
+/VOTODUDA1
+1 'PSOE' 2 'PP' 3 'VOX' 6 'PACMA' 21 'Sumar' 101 'Adelante Andalucía' 102 'Jaén Merece Más'
+201 'PAR' 202 'Existe' 502 'Nueva Canarias' 503 'CC' 801 'UPL' 802 'Soria Ya' 803 'Por Ávila'
+808 'España Vaciada' 901 'ERC' 902 'Junts' 904 'CUP' 905 'Espai CiU' 1201 'BNG' 1501 'UPN' 1502 'Geroa Bai'
+1601 'EAJ-PNV' 1602 'EH Bildu' 8995 'Otro partido' 8996 'En blanco' 9977 'Voto nulo' 9999 'N.C.'
+0 'N.P.'
+/VOTODUDA2
+1 'PSOE' 2 'PP' 3 'VOX' 6 'PACMA' 21 'Sumar' 101 'Adelante Andalucía' 102 'Jaén Merece Más'
+201 'PAR' 202 'Existe' 502 'Nueva Canarias' 503 'CC' 801 'UPL' 802 'Soria Ya' 803 'Por Ávila'
+808 'España Vaciada' 901 'ERC' 902 'Junts' 904 'CUP' 905 'Espai CiU' 1201 'BNG' 1501 'UPN' 1502 'Geroa Bai'
+1601 'EAJ-PNV' 1602 'EH Bildu' 8995 'Otro partido' 8996 'En blanco' 9977 'Voto nulo' 9999 'N.C.'
+0 'N.P.'
+/VOTOCORREOEMITIDO2
+1 'PSOE' 2 'PP' 3 'VOX' 6 'PACMA' 21 'Sumar' 101 'Adelante Andalucía' 102 'Jaén Merece Más'
+201 'PAR' 202 'Existe' 502 'Nueva Canarias' 503 'CC' 801 'UPL' 802 'Soria Ya' 803 'Por Ávila'
+808 'España Vaciada' 901 'ERC' 902 'Junts' 904 'CUP' 905 'Espai CiU' 1201 'BNG' 1501 'UPN' 1502 'Geroa Bai'
+1601 'EAJ-PNV' 1602 'EH Bildu' 8995 'Otro partido' 8996 'En blanco' 9977 'Voto nulo' 9999 'N.C.'
+0 'N.P.'
+/VOTOCORREOEMITIDOCONJUNTO
+1 'PSOE' 2 'PP' 3 'VOX' 21 'Sumar' 6 'PACMA' 101 'Adelante Andalucía' 102 'Jaén Merece Más'
+201 'PAR' 202 'Existe' 502 'Nueva Canarias' 503 'CCa' 801 'UPL' 802 'Soria Ya' 803 'Por Ávila'
+808 'España Vaciada' 901 'ERC' 902 'Junts' 904 'CUP' 905 'Espai CiU' 1201 'BNG' 1501 'UPN' 1502 'Geroa Bai'
+1601 'EAJ-PNV' 1602 'EH Bildu' 8995 'Otro partido' 8996 'En blanco' 9977 'Voto nulo' 9999 'N.C.'
+0 'N.P.'
+/FIDELVOTOCORREO
+1 'Votaría al mismo partido o coalición (no cambiaría)' 2 'Votaría distinto partido o coalición (sí cambiaría)'
+3 '(NO LEER) Votaría blanco o nulo' 4 '(NO LEER) Se abstendría' 8 'N.S.' 9 'N.C.' 0 'N.P.'
+/INTENCIONG
+1 'PSOE' 2 'PP' 3 'VOX' 6 'PACMA' 21 'Sumar' 101 'Adelante Andalucía' 102 'Jaén Merece Más'
+201 'PAR' 202 'Existe' 502 'Nueva Canarias' 503 'CC' 801 'UPL' 802 'Soria Ya' 803 'Por Ávila'
+808 'España Vaciada' 901 'ERC' 902 'Junts' 904 'CUP' 905 'Espai CiU' 1201 'BNG' 1501 'UPN' 1502 'Geroa Bai'
+1601 'EAJ-PNV' 1602 'EH Bildu' 8995 'Otro partido' 8996 'En blanco' 9977 'Voto nulo' 9997 'No votaría'
+9998 'No sabe todavía' 9999 'N.C.' 0 'No procede'
+/CORREOEMITIDOINTENCIONGR
+1 'PSOE' 2 'PP' 3 'VOX' 21 'Sumar' 6 'PACMA' 101 'Adelante Andalucía' 102 'Jaén Merece Más'
+201 'PAR' 202 'Existe' 503 'CCa' 502 'NC-bc' 801 'UPL' 802 'Soria Ya' 803 'Por Ávila' 808 'España Vaciada'
+901 'ERC' 902 'Junts' 904 'CUP' 905 'PDeCAT-E-CiU' 1201 'BNG' 1501 'UPN' 1502 'Geroa Bai' 1601 'EAJ-PNV'
+1602 'EH Bildu' 8995 'Otro partido' 8996 'En blanco' 9977 'Voto nulo' 9997 'No votaría' 9998 'No sabe todavía'
+9999 'N.C.'
+/ESCIDEOL
+1 '1 Izquierda' 10 '10 Derecha' 98 'N.S.' 99 'N.C.'
+/PREFPTE
+1 'Pedro Sánchez' 2 'Alberto Núñez Feijóo' 3 'Santiago Abascal' 4 'Yolanda Díaz' 10 'Ione Belarra'
+7 'Íñigo Errejón' 8 'Isabel Díaz Ayuso' 96 '(NO LEER) Otro/a' 97 '(NO LEER) Ninguno/a de ellos/as'
+98 'N.S.' 99 'N.C.'
+/PARTICIPACIONG
+1 'Votó' 2 'No votó' 3 'No tenía edad para votar' 4 'No tenía derecho a voto' 8 'No recuerda'
+9 'N.C.'
+/RECUVOTOG
+1 'PSOE' 2 'PP' 3 'VOX' 4 'Unidas Podemos' 5 'Ciudadanos' 6 'PACMA' 7 'Más País' 202 'Teruel Existe'
+501 'CC-PNC-NC' 601 'PRC' 901 'ERC' 902 'JxCat' 903 'En Comú Podem' 904 'CUP' 1001 'Més Compromís'
+1201 'BNG' 1202 'En Común-Unidas Podemos' 1501 'Na+' 1601 'EAJ-PNV' 1602 'EH Bildu' 8995 'Otro partido'
+8996 'En blanco' 9977 'Voto nulo' 9998 'No recuerda' 9999 'N.C.' 0 'No procede'
+/RECUERDO
+1 'PSOE' 2 'PP' 3 'VOX' 4 'UP' 903 'En Comú Podem' 1202 'En Común-UP' 5 'C''s' 7 'Más País'
+901 'ERC' 902 'JxCat' 904 'CUP' 1601 'EAJ-PNV' 1602 'EH Bildu' 1501 'Na+' 501 'CCa-NC' 1001 'Més Compromís'
+1201 'BNG' 601 'PRC' 202 'Teruel Existe' 6 'PACMA' 8995 'Otros partidos' 8996 'En blanco' 9977 'Nulo'
+9995 'No tenía edad' 9997 'No votó' 9996 'No tenía derecho a voto' 9998 'No recuerda' 9999 'N.C.'
+/CERCANIA
+1 'PSOE' 2 'PP' 3 'VOX' 4 'Unidas Podemos' 5 'Ciudadanos' 6 'PACMA' 7 'Más País' 8 'Podemos'
+9 'IU' 21 'Sumar' 101 'Adelante Andalucía' 102 'Jaén Merece Más' 201 'PAR' 202 'Existe' 203 'CHA'
+301 'FAC' 401 'MÉS (PSM-Entesa)' 502 'Nueva Canarias' 503 'CCa' 601 'PRC' 801 'UPL' 802 'Soria Ya'
+803 'Por Ávila' 808 'España Vaciada' 901 'ERC' 902 'Junts' 903 'En Comú Podem' 904 'CUP' 905 'Espai CiU'
+1001 'Compromís' 1201 'BNG' 1202 'En Común-Unidas Podemos' 1301 'Más Madrid' 1501 'UPN' 1502 'Geroa Bai'
+1601 'EAJ-PNV' 1602 'EH Bildu' 8995 'Otro partido' 9997 'Ninguno' 9998 'N.S.' 9999 'N.C.'
+/ESCUELA
+1 'No, es analfabeto/a' 2 'No, pero sabe leer y escribir' 3 'Sí, ha ido a la escuela' 9 'N.C.'
+/NIVELESTENTREV
+0 'N.P.' 1 'Menos de 5 años de escolarización ' 2 'Educación Primaria (Educación Primaria de LOGSE; 5º curso de EGB; enseñanza primaria antigua) '
+3 'FP de Grado Básico (FPB), cualificación profesional grado inicial (FP grado inicial). PCPI (Programas de Cualificación P'+'rofesional Inicial, que no precisan de titulación académica de la primera etapa de secundaria para su realización). Prog'+'ramas de garantía social '
+4 'Educación secundaria (ESO; EGB; Graduado Escolar; Certificado de Escolaridad; Bachillerato Elemental) '
+5 'FP de Grado Medio (ciclo/módulo formativo de FP (grado medio) de Artes Plásticas y Diseño, Música y Danza; enseñanzas de'+'portivas; FP I; Bachiller Laboral Elemental; Oficialía Industrial; Bachillerato Comercial) '
+6 'Bachillerato (Bachillerato LOGSE; BUP; Bachillerato Superior (6º); Bachillerato Universitario (7º), incluidos COU y PREU'+') '
+7 'FP de Grado Superior (ciclo/módulo formativo de FP (grado superior) de Artes Plásticas, Diseño, Música y Danza, Deporte;'+' FP II; Bachillerato Laboral Superior; Maestría industrial; perito/a mercantil; Secretariado de 2º grado; Grado Medio co'+'nservatorio) '
+8 'Universitarios Medios (diplomatura; Arquitectura o Ingeniería técnica; aparejador/a; perito/a) '
+9 'Universitarios Superiores (licenciatura; grado; máster oficial; doctorado; Arquitectura o Ingeniería superior; postgrado'+'s)  '
+10 'Otros estudios no reglados ' 98 'N.S./No recuerda ' 99 'N.C.'
+/ESTUDIOS
+1 'Sin estudios' 2 'Primaria' 3 'Secundaria 1ª etapa' 4 'Secundaria 2ª etapa' 5 'F.P.' 6 'Superiores'
+7 'Otros' 9 'N.C.'
+/SITLAB
+1 'Trabaja' 2 'Jubilado/a o pensionista (anteriormente ha trabajado) ' 3 'Pensionista (anteriormente no ha trabajado) '
+4 'Parado/a y ha trabajado antes ' 5 'Parado/a y busca su primer empleo ' 6 'Estudiante' 7 'Trabajo doméstico no remunerado '
+8 'Otra situación' 9 'N.C.'
+/RELALAB
+1 'Asalariado/a por cuenta ajena' 2 'Empresario/a o profesional con asalariados/as' 3 'Profesional o trabajador/a autónomo/a (sin asalariados/as)'
+4 'Ayuda familiar (sin remuneración reglamentada en la empresa o negocio de un/a familiar)'
+5 'Miembro de una cooperativa' 6 'Otra situación' 9 'N.C.' 0 'No procede'
+/CNO11
+1 'Directores/as y gerentes' 2 'Profesionales, científicos/as e intelectuales' 3 'Técnicos/as y profesionales de nivel medio'
+4 'Personal de apoyo administrativo' 5 'Trabajadores/as de los servicios y vendedores/as de comercios y mercados'
+6 'Agricultores/as y trabajadores/as cualificados/as agropecuarios/as, forestales y pesqueros/as'
+7 'Oficiales/as, operarios/as y artesanos/as de artes mecánicas y de otros oficios' 8 'Operadores/as de instalaciones y máquinas y ensambladores/as'
+9 'Ocupaciones elementales' 10 'Ocupaciones militares y cuerpos policiales' 11 'Otra/o' 99 'N.C.'
+0 'No procede'
+/CNO11R
+1 'Directores/as y gerentes' 2 'Profesionales, científicos/as e intelectuales' 3 'Técnicos/as y profesionales de nivel medio'
+4 'Personal de apoyo administrativo' 5 'Trabajadores/as de los servicios y vendedores/as de comercios y mercados'
+6 'Agricultores/as y trabajadores/as agropecuarios/as, forestales y pesqueros/as' 7 'Oficiales/as, operarios/as y artesanos/as'
+8 'Operadores/as de instalaciones y máquinas y ensambladores/as' 9 'Ocupaciones elementales'
+10 'Ocupaciones militares y cuerpos policiales' 11 'Otra/o ocupación' 12 'Jubilado o pensionista (anteriormente ha trabajado)'
+13 'Estudiante' 14 'Trabajo doméstico no remunerado' 15 'Otra situación inactiva' 16 'Parados/as'
+99 'N.C.'
+/INGRESHOG
+1 'Más de 5.000 €' 2 'De 3.901 a 5.000 €' 3 'De 2.701 a 3.900 €' 4 'De 1.801 a 2.700 €' 5 'De 1.100 a 1.800 €'
+6 'Menos de 1.100 €' 8 'N.S.' 9 'N.C.'
+/CLASESOCIAL
+1 'Clase alta ' 2 'Clase media-alta ' 3 'Clase media-media ' 4 'Clase media-baja ' 5 'Clase trabajadora/obrera '
+12 'Clase baja ' 6 'Clase pobre ' 7 'Infraclase' 8 'Proletariado' 9 'A los/as de abajo ' 10 'Excluidos/as'
+11 'A la gente común ' 96 'Otras' 97 'No cree en las clases ' 98 'No sabe, duda ' 99 'N.C.'
+/CLASESUB
+1 'Clase alta y media alta' 2 'Clase media-media' 3 'Clase media-baja' 4 'Clase trabajadora/obrera/proletariado'
+5 'Clase baja/pobre' 6 'Otras' 8 'N.S.' 9 'N.C.'
+/SINCERIDAD
+1 'Mucha' 2 'Bastante' 3 'Poca' 4 'Ninguna' 8 'N.S.'
+/PESO
+/PESOCCAA
+/IA_I501
+0 'No procede'
+/IA_I502
+0 'No procede'
+/IA_I503
+0 'No procede'
+/IA_I504
+0 'No procede'
+/IA_I505
+0 'No procede'
+/IA_I506
+0 'No procede'
+/IA_I507
+0 'No procede'
+/IA_I508
+0 'No procede'
+/IA_I509
+0 'No procede'
+/IA_I510
+0 'No procede'
+/IA_I511
+0 'No' 1 'Sí'
+/IA_I512
+0 'No' 1 'Sí'
+/IA_I513
+0 'No' 1 'Sí'
+/IA_I514
+0 'No' 1 'Sí'
+/IA_I515
+0 'No' 1 'Sí'
+/IA_I516
+0 'No' 1 'Sí'
+/IA_I517
+0 'No' 1 'Sí'
+/IA_I518
+0 'No' 1 'Sí'
+/IA_I519
+0 'No' 1 'Sí'
+/IA_I520
+0 'No' 1 'Sí'
+/IA_I521
+0 'No' 1 'Sí'
+/IA_I522
+0 'No' 1 'Sí'
+/IA_I523
+0 'No procede'
+/IA_I524
+0 'No procede'
+/IA_I525
+0 'No procede'
+/IA_I526
+0 'No procede'
+/IA_I528
+0 'No procede'
+/IA_I529
+0 'No procede'
+/IA_I530
+0 'No procede'
+/IA_I531
+0 'No procede'
+/IA_I532
+0 'No' 1 'Sí'
+/IA_I533
+0 'No' 1 'Sí'
+/IA_I534
+0 'No'
+/IA_I535
+0 'No'
+/IA_I536
+0 'No'
+/IA_I537
+0 'No'
+/IA_I538
+0 'No'
+/IA_I539
+0 'No'
+/IA_I540
+0 'No'
+/IA_I541
+0 'No'
+/IA_I542
+0 'No'
+/IA_I543
+0 'No'
+/IA_OBS1
+0 'No' 1 'Sí'
+/IA_OBS2
+0 'No' 1 'Sí'
+/IA_E1_DIA
+99 'N.C.'
+/IA_E1_MES
+1 'Enero  ' 2 'Febrero  ' 3 'Marzo  ' 4 'Abril  ' 5 'Mayo  ' 6 'Junio  ' 7 'Julio  ' 8 'Agosto  '
+9 'Septiembre  ' 10 'Octubre  ' 11 'Noviembre    ' 12 'Diciembre  ' 99 'N.C.'
+/IA_E1_ANYO
+23 '2023'
+/IA_E2
+1 'Lunes' 2 'Martes' 3 'Miércoles' 4 'Jueves' 5 'Viernes' 6 'Sábado' 7 'Domingo' 9 'N.C.'
+/IA_E3
+/IA_E4
+1 'Mañana (9-12)' 2 'Mediodía (12-16)' 3 'Tarde (16-20)' 4 'Noche (20-22)' 5 'Otra (22-9)'
+/IA_VALIDA
+0 'No' 1 'Sí'
+/IA_APLAZADA
+0 'No' 1 'Sí'
+/IA_MODIFICADA
+0 'No' 1 'Sí'
+/IA_SUPERVISADA
+0 'No' 1 'Sí'
+/IA_C2
+1 'Entrevista no supervisada' 2 'Supervisión telefónica' 3 'Supervisión personal' 4 'Supervisión telefónica y personal'
+5 'Supervisión directa' 6 'Supervisión de audio (monitorización)'
+/IA_C2A
+1 'Entrevista correcta' 2 'Entrevista incorrecta' 3 'No se ha establecido contacto'
+/IA_C2B_1
+1 'Dirección inexistente (no existe número en la calle, piso, etc...)' 0 'No' -99 'N.P.'
+/IA_C2B_2
+1 'Dirección ilocalizable (faltan datos: número, piso, letra, etc...)' 0 'No' -99 'N.P.'
+/IA_C2B_3
+1 'No coinciden datos personales y no ha sido realizada en la dirección que se hace constar'
+0 'No' -99 'N.P.'
+/IA_C2B_4
+1 'Negativa que ofrece dudas. Coinciden datos personales pero niegan haber realizado la entrevista'
+0 'No' -99 'N.P.'
+/IA_C2B_5
+1 'Realizada a una persona, recogiendo los datos de otra' 0 'No' -99 'N.P.'
+/IA_C2B_6
+1 'Realizada cambiando género del entrevistado' 0 'No' -99 'N.P.'
+/IA_C2B_7
+1 'Cambio de edad por otra de un tramo contiguo' 0 'No' -99 'N.P.'
+/IA_C2B_8
+1 'Cambio de edad por otra de un tramo no contiguo' 0 'No' -99 'N.P.'
+/IA_C2B_9
+1 'Realizada fuera de la vivienda pero vive en la sección electoral' 0 'No' -99 'N.P.'
+/IA_C2B_10
+1 'Realizada fuera de la vivienda, y no vive en la sección electoral' 0 'No' -99 'N.P.'
+/IA_C2B_11
+1 'Realizada en dirección que no corresponde a la sección electoral' 0 'No' -99 'N.P.'
+/IA_C2B_12
+1 'Realizada, pero no respeta las normas de ruta' 0 'No' -99 'N.P.'
+/IA_C2B_13
+1 'Se detecta que no ha hecho todas las preguntas' 0 'No' -99 'N.P.'
+/IA_C2B_14
+1 'Negativa que ofrece dudas: no coincide la dirección ni datos personales. Posibilidad de error en el teléfono'
+0 'No' -99 'N.P.'
+/IA_C2B_15
+1 'No hay grabación' 0 'No' -99 'N.P.'
+/IA_C2B_16
+1 'Realizada en otro idioma' 0 'No' -99 'N.P.'
+/IA_C2B_17
+1 'Realizada en un establecimiento o negocio, no es un domicilio' 0 'No' -99 'N.P.'
+/IA_C2B_18
+1 'Valores de cuota anotados incorrectamente, distintos de sexo y edad (provincia/municipio/situación laboral)'
+0 'No' -99 'N.P.'
+/IA_C2B_19
+1 'No se lee el protocolo de inicio o fin de la encuesta' 0 'No' -99 'N.P.'
+/IA_C2B_20
+1 'Entrevista interrumpida y autocompletada' 0 'No' -99 'N.P.'
+/IA_C2B_21
+1 'No se leen  literalmente las preguntas y/o las opciones de respuesta' 0 'No' -99 'N.P.'
+/IA_C2B_22
+1 'Induce las respuestas' 0 'No' -99 'N.P.'
+/IA_C2B_23
+1 'No se recogen fielmente las respuestas espontáneas' 0 'No' -99 'N.P.'
+/IA_C2B_24
+1 'Lee las categorías de respuesta cuando ésta es espontánea' 0 'No' -99 'N.P.'
+/IA_C2B_25
+1 'Codificación incorrecta por parte del entrevistador (Ej. estudios, problemas, preguntas precodificadas…)'
+0 'No' -99 'N.P.'
+/IA_C3
+1 'Entrevista válida' 2 'Entrevista anulada' -99 'N.P.'
+/IA_C4
+0 'Anonimizado'
+/RECUVOTOGR
+1 'PSOE' 2 'PP' 3 'VOX' 4 'Unidas Podemos' 903 'En Comú Podem' 1202 'En Común-Unidas Podemos'
+5 'Ciudadanos' 7 'Más País' 401 'MÉS-PSM Entesa' 901 'ERC' 902 'JxCat' 904 'CUP' 1601 'EAJ-PNV'
+1602 'EH Bildu' 1501 'Na+' 501 'CCa-NC' 1001 'Més Compromís' 1201 'BNG' 601 'PRC' 202 'Teruel Existe'
+6 'PACMA' 8995 'Otros partidos' 8996 'En blanco' 9977 'Voto nulo' 9998 'No recuerda' 9999 'N.C.'
+0 'No procede'
+/VOTOCORREOEMITIDO1R
+1 'PSOE' 2 'PP' 3 'VOX' 21 'Sumar' 6 'PACMA' 101 'Adelante Andalucía' 102 'Jaén Merece Más'
+201 'PAR' 202 'Existe' 503 'CCa' 502 'NC-bc' 801 'UPL' 802 'Soria Ya' 803 'Por Ávila' 808 'España Vaciada'
+901 'ERC' 902 'Junts' 904 'CUP' 905 'PDeCAT-E-CiU' 1201 'BNG' 1501 'UPN' 1502 'Geroa Bai' 1601 'EAJ-PNV'
+1602 'EH Bildu' 8995 'Otro partido' 8996 'En blanco' 9977 'Voto nulo' 9999 'N.C.' 0 'N.P.'
+/VOTODUDA1R
+1 'PSOE' 2 'PP' 3 'VOX' 6 'PACMA' 21 'Sumar' 101 'Adelante Andalucía' 102 'Jaén Merece Más'
+201 'PAR' 202 'Existe' 502 'Nueva Canarias' 503 'CC' 801 'UPL' 802 'Soria Ya' 803 'Por Ávila'
+808 'España Vaciada' 901 'ERC' 902 'Junts' 904 'CUP' 905 'Espai CiU' 1201 'BNG' 1501 'UPN' 1502 'Geroa Bai'
+1601 'EAJ-PNV' 1602 'EH Bildu' 8995 'Otro partido' 8996 'En blanco' 9977 'Voto nulo' 9999 'N.C.'
+0 'N.P.'
+/VOTODUDA2R
+1 'PSOE' 2 'PP' 3 'VOX' 6 'PACMA' 21 'Sumar' 101 'Adelante Andalucía' 102 'Jaén Merece Más'
+201 'PAR' 202 'Existe' 502 'Nueva Canarias' 503 'CC' 801 'UPL' 802 'Soria Ya' 803 'Por Ávila'
+808 'España Vaciada' 901 'ERC' 902 'Junts' 904 'CUP' 905 'Espai CiU' 1201 'BNG' 1501 'UPN' 1502 'Geroa Bai'
+1601 'EAJ-PNV' 1602 'EH Bildu' 8995 'Otro partido' 8996 'En blanco' 9977 'Voto nulo' 9999 'N.C.'
+0 'N.P.'
+/P3A2COM
+10002 'PSOE/PP' 10003 'PSOE/VOX' 10021 'PSOE/Sumar' 10006 'PSOE/PACMA' 10101 'PSOE/Adelante Andalucía'
+10102 'PSOE/Jaén Merece Más' 10201 'PSOE/PAR' 10202 'PSOE/Existe' 10503 'PSOE/CCa' 10502 'PSOE/NC'
+10801 'PSOE/UPL' 10802 'PSOE/Soria Ya' 10803 'PSOE/Por Ávila' 10808 'PSOE/España Vaciada' 10901 'PSOE/ERC'
+10902 'PSOE/Junts' 10904 'PSOE/CUP' 10905 'PSOE/PDeCAT-E-CiU' 11201 'PSOE/BNG' 11501 'PSOE/UPN'
+11502 'PSOE/Geroa Bai' 11601 'PSOE/EAJ-PNV' 11602 'PSOE/EH Bildu' 18995 'PSOE/Otros' 18996 'PSOE/En blanco'
+19977 'PSOE/Voto nulo' 19997 'PSOE/Abstención' 20003 'PP/VOX' 20021 'PP/Sumar' 20006 'PP/PACMA'
+20101 'PP/Adelante Andalucía' 20102 'PP/Jaén Merece Más' 20201 'PP/PAR' 20202 'PP/Existe' 20503 'PP/CCa'
+20502 'PP/NC' 20801 'PP/UPL' 20802 'PP/Soria Ya' 20803 'PP/Por Ávila' 20808 'PP/España Vaciada'
+20901 'PP/ERC' 20902 'PP/Junts' 20904 'PP/CUP' 20905 'PP/PDeCAT-E-CiU' 21201 'PP/BNG' 21501 'PP/UPN'
+21502 'PP/Geroa Bai' 21601 'PP/EAJ-PNV' 21602 'PP/EH Bildu' 28995 'PP/Otros' 28996 'PP/En blanco'
+29977 'PP/Voto nulo' 29997 'PP/Abstención' 30021 'VOX/Sumar' 30006 'VOX/PACMA' 30101 'VOX/Adelante Andalucía'
+30102 'VOX/Jaén Merece Más' 30201 'VOX/PAR' 30202 'VOX/Existe' 30503 'VOX/CCa' 30502 'VOX/NC'
+30801 'VOX/UPL' 30802 'VOX/Soria Ya' 30803 'VOX/Por Ávila' 30808 'VOX/España Vaciada' 30901 'VOX/ERC'
+30902 'VOX/Junts' 30904 'VOX/CUP' 30905 'VOX/PDeCAT-E-CiU' 31201 'VOX/BNG' 31501 'VOX/UPN' 31502 'VOX/Geroa Bai'
+31601 'VOX/EAJ-PNV' 31602 'VOX/EH Bildu' 38995 'VOX/Otros' 38996 'VOX/En blanco' 39977 'VOX/Voto nulo'
+39997 'VOX/Abstención' 210006 'Sumar/PACMA' 210101 'Sumar/Adelante Andalucía' 210102 'Sumar/Jaén Merece Más'
+210201 'Sumar/PAR' 210202 'Sumar/Existe' 210503 'Sumar/CCa' 210502 'Sumar/NC' 210801 'Sumar/UPL'
+210802 'Sumar/Soria Ya' 210803 'Sumar/Por Ávila' 210808 'Sumar/España Vaciada' 210901 'Sumar/ERC'
+210902 'Sumar/Junts' 210904 'Sumar/CUP' 210905 'Sumar/PDeCAT-E-CiU' 211201 'Sumar/BNG' 211501 'Sumar/UPN'
+211502 'Sumar/Geroa Bai' 211601 'Sumar/EAJ-PNV' 211602 'Sumar/EH Bildu' 218995 'Sumar/Otros'
+218996 'Sumar/En blanco' 219977 'Sumar/Voto nulo' 219997 'Sumar/Abstención' 60101 'PACMA/Adelante Andalucía'
+60102 'PACMA/Jaén Merece Más' 60201 'PACMA/PAR' 60202 'PACMA/Existe' 60503 'PACMA/CCa' 60502 'PACMA/NC'
+60801 'PACMA/UPL' 60802 'PACMA/Soria Ya' 60803 'PACMA/Por Ávila' 60808 'PACMA/España Vaciada'
+60901 'PACMA/ERC' 60902 'PACMA/Junts' 60904 'PACMA/CUP' 60905 'PACMA/PDeCAT-E-CiU' 61201 'PACMA/BNG'
+61501 'PACMA/UPN' 61502 'PACMA/Geroa Bai' 61601 'PACMA/EAJ-PNV' 61602 'PACMA/EH Bildu' 68995 'PACMA/Otros'
+68996 'PACMA/En blanco' 69977 'PACMA/Voto nulo' 69997 'PACMA/Abstención' 1010102 'Adelante Andalucía/Jaén Merece Más'
+1010201 'Adelante Andalucía/PAR' 1010202 'Adelante Andalucía/Existe' 1010503 'Adelante Andalucía/CCa'
+1010502 'Adelante Andalucía/NC' 1010801 'Adelante Andalucía/UPL' 1010802 'Adelante Andalucía/Soria Ya'
+1010803 'Adelante Andalucía/Por Ávila' 1010808 'Adelante Andalucía/España Vaciada' 1010901 'Adelante Andalucía/ERC'
+1010902 'Adelante Andalucía/Junts' 1010904 'Adelante Andalucía/CUP' 1010905 'Adelante Andalucía/PDeCAT-E-CiU'
+1011201 'Adelante Andalucía/BNG' 1011501 'Adelante Andalucía/UPN' 1011502 'Adelante Andalucía/Geroa Bai'
+1011601 'Adelante Andalucía/EAJ-PNV' 1011602 'Adelante Andalucía/EH Bildu' 1018995 'Adelante Andalucía/Otros'
+1018996 'Adelante Andalucía/En blanco' 1019977 'Adelante Andalucía/Voto nulo' 1019997 'Adelante Andalucía/Abstención'
+1020201 'Jaén Merece Más/PAR' 1020202 'Jaén Merece Más/Existe' 1020503 'Jaén Merece Más/CCa'
+1020502 'Jaén Merece Más/NC' 1020801 'Jaén Merece Más/UPL' 1020802 'Jaén Merece Más/Soria Ya'
+1020803 'Jaén Merece Más/Por Ávila' 1020808 'Jaén Merece Más/España Vaciada' 1020901 'Jaén Merece Más/ERC'
+1020902 'Jaén Merece Más/Junts' 1020904 'Jaén Merece Más/CUP' 1020905 'Jaén Merece Más/PDeCAT-E-CiU'
+1021201 'Jaén Merece Más/BNG' 1021501 'Jaén Merece Más/UPN' 1021502 'Jaén Merece Más/Geroa Bai'
+1021601 'Jaén Merece Más/EAJ-PNV' 1021602 'Jaén Merece Más/EH Bildu' 1028995 'Jaén Merece Más/Otros'
+1028996 'Jaén Merece Más/En blanco' 1029977 'Jaén Merece Más/Voto nulo' 1029997 'Jaén Merece Más/Abstención'
+2010202 'PAR/Existe' 2010503 'PAR/CCa' 2010502 'PAR/NC' 2010801 'PAR/UPL' 2010802 'PAR/Soria Ya'
+2010803 'PAR/Por Ávila' 2010808 'PAR/España Vaciada' 2010901 'PAR/ERC' 2010902 'PAR/Junts' 2010904 'PAR/CUP'
+2010905 'PAR/PDeCAT-E-CiU' 2011201 'PAR/BNG' 2011501 'PAR/UPN' 2011502 'PAR/Geroa Bai' 2011601 'PAR/EAJ-PNV'
+2011602 'PAR/EH Bildu' 2018995 'PAR/Otros' 2018996 'PAR/En blanco' 2019977 'PAR/Voto nulo' 2019997 'PAR/Abstención'
+2020503 'Existe/CCa' 2020502 'Existe/NC' 2020801 'Existe/UPL' 2020802 'Existe/Soria Ya' 2020803 'Existe/Por Ávila'
+2020808 'Existe/España Vaciada' 2020901 'Existe/ERC' 2020902 'Existe/Junts' 2020904 'Existe/CUP'
+2020905 'Existe/PDeCAT-E-CiU' 2021201 'Existe/BNG' 2021501 'Existe/UPN' 2021502 'Existe/Geroa Bai'
+2021601 'Existe/EAJ-PNV' 2021602 'Existe/EH Bildu' 2028995 'Existe/Otros' 2028996 'Existe/En blanco'
+2029977 'Existe/Voto nulo' 2029997 'Existe/Abstención' 5030502 'CCa/NC' 5030801 'CCa/UPL' 5030802 'CCa/Soria Ya'
+5030803 'CCa/Por Ávila' 5030808 'CCa/España Vaciada' 5030901 'CCa/ERC' 5030902 'CCa/Junts' 5030904 'CCa/CUP'
+5030905 'CCa/PDeCAT-E-CiU' 5031201 'CCa/BNG' 5031501 'CCa/UPN' 5031502 'CCa/Geroa Bai' 5031601 'CCa/EAJ-PNV'
+5031602 'CCa/EH Bildu' 5038995 'CCa/Otros' 5038996 'CCa/En blanco' 5039977 'CCa/Voto nulo' 5039997 'CCa/Abstención'
+5020801 'NC/UPL' 5020802 'NC/Soria Ya' 5020803 'NC/Por Ávila' 5020808 'NC/España Vaciada' 5020901 'NC/ERC'
+5020902 'NC/Junts' 5020904 'NC/CUP' 5020905 'NC/PDeCAT-E-CiU' 5021201 'NC/BNG' 5021501 'NC/UPN'
+5021502 'NC/Geroa Bai' 5021601 'NC/EAJ-PNV' 5021602 'NC/EH Bildu' 5028995 'NC/Otros' 5028996 'NC/En blanco'
+5029977 'NC/Voto nulo' 5029997 'NC/Abstención' 8010802 'UPL/Soria Ya' 8010803 'UPL/Por Ávila'
+8010808 'UPL/España Vaciada' 8010901 'UPL/ERC' 8010902 'UPL/Junts' 8010904 'UPL/CUP' 8010905 'UPL/PDeCAT-E-CiU'
+8011201 'UPL/BNG' 8011501 'UPL/UPN' 8011502 'UPL/Geroa Bai' 8011601 'UPL/EAJ-PNV' 8011602 'UPL/EH Bildu'
+8018995 'UPL/Otros' 8018996 'UPL/En blanco' 8019977 'UPL/Voto nulo' 8019997 'UPL/Abstención'
+8020803 'Soria Ya/Por Ávila' 8020808 'Soria Ya/España Vaciada' 8020901 'Soria Ya/ERC' 8020902 'Soria Ya/Junts'
+8020904 'Soria Ya/CUP' 8020905 'Soria Ya/PDeCAT-E-CiU' 8021202 'Soria Ya/BNG' 8021501 'Soria Ya/UPN'
+8021502 'Soria Ya/Geroa Bai' 8021601 'Soria Ya/EAJ-PNV' 8021602 'Soria Ya/EH Bildu' 8028995 'Soria Ya/Otros'
+8028996 'Soria Ya/En blanco' 8029977 'Soria Ya/Voto nulo' 8029997 'Soria Ya/Abstención' 8030808 'Por Ávila/España Vaciada'
+8030901 'Por Ávila/ERC' 8030902 'Por Ávila/Junts' 8030904 'Por Ávila/CUP' 8030905 'Por Ávila/PDeCAT-E-CiU'
+8031201 'Por Ávila/BNG' 8031501 'Por Ávila/UPN' 8031502 'Por Ávila/Geroa Bai' 8031601 'Por Ávila/EAJ-PNV'
+8031602 'Por Ávila/EH Bildu' 8038995 'Por Ávila/Otros' 8038996 'Por Ávila/En blanco' 8039977 'Por Ávila/Voto nulo'
+8039997 'Por Ávila/Abstención' 8080901 'España Vaciada/ERC' 8080902 'España Vaciada/Junts' 8080904 'España Vaciada/CUP'
+8080905 'España Vaciada/PDeCAT-E-CiU' 8081201 'España Vaciada/BNG' 8081501 'España Vaciada/UPN'
+8081502 'España Vaciada/Geroa Bai' 8081601 'España Vaciada/EAJ-PNV' 8081602 'España Vaciada/EH Bildu'
+8088995 'España Vaciada/Otros' 8088996 'España Vaciada/En blanco' 8089977 'España Vaciada/Voto nulo'
+8089997 'España Vaciada/Abstención' 9010902 'ERC/Junts' 9010904 'ERC/CUP' 9010905 'ERC/PDeCAT-E-CiU'
+9011201 'ERC/BNG' 9011501 'ERC/UPN' 9011502 'ERC/Geroa Bai' 9011601 'ERC/EAJ-PNV' 9011602 'ERC/EH Bildu'
+9018995 'ERC/Otros' 9018996 'ERC/En blanco' 9019977 'ERC/Voto nulo' 9019997 'ERC/Abstención'
+9020904 'Junts/CUP' 9020905 'Junts/PDeCAT-E-CiU' 9021201 'Junts/BNG' 9021501 'Junts/UPN' 9021502 'Junts/Geroa Bai'
+9021601 'Junts/EAJ-PNV' 9021602 'Junts/EH Bildu' 9028995 'Junts/Otros' 9028996 'Junts/En blanco'
+9029977 'Junts/Voto nulo' 9029997 'Junts/Abstención' 9040905 'CUP/PDeCAT-E-CiU' 9041201 'CUP/BNG'
+9041501 'CUP/UPN' 9041502 'CUP/Geroa Bai' 9041601 'CUP/EAJ-PNV' 9041602 'CUP/EH Bildu' 9048995 'CUP/Otros'
+9048996 'CUP/En blanco' 9049977 'CUP/Voto nulo' 9049997 'CUP/Abstención' 9051201 'PDeCAT-E-CiU/BNG'
+9051501 'PDeCAT-E-CiU/UPN' 9051502 'PDeCAT-E-CiU/Geroa Bai' 9051601 'PDeCAT-E-CiU/EAJ-PNV' 9051602 'PDeCAT-E-CiU/EH Bildu'
+9058995 'PDeCAT-E-CiU/Otros' 9058996 'PDeCAT-E-CiU/En blanco' 9059977 'PDeCAT-E-CiU/Voto nulo'
+9059997 'PDeCAT-E-CiU/Abstención' 12011501 'BNG/UPN' 12011502 'BNG/Geroa Bai' 12011601 'BNG/EAJ-PNV'
+12011602 'BNG/EH Bildu' 12018995 'BNG/Otros' 12018996 'BNG/En blanco' 12019977 'BNG/Voto nulo'
+12019997 'BNG/Abstención' 15011502 'UPN/Geroa Bai' 15011601 'UPN/EAJ-PNV' 15011602 'UPN/EH Bildu'
+15018995 'UPN/Otros' 15018996 'UPN/En blanco' 15019977 'UPN/Voto nulo' 15019997 'UPN/Abstención'
+15021601 'Geroa Bai/EAJ-PNV' 15021602 'Geroa Bai/EH Bildu' 15028995 'Geroa Bai/Otros' 15028996 'Geroa Bai/En blanco'
+15029977 'Geroa Bai/Voto nulo' 15029997 'Geroa Bai/Abstención' 16011602 'EAJ-PNV/EH Bildu' 16018995 'EAJ-PNV/Otros'
+16018996 'EAJ-PNV/En blanco' 16019977 'EAJ-PNV/Voto nulo' 16019997 'EAJ-PNV/Abstención' 16028995 'EH Bildu/Otros'
+16028996 'EH Bildu/En blanco' 16029977 'EH Bildu/Voto nulo' 16029997 'EH Bildu/Abstención' 89959997 'Otros/Abstención'
+99999994 'Otras respuestas' 99999998 'N.S.' 99999999 'N.C.' 0 'N.P.'
+/VOTOCORREOEMITIDO2R
+1 'PSOE' 2 'PP' 3 'VOX' 21 'Sumar' 6 'PACMA' 101 'Adelante Andalucía' 102 'Jaén Merece Más'
+201 'PAR' 202 'Existe' 503 'CCa' 502 'NC-bc' 801 'UPL' 802 'Soria Ya' 803 'Por Ávila' 808 'España Vaciada'
+901 'ERC' 902 'Junts' 904 'CUP' 905 'PDeCAT-E-CiU' 1201 'BNG' 1501 'UPN' 1502 'Geroa Bai' 1601 'EAJ-PNV'
+1602 'EH Bildu' 8995 'Otro partido' 8996 'En blanco' 9977 'Voto nulo' 9999 'N.C.' 0 'N.P.'
+/INTENCIONGR
+1 'PSOE' 2 'PP' 3 'VOX' 21 'Sumar' 6 'PACMA' 101 'Adelante Andalucía' 102 'Jaén Merece Más'
+201 'PAR' 202 'Existe' 503 'CCa' 502 'NC-bc' 801 'UPL' 802 'Soria Ya' 803 'Por Ávila' 808 'España Vaciada'
+901 'ERC' 902 'Junts' 904 'CUP' 905 'PDeCAT-E-CiU' 1201 'BNG' 1501 'UPN' 1502 'Geroa Bai' 1601 'EAJ-PNV'
+1602 'EH Bildu' 8995 'Otro partido' 8996 'En blanco' 9977 'Voto nulo' 9997 'No votaría' 9998 'No sabe todavía'
+9999 'N.C.' 0 'No procede'
+/INTENCIONGRA
+1 'PSOE' 2 'PP' 3 'VOX' 21 'Sumar' 901 'ERC' 902 'Junts' 1601 'EAJ-PNV' 1602 'EH Bildu' 8995 'Otros partidos'
+9977 'Nulo + Blanco' 9997 'No votaría' 9999 'N.S.+ N.C.' -99 'N.P.'
+/INTENCIONGALTER
+1 'PSOE' 2 'PP' 3 'VOX' 6 'PACMA' 21 'Sumar' 101 'Adelante Andalucía' 102 'Jaén Merece Más'
+201 'PAR' 202 'Existe' 502 'Nueva Canarias' 503 'CC' 801 'UPL' 802 'Soria Ya' 803 'Por Ávila'
+808 'España Vaciada' 901 'ERC' 902 'Junts' 904 'CUP' 905 'Espai CiU' 1201 'BNG' 1501 'UPN' 1502 'Geroa Bai'
+1601 'EAJ-PNV' 1602 'EH Bildu' 8995 'Otro partido' 8996 'En blanco' 9977 'Voto nulo' 9993 '(NO LEER) No votaría a ningún otro partido (cita el mismo partido)'
+9997 'No votaría' 9998 'N.S.' 9999 'N.C.' 0 'No procede'
+/INTENCIONGALTERR
+1 'PSOE' 2 'PP' 3 'VOX' 21 'Sumar' 6 'PACMA' 101 'Adelante Andalucía' 102 'Jaén Merece Más'
+201 'PAR' 202 'Existe' 503 'CCa' 502 'NC-bc' 801 'UPL' 802 'Soria Ya' 803 'Por Ávila' 808 'España Vaciada'
+901 'ERC' 902 'Junts' 904 'CUP' 905 'PDeCAT-E-CiU' 1201 'BNG' 1501 'UPN' 1502 'Geroa Bai' 1601 'EAJ-PNV'
+1602 'EH Bildu' 9993 '(NO LEER) No votaría a ningún otro partido (cita el mismo partido)' 8995 'Otro partido'
+8996 'En blanco' 9977 'Voto nulo' 9997 'No votaría' 9998 'N.S.' 9999 'N.C.' 0 'No procede'
+/SIMPATIA
+1 'PSOE' 2 'PP' 3 'VOX' 4 'Unidas Podemos' 5 'Ciudadanos' 6 'PACMA' 7 'Más País' 8 'Podemos'
+9 'IU' 21 'Sumar' 101 'Adelante Andalucía' 102 'Jaén Merece Más' 201 'PAR' 202 'Existe' 203 'CHA'
+301 'FAC' 401 'MÉS (PSM-Entesa)' 502 'Nueva Canarias' 503 'CC' 601 'PRC' 801 'UPL' 802 'Soria Ya'
+803 'Por Ávila' 808 'España Vaciada' 901 'ERC' 902 'Junts' 903 'En Comú Podem' 904 'CUP' 905 'Espai CiU'
+1001 'Compromís' 1201 'BNG' 1202 'En Común-Unidas Podemos' 1301 'Más Madrid' 1501 'UPN' 1502 'Geroa Bai'
+1601 'EAJ-PNV' 1602 'EH Bildu' 8995 'Otro partido' 9997 'Ninguno' 9998 'N.S.' 9999 'N.C.' 0 'No procede'
+/VOTOSIMG
+1 'PSOE' 2 'PP' 3 'VOX' 21 'Sumar' 202 'Existe' 6 'PACMA' 101 'Adelante Andalucía' 102 'Jaén Merece Más'
+201 'PAR' 503 'CCa' 502 'NC-bc' 801 'UPL' 802 'Soria Ya' 803 'Por Ávila' 808 'España Vaciada'
+901 'ERC' 902 'Junts' 904 'CUP' 905 'PDeCAT-E-CiU' 1201 'BNG' 1501 'UPN' 1502 'Geroa Bai' 1601 'EAJ-PNV'
+1602 'EH Bildu' 8995 'Otro partido' 8996 'En blanco' 9977 'Voto nulo' 9997 'No votaría' 9998 'No sabe todavía'
+9999 'N.C.' 0 'No procede'
+/VOTOSIMGCONJUNTO
+1 'PSOE' 2 'PP' 3 'VOX' 21 'Sumar' 202 'Existe' 6 'PACMA' 101 'Adelante Andalucía' 102 'Jaén Merece Más'
+201 'PAR' 503 'CCa' 502 'NC-bc' 801 'UPL' 802 'Soria Ya' 803 'Por Ávila' 808 'España Vaciada'
+901 'ERC' 902 'Junts' 904 'CUP' 905 'PDeCAT-E-CiU' 1201 'BNG' 1501 'UPN' 1502 'Geroa Bai' 1601 'EAJ-PNV'
+1602 'EH Bildu' 8995 'Otro partido' 8996 'En blanco' 9977 'Voto nulo' 9997 'No votaría' 9998 'No sabe todavía'
+9999 'N.C.'
+.
+EXECUTE.
+
+MISSING VALUES
+ DUDACORREO (0) VOTOCORREOEMITIDO1 (0) VOTODUDA1 (0) VOTODUDA2 (0) VOTOCORREOEMITIDO2 (0) VOTOCORREOEMITIDOCONJUNTO (0)
+ FIDELVOTOCORREO (0) INTENCIONG (0) RECUVOTOG (0) NIVELESTENTREV (0) RELALAB (0) CNO11 (0) RECUVOTOGR (0)
+ VOTOCORREOEMITIDO1R (0) VOTODUDA1R (0) VOTODUDA2R (0) P3A2COM (0) VOTOCORREOEMITIDO2R (0) INTENCIONGR (0)
+ INTENCIONGALTER (0) INTENCIONGALTERR (0) SIMPATIA (0) VOTOSIMG (0).
+EXECUTE.
+WEIGHT BY PESO.
+FREQUENCIES VARIABLES ALL.

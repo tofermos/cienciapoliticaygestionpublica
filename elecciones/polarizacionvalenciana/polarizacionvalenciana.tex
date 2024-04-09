@@ -1,0 +1,496 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={LA POLARIZACIÓN EN LES CORTS VALENCIANES},
+  pdfauthor={Tomàs Ferrandis Moscardó},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{LA POLARIZACIÓN EN LES CORTS VALENCIANES}
+\author{Tomàs Ferrandis Moscardó}
+\date{2023-12-10}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\hypertarget{nepe-y-el-nepp-elecciones-autonuxf3micas-2019-comunidad-valenciana}{%
+\section{1 NEPE Y EL NEPP ELECCIONES AUTONÓMICAS 2019 COMUNIDAD
+VALENCIANA**}\label{nepe-y-el-nepp-elecciones-autonuxf3micas-2019-comunidad-valenciana}}
+
+\hypertarget{cuxe1lculos}{%
+\subsection{1.1 CÁLCULOS}\label{cuxe1lculos}}
+
+Obtenemos los datos de Número Efectivo de Partidos Electorales y Número
+Efectivo de Partidos Parlamentarios.
+
+\begin{longtable}[]{@{}lrrrrrr@{}}
+\toprule\noalign{}
+Sigla & Votos & Candidatura & Escaños & \% escaños & TantoX1escaños &
+Tanto1Xotos \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+PSOE & 643.909 & 24,40 & 27 & 27 & 0,24 & 0,27 \\
+PP & 508.534 & 19,27 & 19 & 19 & 0,19 & 0,19 \\
+Cs & 470.676 & 17,84 & 18 & 18 & 0,18 & 0,18 \\
+COMPROMÍS & 443.640 & 16,81 & 17 & 17 & 0,17 & 0,17 \\
+VOX & 281.608 & 10,67 & 10 & 10 & 0,11 & 0,10 \\
+PODEMOS & 215.392 & 8,16 & 8 & 8 & 0,08 & 0,08 \\
+& & & & Suma & 0,18 & 0,19 \\
+& & & & F=1-Σx1² & 0,83 & 0,81 \\
+& & & & & \textbf{NEPP} & \textbf{NEPE} \\
+& & & & & 5,71 & 5,38 \\
+\end{longtable}
+
+\emph{Fuente: Elaboración propia a partir de datos de ARGOS}
+
+\textbf{Sigla:} Siglas con las que concurría el partido o coalición
+electoral.
+
+\textbf{Votos:} Suma de los votos de cada candidatura en las tres
+circunscripciones provinciales.
+
+\textbf{\%Válidos:} Porcentaje de votos válidos de cada candidatura
+redondeado a 2 decimales.
+
+\textbf{Escaños:} Suma de escaños obtenidos por cada candidatura.
+
+\textbf{x1\_votos:} Tanto por uno de votos de cada candidatura,
+redondeado a 3 decimales.
+
+\textbf{x\_1\_escaños:} Tanto por uno respecto al total de escaños
+asignados a la autonomía.
+
+\textbf{x1\_votos2:} x1\_votos elevado al cuadrado y redondeado a 3
+decimales
+
+\textbf{x1\_escaños2:} x1\_escaños elevado al cuadrado y redondeado a 3
+decimales.
+
+\textbf{NEPE:} Número Efectivo de Partidos Electorales.
+
+NEPE=1TantoX1votos2
+
+\textbf{Número efectivo de partidos parlamentarios} \textbf{NEPP:}
+Número Efectivo de Partidos Parlamentarios.
+
+NEPP=1TantoX1escaños2
+
+\hypertarget{la-diferencia-entre-el-nepe-y-el-nepp}{%
+\section{1.2 LA DIFERENCIA ENTRE EL NEPE Y EL
+NEPP}\label{la-diferencia-entre-el-nepe-y-el-nepp}}
+
+La razón por la que el NEPP es mayor que el NEPE es la
+desproporcionalidad que introduce el sistema electoral a la hora de
+transformar los votos en escaños.
+
+Esta desproporcionalidad se debe a dos efectos. Por un parte, la
+asignación de diputados aplicando la \textbf{Ley d'Hondt}. Esta fórmula
+favorece al partido o los partidos mayoritarios en detrimento del resto.
+Por otra parte, tenemos el efecto producido por la división del
+territorio en \textbf{circunscripciones provinciales.} Al crear estos
+distritos, se asignan menos escaños en cada reparto, hecho que dificulta
+(cuando no impide) a los terceros partidos la obtención de
+representantes.
+
+La consecuencia de ambos efectos es una concentración de escaños
+superior a la de votos. \#\#\# \textbf{EFECTO DE LA APLICACIÓN DE LA LEY
+D'HONDT} \#\#\#\# \textbf{\emph{Circunscripción de valencia}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1000}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1500}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1500}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1500}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1500}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1500}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+;;
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{PSOE}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{PP}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{VOX}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{UP}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{COMPROMÍS}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{Cs}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+40 & 10 & 7 & 4 & 3 & 9 & 7 \\
+1 & \textbf{326.663} & \textbf{259.934} & \textbf{146.908} &
+\textbf{107.397} & \textbf{299.404} & \textbf{250.267} \\
+2 & \textbf{163.332} & \textbf{129.967} & \textbf{73.454} &
+\textbf{53.699} & \textbf{149.702} & \textbf{125.134} \\
+3 & \textbf{108.888} & \textbf{86.645} & \textbf{48.969} &
+\textbf{35.799} & \textbf{99.801} & \textbf{83.422} \\
+4 & \textbf{81.666} & \textbf{64.984} & \textbf{36.727} & 26.849 &
+\textbf{74.851} & \textbf{62.567} \\
+5 & \textbf{65.333} & \textbf{51.987} & 29.382 & 21.479 &
+\textbf{59.881} & \textbf{50.053} \\
+6 & \textbf{54.444} & \textbf{43.322} & 24.485 & 17.900 &
+\textbf{49.901} & \textbf{41.711} \\
+7 & \textbf{46.666} & \textbf{37.133} & 20.987 & 15.342 &
+\textbf{42.772} & \textbf{35.752} \\
+8 & \textbf{40.833} & 32.492 & 18.364 & 13.425 & \textbf{37.426} &
+31.283 \\
+9 & \textbf{36.296} & 28.882 & 16.323 & 11.933 & \textbf{33.267} &
+27.807 \\
+10 & \textbf{32.666} & 25.993 & 14.691 & 10.740 & 29.940 & 25.027 \\
+11 & 29.697 & 23.630 & 13.355 & 9.763 & 27.219 & 22.752 \\
+\end{longtable}
+
+\emph{Fuente: Elaboración propia a partir de datos de ARGOS}
+
+Vemos como el porcentaje de escaños supera al de votos sólo en los dos
+partidos más votados. Siendo el efecto, en el resto de partidos, el
+contrario.
+
+\begin{longtable}[]{@{}lcccc@{}}
+\toprule\noalign{}
+\textbf{Candidaturas} & \textbf{Votos} & \textbf{\% Votos} &
+\textbf{Escaños} & \textbf{\% escaños} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+P.S.O.E. & 326.663 & 22,8 & 10 & 25 \\
+COMPROMíS & 299.404 & 20,9 & 9 & 22,5 \\
+PP & 259.934 & 18,15 & 7 & 17,5 \\
+Cs & 250.267 & 17,47 & 7 & 17,5 \\
+VOX & 146.908 & 10,26 & 4 & 10 \\
+UNIDES PODEM-EUPV & 107.397 & 7,5 & 3 & 7,5 \\
+\end{longtable}
+
+\emph{Fuente: Elaboración propia a partir de datos de ARGOS}
+
+\hypertarget{section}{%
+\paragraph{}\label{section}}
+
+\hypertarget{circunscripciuxf3n-de-alicante}{%
+\paragraph{\texorpdfstring{\textbf{\emph{Circunscripción de
+Alicante}}}{Circunscripción de Alicante}}\label{circunscripciuxf3n-de-alicante}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1000}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1500}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1500}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1500}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1500}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1500}}
+  >{\centering\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{35}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{PSOE}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{PP}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{VOX}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{UP}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{Cs}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{COMPROMÍS}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+& 10 & 7 & 4 & 3 & 7 & 4 \\
+1 & \textbf{231.662} & \textbf{181.867} & \textbf{102.239} &
+\textbf{83.855} & \textbf{173.468} & \textbf{99.488} \\
+2 & \textbf{115.831} & \textbf{90.934} & \textbf{51.120} &
+\textbf{41.928} & \textbf{86.734} & \textbf{49.744} \\
+3 & \textbf{77.221} & \textbf{60.622} & \textbf{34.080} &
+\textbf{27.952} & \textbf{57.823} & \textbf{33.163} \\
+4 & \textbf{57.916} & \textbf{45.467} & \textbf{25.560} & 20.964 &
+\textbf{43.367} & \textbf{24.872} \\
+5 & \textbf{46.332} & \textbf{36.373} & 20.448 & 16.771 &
+\textbf{34.694} & 19.898 \\
+6 & \textbf{38.610} & \textbf{30.311} & 17.040 & 13.976 &
+\textbf{28.911} & 16.581 \\
+7 & \textbf{33.095} & \textbf{25.981} & 14.606 & 11.979 &
+\textbf{24.781} & 14.213 \\
+8 & \textbf{28.958} & 22.733 & 12.780 & 10.482 & 21.684 & 12.436 \\
+9 & \textbf{25.740} & 20.207 & 11.360 & 9.317 & 19.274 & 11.054 \\
+10 & \textbf{23.166} & 18.187 & 10.224 & 8.386 & 17.347 & 9.949 \\
+11 & 21.060 & 16.533 & 9.294 & 7.623 & 15.770 & 9.044 \\
+\end{longtable}
+
+\emph{Fuente: Elaboración propia a partir de datos de ARGOS}
+
+Vemos cómo claramente el primer partido obtiene un porcentaje de escaños
+superior al de votos. El segundo y tercer partido prácticamente se
+quedan igual pero el resto quedan perjudicados en el reparto.
+
+\begin{longtable}[]{@{}lcccc@{}}
+\toprule\noalign{}
+\textbf{Candidaturas} & \textbf{Votos} & \textbf{\% votos} &
+\textbf{Escaños} & \textbf{\% Escaños} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+PSOE & 231.662 & 25,78 & 10 & 28,57 \\
+PP & 181.867 & 20,24 & 7 & 20,00 \\
+Cs & 173.468 & 19,3 & 7 & 20,00 \\
+VOX & 102.239 & 11,38 & 4 & 11,43 \\
+COMPROMíS & 99.488 & 11,07 & 4 & 11,43 \\
+UNIDES PODEM-EUPV & 83.855 & 9,33 & 3 & 8,57 \\
+\end{longtable}
+
+\emph{Fuente: Elaboración propia a partir de ARGOS}
+
+\hypertarget{circunscripciuxf3n-por-castelluxf3n}{%
+\paragraph{\texorpdfstring{\textbf{\emph{Circunscripción por
+Castellón}}}{Circunscripción por Castellón}}\label{circunscripciuxf3n-por-castelluxf3n}}
+
+\begin{longtable}[]{@{}lcccccc@{}}
+\toprule\noalign{}
+& \textbf{PSOE} & \textbf{PP} & \textbf{VOX} & \textbf{UP} & \textbf{Cs}
+& \textbf{Compromís} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+24 & 7 & 5 & 2 & 2 & 4 & 4 \\
+1 & \textbf{85.584} & \textbf{66.733} & \textbf{32.461} &
+\textbf{24.140} & \textbf{46.941} & \textbf{44.748} \\
+2 & \textbf{42.792} & \textbf{33.367} & \textbf{16.231} &
+\textbf{12.070} & \textbf{23.471} & \textbf{22.374} \\
+3 & \textbf{28.528} & \textbf{22.244} & 10.820 & 8.047 & \textbf{15.647}
+& \textbf{14.916} \\
+4 & \textbf{21.396} & \textbf{16.683} & 8.115 & 6.035 & 11.735 &
+11.187 \\
+5 & \textbf{17.117} & \textbf{13.347} & 6.492 & 4.828 & 9.388 & 8.950 \\
+6 & \textbf{14.264} & 11.122 & 5.410 & 4.023 & 7.824 & 7.458 \\
+7 & \textbf{12.226} & 9.533 & 4.637 & 3.449 & 6.706 & 6.393 \\
+8 & 10.698 & 8.342 & 4.058 & 3.018 & 5.868 & 5.594 \\
+\end{longtable}
+
+\emph{Fuente: Elaboración propia a partir de datos de ARGOS}
+
+Aunque con diferencias en los partidos segundo, tercero y cuarto menos
+significativas, sigue produciéndose una asignación más favorable al
+partido mayor y la asignación más desfavorable a los partidos mas
+pequeños.
+
+\begin{longtable}[]{@{}lcccc@{}}
+\toprule\noalign{}
+\textbf{Candidaturas} & \textbf{Votos} & \textbf{\% votos} &
+\textbf{Escaños} & \textbf{\% Escaños} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+P.S.O.E & 85.584 & 27,84 & 7 & 29,17 \\
+PP & 66.733 & 21,71 & 5 & 20,83 \\
+Cs & 46.941 & 15,27 & 4 & 16,67 \\
+COMPROMíS & 44.748 & 14,56 & 4 & 16,67 \\
+VOX & 32.461 & 10,56 & 2 & 8,33 \\
+UNIDES PODEM-EUPV & 24.140 & 7,85 & 2 & 8,33 \\
+\end{longtable}
+
+\emph{Fuente: Elaboración propia a partir de datos de ARGOS} \#\# \#\#
+\textbf{EFECTO DE LAS CIRCUNSCRIPCIONES PROVINCIALES}
+
+El hecho de que cada escaño no ``cueste'' en todas las circunscripciones
+electorales supone una ventaja enorme para los partidos mayoritarios
+especialmente en circunscripciones menores. Esto se ve claramente en la
+circunscripción de Castellón. Aunque la tendencia a la fragmentación
+producida en estas últimas elecciones ha reducido este efecto mucho
+respecto a convocatorias anteriores.
+
+\begin{longtable}[]{@{}lccc@{}}
+\toprule\noalign{}
+& \textbf{Votos} & \textbf{Escaños} & \textbf{Votos por escaños} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Valencia & 1.432.434 & 40 & 35.810 \\
+Alicante & 898.706 &  35 &  25.677 \\
+ Castellón &  307.396 &  24 &  12.808 \\
+\end{longtable}
+
+\emph{Fuente: Elaboración propia a partir de datos de ARGOS}
+
+\hypertarget{section-1}{%
+\subsection{**}\label{section-1}}
+
+\hypertarget{conclusiuxf3n}{%
+\subsection{\texorpdfstring{\textbf{CONCLUSIÓN}}{CONCLUSIÓN}}\label{conclusiuxf3n}}
+
+De los datos anteriores se puede entender que el ``coste'' de un
+Diputado no sea el mismo para cada partido y que, en lineas generales
+cuando mayor sea el partido, más fácil sea obtener un diputado más.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1818}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2727}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2727}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2727}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+ 
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+ \textbf{Votos totales}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+ \textbf{Diputados}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+ \textbf{Votos/Escaño}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+ PSOE &  643.909 &  27 &  23.848 \\
+ PP &  508.534 &  19 &  26.765 \\
+ Cs &  470.676 &  18 &  26.149 \\
+ COMPROMÍS &  443.640 &  17 &  26.096 \\
+ VOX &  281.608 &  10 &  28.161 \\
+ PODEMOS &  215.392 &  8 &  26.924 \\
+\end{longtable}
+
+\emph{Fuente: Elaboración propia a partir de datos de ARGOS}
+
+\hypertarget{relaciuxf3n-entre-polarizaciuxf3n-y-formato-del-sistema-de-partidos}{%
+\section{\texorpdfstring{\textbf{2 RELACIÓN ENTRE POLARIZACIÓN Y FORMATO
+DEL SISTEMA DE
+PARTIDOS}}{2 RELACIÓN ENTRE POLARIZACIÓN Y FORMATO DEL SISTEMA DE PARTIDOS}}\label{relaciuxf3n-entre-polarizaciuxf3n-y-formato-del-sistema-de-partidos}}
+
+En principio la distribución de fuerzas y su peso electoral y
+parlamentario nos sitúa en un escenario claro de multipartidismo.
+Respecto a la polarización del sistema podemos señalar aspectos como la
+competencia fuerte por el electorado ideologizado de izquierda entre
+Compromís y Podemos y la actitud antisistema de VOX (oposición frontal
+al autogobierno, al bilingüismo, a la recuperación del derecho civil o
+la reforma de la financiación autonómica\ldots). Ambas conductas nos
+definen tendencias centrífugas propias de un multipartidismo polarizado.
+
+Aunque, por otra parte, también tendríamos la tendencia centrípeta
+propia de un partido \emph{catch-all} como el PSOE y, últimamente,
+también recuperada en el PP valenciano que, de hecho, evita hablar de
+coalición con la derecha radical así como coincidir en el discurso.
+
+La polarización en si, adquiere una mayor importancia debido a dos
+factores. La identidad del País Valenciano como tal y los resultados
+electorales similares de las segundas y terceras fuerzas parlamentarias.
+Hablamos de un pueblo histórico con una cultura y lengua que no se
+ajusta al viejo ideal de Estado-nación uniforme que defiende VOX.
+Además, existe una izquierda de marcado acento valencianista. Esto
+añadiría una nueva dimensión a la polarización al tener que considerarla
+no solo respecto al clivaje típico de izquierda-derecha, sino también
+centro-periferia o identitario Además como hemos avanzado, si
+consideramos la escasa diferencia de votos y escaños en términos (sobre
+todo) de los partidos más polarizados ( VOX, Compromís, Podemos),
+incluso un cálculo de la ``polarización ponderada'' nos daría un
+resultado elevado tanto electoral como parlamentaria.
+
+No obstante, debemos tener en cuenta que el actual gobierno de coalición
+ya es el segundo (Botànic 2) y en estos momentos todos sus componentes
+(PSOE Compromís y Podemos) piden el voto para reeditar un Tercer Botànic
+frente a la posibilidad, ya real, de gobierno PP-VOX. Incluso el
+enfrentamiento entre Compromís y Podemos ha disminuido ante el temor
+compartido de que el partido morado no sume suficiente para reeditar el
+pacto. Por lo tanto, se empieza a asumir por parte de la izquierda, de
+VOX y de Ciudadanos la idea de alternancia de coaliciones.
+
+En conclusión, podemos decir que observando la polarización, entre otras
+cuestiones como la fragmentación, concentración etc, el sistema de
+partidos valenciano que evolucionó del bipartidismo al multipartidismo
+polarizado actual, parece que tienda hacia algo similar a lo que
+Caramandi definió como bipolar; una reedición de la coalición de
+izquierdas y la posible alternancia con una nueva coalición de derechas
+pero no se trataría, de momento, de coaliciones preelectorales aunque no
+hay que descartar una futura ``confluencia'' entre Compromís y Podemos.
+
+1
+
+\end{document}
