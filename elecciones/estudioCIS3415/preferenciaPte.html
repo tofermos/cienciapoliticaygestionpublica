@@ -2764,6 +2764,13 @@ Práctica 1. Apartado 3</div></h3>
 
 
 <div style="page-break-after: always;"></div>
+<pre class="r"><code># Instalar, si no están instalados ya, paquetes con funciones...
+if(!require(haven)){install.packages(&quot;haven&quot;)} # ...para abrir el fichero .sav</code></pre>
+<pre><code>## Loading required package: haven</code></pre>
+<pre class="r"><code>if(!require(knitr)){install.packages(&quot;knitr&quot;)} # ...de propósito general ( ej: table)</code></pre>
+<pre><code>## Loading required package: knitr</code></pre>
+<pre class="r"><code>if (!require(xlsx)){install.packages(&quot;xlsx&quot;)} # para guardar y leer ficheros externos .xlsx</code></pre>
+<pre><code>## Loading required package: xlsx</code></pre>
 <div id="introducción" class="section level1">
 <h1>1. INTRODUCCIÓN</h1>
 <p>En esta primera parte de la actividad se hará un <em>analisis
@@ -2795,7 +2802,6 @@ de la web del CIS.</p>
 el fichero <em>.csv</em> y otra donde se inddicará el nombre en si del
 fichero. <em>Variables</em></p>
 <pre class="r"><code># El fichero .sav lo tenemos en una subcarpeta DATOS
-library(knitr)
 nombreFichero&lt;-&quot;datosjulio2023.sav&quot;
 directorioTrabajo&lt;-getwd()
 rutaFichero&lt;-paste(directorioTrabajo,&quot;DATOS&quot;,nombreFichero,sep=&quot;/&quot;)</code></pre>
@@ -2805,7 +2811,7 @@ rutaFichero&lt;-paste(directorioTrabajo,&quot;DATOS&quot;,nombreFichero,sep=&quo
 <p>A partir del fichero de tipo <em>sav</em> se creará el <em>data
 frame</em> de R. En será la base de datos incial donde tendremos todos
 los datos del barómetro en concreto del Estudio 3415.</p>
-<pre class="r"><code>df_cisjulio&lt;-haven::read_sav(rutaFichero)      </code></pre>
+<pre class="r"><code>df_cisjulio&lt;-read_sav(rutaFichero)      </code></pre>
 <pre><code>## Invalid date string (length=9): 25 038 23</code></pre>
 </div>
 <div id="consultar-el-cuestionario-y-el-diccionario-de-datos" class="section level2">
@@ -3220,12 +3226,7 @@ write.csv(grafico, file = &quot;tablafrec.csv&quot;, row.names = TRUE) </code></
 <h2>7.2 Hoja de cálculo MS-Excel (xlsx)</h2>
 <p>Mediante esta opción se puede crear una página nueva en un fichero
 existente de MS Excel.</p>
-<pre class="r"><code>if (!require(xlsx)){install.packages(&quot;xlsx&quot;)}</code></pre>
-<pre><code>## Loading required package: xlsx</code></pre>
-<pre class="r"><code>#install.packages(&quot;xlsx&quot;)
-#require(xlsx)
-
-write.xlsx(grafico, file = &quot;resultados.xlsx&quot;,               # file= nombre del fichero
+<pre class="r"><code>write.xlsx(grafico, file = &quot;resultados.xlsx&quot;,               # file= nombre del fichero
            sheetName = &quot;prefpte&quot;, append = FALSE)           # file= nombre de la página</code></pre>
 </div>
 </div>

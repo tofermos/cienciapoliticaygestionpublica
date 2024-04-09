@@ -36,7 +36,8 @@ Podemos ver que, pese a ser un variable cualitativa ordinal, esta será manipula
 ```{r paquetes, echo=TRUE}
 # Para las librerías necesarias, se deben instalar los paquetes si no están ya instalados. 
 # Ocultamos los mensajes.
-suppressMessages({if (!require(epiDisplay)){install.packages("epiDisplay")}
+suppressMessages({
+if (!require(epiDisplay)){install.packages("epiDisplay")}
 if (!require(e1071)){install.packages("e1071")}
 if (!require(stats)){install.packages("stats")}
 if (!require(tibble)){install.packages("tibble")}

@@ -8,19 +8,27 @@ subtitle: |
 author: "Tomàs Ferrandis Moscardó"
 date: "2023-03-18"
 output:
-  pdf_document:
-    toc: true
-    keep_tex: true
-    latex_engine: xelatex
   html_document:
     toc: true
     toc_float: true
     toc_depth: 4
     df_print: paged
     number_sections: false
+  pdf_document:
+    toc: true
+    keep_tex: true
+    latex_engine: xelatex
 ---
 
 \newpage
+
+```{r paquetes, echo=TRUE}
+# Instalar, si no están instalados ya, paquetes con funciones...
+if(!require(haven)){install.packages("haven")} # ...para abrir el fichero .sav
+if(!require(knitr)){install.packages("knitr")} # ...de propósito general ( ej: table)
+if (!require(xlsx)){install.packages("xlsx")} # para guardar y leer ficheros externos .xlsx
+```
+
 
 # 1. INTRODUCCIÓN
 
@@ -40,7 +48,6 @@ Se usará una variable con la ruta absoluta del directorio donde esté el ficher
 
 ```{r rutas, echo=TRUE}
 # El fichero .sav lo tenemos en una subcarpeta DATOS
-library(knitr)
 nombreFichero<-"datosjulio2023.sav"
 directorioTrabajo<-getwd()
 rutaFichero<-paste(directorioTrabajo,"DATOS",nombreFichero,sep="/")
@@ -50,7 +57,8 @@ rutaFichero<-paste(directorioTrabajo,"DATOS",nombreFichero,sep="/")
 A partir del fichero de tipo *sav* se creará el *data frame* de R. En será la base de datos incial donde tendremos todos los datos del barómetro en concreto del Estudio 3415.
 
 ```{r, lecturaDatos, echo=TRUE, message=FALSE}
-df_cisjulio<-haven::read_sav(rutaFichero)      
+
+df_cisjulio<-read_sav(rutaFichero)      
 ```
 
 ## 2.3 Consultar el cuestionario y el diccionario de datos
@@ -327,9 +335,6 @@ write.csv(grafico, file = "tablafrec.csv", row.names = TRUE)
 Mediante esta opción se puede crear una página nueva en un fichero existente de MS Excel.
 
 ```{r guardarTablaXLSX, echo=TRUE}
-if (!require(xlsx)){install.packages("xlsx")}
-#install.packages("xlsx")
-#require(xlsx)
 
 write.xlsx(grafico, file = "resultados.xlsx",               # file= nombre del fichero
            sheetName = "prefpte", append = FALSE)           # file= nombre de la página
