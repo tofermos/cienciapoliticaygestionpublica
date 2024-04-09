@@ -5,8 +5,8 @@ output:
 ---
 # Ciencia politica y gestión pública
 |||
-|:----|--:|
-|![](recursos/llibres.jpeg){width=80%}| <br>Tomàs Ferrandis Moscardó<br>tomasferrandis@gmail.com <br> ![](recursos/CC_BY-NC-ND.png){width=30%}| |
+|:---------|--:|
+|![](recursos/llibres.jpeg){width=100%}|Tomàs Ferrandis Moscardó<br>tomasferrandis@gmail.com <br> ![](recursos/CC_BY-NC-ND.png){width=30%}| |
 
 El contenido de este repositorio está relacionado con el _Grado Universitario de Ciencia Política y Gestión Pública_ de la [_Universidad de Burgos (online)_](https://www.ubu.es/).
 
@@ -17,9 +17,9 @@ El procesamiento de datos se hrealiza mediante el [lenguaje de programación R](
 ## Elecciones y encuestas
 |||
 ------------------------- | -- | --
-1. [Investigación. El voto valencianista en las Elecciones Autonómicas del 2023](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023_page.html)|[![](recursos/iconopdf.png)](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023_page.pdf)|[![](recursos/iconomd.png)](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023_page.md)
-2. [Ejemplo comentado de *R Markdown*. Resultados en elecciones autonómicas en la comarca de La Safor (Valencia)](elecciones/lasafor/SAFOR.html)|[![](recursos/iconopdf.png)](elecciones/lasafor/SAFOR.pdf)|[![](recursos/iconomd.png)](elecciones/lasafor/SAFOR.pdf)
-3. [El sistema de partidos políticos alemán tras las elecciones de 2021](elecciones/alemanas2021/alemanas2021.html)|[![](recursos/iconopdf.png)](elecciones/alemanas2021/alemanas2021.md)|[![](recursos/iconomd.png)](elecciones/alemanas2021/alemanas2021.pdf)
+1. [Ejemplo comentado de *R Markdown*. Resultados en elecciones autonómicas en la comarca de La Safor (Valencia)](elecciones/lasafor/SAFOR.html)|[![](recursos/iconopdf.png)](elecciones/lasafor/SAFOR.pdf)|[![](recursos/iconomd.png)](elecciones/lasafor/SAFOR.Rmd)
+2. [Investigación sobre el voto valencianista en las Elecciones Autonómicas del 2023](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023_page.html)|[![](recursos/iconopdf.png)](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023_page.pdf)|[![](recursos/iconomd.png)](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023_page.md)
+3. [El sistema de partidos políticos alemán tras las elecciones de 2021](elecciones/alemanas2021/alemanas2021.html)|[![](recursos/iconopdf.png)](elecciones/alemanas2021/alemanas2021.pdf)|[![](recursos/iconomd.png)](elecciones/alemanas2021/alemanas2021.md)
 4. [La polarización a les Corts Valencianes](elecciones/polarizacionvalenciana/polarizacionvalenciana.html)|[![](recursos/iconopdf.png)](elecciones/polarizacionvalenciana/polarizacionvalenciana.pdf)|[![](recursos/iconomd.png)](elecciones/polarizacionvalenciana/polarizacionvalenciana.md)
 5. [Análisis univariable sobre preferencia de presidente/a de Gobierno según barómetro de julio de 2023 (Estudio 3415)](elecciones/estudioCIS3415/preferenciaPte.html)|[![](recursos/iconopdf.png)](elecciones/estudioCIS3415/preferenciaPte.pdf)|[![](recursos/iconomd.png)](elecciones/estudioCIS3415/preferenciaPte.Rmd)
 6. [Análisis univariable sobre probabilidad de voto según barómetro de julio de 2023 (Estudio 3415)](elecciones/estudioCIS3415/probabilidadVoto.html)|[![](recursos/iconopdf.png)](elecciones/estudioCIS3415/probabilidadVoto.pdf)|[![](recursos/iconomd.png)](elecciones/estudioCIS3415/probabilidadVoto.Rmd)

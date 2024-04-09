@@ -171,6 +171,8 @@ corresponderían a esta versión final y están maquetadas en Markdown.
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(e1071))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"e1071"}\NormalTok{)\}}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(stats))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"stats"}\NormalTok{)\}}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(tibble))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tibble"}\NormalTok{)\}}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(knitr))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"knitr"}\NormalTok{)\}}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(haven))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"haven"}\NormalTok{)\}}
 \NormalTok{\})}
 \end{Highlighting}
 \end{Shaded}
@@ -185,7 +187,6 @@ Abierto}\label{fichero-y-datos-en-abierto}}
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# El fichero .sav lo tenemos en una subcarpeta DATOS}
-\FunctionTok{library}\NormalTok{(knitr)}
 \NormalTok{nombreFichero}\OtherTok{\textless{}{-}}\StringTok{"datosjulio2023.sav"}
 \NormalTok{directorioTrabajo}\OtherTok{\textless{}{-}}\FunctionTok{getwd}\NormalTok{()}
 \NormalTok{rutaFichero}\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(directorioTrabajo,}\StringTok{"DATOS"}\NormalTok{,nombreFichero,}\AttributeTok{sep=}\StringTok{"/"}\NormalTok{)}
@@ -202,7 +203,7 @@ del barómetro en concreto del Estudio 3415.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_cisjulio}\OtherTok{\textless{}{-}}\NormalTok{haven}\SpecialCharTok{::}\FunctionTok{read\_sav}\NormalTok{(rutaFichero)}
+\NormalTok{df\_cisjulio}\OtherTok{\textless{}{-}}\FunctionTok{read\_sav}\NormalTok{(rutaFichero)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -214,7 +215,7 @@ del barómetro en concreto del Estudio 3415.
 \subsection{2.3 Consultar el cuestionario y el diccionario de
 datos}\label{consultar-el-cuestionario-y-el-diccionario-de-datos}}
 
-Al margen de consultar al cuestionario del CIS, mediante R se puede
+Al margen de consultar el cuestionario del CIS, mediante R se puede
 observar la variable para intentar deducir de qué tipo se trata.
 
 Algunas consultas posibles podrían ser:
@@ -232,13 +233,13 @@ Algunas consultas posibles podrían ser:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{head}\NormalTok{(df\_cisjulio}\SpecialCharTok{$}\NormalTok{PROBVOTO,}\DecValTok{5}\NormalTok{) }\CommentTok{\# vemos solo 5 casos y los valores y etiquetas}
+\FunctionTok{tail}\NormalTok{(df\_cisjulio}\SpecialCharTok{$}\NormalTok{PROBVOTO,}\DecValTok{5}\NormalTok{) }\CommentTok{\# vemos solo 5 casos y los valores y etiquetas}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## <labelled<double>[5]>: Escala de probabilidad de ir a votar (0-10) en las elecciones generales de 2023
-## [1] 10 10 10  6 10
+## [1] 10 10 10 10  5
 ## 
 ## Labels:
 ##  value                                label
@@ -260,8 +261,7 @@ Algunas consultas posibles podrían ser:
 \begin{Shaded}
 \begin{Highlighting}[]
                              \CommentTok{\# de la variable puesto que es factor}
-
-\FunctionTok{table}\NormalTok{(df\_cisjulio}\SpecialCharTok{$}\NormalTok{PROBVOTO) }
+\FunctionTok{table}\NormalTok{(df\_cisjulio}\SpecialCharTok{$}\NormalTok{PROBVOTO) }\CommentTok{\# Nos da el total de casos que tiene cada valor}
 \end{Highlighting}
 \end{Shaded}
 
@@ -273,7 +273,7 @@ Algunas consultas posibles podrían ser:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{unique}\NormalTok{(df\_cisjulio}\SpecialCharTok{$}\NormalTok{PROBVOTO)}
+\FunctionTok{unique}\NormalTok{(df\_cisjulio}\SpecialCharTok{$}\NormalTok{PROBVOTO) }\CommentTok{\# Obtiene los valores sin duplicados}
 \end{Highlighting}
 \end{Shaded}
 
@@ -309,7 +309,7 @@ simplificar esta base de datos inicial.
 \subsection{3.1 Limpieza de la base de
 datos.}\label{limpieza-de-la-base-de-datos.}}
 
-El data frame inicial contiene \texttt{ncol(df\_cisjulio)} columnas
+El data frame inicial contiene \texttt{r}ncol(df\_cisjulio)` columnas
 correspondientes a todas las preguntas de la encuesta. Se puede
 prescindir del resto de columnas del data frame innecesarias para
 nuestro análisis univariado.
@@ -317,25 +317,24 @@ nuestro análisis univariado.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df\_cisProbVoto}\OtherTok{\textless{}{-}}\NormalTok{df\_cisjulio [, }\StringTok{"PROBVOTO"}\NormalTok{]}
-\CommentTok{\#ncol(df\_cisjulio) \# devuelve el número de columnas del data frame. Lo usamos en nuestro}
-\CommentTok{\#Markdown}
+\CommentTok{\#ncol(df\_cisjulio) \# devuelve el número de columnas del data frame. Usado en Rmd}
 \end{Highlighting}
 \end{Shaded}
 
-Hemos pasado de \texttt{ncol(df\_cisjulio)} a 1 sola columna.
+Hemos pasado de \texttt{r}ncol(df\_cisjulio)` a 1 sola columna.
 
 \hypertarget{recodificciuxf3n}{%
 \subsection{3.2 Recodificción}\label{recodificciuxf3n}}
 
-En estecaso hay pocos valores válidos (11) como es habitual en una
-variable cualitativa, no se va a grupar valores pero si se debe decidir
-qué valores no sol válidos en la estadística y excluirlos.
+En este caso hay pocos valores válidos (11) como es habitual en una
+variable cualitativa, no se va a agrupar valores pero si se debe decidir
+qué valores no son válidos en la estadística y excluirlos.
 
 \hypertarget{duplicamos-la-columna}{%
 \subsubsection{Duplicamos la columna}\label{duplicamos-la-columna}}
 
 Antes de modificar cualquier campo, se debe hacer un dupicado de este
-(columna del data frame) y trabajar sobre él.
+(nueva columna en el data frame) y trabajar sobre él.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -460,7 +459,7 @@ Total & 8798 & 100.0 & 100.0 & 100.0 & 100.0 \\
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print(tabla)  \# En r estrictamente}
+\CommentTok{\# print(tabla)  \# En R estrictamente}
 
 \CommentTok{\# Para calcular las frecuencias directamente:}
 \CommentTok{\# round(prop.table(table(df\_cisProbVoto$recPROBVOTO, useNA="no"))*100,1)}
@@ -611,14 +610,15 @@ donde la Media y a Moda coinciden y la Media es el valor más bajo
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{probabilidadVoto_files/figure-latex/historiograma-1.pdf}
+\includegraphics{probabilidadVoto_files/figure-latex/histograma-1.pdf}
 \#\#\# Conclusión sobre las medidas de posición central
 
-Debido al sesgo ( a la derecha ) la mediana tener un valor mayor que la
-Moda y menor que la media. La Mediada debería ser una medida de posición
-central mejor que la media que quedaría que la Media distorsionada por
-los extremos o la Moda definida por la repetición de un valor. En
-nuestro caso, en cambio, la Mediana coincide con la Moda.
+Viendo el sesgo (a la derecha) se entiende que la Mediana tenga un valor
+mayor que la Moda y menor que la Media. La Mediada debería ser una
+medida de posición central mejor que la Media ya que esta quedaría
+distorsionada por los extremos. La Moda viene definida por la repetición
+de un valor. En nuestro caso, en cambio, la Mediana coincide con la
+Moda.
 
 \hypertarget{medidas-de-posiciuxf3n-no-central}{%
 \subsection{5.3 Medidas de posición no
@@ -656,7 +656,7 @@ elegido estos valores, simplemente.
 \subsubsection{Cuartiles y percentiles}\label{cuartiles-y-percentiles}}
 
 En una distribución de valores de una muestra tan sesgada, un cuartil no
-da demasiada información. La inmensa mayoría de valores son 10 y ek
+da demasiada información. La inmensa mayoría de valores son 10 y el
 resto son tratados como valores atípicos ( 1,5 veces la caja).
 
 \begin{Shaded}
@@ -773,8 +773,6 @@ Asimetría}\label{coeficiente-de-asimetruxeda}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#skewness(df\_cisProbVoto$recPROBVOTO)}
-
 \NormalTok{coeficienteAsimetria}\OtherTok{\textless{}{-}}\FunctionTok{skewness}\NormalTok{(df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}

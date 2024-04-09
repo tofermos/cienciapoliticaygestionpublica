@@ -8,16 +8,16 @@ subtitle: |
 author: "Tomàs Ferrandis Moscardó"
 date: "2023-03-22"
 output:
+  pdf_document:
+    toc: true
+    keep_tex: true
+    latex_engine: xelatex
   html_document:
     toc: true
     toc_float: true
     toc_depth: 4
     df_print: paged
     number_sections: false
-  pdf_document:
-    toc: true
-    keep_tex: true
-    latex_engine: xelatex
 ---
 
   \newpage
@@ -40,6 +40,8 @@ suppressMessages({if (!require(epiDisplay)){install.packages("epiDisplay")}
 if (!require(e1071)){install.packages("e1071")}
 if (!require(stats)){install.packages("stats")}
 if (!require(tibble)){install.packages("tibble")}
+if (!require(knitr)){install.packages("knitr")}
+if (!require(haven)){install.packages("haven")}
 })
 ```
 
@@ -48,9 +50,8 @@ if (!require(tibble)){install.packages("tibble")}
 
 ## 2.1 Fichero y Datos en Abierto
 
-```{r 1, echo=TRUE}
+```{r fichero, echo=TRUE}
 # El fichero .sav lo tenemos en una subcarpeta DATOS
-library(knitr)
 nombreFichero<-"datosjulio2023.sav"
 directorioTrabajo<-getwd()
 rutaFichero<-paste(directorioTrabajo,"DATOS",nombreFichero,sep="/")
@@ -59,13 +60,12 @@ rutaFichero<-paste(directorioTrabajo,"DATOS",nombreFichero,sep="/")
 
 A partir del fichero de tipo *sav* se creará el *data frame* de R. En será la base de datos incial donde tendremos todos los datos del barómetro en concreto del Estudio 3415.
 
-```{r 1b, echo=TRUE}
-df_cisjulio<-haven::read_sav(rutaFichero)
-
+```{r dataframe, echo=TRUE}
+df_cisjulio<-read_sav(rutaFichero)
 ```
 ## 2.3 Consultar el cuestionario y el diccionario de datos
 
-Al margen de consultar al cuestionario del CIS, mediante R se puede observar la variable para intentar deducir de qué tipo se trata.
+Al margen de consultar el cuestionario del CIS, mediante R se puede observar la variable para intentar deducir de qué tipo se trata.
 
 Algunas consultas posibles podrían ser:
 
@@ -73,13 +73,12 @@ Algunas consultas posibles podrían ser:
 * Usar *table* que devuelve el número de casos de cada valor.
 * Agrupar todos los valores con *unique*
 
-```{r 2, include=TRUE}
+```{r prueba, include=TRUE}
 
-head(df_cisjulio$PROBVOTO,5) # vemos solo 5 casos y los valores y etiquetas
+tail(df_cisjulio$PROBVOTO,5) # vemos solo 5 casos y los valores y etiquetas
                              # de la variable puesto que es factor
-
-table(df_cisjulio$PROBVOTO) 
-unique(df_cisjulio$PROBVOTO)
+table(df_cisjulio$PROBVOTO) # Nos da el total de casos que tiene cada valor
+unique(df_cisjulio$PROBVOTO) # Obtiene los valores sin duplicados
 ```
 
 # 3 PREPARACIÓN DE LA MATRIZ DE DATOS
@@ -88,22 +87,21 @@ Una vez obtenida la matriz inicial de datos, se deberá limpiar y simplificar es
 
 ## 3.1 Limpieza de la base de datos.
 
-El data frame inicial contiene `ncol(df_cisjulio)` columnas correspondientes a todas las preguntas de la encuesta. Se puede prescindir del resto de columnas del data frame innecesarias para nuestro análisis univariado.
+El data frame inicial contiene `r `ncol(df_cisjulio)` columnas correspondientes a todas las preguntas de la encuesta. Se puede prescindir del resto de columnas del data frame innecesarias para nuestro análisis univariado.
 
-```{r 3, echo=TRUE}
+```{r unasolacolumna, echo=TRUE}
 df_cisProbVoto<-df_cisjulio [, "PROBVOTO"]
-#ncol(df_cisjulio) # devuelve el número de columnas del data frame. Lo usamos en nuestro
-#Markdown
+#ncol(df_cisjulio) # devuelve el número de columnas del data frame. Usado en Rmd
 ```
-Hemos pasado de `ncol(df_cisjulio)` a 1 sola columna.
+Hemos pasado de `r `ncol(df_cisjulio)` a 1 sola columna.
 
 ## 3.2 Recodificción
 
-En estecaso hay pocos valores válidos (11) como es habitual en una variable cualitativa, no se va a grupar valores pero si se debe decidir qué valores no sol válidos en la estadística y excluirlos.
+En este caso hay pocos valores válidos (11) como es habitual en una variable cualitativa, no se va a agrupar valores pero si se debe decidir qué valores no son válidos en la estadística y excluirlos.
 
 ### Duplicamos la columna
 
-Antes de modificar cualquier campo, se debe hacer un dupicado de este (columna del data frame) y trabajar sobre él.
+Antes de modificar cualquier campo, se debe hacer un dupicado de este (nueva columna en el data frame) y trabajar sobre él.
 
 ```{r duplicado, echo=TRUE}
 df_cisProbVoto$recPROBVOTO<-df_cisProbVoto$PROBVOTO
@@ -172,7 +170,7 @@ tabla<-tablaGrafico$output.table
 colnames(tabla)<-c("Frecuencia","%","%_acumulado", "%_válido","%_acumulado válido")
 knitr::kable(tabla,column.width=c("10%","20%","20%","20%","20%"),caption="Tabla1.
               Tabla de distribución de frecuencias") 
-# print(tabla)  # En r estrictamente
+# print(tabla)  # En R estrictamente
 
 # Para calcular las frecuencias directamente:
 # round(prop.table(table(df_cisProbVoto$recPROBVOTO, useNA="no"))*100,1)
@@ -252,7 +250,7 @@ El histograma mostrará una asimetría positiva (sesgo a la izquierda) donde la 
 **X<Me=Mo**
 
 
-```{r historiograma, ECHO=TRUE}
+```{r histograma, ECHO=TRUE}
 # Eliminar filas con NA
 df_cisProbVotoSinNA <- df_cisProbVoto[complete.cases(df_cisProbVoto$recPROBVOTO), ]
 
@@ -263,13 +261,13 @@ lines(density(df_cisProbVotoSinNA$recPROBVOTO), col = "red", lwd = 1)
 ```
 ### Conclusión sobre las medidas de posición central
 
-Debido al sesgo ( a la derecha ) la mediana tener un valor mayor que la Moda y menor que la media. La Mediada debería ser una medida de posición  central mejor que la media que quedaría que la Media distorsionada por los extremos o la Moda definida por la repetición de un valor.
+Viendo el sesgo (a la derecha) se entiende que la Mediana tenga un valor mayor que la Moda y menor que la Media. La Mediada debería ser una medida de posición central mejor que la Media ya que esta quedaría distorsionada por los extremos. La Moda viene definida por la repetición de un valor.
 En nuestro caso, en cambio, la Mediana coincide con la Moda.
 
 ## 5.3 Medidas de posición no central
 ### Valores extremos: Máximo y Mínimo
 
-```{r valoresExtermos,ECHO=TRUE}
+```{r valoresExtremos,ECHO=TRUE}
 maximo<-max(df_cisProbVoto$recPROBVOTO, na.rm = TRUE)
 
 minimo<-min(df_cisProbVoto$recPROBVOTO, na.rm = TRUE)
@@ -285,7 +283,7 @@ Al tratarse de una pregunta cerrada con una ordenación entre las respuestas (va
 
 ### Cuartiles y percentiles
 
-En una distribución de valores de una muestra tan sesgada, un cuartil no da demasiada información. La inmensa mayoría de valores son 10 y ek resto son tratados como valores atípicos ( 1,5 veces la caja).
+En una distribución de valores de una muestra tan sesgada, un cuartil no da demasiada información. La inmensa mayoría de valores son 10 y el resto son tratados como valores atípicos ( 1,5 veces la caja).
 
 ```{r cuartiles, echo=TRUE}
 
@@ -371,8 +369,6 @@ El coeficiente de curtosis es: `r coeficienteKurtosis`
 ### Coeficiente de Asimetría
 
 ```{r asimetria, echo=TRUE}
-
-#skewness(df_cisProbVoto$recPROBVOTO)
 
 coeficienteAsimetria<-skewness(df_cisProbVoto$recPROBVOTO, na.rm = TRUE)
 ```

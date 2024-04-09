@@ -250,6 +250,8 @@ donde cada uno de ellos tiene una etiqueta asociada.
 Antes de obtener medidas de posición o de variación se tratará
 previamente la matriz de datos.
 
+\newpage
+
 \hypertarget{preparaciuxf3n-de-la-matriz-de-datos}{%
 \section{3. PREPARACIÓN DE LA MATRIZ DE
 DATOS}\label{preparaciuxf3n-de-la-matriz-de-datos}}
@@ -461,6 +463,8 @@ missing values = FALSE )
 Hay un total de 1625 lo que supone un 18.5 de casos no válidos sobre el
 total de 8798 que se exluirán del análisis
 
+\newpage
+
 \hypertarget{medidas-de-tendencia-central}{%
 \section{4 MEDIDAS DE TENDENCIA
 CENTRAL}\label{medidas-de-tendencia-central}}
@@ -498,7 +502,7 @@ variable para poder consultarlo.
 \end{Highlighting}
 \end{Shaded}
 
-La moda es: \emph{Pedro Sánchez}
+La moda es: \emph{Pedro Sánchez} \newpage
 
 \hypertarget{medidas-de-dispersiuxf3n-central}{%
 \section{5. MEDIDAS DE DISPERSIÓN
@@ -579,6 +583,8 @@ que se prefienren a cada candidato.
   Con la función aritmética \emph{round} se redondeará a 1 decimal como
   es habitual en Ciencias Sociales.
 \end{itemize}
+
+\newpage
 
 \hypertarget{gruxe1ficos}{%
 \section{6 Gráficos}\label{gruxe1ficos}}
@@ -698,6 +704,7 @@ Se ordenarán los datos y las frecuencias en sentido decreaciente
 \end{Shaded}
 
 \includegraphics{preferenciaPte_files/figure-latex/graficoPareto-1.pdf}
+
 \newpage
 
 \hypertarget{guardar-resultado-en-fichero-externo}{%
@@ -776,18 +783,7 @@ existente de MS Excel.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{install.packages}\NormalTok{(}\StringTok{"xlsx"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Installing package into '/home/tomas/R/x86_64-pc-linux-gnu-library/4.1'
-## (as 'lib' is unspecified)
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{require}\NormalTok{(xlsx)}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(xlsx))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"xlsx"}\NormalTok{)\}}
 \end{Highlighting}
 \end{Shaded}
 
@@ -797,6 +793,9 @@ existente de MS Excel.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\#install.packages("xlsx")}
+\CommentTok{\#require(xlsx)}
+
 \FunctionTok{write.xlsx}\NormalTok{(grafico, }\AttributeTok{file =} \StringTok{"resultados.xlsx"}\NormalTok{,               }\CommentTok{\# file= nombre del fichero}
            \AttributeTok{sheetName =} \StringTok{"prefpte"}\NormalTok{, }\AttributeTok{append =} \ConstantTok{FALSE}\NormalTok{)           }\CommentTok{\# file= nombre de la página}
 \end{Highlighting}

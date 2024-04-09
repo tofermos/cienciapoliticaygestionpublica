@@ -8,7 +8,7 @@ subtitle: |
 author: "Tomàs Ferrandis Moscardó"
 date: "2023-03-18"
 output:
-  pdf_document: 
+  pdf_document:
     toc: true
     keep_tex: true
     latex_engine: xelatex
@@ -66,6 +66,8 @@ unique(df_cisjulio$PREFPTE)
 A la vista de los resultados anteriores y, tras leer la documentación del cuestionario, se puede deducir que la variable PREFTE es una variable *cualitativa nominal* típica: con escasos valores (11) y, donde cada uno de ellos tiene una etiqueta asociada.
 
 Antes de obtener medidas de posición o de variación se tratará previamente la matriz de datos.
+
+\newpage
 
 # 3. PREPARACIÓN DE LA MATRIZ DE DATOS
 
@@ -163,6 +165,8 @@ porcentaje_na<-round(mean(is.na(df_cis$recPREFPTE))*100,1)
 
 Hay un total de `r numero_na` lo que supone un `r porcentaje_na` de casos no válidos sobre el total de `r ncasos` que se exluirán del análisis
 
+\newpage
+
 # 4 MEDIDAS DE TENDENCIA CENTRAL
 
 Al tratarse de una variable **cualitativa nominal** solo tiene sentido como medida de tendencia central la *moda*. La *mediana* y la *media* carecen de sentido.
@@ -187,6 +191,7 @@ varModa<-moda(df_cis$recPREFPTE)
 ```
 
 La moda es: *`r varModa`*
+\newpage
 
 # 5. MEDIDAS DE DISPERSIÓN CENTRAL
 
@@ -218,6 +223,8 @@ round(prop.table(table(df_cis$recPREFPTE,useNA="no"))*100,digits=1)
 -   La función *prop* devolverá el tanto x 1 del valor anterior. *Ejemplo: Pedro Sánchez: 0,361*
 -   Se multiplicará x 100 para obtener el porcentaje.
 -   Con la función aritmética *round* se redondeará a 1 decimal como es habitual en Ciencias Sociales.
+
+\newpage
 
 # 6 Gráficos
 
@@ -290,6 +297,7 @@ barplot(valoresOrdenados, main = "Gráfico 3. Preferencia Presidencia de Gobiern
 legend("topright", legend = c("Frecuencia", "Porcentaje acumulado"), col = c("blue", "red")
        , lty = 1, pch = c(NA, 21), pt.bg = c(NA, "red"))
 ```
+
 \newpage
 
 # 7 GUARDAR RESULTADO EN FICHERO EXTERNO
@@ -319,8 +327,9 @@ write.csv(grafico, file = "tablafrec.csv", row.names = TRUE)
 Mediante esta opción se puede crear una página nueva en un fichero existente de MS Excel.
 
 ```{r guardarTablaXLSX, echo=TRUE}
-install.packages("xlsx")
-require(xlsx)
+if (!require(xlsx)){install.packages("xlsx")}
+#install.packages("xlsx")
+#require(xlsx)
 
 write.xlsx(grafico, file = "resultados.xlsx",               # file= nombre del fichero
            sheetName = "prefpte", append = FALSE)           # file= nombre de la página
