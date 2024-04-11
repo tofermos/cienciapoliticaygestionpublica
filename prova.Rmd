@@ -1,0 +1,35 @@
+---
+title: "Untitled"
+author:
+- name: Nora Jones
+  url: https://example.com/norajones
+  affiliation: Spacely Sprockets
+  affiliation_url: https://example.com/spacelysprokets
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+  distill::distill_article: default
+  html_document:
+    df_print: paged
+description: |
+  A new article created using the Distill format.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+# INTRODUCCIOsdsa
+## INTRO 1asdsad
+# SEGON PUNT
+SFS
+ASFDAS
+D
+
+Distill is a publication format for scientific and technical writing, native to the web. 
+
+Learn more about using Distill for R Markdown at <https://rstudio.github.io/distill>.
+
+
+
+
+

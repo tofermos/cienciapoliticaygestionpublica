@@ -3,8 +3,11 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
+  12 pt,
+  a4paper,
 ]{article}
 \usepackage{amsmath,amssymb}
+\usepackage{setspace}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -18,6 +21,7 @@
 \usepackage{lmodern}
 \ifPDFTeX\else
   % xetex/luatex font selection
+  \setmainfont[]{Times New Roman}
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -105,6 +109,19 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{spanish}
+\ifPDFTeX
+\else
+\babelfont[spanish]{rm}{Times New Roman}
+\fi
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
@@ -112,6 +129,7 @@
 \urlstyle{same}
 \hypersetup{
   pdfauthor={Tomàs Ferrandis Moscardó},
+  pdflang={es-ES},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
@@ -136,49 +154,59 @@ Práctica 1. Apartado 3}
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
+\setstretch{1.5}
 \newpage
+\renewcommand\tablename{Tabla}
 
 \hypertarget{introducciuxf3n}{%
 \section{1. INTRODUCCIÓN}\label{introducciuxf3n}}
 
-En esta primera parte de la actividad se hará un \emph{analisis
-univariado} sobre la variable PREFPTE (Pregunta P8) del Barómetros del
-CIS de julio de 2023: \emph{De los/las principales líderes políticos/as,
-¿quién preferiría que fuese el/la presidente/a del Gobierno tras las
-elecciones?} .
+Esta actividad corresponde al apartado 3º de la Práctica 1 de Técnicas
+de Investigación en Ciencia Política. Se trata de un \emph{análisis
+univariado} sobre la variable PREFPTE del Barómetro del CIS de julio de
+2023 (Estudio 3415) concretamente se trata de la pregunta P8 : \emph{De
+los/las principales líderes políticos/as, ¿quién preferiría que fuese
+el/la presidente/a del Gobierno tras las elecciones?} . Obviamente al
+tratarse de análisis univariado solo puede ser descriptivo.
 
-En la segunda parte se tratará la variable PROBVOTO (pregunta P1) del
-mismo cuestionario: \emph{Como Ud. sabe, el domingo 23 de julio se van a
-celebrar elecciones generales en España. Para comenzar me gustaría que
-me dijera cuál es la probabilidad de que Ud. vaya a votar. Para
-contestar utilice una escala de 0 a 10 en la que el 0 significa ``con
-toda seguridad no iría a votar'' y 10 ``con toda seguridad, iría a
-votar''} por lo tanto se trata también de un \emph{análisi univariado}.
-Aunque se le dará un tratamiento distinto como veremos.
-
-Evidentemente al tratarse trabajos de análisi univariados solo pueden
-ser descriptivos.
+Para el análisis de los datos se usa el lenguaje de programación R. Se
+incorpora el código en los documentos renderizados (HTML y PDF)
+activando la opción ``echo'' de los chunks (\textbf{echo=TRUE}). En
+algunos chunks no interesa la impresión del resultado por lo que se
+configuran con \textbf{results=`hide'}. Si se desea ver el resultado de
+la ejecución correcta de alguno de estos chunks bastará con eliminar
+esta parametrización en el fichero Rmd descargado (ver
+\protect\hyperlink{id-github}{punto 8} ).
 
 \hypertarget{obtenciuxf3n-de-datos}{%
 \section{2. OBTENCIÓN DE DATOS}\label{obtenciuxf3n-de-datos}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{suppressMessages}\NormalTok{(\{ }\CommentTok{\# Suprimimos mensajes de salida al...}
+\CommentTok{\# instalar paquetes (si no están) con las funciones...}
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(haven))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"haven"}\NormalTok{)\} }\CommentTok{\# para abrir fichero .sav}
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(epiDisplay))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"epiDisplay"}\NormalTok{)\} }\CommentTok{\# para gráfico }
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(knitr))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"knitr"}\NormalTok{)\}}\CommentTok{\#tabla dinámica Rmd y otros}
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(xlsx))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"xlsx"}\NormalTok{)\} }\CommentTok{\# manejo de ficheros .xlsx}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{fichero-y-datos-en-abierto}{%
 \subsection{2.1 Fichero y Datos en
 Abierto}\label{fichero-y-datos-en-abierto}}
 
-En esta práctica se realizará a partir del \emph{barómetro de julio
-2023} correspondiente al \emph{estudio 3415}. Se optará por descargar
-los datos estadísticos en un formato de fichero \emph{.sav} de la web
-del CIS.
+Del portal del CIS, se localiza el \emph{barómetro de julio 2023} y se
+descargan los datos estadísticos en un formato de fichero \emph{.sav}
 
-Se usará una variable con la ruta absoluta del directorio donde esté el
-fichero \emph{.csv} y otra donde se inddicará el nombre en si del
-fichero. \emph{Variables}
+Se usará una variable R (\emph{nombreFichero}) con la ruta relativa
+\emph{DATOS} que será el directorio donde se guardará los ficheros de
+datos.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# El fichero .sav lo tenemos en una subcarpeta DATOS}
-\FunctionTok{library}\NormalTok{(knitr)}
+\CommentTok{\# El fichero .sav se guardará en una subcarpeta DATOS}
 \NormalTok{nombreFichero}\OtherTok{\textless{}{-}}\StringTok{"datosjulio2023.sav"}
 \NormalTok{directorioTrabajo}\OtherTok{\textless{}{-}}\FunctionTok{getwd}\NormalTok{()}
 \NormalTok{rutaFichero}\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(directorioTrabajo,}\StringTok{"DATOS"}\NormalTok{,nombreFichero,}\AttributeTok{sep=}\StringTok{"/"}\NormalTok{)}
@@ -189,54 +217,34 @@ fichero. \emph{Variables}
 \subsection{\texorpdfstring{2.2 Creación de la base de datos (\emph{data
 frame})}{2.2 Creación de la base de datos (data frame)}}\label{creaciuxf3n-de-la-base-de-datos-data-frame}}
 
-A partir del fichero de tipo \emph{sav} se creará el \emph{data frame}
-de R. En será la base de datos incial donde tendremos todos los datos
-del barómetro en concreto del Estudio 3415.
+A partir del fichero de tipo \emph{sav} se creará el objeto \emph{data
+frame} de R. Este data frame será la base de datos inicial con todos los
+datos obtenidos de la muestra mediante la encuesta.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_cisjulio}\OtherTok{\textless{}{-}}\NormalTok{haven}\SpecialCharTok{::}\FunctionTok{read\_sav}\NormalTok{(rutaFichero)      }
+\NormalTok{df\_cisjulio}\OtherTok{\textless{}{-}}\FunctionTok{read\_sav}\NormalTok{(rutaFichero)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## Invalid date string (length=9): 25 038 23
-\end{verbatim}
 
 \hypertarget{consultar-el-cuestionario-y-el-diccionario-de-datos}{%
 \subsection{2.3 Consultar el cuestionario y el diccionario de
 datos}\label{consultar-el-cuestionario-y-el-diccionario-de-datos}}
 
-Se observará el cuestionario del CIS para ver qué tipo de variable es.
-En el caso de ser cualitativa, en R podemos comprobar que todos los
-valores existentes en la base de datos coincidan coeherentemente con las
-respuestas válidas del cuestionario. La función \emph{unique} que
-obtiene los valores existentes en la columna será de gran ayuda.
+Observando el cuestionario del CIS se puede ver qué se trata de una
+variable de tipo cualitativa. Una comprobación que se puede hacer
+mediante R es ver que los valores existentes en la base de datos
+coinciden coherentemente con las respuestas válidas del cuestionario.
+Mediante la función \emph{unique} devuelve todos valores existentes en
+la columna sin duplicados, además de un listado de los valores posibles
+y sus respectiva etiquetas definidos. Puede ser de gran ayuda para esta
+comprobación.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{unique}\NormalTok{(df\_cisjulio}\SpecialCharTok{$}\NormalTok{PREFPTE)}
+\FunctionTok{unique}\NormalTok{(df\_cisjulio}\SpecialCharTok{$}\NormalTok{PREFPTE) }\CommentTok{\# obtiene los valores sin duplicado }
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## <labelled<double>[11]>: Preferencia personal como presidente del Gobierno central
-##  [1]  2  4  3 99  1 97  8 98 96  7 10
-## 
-## Labels:
-##  value                           label
-##      1                   Pedro Sánchez
-##      2            Alberto Núñez Feijóo
-##      3                Santiago Abascal
-##      4                    Yolanda Díaz
-##     10                    Ione Belarra
-##      7                   Íñigo Errejón
-##      8               Isabel Díaz Ayuso
-##     96                (NO LEER) Otro/a
-##     97 (NO LEER) Ninguno/a de ellos/as
-##     98                            N.S.
-##     99                            N.C.
-\end{verbatim}
 
 \hypertarget{tipo-de-variable-prefpte}{%
 \subsection{2.4 Tipo de variable
@@ -244,10 +252,10 @@ PREFPTE}\label{tipo-de-variable-prefpte}}
 
 A la vista de los resultados anteriores y, tras leer la documentación
 del cuestionario, se puede deducir que la variable PREFTE es una
-variable \emph{cualitativa nominal} típica: con escasos valores (11) y,
-donde cada uno de ellos tiene una etiqueta asociada.
+variable \emph{cualitativa nominal} con escasos valores como es habitual
+(11) y, donde cada uno de ellos tiene una etiqueta asociada.
 
-Antes de obtener medidas de posición o de variación se tratará
+Antes de obtener medidas de posición o de variación se deberá tratar
 previamente la matriz de datos.
 
 \newpage
@@ -256,8 +264,8 @@ previamente la matriz de datos.
 \section{3. PREPARACIÓN DE LA MATRIZ DE
 DATOS}\label{preparaciuxf3n-de-la-matriz-de-datos}}
 
-A partir de la matriz obtenida se deberá limpiar y simplificar esta base
-de datos inicial.
+A partir de la matriz obtenida se procederá a limpiar y simplificar esta
+base de datos inicial.
 
 \hypertarget{limpieza-de-la-base-de-datos}{%
 \subsection{3.1 Limpieza de la base de
@@ -268,8 +276,9 @@ datos}\label{limpieza-de-la-base-de-datos}}
 datos}\label{reducciuxf3n-del-tamauxf1o-de-la-matriz-de-datos}}
 
 Al tratarse de un \emph{análisis univariado} en que solo se va a
-considerar una columna, se puede prescindir de los demás datos usando
-así, un \emph{datra frame} de menor tamaño y más simple.
+considerar una columna es conveniente prescindir de los demás datos
+usando así, un \emph{data frame} de menor tamaño (menos columnas) y más
+simple.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -277,35 +286,26 @@ así, un \emph{datra frame} de menor tamaño y más simple.
 \end{Highlighting}
 \end{Shaded}
 
-Para combrobar el resultado se usará, por ejemplo, una instrucción de R
-similar al \emph{head} pero que leerá las filas últimas. En este caso
-los 4 últimos casos.
+Para comprobar el resultado se puede usar instrucciones de lectura del
+data frame de R como \emph{head} o \emph{tail}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{tail}\NormalTok{(df\_cis,}\DecValTok{4}\NormalTok{)}
+\FunctionTok{tail}\NormalTok{(df\_cis,}\DecValTok{4}\NormalTok{) }\CommentTok{\# Muestra los 4 últimos casos}
+\FunctionTok{head}\NormalTok{(df\_cis,}\DecValTok{4}\NormalTok{) }\CommentTok{\# Muestra los 4 primeros casos}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## # A tibble: 4 x 1
-##   PREFPTE                             
-##   <dbl+lbl>                           
-## 1  4 [Yolanda Díaz]                   
-## 2  2 [Alberto Núñez Feijóo]           
-## 3 97 [(NO LEER) Ninguno/a de ellos/as]
-## 4 97 [(NO LEER) Ninguno/a de ellos/as]
-\end{verbatim}
-
-Otra comprobación interesante consistiría en comparar las dimensiones de
-ambos \emph{data frames} con funciones de R como:
+Otra comprobación interesante consiste en comparar las dimensiones de
+ambos \emph{data frames}, el inicial y el resumido, con funciones de R
+como:
 
 \begin{itemize}
 \tightlist
 \item
   \emph{dim()} Devuelve un vector con dos valores: el número total de
   casos (lineas del \emph{data frame}) y el número de variables
-  (columnas del \emph{data frame})
+  (columnas del \emph{data frame}).
 \item
   \emph{nrow()} Devuelve el número total de casos (lineas del \emph{data
   frame})
@@ -316,33 +316,20 @@ ambos \emph{data frames} con funciones de R como:
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{dim}\NormalTok{(df\_cis)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 8798    1
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{dim}\NormalTok{(df\_cisjulio)}
+\FunctionTok{nrow}\NormalTok{(df\_cis)}
+\FunctionTok{nrow}\NormalTok{(df\_cisjulio)}
+\FunctionTok{ncol}\NormalTok{(df\_cisjulio)}
+
+\NormalTok{n}\OtherTok{\textless{}{-}}\FunctionTok{nrow}\NormalTok{(df\_cis) }\CommentTok{\# La n del muestreo}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## [1] 8798  141
-\end{verbatim}
+Lógicamente el número de casos es 8798 en ambos \emph{data frames}.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{ncasos}\OtherTok{\textless{}{-}}\FunctionTok{nrow}\NormalTok{(df\_cis)}
-\NormalTok{ncasos1}\OtherTok{\textless{}{-}}\FunctionTok{nrow}\NormalTok{(df\_cisjulio)}
-\NormalTok{nvars}\OtherTok{\textless{}{-}}\FunctionTok{ncol}\NormalTok{(df\_cisjulio)}
-\end{Highlighting}
-\end{Shaded}
-
-Se puede ver, por ejemplo que el número de casos es 8798 en ambos
-\emph{data frames} .
+\begin{quote}
+8798 es el valor \textbf{n} del muestreo
+\end{quote}
 
 \hypertarget{recodificaciuxf3n}{%
 \subsection{3.2 Recodificación}\label{recodificaciuxf3n}}
@@ -365,9 +352,9 @@ frame}
 \subsubsection{Valores válidos y no
 válidos}\label{valores-vuxe1lidos-y-no-vuxe1lidos}}
 
-A partir de la observación que se ha hecho en el punto 1.2 anterior, ya
-se puede decidir qué valores de la variable son válidos y cuales no
-interesan a efectos de análisis.
+Una vez examinados los datos en el apartado 3.2 anterior, ya se puede
+decidir qué valores de la variable son válidos y cuales no interesan
+para nuestro análisis.
 
 \emph{Valores válidos: niveles y etiquetas}
 
@@ -403,65 +390,82 @@ interesan a efectos de análisis.
   N.C. 99
 \end{itemize}
 
-Se deberá agrupar bajo la etiqueta de NA ( valor ausente) los valores
-97, 96, 98 y 99. Antes de proceder se deberá duplicar esta columna, es
-decir insertar dentro del \emph{data frame} una segunda columna con los
+Se deberá agrupar bajo la etiqueta de NA (valor ausente) los valores 96,
+97, 98 y 99. Para ello, antes se duplicará esta columna, es decir, se
+insertará dentro del \emph{data frame} una segunda columna con los
 mismos valores. Sobre esta columna se editarán los datos
-(recodificación).
+(\textbf{recodificación}).
 
 \hypertarget{agrupaciuxf3n-de-valores-no-vuxe1lidos}{%
 \subsubsection{Agrupación de valores NO
 válidos}\label{agrupaciuxf3n-de-valores-no-vuxe1lidos}}
 
-Todos los valores que no son válidos para el análisis (96, 97, 98, 99(
-se actualizarán a NA.
+Todos los valores que no son válidos para el análisis (96, 97, 98, 99 se
+actualizarán a NA.
 
 Al mismo tiempo se puede simplificar el resto de valores en este caso,
 solo cambiándolos a {[}1,2,3,4,5,6 7{]}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\NormalTok{df\_cis0}\OtherTok{\textless{}{-}}\NormalTok{df\_cis}
 \NormalTok{df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE[df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE }\SpecialCharTok{\textgreater{}=}\DecValTok{96}\NormalTok{]}\OtherTok{\textless{}{-}}\ConstantTok{NA}
 \NormalTok{df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE}\OtherTok{\textless{}{-}}\FunctionTok{factor}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE,}
-                        \AttributeTok{levels=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{),}
-                        \AttributeTok{labels=}\FunctionTok{c}\NormalTok{(}\StringTok{"Pedro Sánchez"}\NormalTok{, }\StringTok{"Alberto Núñez Feijóo"}\NormalTok{,}
-                                 \StringTok{"Santiago Abascal"}\NormalTok{,}\StringTok{"Yolanda Díaz"}\NormalTok{,}\StringTok{"Ione Belarra"}\NormalTok{,}
-                                 \StringTok{"Íñigo Errejón"}\NormalTok{,}\StringTok{"Isabel Díaz Ayuso"}\NormalTok{))}
+                  \AttributeTok{levels=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{),}
+                  \AttributeTok{labels=}\FunctionTok{c}\NormalTok{(}\StringTok{"Pedro Sánchez"}\NormalTok{, }\StringTok{"Alberto Núñez Feijóo"}\NormalTok{,}
+                   \StringTok{"Santiago Abascal"}\NormalTok{,}\StringTok{"Yolanda Díaz"}\NormalTok{,}\StringTok{"Ione Belarra"}\NormalTok{,}
+                   \StringTok{"Íñigo Errejón"}\NormalTok{,}\StringTok{"Isabel Díaz Ayuso"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
 El tratamiento de los valores no válidos es doble. Se excluirán del
 análisis pero se deberá valorar su importancia. Para ello se debe ver su
-peso en relación al conjunto de valores. Se puede usar la función
-\emph{summary} especificándole que no borre los valores NA ( remove
-missing values = FALSE )
+peso en relación al conjunto de valores. En R tenemos la función
+\emph{summary} que devuelve los valores de posición central (media,
+mediana y moda) y los cuartiles. Se puede parametrizar para que cuente
+también los valores NA (remove missing values = FALSE)
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{summary}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE, }\AttributeTok{na.rm=}\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{numero\_na}\OtherTok{\textless{}{-}}\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE)) }\CommentTok{\# Guarda valor en variable para...}
+\NormalTok{porcentaje\_na}\OtherTok{\textless{}{-}}\FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE))}\SpecialCharTok{*}\DecValTok{100}\NormalTok{,}\DecValTok{1}\NormalTok{) }\CommentTok{\#calcular \% NA}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-##        Pedro Sánchez Alberto Núñez Feijóo     Santiago Abascal 
-##                 2631                 2576                  658 
-##         Yolanda Díaz         Ione Belarra        Íñigo Errejón 
-##                 1300                    0                    0 
-##    Isabel Díaz Ayuso                 NA's 
-##                    8                 1625
-\end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{numero\_na}\OtherTok{\textless{}{-}}\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE))}
-\NormalTok{porcentaje\_na}\OtherTok{\textless{}{-}}\FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE))}\SpecialCharTok{*}\DecValTok{100}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+\CommentTok{\# Totaliza por valores, incluyendo NA)}
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{summary}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE, }\AttributeTok{na.rm=}\ConstantTok{FALSE}\NormalTok{), }\AttributeTok{col.names =} \FunctionTok{c}\NormalTok{(}\StringTok{"Líder"}\NormalTok{,}\StringTok{"Repeticiones"}\NormalTok{), }
+                                                                   \AttributeTok{caption=}\StringTok{"Summary"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{longtable}[]{@{}lr@{}}
+\caption{Summary}\tabularnewline
+\toprule\noalign{}
+Líder & Repeticiones \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Líder & Repeticiones \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Pedro Sánchez & 2631 \\
+Alberto Núñez Feijóo & 2576 \\
+Santiago Abascal & 658 \\
+Yolanda Díaz & 1300 \\
+Ione Belarra & 0 \\
+Íñigo Errejón & 0 \\
+Isabel Díaz Ayuso & 8 \\
+NA's & 1625 \\
+\end{longtable}
 
 \emph{Importancia de los valores perdidos NA}
 
-Hay un total de 1625 lo que supone un 18.5 de casos no válidos sobre el
-total de 8798 que se exluirán del análisis
+Hay un total de 1625 lo que supone un porcentaje del 18.5 de casos no
+válidos sobre el total de n=8798.
 
 \newpage
 
@@ -471,15 +475,14 @@ CENTRAL}\label{medidas-de-tendencia-central}}
 
 Al tratarse de una variable \textbf{cualitativa nominal} solo tiene
 sentido como medida de tendencia central la \emph{moda}. La
-\emph{mediana} y la \emph{media} carecen de sentido.
+\emph{mediana} y la \emph{media}, no.
 
 \hypertarget{moda}{%
 \subsection{4.1 Moda}\label{moda}}
 
-\begin{quote}
 Para el cálculo de la moda, R no dispone de ninguna función en sus
-librerías, se deberá crear.
-\end{quote}
+librerías, se puede usar una función de usuario como la aportada en los
+apuntes de la asignatura.
 
 \emph{Función Moda}
 
@@ -492,32 +495,32 @@ librerías, se deberá crear.
 \end{Highlighting}
 \end{Shaded}
 
-Una vez creada la función e incorporado el código en nuestro script r (
-o R-markdown) se podrá llamar. Se puede guardar el resutado en una
-variable para poder consultarlo.
+Una vez creada la función e incorporado su código en el documento
+RMarkdown (o script R) se podrá llamar y almacenar su resultado en una
+variable para consultas u operaciones posteriores.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{varModa}\OtherTok{\textless{}{-}}\FunctionTok{moda}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE) }
+\NormalTok{varModa}\OtherTok{\textless{}{-}}\FunctionTok{moda}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE) }\CommentTok{\#llama a la función y recupera valor}
 \end{Highlighting}
 \end{Shaded}
 
-La moda es: \emph{Pedro Sánchez} \newpage
+La moda es: \emph{Pedro Sánchez}
+
+\newpage
 
 \hypertarget{medidas-de-dispersiuxf3n-central}{%
 \section{5. MEDIDAS DE DISPERSIÓN
 CENTRAL}\label{medidas-de-dispersiuxf3n-central}}
 
 Al tratarse de una variable cualitativa nominal no tiene sentido
-estudiar un comportamiento en la distribución de valores o qué valores
-representan una preferencia por los candidatos.
+estudiar un comportamiento en la distribución de valores.
 
 \hypertarget{tabla-de-frecuencias-de-preferencia-de-presidentea}{%
 \subsection{5.1 Tabla de frecuencias de Preferencia de
 presidente/a}\label{tabla-de-frecuencias-de-preferencia-de-presidentea}}
 
-En los siguientes análisis de datos se excluirán los valores no
-vádlidos.
+En los siguientes análisis de datos se excluirán los valores no válidos.
 
 \hypertarget{frecuencias-absolutas}{%
 \subsubsection{Frecuencias absolutas}\label{frecuencias-absolutas}}
@@ -527,47 +530,73 @@ uno de los candidatos.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{table}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE, }\AttributeTok{useNA=}\StringTok{"no"}\NormalTok{)}
+\CommentTok{\# La función *table* de R puede ignorar o no los NA (useNA="no"/"ifany")}
+\CommentTok{\# por defecto. useNA="no" (los ignora, no haría falta indicarlo)}
+
+
+\CommentTok{\# table(df\_cis$recPREFPTE, useNA="no") \# En R estrictamente}
+
+\CommentTok{\# Uso de formato RMarkdown }
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{table}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE),}\AttributeTok{column.width=}\FunctionTok{c}\NormalTok{(}\StringTok{"30\%"}\NormalTok{,}\StringTok{"70\%"}\NormalTok{),}
+  \AttributeTok{col.names =} \FunctionTok{c}\NormalTok{(}\StringTok{"Líder"}\NormalTok{,}\StringTok{"Repeticiones"}\NormalTok{),}\AttributeTok{caption=}\StringTok{"Frecuencia absoluta"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## 
-##        Pedro Sánchez Alberto Núñez Feijóo     Santiago Abascal 
-##                 2631                 2576                  658 
-##         Yolanda Díaz         Ione Belarra        Íñigo Errejón 
-##                 1300                    0                    0 
-##    Isabel Díaz Ayuso 
-##                    8
-\end{verbatim}
-
-\begin{quote}
-La función \emph{table}, por defecto, ignora los valores NA (
-useNA=``no''/``ifany'')
-\end{quote}
+\begin{longtable}[]{@{}lr@{}}
+\caption{Frecuencia absoluta}\tabularnewline
+\toprule\noalign{}
+Líder & Repeticiones \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Líder & Repeticiones \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Pedro Sánchez & 2631 \\
+Alberto Núñez Feijóo & 2576 \\
+Santiago Abascal & 658 \\
+Yolanda Díaz & 1300 \\
+Ione Belarra & 0 \\
+Íñigo Errejón & 0 \\
+Isabel Díaz Ayuso & 8 \\
+\end{longtable}
 
 \hypertarget{frecuencias-relativas.}{%
 \subsubsection{Frecuencias relativas.}\label{frecuencias-relativas.}}
 
 La frecuencia relativa indica el porcentaje respecto al total de casos
 de los valores del apartado anterior. Es decir, el porcentaje de casos
-que se prefienren a cada candidato.
+que se prefieren a cada candidato.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{round}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE,}\AttributeTok{useNA=}\StringTok{"no"}\NormalTok{))}\SpecialCharTok{*}\DecValTok{100}\NormalTok{,}\AttributeTok{digits=}\DecValTok{1}\NormalTok{)}
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{round}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE,}\AttributeTok{useNA=}\StringTok{"no"}\NormalTok{))}\SpecialCharTok{*}\DecValTok{100}\NormalTok{,}\AttributeTok{digits=}\DecValTok{1}\NormalTok{),}
+      \AttributeTok{col.names =} \FunctionTok{c}\NormalTok{(}\StringTok{"Líder"}\NormalTok{,}\StringTok{"\% de repeticiones"}\NormalTok{),}\AttributeTok{caption=}\StringTok{"Frecuencia relativa"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## 
-##        Pedro Sánchez Alberto Núñez Feijóo     Santiago Abascal 
-##                 36.7                 35.9                  9.2 
-##         Yolanda Díaz         Ione Belarra        Íñigo Errejón 
-##                 18.1                  0.0                  0.0 
-##    Isabel Díaz Ayuso 
-##                  0.1
-\end{verbatim}
+\begin{longtable}[]{@{}lr@{}}
+\caption{Frecuencia relativa}\tabularnewline
+\toprule\noalign{}
+Líder & \% de repeticiones \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Líder & \% de repeticiones \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Pedro Sánchez & 36.7 \\
+Alberto Núñez Feijóo & 35.9 \\
+Santiago Abascal & 9.2 \\
+Yolanda Díaz & 18.1 \\
+Ione Belarra & 0.0 \\
+Íñigo Errejón & 0.0 \\
+Isabel Díaz Ayuso & 0.1 \\
+\end{longtable}
 
 \begin{itemize}
 \tightlist
@@ -598,61 +627,44 @@ Para variables nominales, se puede optar por:
 \item
   Gráfico de sectores
 \item
-  Grafico de Pareto
+  Gráfico de Pareto
 \end{itemize}
 
-Vemos las diferentes opciones.
+En los siguientes subapartados ser verán los resultados en las
+diferentes opciones.
 
 \hypertarget{gruxe1fico-de-barras}{%
 \subsection{6.1 Gráfico de barras}\label{gruxe1fico-de-barras}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{require}\NormalTok{(epiDisplay)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Loading required package: epiDisplay
-\end{verbatim}
-
-\begin{verbatim}
-## Loading required package: foreign
-\end{verbatim}
-
-\begin{verbatim}
-## Loading required package: survival
-\end{verbatim}
-
-\begin{verbatim}
-## Loading required package: MASS
-\end{verbatim}
-
-\begin{verbatim}
-## Loading required package: nnet
-\end{verbatim}
+Para una variable nominal como es el caso, el gráfico más adecuado es el
+diagrama de barras.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Este vector tendrá los colores para cada candidato (orden decreciente ) que }
-\CommentTok{\#los indentifica con su opción política. Se usará en todos los gráficos.}
-\NormalTok{colores}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"\#1976d2"}\NormalTok{,}\StringTok{"\#FF33FF"}\NormalTok{,}\StringTok{"\#2ecc71"}\NormalTok{,}\StringTok{"\#2980b9"}\NormalTok{,}\StringTok{"\#ab47bc"}\NormalTok{,}\StringTok{"\#c8e6c9"}\NormalTok{)}
+\CommentTok{\# Este vector tendrá los colores para cada candidato que }
+\CommentTok{\# los identifica con su opción política. Se usará en todos los gráficos.}
+\NormalTok{colores}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"blue"}\NormalTok{,}\StringTok{"\#FF33FF"}\NormalTok{,}\StringTok{"\#2ecc71"}\NormalTok{,}\StringTok{"\#2980b9"}\NormalTok{,}\StringTok{"\#ab47bc"}\NormalTok{,}\StringTok{"\#c8e6c9"}\NormalTok{)}
 \NormalTok{coloresInvertidos}\OtherTok{\textless{}{-}}\FunctionTok{rev}\NormalTok{(colores)}
-\NormalTok{grafico }\OtherTok{\textless{}{-}} \FunctionTok{tab1}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE,}\AttributeTok{cum.percent =} \ConstantTok{TRUE}\NormalTok{,}\AttributeTok{sort.group=}\StringTok{"decreasing"}\NormalTok{,}
-                \AttributeTok{xlab=}\StringTok{"\% preferencia"}\NormalTok{,}\AttributeTok{decimal=}\DecValTok{1}\NormalTok{,}\AttributeTok{bar.values =} \StringTok{"percent"}\NormalTok{,  }
-                \AttributeTok{main=}\StringTok{"Gráfico 1. Preferencia para Presidencia de Gobierno"}\NormalTok{,}
+\NormalTok{grafico }\OtherTok{\textless{}{-}} \FunctionTok{tab1}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE,}\AttributeTok{cum.percent =} \ConstantTok{TRUE}\NormalTok{,}
+                \AttributeTok{sort.group=}\StringTok{"decreasing"}\NormalTok{,}\AttributeTok{xlab=}\StringTok{"\% preferencia"}\NormalTok{,}
+                \AttributeTok{decimal=}\DecValTok{1}\NormalTok{,}\AttributeTok{bar.values =} \StringTok{"percent"}\NormalTok{,  }
+                \AttributeTok{main=}\StringTok{"Gráfico 1. Preferencia Presidencia de Gobierno"}\NormalTok{,}
                 \AttributeTok{col=}\NormalTok{coloresInvertidos, }\AttributeTok{missing =} \ConstantTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{preferenciaPte_files/figure-latex/grafico-1.pdf}
+\newpage
 
 \hypertarget{gruxe1fico-de-sectores}{%
 \subsection{6.2 Gráfico de sectores}\label{gruxe1fico-de-sectores}}
 
+Alternativamente se podría usar el gráfico de sectores.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{valores}\OtherTok{\textless{}{-}}\FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{round}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE))}\SpecialCharTok{*}\DecValTok{100}\NormalTok{,}\AttributeTok{digits=}\DecValTok{1}\NormalTok{))}
+\NormalTok{valores}\OtherTok{\textless{}{-}}\FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{round}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE))}\SpecialCharTok{*}\DecValTok{100}\NormalTok{,}
+                                                              \AttributeTok{digits=}\DecValTok{1}\NormalTok{))}
 \NormalTok{nombres}\OtherTok{\textless{}{-}}\FunctionTok{names}\NormalTok{(}\FunctionTok{round}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE))}\SpecialCharTok{*}\DecValTok{100}\NormalTok{,}\AttributeTok{digits=}\DecValTok{1}\NormalTok{))}
 \CommentTok{\#vector con los índices ordenados según valor decreciente}
 \NormalTok{orden}\OtherTok{\textless{}{-}}\FunctionTok{order}\NormalTok{(valores,}\AttributeTok{decreasing=}\ConstantTok{TRUE}\NormalTok{)}
@@ -672,34 +684,40 @@ claridad los porcentajes que el gráfico de barras.
 \hypertarget{gruxe1fico-de-pareto}{%
 \subsection{6.3 Gráfico de Pareto}\label{gruxe1fico-de-pareto}}
 
-Se ordenarán los datos y las frecuencias en sentido decreaciente
+Esta otra alternativa ordena los datos y las frecuencias en sentido
+decreciente y muestra qué porcentaje acumulan en total las opciones
+representadas.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{valores}\OtherTok{\textless{}{-}}\FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{round}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE))}\SpecialCharTok{*}\DecValTok{100}\NormalTok{,}\AttributeTok{digits=}\DecValTok{1}\NormalTok{))}
+\NormalTok{valores}\OtherTok{\textless{}{-}}\FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{round}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE))}\SpecialCharTok{*}\DecValTok{100}\NormalTok{,}
+                                                              \AttributeTok{digits=}\DecValTok{1}\NormalTok{))}
 \NormalTok{nombres}\OtherTok{\textless{}{-}}\FunctionTok{names}\NormalTok{(}\FunctionTok{round}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE))}\SpecialCharTok{*}\DecValTok{100}\NormalTok{,}\AttributeTok{digits=}\DecValTok{1}\NormalTok{))}
-\CommentTok{\#vector con los índices ordenados según valor decreciente}
+\CommentTok{\# vector con los índices ordenados según valor decreciente}
 \NormalTok{orden}\OtherTok{\textless{}{-}}\FunctionTok{order}\NormalTok{(valores,}\AttributeTok{decreasing=}\ConstantTok{TRUE}\NormalTok{)}
 \NormalTok{valoresOrdenados}\OtherTok{\textless{}{-}}\NormalTok{valores[orden]}
 \NormalTok{nombresOrdenados}\OtherTok{\textless{}{-}}\NormalTok{nombres[orden]}
-\NormalTok{colores}\OtherTok{=}\FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"\#1976d2"}\NormalTok{,}\StringTok{"\#FF33FF"}\NormalTok{,}\StringTok{"\#2ecc71"}\NormalTok{,}\StringTok{"\#2980b9"}\NormalTok{,}\StringTok{"\#ab47bc"}\NormalTok{,}\StringTok{"\#c8e6c9"}\NormalTok{)}
+\NormalTok{colores}\OtherTok{=}\FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"blue"}\NormalTok{,}\StringTok{"\#FF33FF"}\NormalTok{,}\StringTok{"\#2ecc71"}\NormalTok{,}\StringTok{"\#2980b9"}\NormalTok{,}\StringTok{"\#ab47bc"}\NormalTok{,}\StringTok{"\#c8e6c9"}\NormalTok{)}
 
 \CommentTok{\# Calcular el porcentaje acumulado}
-\NormalTok{porcentajeAcumulado}\OtherTok{\textless{}{-}}\FunctionTok{cumsum}\NormalTok{(valoresOrdenados}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(valoresOrdenados)))}\SpecialCharTok{*}\DecValTok{100}
+\NormalTok{porcentajeAcumulado}\OtherTok{\textless{}{-}}\FunctionTok{cumsum}\NormalTok{(valoresOrdenados}\SpecialCharTok{/}
+                              \FunctionTok{sum}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(valoresOrdenados)))}\SpecialCharTok{*}\DecValTok{100}
 
 \CommentTok{\# Crear el gráfico de Pareto}
 \FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{2}\NormalTok{))  }\CommentTok{\# Ajustar los márgenes del gráfico}
 \NormalTok{ylim }\OtherTok{\textless{}{-}} \FunctionTok{range}\NormalTok{(}\FunctionTok{c}\NormalTok{(valoresOrdenados, porcentajeAcumulado))}
-\NormalTok{ylim[}\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ ylim[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{+} \DecValTok{10}  \CommentTok{\# Ajustar el límite superior para dejar espacio adicional}
-
-\FunctionTok{barplot}\NormalTok{(valoresOrdenados, }\AttributeTok{main =} \StringTok{"Gráfico 3. Preferencia Presidencia de Gobierno."}\NormalTok{, }
-        \AttributeTok{xlab =} \StringTok{"Candidatos"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Frecuencia"}\NormalTok{, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{)}
+\NormalTok{ylim[}\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ ylim[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{+} \DecValTok{10}
+\FunctionTok{barplot}\NormalTok{(valoresOrdenados, }
+        \AttributeTok{main =} \StringTok{"Gráfico 3. Preferencia Presidencia de Gobierno."}\NormalTok{, }
+        \AttributeTok{xlab =} \StringTok{"Candidatos"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Frecuencia"}\NormalTok{, }\AttributeTok{col =} \StringTok{"lightblue"}\NormalTok{)}
         \FunctionTok{lines}\NormalTok{(porcentajeAcumulado, }
                 \AttributeTok{type =} \StringTok{"b"}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{pch =} \DecValTok{21}\NormalTok{, }\AttributeTok{bg =} \StringTok{"red"}\NormalTok{, }\AttributeTok{yaxt =} \StringTok{"n"}\NormalTok{)}
-        \FunctionTok{axis}\NormalTok{(}\DecValTok{4}\NormalTok{, }\AttributeTok{at =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{100}\NormalTok{, }\AttributeTok{by =} \DecValTok{10}\NormalTok{), }\AttributeTok{labels =} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{100}\NormalTok{, }\AttributeTok{by =} \DecValTok{10}\NormalTok{),}\StringTok{"\%"}\NormalTok{)}
-\NormalTok{              , }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{las =} \DecValTok{1}\NormalTok{)}
-\FunctionTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }\AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"Frecuencia"}\NormalTok{, }\StringTok{"Porcentaje acumulado"}\NormalTok{), }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{)}
-\NormalTok{       , }\AttributeTok{lty =} \DecValTok{1}\NormalTok{, }\AttributeTok{pch =} \FunctionTok{c}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\DecValTok{21}\NormalTok{), }\AttributeTok{pt.bg =} \FunctionTok{c}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\StringTok{"red"}\NormalTok{))}
+        \FunctionTok{axis}\NormalTok{(}\DecValTok{4}\NormalTok{, }\AttributeTok{at =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{100}\NormalTok{, }\AttributeTok{by =} \DecValTok{10}\NormalTok{), }
+                \AttributeTok{labels =} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{100}\NormalTok{, }\AttributeTok{by =} \DecValTok{10}\NormalTok{),}\StringTok{"\%"}\NormalTok{),}
+                \AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{las =} \DecValTok{1}\NormalTok{)}
+        \FunctionTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }\AttributeTok{legend =}\FunctionTok{c}\NormalTok{(}\StringTok{"Frecuencia"}\NormalTok{,}\StringTok{"Porcentaje acumulado"}\NormalTok{),}
+                \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"lightblue"}\NormalTok{, }\StringTok{"red"}\NormalTok{),}
+                \AttributeTok{lty =} \DecValTok{1}\NormalTok{, }\AttributeTok{pch =} \FunctionTok{c}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\DecValTok{21}\NormalTok{), }\AttributeTok{pt.bg =} \FunctionTok{c}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\StringTok{"red"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -707,24 +725,26 @@ Se ordenarán los datos y las frecuencias en sentido decreaciente
 
 \newpage
 
-\hypertarget{guardar-resultado-en-fichero-externo}{%
-\section{7 GUARDAR RESULTADO EN FICHERO
-EXTERNO}\label{guardar-resultado-en-fichero-externo}}
+\hypertarget{guardar-resultados-en-fichero-externo}{%
+\section{7 GUARDAR RESULTADOS EN FICHERO
+EXTERNO}\label{guardar-resultados-en-fichero-externo}}
 
-\hypertarget{fichero-csv-comma-separated-values}{%
-\subsection{\texorpdfstring{7.1 Fichero CSV (\emph{Comma-Separated
-Values})}{7.1 Fichero CSV (Comma-Separated Values)}}\label{fichero-csv-comma-separated-values}}
-
-El objeto \emph{gráfico} de R tiene el atributo \emph{output.table} para
-exportar los datos a una tabla. Con la fución \emph{knitr} de R
-mejoramos el formato de la tabla.
+Los resultados de la tabla de frecuencia se van a guardar en un fichero
+externo en al misma carpeta donde hemos guardado los datos fuente
+(DATOS).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# grafico$output.table \# Esta dentro de los atributos, es un exportable que se genera}
+\CommentTok{\# El atributo *output.table* permite exportar los datos a una tabla. }
 \NormalTok{df\_tabla}\OtherTok{\textless{}{-}}\NormalTok{grafico}\SpecialCharTok{$}\NormalTok{output.table}
-\FunctionTok{colnames}\NormalTok{(df\_tabla)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"Frecuencia"}\NormalTok{,}\StringTok{"\%"}\NormalTok{,}\StringTok{"\%\_acumulado"}\NormalTok{, }\StringTok{"\%\_válido"}\NormalTok{,}\StringTok{"\%\_acumulado válido"}\NormalTok{)}
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(df\_tabla,}\AttributeTok{column.width=}\FunctionTok{c}\NormalTok{(}\StringTok{"10\%"}\NormalTok{,}\StringTok{"20\%"}\NormalTok{,}\StringTok{"20\%"}\NormalTok{,}\StringTok{"20\%"}\NormalTok{,}\StringTok{"20\%"}\NormalTok{))}
+
+\CommentTok{\# Se redefinen los nombres de campos}
+\FunctionTok{colnames}\NormalTok{(df\_tabla)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"Frecuencia"}\NormalTok{,}\StringTok{"\%"}\NormalTok{,}\StringTok{"\%\_acumulado"}\NormalTok{, }\StringTok{"\%\_válido"}\NormalTok{,}
+                                            \StringTok{"\%\_acumulado válido"}\NormalTok{)}
+
+\CommentTok{\# La función *knitr* mejora el formato de la tabla a mostrar en Rmd}
+\FunctionTok{kable}\NormalTok{(df\_tabla,}\AttributeTok{column.width=}\FunctionTok{c}\NormalTok{(}\StringTok{"10\%"}\NormalTok{,}\StringTok{"20\%"}\NormalTok{,}\StringTok{"20\%"}\NormalTok{,}\StringTok{"20\%"}\NormalTok{,}\StringTok{"20\%"}\NormalTok{),}
+                    \AttributeTok{caption=}\StringTok{"Tabla de distribución de frecuencias"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -735,6 +755,22 @@ mejoramos el formato de la tabla.
   >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1538}}
   >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1154}}
   >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2436}}@{}}
+\caption{Tabla de distribución de frecuencias}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Frecuencia
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\%
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\%\_acumulado
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\%\_válido
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\%\_acumulado válido
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
@@ -763,43 +799,85 @@ Ione Belarra & 0 & 0.0 & 81.4 & 0.0 & 99.9 \\
 Total & 8798 & 100.0 & 100.0 & 100.0 & 100.0 \\
 \end{longtable}
 
-Esta tabla la guardaremos en un ficheros externo de tipo \emph{csv}
-mediante el la función \emph{write.csv} indicando que la primera fila
-contenga el nombre de los campos ( row.names = TRUE )
+\hypertarget{fichero-csv-comma-separated-values}{%
+\subsection{\texorpdfstring{7.1 Fichero CSV (\emph{Comma-Separated
+Values})}{7.1 Fichero CSV (Comma-Separated Values)}}\label{fichero-csv-comma-separated-values}}
+
+Una opción sería crear un fichero \emph{csv}, se trata de un fichero de
+texto plano que usa el ``;'' o ``,'' como carácter delimitador de campos
+mediante el la función \emph{write.csv} e indicando que la primera fila
+contenga el nombre de los campos (row.names = TRUE)
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Guardamos la tabla de frecuencias en un fichero csv}
-\FunctionTok{write.csv}\NormalTok{(grafico, }\AttributeTok{file =} \StringTok{"tablafrec.csv"}\NormalTok{, }\AttributeTok{row.names =} \ConstantTok{TRUE}\NormalTok{) }
+\CommentTok{\# Se guarda la tabla de frecuencias en un fichero csv}
+\FunctionTok{write.csv}\NormalTok{(grafico, }\AttributeTok{file =} \StringTok{"DATOS/tablafrecResultado.csv"}\NormalTok{,}\AttributeTok{row.names=}\ConstantTok{TRUE}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{hoja-de-cuxe1lculo-ms-excel-xlsx}{%
-\subsection{7.2 Hoja de cálculo MS-Excel
+\subsection{7.2 Hoja de cálculo MS Excel
 (xlsx)}\label{hoja-de-cuxe1lculo-ms-excel-xlsx}}
 
-Mediante esta opción se puede crear una página nueva en un fichero
-existente de MS Excel.
+Una segunda opción sería crear una hoja de cálculo de MS Excel.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(xlsx))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"xlsx"}\NormalTok{)\}}
+\CommentTok{\# file= nombre del fichero hoja de cálculo de MSOffice}
+\FunctionTok{write.xlsx}\NormalTok{(grafico, }\AttributeTok{file =} \StringTok{"DATOS/tablafrecResultado.xlsx"}\NormalTok{,}
+           \AttributeTok{sheetName =} \StringTok{"prefpte"}\NormalTok{, }\AttributeTok{append =} \ConstantTok{FALSE}\NormalTok{)           }
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## Loading required package: xlsx
-\end{verbatim}
+Alternativamente se puede añadir una nueva página en un fichero excel ya
+existente.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\#install.packages("xlsx")}
-\CommentTok{\#require(xlsx)}
+\newpage
 
-\FunctionTok{write.xlsx}\NormalTok{(grafico, }\AttributeTok{file =} \StringTok{"resultados.xlsx"}\NormalTok{,               }\CommentTok{\# file= nombre del fichero}
-           \AttributeTok{sheetName =} \StringTok{"prefpte"}\NormalTok{, }\AttributeTok{append =} \ConstantTok{FALSE}\NormalTok{)           }\CommentTok{\# file= nombre de la página}
-\end{Highlighting}
-\end{Shaded}
+\hypertarget{id-github}{%
+\section{8 EJECUCIÓN DEL Rmd Y REPOSITORIO DE
+FICHEROS}\label{id-github}}
 
+Para la ejecución del código R, está disponible el fichero ejecutable
+\textbf{preferenciaPte.Rmd} y el fichero de datos
+\textbf{datosjulio2023.sav} en el repositorio GitHub. En el mismo
+repositorio se encuentra este PDF y un fichero HTML renderizados a
+partir del Rmd.
+
+El fichero \emph{datosjulio2023.sav} debe ubicarse en una subcarpeta del
+directorio de trabajo con nombre \emph{DATA}.
+
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2632}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3684}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3684}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+\includegraphics[width=0.1\textwidth,height=\textheight]{../../recursos/iconohyperlink.jpg}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Enlace a GitHub
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/estudioCIS3415/DATOS/datosjulio2023.sav}{\includegraphics[width=0.1\textwidth,height=\textheight]{../../recursos/iconosav.png}}
+& Fichero de datos tipo sav &
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/estudioCIS3415/DATOS/datosjulio2023.sav}{datosjulio2023.sav} \\
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/estudioCIS3415/preferenciaPte.Rmd}{\includegraphics[width=0.1\textwidth,height=\textheight]{../../recursos/rmarkdown.png}}
+& Fichero Rmd &
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/estudioCIS3415/preferenciaPte.Rmd}{preferenciaPte.Rmd} \\
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/estudioCIS3415/preferenciaPte.html}{\includegraphics[width=0.1\textwidth,height=\textheight]{../../recursos/iconohtml.png}}
+& Fichero HTML &
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/estudioCIS3415/preferenciaPte.html}{preferenciaPte.html} \\
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/estudioCIS3415/probabilidadVoto.pdf}{\includegraphics[width=0.1\textwidth,height=\textheight]{../../recursos/iconopdf.png}}
+& Fichero PDF &
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/estudioCIS3415/probabilidadVoto.pdf}{preferenciaPte.pdf} \\
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/}{\includegraphics[width=0.2\textwidth,height=\textheight]{../../recursos/iconogithub.png}}
+& &
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/}{Repositorio
+tofermos} \\
+\end{longtable}
 
 \end{document}

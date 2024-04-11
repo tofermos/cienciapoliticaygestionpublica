@@ -3,8 +3,11 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
+  12 pt,
+  a4paper,
 ]{article}
 \usepackage{amsmath,amssymb}
+\usepackage{setspace}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -18,6 +21,7 @@
 \usepackage{lmodern}
 \ifPDFTeX\else
   % xetex/luatex font selection
+  \setmainfont[]{Times New Roman}
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -105,6 +109,19 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{spanish}
+\ifPDFTeX
+\else
+\babelfont[spanish]{rm}{Times New Roman}
+\fi
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
@@ -112,6 +129,7 @@
 \urlstyle{same}
 \hypersetup{
   pdfauthor={Tomàs Ferrandis Moscardó},
+  pdflang={es-ES},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
@@ -136,37 +154,48 @@ Práctica 1. Apartado 4.}
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
+\setstretch{1.5}
 \newpage
+
+\renewcommand\tablename{Tabla}
 
 \hypertarget{introducciuxf3n}{%
 \section{1 INTRODUCCIÓN}\label{introducciuxf3n}}
 
-Este segundo estudio univariao se centrará en la variable PROBVOTO
-(pregunta P1) del mismo cuestionario: \emph{Como Ud. sabe, el domingo 23
-de julio se van a celebrar elecciones generales en España. Para comenzar
-me gustaría que me dijera cuál es la probabilidad de que Ud. vaya a
-votar. Para contestar utilice una escala de 0 a 10 en la que el 0
-significa ``con toda seguridad no iría a votar'' y 10 ``con toda
-seguridad, iría a votar''} por lo tanto se trata también de un
-\emph{análisi univariado}.
+Esta actividad corresponde al apartado 4º de la Práctica 1 de Técnicas
+de Investigación en Ciencia Política. Se trata de un \emph{análisis
+univariado} sobre la variable PROBVOTO (pregunta P1) de la encuesta del
+Barómetro de julio de 2023 (estudio 3415) vista en el apartado 3 y que
+pregunta: \emph{Como Ud. sabe, el domingo 23 de julio se van a celebrar
+elecciones generales en España. Para comenzar me gustaría que me dijera
+cuál es la probabilidad de que Ud. vaya a votar. Para contestar utilice
+una escala de 0 a 10 en la que el 0 significa ``con toda seguridad no
+iría a votar'' y 10 ``con toda seguridad, iría a votar''}.
 
-Podemos ver que, pese a ser un variable cualitativa ordinal, esta será
-manipulada como si fuese una cuantitativa para obtener más información
-estadística. Se trata de una práctica habitual en ciencias sociales que
-debe, en todo caso, quedar justificada.
+Por lo tanto se trata también de un \emph{análisis univariado},
+descriptivo por tanto, aunque se le dará un tratamiento distinto.
 
-\begin{quote}
-NOTA: En este documento se ha activado la opción \emph{echo} de los
-chuncks de R a fin de poder ser valorados académicamente. La creación
-del fichero HTML, PDF o DOCX renderizado se haría tras la desactivación.
-Solo llevan título de tablas de resultados que \textgreater{}
-corresponderían a esta versión final y están maquetadas en Markdown.
-\end{quote}
+Pese a ser un variable cualitativa ordinal, esta será manipulada como si
+fuese una cuantitativa para obtener más información estadística. Se
+trata de una práctica habitual en ciencias sociales que debe
+justificarse en este caso porqué se observa se puede obtener más
+información coherente.
+
+Obviamente al tratarse de análisis univariado solo puede ser
+descriptivo.
+
+Como en la anterior actividad se incorpora el código R en los documentos
+renderizados (HTML y PDF) opción \textbf{echo=TRUE} de los chunks. En
+algunos chunks no interesa la impresión del resultado por lo que se
+configuran con \textbf{results=`hide'}. Si se desea ver el resultado de
+la ejecución correcta de alguno de estos chunks bastará con eliminar
+esta parametrización en el fichero Rmd descargado (ver
+\protect\hyperlink{id-github}{punto 7} ).
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Para las librerías necesarias, se deben instalar los paquetes si no están ya instalados. }
-\CommentTok{\# Ocultamos los mensajes.}
+\CommentTok{\# INSTALACIÓN (si no están instalados ) DE PAQUETES CON LAS LIBRERÍAS }
+\CommentTok{\# NECESARIAS DE R (Se ocultan los mensajes de la instalación )}
 \FunctionTok{suppressMessages}\NormalTok{(\{}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(epiDisplay))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"epiDisplay"}\NormalTok{)\}}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(e1071))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"e1071"}\NormalTok{)\}}
@@ -178,6 +207,8 @@ corresponderían a esta versión final y están maquetadas en Markdown.
 \end{Highlighting}
 \end{Shaded}
 
+\newpage
+
 \hypertarget{obtenciuxf3n-de-datos}{%
 \section{2 OBTENCIÓN DE DATOS}\label{obtenciuxf3n-de-datos}}
 
@@ -187,7 +218,7 @@ Abierto}\label{fichero-y-datos-en-abierto}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# El fichero .sav lo tenemos en una subcarpeta DATOS}
+\CommentTok{\# El fichero .sav lo debe estar en una subcarpeta DATOS}
 \NormalTok{nombreFichero}\OtherTok{\textless{}{-}}\StringTok{"datosjulio2023.sav"}
 \NormalTok{directorioTrabajo}\OtherTok{\textless{}{-}}\FunctionTok{getwd}\NormalTok{()}
 \NormalTok{rutaFichero}\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(directorioTrabajo,}\StringTok{"DATOS"}\NormalTok{,nombreFichero,}\AttributeTok{sep=}\StringTok{"/"}\NormalTok{)}
@@ -198,9 +229,9 @@ Abierto}\label{fichero-y-datos-en-abierto}}
 \subsection{\texorpdfstring{2.2 Creación de la base de datos (\emph{data
 frame})}{2.2 Creación de la base de datos (data frame)}}\label{creaciuxf3n-de-la-base-de-datos-data-frame}}
 
-A partir del fichero de tipo \emph{sav} se creará el \emph{data frame}
-de R. En será la base de datos incial donde tendremos todos los datos
-del barómetro en concreto del Estudio 3415.
+A partir del fichero de tipo \textbf{datosjulio2023.sav} descargado
+desde el portal del CIS, se creará el \emph{data frame} de R. Esta será
+la base de datos inicial con todos los datos de la encuesta.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -216,88 +247,68 @@ del barómetro en concreto del Estudio 3415.
 \subsection{2.3 Consultar el cuestionario y el diccionario de
 datos}\label{consultar-el-cuestionario-y-el-diccionario-de-datos}}
 
-Al margen de consultar el cuestionario del CIS, mediante R se puede
-observar la variable para intentar deducir de qué tipo se trata.
+Al margen de consultar el cuestionario del CIS, mediante funciones de R
+se puede observar la variable para intentar deducir de qué tipo se
+trata.
 
 Algunas consultas posibles podrían ser:
 
-\begin{itemize}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Consultar algunos casos y los valores con etiquetas (en este caso) con
+  Consultar algunos casos y ver sus valores y etiquetas con
   \emph{head()} o \emph{tail()}
 \item
-  Usar \emph{table} que devuelve el número de casos de cada valor.
+  Agrupar todos los valores con la función \emph{unique}
 \item
-  Agrupar todos los valores con \emph{unique}
-\end{itemize}
+  Usar la función \emph{table} que devuelve el número de casos de cada
+  valor.
+\end{enumerate}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{tail}\NormalTok{(df\_cisjulio}\SpecialCharTok{$}\NormalTok{PROBVOTO,}\DecValTok{5}\NormalTok{) }\CommentTok{\# vemos solo 5 casos y los valores y etiquetas}
+\CommentTok{\# 1. Muestra los 5 últimos casos. Los valores y etiquetas}
+\CommentTok{\# tail(df\_cisjulio$PROBVOTO,5) }
+\CommentTok{\# 2. Obtiene los valores sin duplicados}
+\CommentTok{\# unique(df\_cisjulio$PROBVOTO) }
+\CommentTok{\# 3. table(df\_cisjulio$PROBVOTO) \# Nos da el total de casos que tiene }
+            \CommentTok{\# cada valor}
+
+\CommentTok{\# Uso de formato RMarkdown }
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{table}\NormalTok{(df\_cisjulio}\SpecialCharTok{$}\NormalTok{PROBVOTO),}\AttributeTok{column.width=}\FunctionTok{c}\NormalTok{(}\StringTok{"30\%"}\NormalTok{,}\StringTok{"70\%"}\NormalTok{),}
+  \AttributeTok{col.names =} \FunctionTok{c}\NormalTok{(}\StringTok{"Valor"}\NormalTok{,}\StringTok{"Repeticiones"}\NormalTok{),}\AttributeTok{caption=}\StringTok{"Repeticiones de cada valor"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## <labelled<double>[5]>: Escala de probabilidad de ir a votar (0-10) en las elecciones generales de 2023
-## [1] 10 10 10 10  5
-## 
-## Labels:
-##  value                                label
-##      0 0 Con toda seguridad no iría a votar
-##      1                                    1
-##      2                                    2
-##      3                                    3
-##      4                                    4
-##      5                                    5
-##      6                                    6
-##      7                                    7
-##      8                                    8
-##      9                                    9
-##     10  10 Con toda seguridad, iría a votar
-##     98                                 N.S.
-##     99                                 N.C.
-\end{verbatim}
+\begin{longtable}[]{@{}lr@{}}
+\caption{Repeticiones de cada valor}\tabularnewline
+\toprule\noalign{}
+Valor & Repeticiones \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+Valor & Repeticiones \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & 249 \\
+1 & 35 \\
+2 & 31 \\
+3 & 32 \\
+4 & 23 \\
+5 & 183 \\
+6 & 75 \\
+7 & 117 \\
+8 & 303 \\
+9 & 574 \\
+10 & 7145 \\
+98 & 16 \\
+99 & 15 \\
+\end{longtable}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-                             \CommentTok{\# de la variable puesto que es factor}
-\FunctionTok{table}\NormalTok{(df\_cisjulio}\SpecialCharTok{$}\NormalTok{PROBVOTO) }\CommentTok{\# Nos da el total de casos que tiene cada valor}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-##    0    1    2    3    4    5    6    7    8    9   10   98   99 
-##  249   35   31   32   23  183   75  117  303  574 7145   16   15
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{unique}\NormalTok{(df\_cisjulio}\SpecialCharTok{$}\NormalTok{PROBVOTO) }\CommentTok{\# Obtiene los valores sin duplicados}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## <labelled<double>[13]>: Escala de probabilidad de ir a votar (0-10) en las elecciones generales de 2023
-##  [1] 10  6  0 99  5  8  2  9  7  4  3 98  1
-## 
-## Labels:
-##  value                                label
-##      0 0 Con toda seguridad no iría a votar
-##      1                                    1
-##      2                                    2
-##      3                                    3
-##      4                                    4
-##      5                                    5
-##      6                                    6
-##      7                                    7
-##      8                                    8
-##      9                                    9
-##     10  10 Con toda seguridad, iría a votar
-##     98                                 N.S.
-##     99                                 N.C.
-\end{verbatim}
+\newpage
 
 \hypertarget{preparaciuxf3n-de-la-matriz-de-datos}{%
 \section{3 PREPARACIÓN DE LA MATRIZ DE
@@ -310,36 +321,37 @@ simplificar esta base de datos inicial.
 \subsection{3.1 Limpieza de la base de
 datos.}\label{limpieza-de-la-base-de-datos.}}
 
-El data frame inicial contiene \texttt{r}ncol(df\_cisjulio)` columnas
-correspondientes a todas las preguntas de la encuesta. Se puede
-prescindir del resto de columnas del data frame innecesarias para
-nuestro análisis univariado.
+El data frame inicial contiene 141 columnas correspondientes a todas las
+preguntas de la encuesta. Se puede prescindir del resto de columnas del
+data frame innecesarias para nuestro análisis univariado.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{df\_cisProbVoto}\OtherTok{\textless{}{-}}\NormalTok{df\_cisjulio [, }\StringTok{"PROBVOTO"}\NormalTok{]}
-\CommentTok{\#ncol(df\_cisjulio) \# devuelve el número de columnas del data frame. Usado en Rmd}
+\CommentTok{\# ncol(df\_cisjulio) \# Para ver el número de columnas}
 \end{Highlighting}
 \end{Shaded}
 
-Hemos pasado de \texttt{r}ncol(df\_cisjulio)` a 1 sola columna.
+Se ha reducido de 141 columna a 1 sola.
 
 \hypertarget{recodificciuxf3n}{%
 \subsection{3.2 Recodificción}\label{recodificciuxf3n}}
 
-En este caso hay pocos valores válidos (11) como es habitual en una
-variable cualitativa, no se va a agrupar valores pero si se debe decidir
-qué valores no son válidos en la estadística y excluirlos.
+En este caso hay pocos valores válidos como es habitual en una variable
+cualitativa (11 valores que son {[}0..10{]} ), no se va a agrupar
+valores pero si se debe decidir qué valores no son válidos en la
+estadística y excluirlos.
 
-\hypertarget{duplicamos-la-columna}{%
-\subsubsection{Duplicamos la columna}\label{duplicamos-la-columna}}
+\hypertarget{se-duplica-la-columna}{%
+\subsubsection{Se duplica la columna}\label{se-duplica-la-columna}}
 
-Antes de modificar cualquier campo, se debe hacer un dupicado de este
-(nueva columna en el data frame) y trabajar sobre él.
+Antes de modificar cualquier campo, se debe hacer un duplicado de este
+(una nueva columna en el data frame) y trabajar sobre él.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO}\OtherTok{\textless{}{-}}\NormalTok{df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{PROBVOTO}
+\CommentTok{\# Duplicación de columna}
+\NormalTok{df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO}\OtherTok{\textless{}{-}}\NormalTok{df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{PROBVOTO }
 \end{Highlighting}
 \end{Shaded}
 
@@ -347,7 +359,23 @@ Antes de modificar cualquier campo, se debe hacer un dupicado de este
 \subsubsection{Valores válidos y valores no
 válidos}\label{valores-vuxe1lidos-y-valores-no-vuxe1lidos}}
 
-Valores no válidos: * 98 N.S. * 99 N.C. Valores válidos: 0..10
+Valores no válidos:
+
+\begin{itemize}
+\tightlist
+\item
+  98 N.S.
+\item
+  99 N.C.
+\end{itemize}
+
+Valores válidos:
+
+\begin{itemize}
+\tightlist
+\item
+  0,1,2,3,4,5,6,7,8,9,10
+\end{itemize}
 
 Los valores no válidos tienen un doble tratamiento:
 
@@ -359,25 +387,20 @@ Los valores no válidos tienen un doble tratamiento:
   Excluirlos de los cálculos
 \end{itemize}
 
-\emph{Importancia de los valores perdidos}
+\hypertarget{importancia-de-los-valores-perdidos}{%
+\paragraph{Importancia de los valores
+perdidos}\label{importancia-de-los-valores-perdidos}}
 
 Para valorar la incidencia o relevancia de los valores no válidos se
-puede de qué porcentaje de casos de la muestra se trata.
+puede ver de qué porcentaje de casos sobre el total de la muestra se
+trata.
 
-Vemos que tenemos 31 de un total de 8798. Un porcentaje inferior a un
-0.4 \% de los casos y, por tanto, insignificante.
+Existen 31 de un total de 8798. Un porcentaje inferior a un 0.4 \% de
+los casos y, por tanto, insignificante.
 
-\begin{quote}
-Obtenemos estos valores con
-
-\texttt{\#r\ nrow(df\_cisProbVoto{[}df\_cisProbVoto\$recPROBVOTO\textgreater{}=98,{]})}
-
-\texttt{\#r\ nrow(df\_cisProbVoto)}
-
-\texttt{\#r\ nrow(df\_cisProbVoto{[}df\_cisProbVoto\$recPROBVOTO\textgreater{}=98,{]})/nrow(df\_cisProbVoto)*100}
-\end{quote}
-
-\emph{Asignar NA para excluir en el análisis}
+\hypertarget{asignar-na-para-excluir-en-el-anuxe1lisis}{%
+\paragraph{Asignar NA para excluir en el
+análisis}\label{asignar-na-para-excluir-en-el-anuxe1lisis}}
 
 R permite excluir en sus funciones estadísticas los valores perdidos con
 parametrizaciones al estilo \emph{MISSING=TRUE} o \emph{na.rm = TRUE}.
@@ -385,17 +408,20 @@ Para ello, previamente se tiene que asignar el valor NA a estos campos.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# Los valores 98 y 99 (NS, NC ) pasan a NA}
 \NormalTok{df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO[df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO}\SpecialCharTok{\textgreater{}=}\DecValTok{98}\NormalTok{]}\OtherTok{\textless{}{-}}\ConstantTok{NA}
 \end{Highlighting}
 \end{Shaded}
+
+\newpage
 
 \hypertarget{distribuciuxf3n-de-frecuencias}{%
 \section{4. DISTRIBUCIÓN DE
 FRECUENCIAS}\label{distribuciuxf3n-de-frecuencias}}
 
-En esta apartado se verá el uso de tablas de distribución de frecuencias
-y gráficos, métodos fundamnetales que nos muestran as constituyen una
-primera forma de dar cuenta de la información sobre las variables.
+En este apartado se verá el uso de tablas de distribución de frecuencias
+y gráficos. Ambos nos dan una idea de la frecuencia con que se repiten
+los diferentes valores.
 
 \hypertarget{gruxe1fico-de-barras}{%
 \subsection{4.1 Gráfico de barras}\label{gruxe1fico-de-barras}}
@@ -403,9 +429,9 @@ primera forma de dar cuenta de la información sobre las variables.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{tablaGrafico }\OtherTok{\textless{}{-}} \FunctionTok{tab1}\NormalTok{(df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO, }\AttributeTok{cum.percent =} \ConstantTok{TRUE}\NormalTok{, }
-             \AttributeTok{bar.values =} \StringTok{"percent"}\NormalTok{, }\AttributeTok{missing =} \ConstantTok{FALSE}\NormalTok{,}
-             \AttributeTok{xlab=}\StringTok{"\% probabilidad"}\NormalTok{,}\AttributeTok{decimal=}\DecValTok{1}\NormalTok{,}
-             \AttributeTok{main=}\StringTok{"Gráfico 1. Probabilidad de votar"}\NormalTok{)}
+                            \AttributeTok{bar.values =} \StringTok{"percent"}\NormalTok{, }\AttributeTok{missing =} \ConstantTok{FALSE}\NormalTok{,}
+                                    \AttributeTok{xlab=}\StringTok{"\% probabilidad"}\NormalTok{, }\AttributeTok{decimal=}\DecValTok{1}\NormalTok{,}
+                            \AttributeTok{main=}\StringTok{"Gráfico 1. Probabilidad de votar"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -414,25 +440,28 @@ primera forma de dar cuenta de la información sobre las variables.
 \hypertarget{tabla-de-frecuencias}{%
 \subsection{4.2 Tabla de frecuencias}\label{tabla-de-frecuencias}}
 
-En la tabla de frecuencias siguiente se muestra el total casos por cada
-valor, la frecuencia en que aparecen y la frecuencia acumulada. Las
-frecuencias puede calcularse respecto al totas de casos o respecto al
-total de casos válidos. En este caso, como ya se ha apuntado
+En la tabla de frecuencias siguiente se muestra el total casos de la
+muestra por cada valor, la frecuencia en que aparecen y la frecuencia
+acumulada. Las frecuencias puede calcularse respecto al total de casos o
+respecto al total de casos válidos. En este caso, como ya se ha apuntado
 anteriormente, la diferencia es insignificante.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Mediante el atributo output.table se exporta una tabla}
 \NormalTok{tabla}\OtherTok{\textless{}{-}}\NormalTok{tablaGrafico}\SpecialCharTok{$}\NormalTok{output.table}
-\CommentTok{\#Para mejorar la comprensión se puede cambiar los nombres de las columnas e imprimir con MD}
-\FunctionTok{colnames}\NormalTok{(tabla)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"Frecuencia"}\NormalTok{,}\StringTok{"\%"}\NormalTok{,}\StringTok{"\%\_acumulado"}\NormalTok{, }\StringTok{"\%\_válido"}\NormalTok{,}\StringTok{"\%\_acumulado válido"}\NormalTok{)}
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(tabla,}\AttributeTok{column.width=}\FunctionTok{c}\NormalTok{(}\StringTok{"10\%"}\NormalTok{,}\StringTok{"20\%"}\NormalTok{,}\StringTok{"20\%"}\NormalTok{,}\StringTok{"20\%"}\NormalTok{,}\StringTok{"20\%"}\NormalTok{),}\AttributeTok{caption=}\StringTok{"Tabla1.}
-\StringTok{              Tabla de distribución de frecuencias"}\NormalTok{) }
+\CommentTok{\#Para mejor la comprensión se puede cambiar los nombres de las columnas e }
+\CommentTok{\# imprimir la tabla con Rmd}
+\FunctionTok{colnames}\NormalTok{(tabla)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"Frecuencia"}\NormalTok{,}\StringTok{"\%"}\NormalTok{,}\StringTok{"\%\_acumulado"}\NormalTok{, }\StringTok{"\%\_válido"}\NormalTok{,}
+                                          \StringTok{"\%\_acumulado válido"}\NormalTok{)}
+
+\FunctionTok{kable}\NormalTok{(tabla,}\AttributeTok{column.width =} \FunctionTok{c}\NormalTok{(}\StringTok{"10\%"}\NormalTok{,}\StringTok{"20\%"}\NormalTok{,}\StringTok{"20\%"}\NormalTok{,}\StringTok{"20\%"}\NormalTok{,}\StringTok{"20\%"}\NormalTok{),}
+                \AttributeTok{caption=}\StringTok{"Tabla de distribución de frecuencias"}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
 \begin{longtable}[]{@{}lrrrrr@{}}
-\caption{Tabla1. Tabla de distribución de frecuencias}\tabularnewline
+\caption{Tabla de distribución de frecuencias}\tabularnewline
 \toprule\noalign{}
 & Frecuencia & \% & \%\_acumulado & \%\_válido & \%\_acumulado válido \\
 \midrule\noalign{}
@@ -460,29 +489,31 @@ Total & 8798 & 100.0 & 100.0 & 100.0 & 100.0 \\
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print(tabla)  \# En R estrictamente}
+\CommentTok{\# print(tabla)  \# En R estrictamente (no Rmd)}
 
-\CommentTok{\# Para calcular las frecuencias directamente:}
+\CommentTok{\# Para calcular solo las frecuencias de cada valor directamente:}
 \CommentTok{\# round(prop.table(table(df\_cisProbVoto$recPROBVOTO, useNA="no"))*100,1)}
 \end{Highlighting}
 \end{Shaded}
+
+\newpage
 
 \hypertarget{tratamiento-como-variable-cuantitativa}{%
 \section{5 TRATAMIENTO COMO VARIABLE
 CUANTITATIVA}\label{tratamiento-como-variable-cuantitativa}}
 
-Aunque la probabilidad de votar en este cuestionario se trata de una
+Aunque la ``probabilidad de votar'' en este cuestionario se trata de una
 variable \emph{cualitativa ordinal}, se podría asumir que los valores
-válidos (0..10) representan una magnitud que admite operaciones
-artiméticas y darle un tratamiento de \emph{variable cuantitativa}. En
+válidos {[}0..10{]} representan una magnitud que admite operaciones
+aritméticas y darle un tratamiento de \emph{variable cuantitativa}. En
 este contexto podría entenderse como de variable \emph{razón} si se
-asume el valor 0 como la ausencia absoluta de intención de ir a votar.
-No obstante se trata de una interpretación que no debe sacarse del
-contexto del análisis concreto.
+asume el valor 0 como la ausencia absoluta de intención de ir a votar
+(cero absoluto). No obstante se trata de una interpretación que no debe
+sacarse del contexto de este análisis concreto.
 
 Este planteamiento, excepcional, se justifica por la necesidad de
 obtener los valores de las \emph{medidas de tendencia central} más allá
-de la \emph{moda}
+de la \emph{moda}.
 
 \hypertarget{medidas-de-tendencia-central}{%
 \subsection{5.1 Medidas de tendencia
@@ -498,24 +529,37 @@ segundo cuartil equivale a la mediana.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{summary}\NormalTok{(df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO)}
+\FunctionTok{summary}\NormalTok{(df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO,}\AttributeTok{digits=}\DecValTok{2}\NormalTok{)  }\CommentTok{\#Digits: dígitos significativos}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-##   0.000  10.000  10.000   9.297  10.000  10.000      31
+##     0.0    10.0    10.0     9.3    10.0    10.0      31
 \end{verbatim}
 
 \hypertarget{media-mediana-y-moda}{%
 \subsubsection{Media, Mediana y Moda}\label{media-mediana-y-moda}}
 
 Estas medidas de posición central se pueden obtener mediante funciones
-específicas con posibilidad de especificar opciones en su cálculo
-(borrar NA, número de decimales\ldots) y guardar su valor en una
+de R con posibilidad de parametrizar su cálculo (borrar NA, número de
+decimales\ldots) y evidentemente guardar su valor de retorno en una
 variable para su posterior uso.
 
-\textbf{Media} Promedio aritmético de todos los valores de la muestra.
+\begin{itemize}
+\tightlist
+\item
+  La opción \emph{na.rm = TRUE} indica que no se debe considerar los
+  valores no validos
+\item
+  El valor obtenido se puede redondear con la función \emph{round}. En
+  ciencias sociales lo habitual es 1 decimal
+\end{itemize}
+
+\hypertarget{media}{%
+\paragraph{Media}\label{media}}
+
+Promedio aritmético de todos los valores de la muestra.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -523,10 +567,13 @@ variable para su posterior uso.
 \end{Highlighting}
 \end{Shaded}
 
-\textbf{Mediana} Valor de la muestra que divide la muestra en dos
-mitades o grupos con igual cantidad de casos, siendo uno de los grupos
-el formado por casoa con un valor superior y el otro grupo el formado
-por los casos con valor inferior.
+\hypertarget{mediana}{%
+\paragraph{Mediana}\label{mediana}}
+
+Valor de la muestra que divide la muestra en dos mitades o grupos con
+igual cantidad de casos, siendo uno de los grupos el formado por casos
+con un valor superior y el otro grupo el formado por los casos con valor
+inferior.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -534,31 +581,29 @@ por los casos con valor inferior.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{quote}
-La opción \emph{na.rm = TRUE} indica no se debe considerar los valores
-no validos: remove NA Redondeamos con la función \emph{round}, como es
-habitual en ciencias sociales a 1 decimal
-\end{quote}
+\hypertarget{moda}{%
+\paragraph{Moda}\label{moda}}
 
-\textbf{Moda} La moda es el valor de la muestra que más se repite.
-\textgreater{} En R no existe una función que devuelva la moda
-directamente similar a las vistas para mediana \emph{median()} y para la
-media \emph{mean()}. Se debe usar una diseñada expresamente.
+La moda es el valor de la muestra que más se repite. Como ya se vio en
+la actividad anterior de esta práctica, en R no existe una función que
+devuelva la moda directamente similar a las vistas para mediana
+\emph{median()} y para la media \emph{mean()}.
+
+Se debe usar una diseñada expresamente que, una vez definida, se puede
+llamar de igual manera que a las librerías predefinidas de R e
+incorporadas con la instalación de los paquetes.
 
 \emph{Función moda}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#declaración y desarollo de la función de usuario}
+\CommentTok{\#declaración y desarrollo de la función de usuario}
 \NormalTok{moda}\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(v) \{}
 \NormalTok{uniqv }\OtherTok{\textless{}{-}} \FunctionTok{unique}\NormalTok{(v)}
 \NormalTok{uniqv[}\FunctionTok{which.max}\NormalTok{(}\FunctionTok{tabulate}\NormalTok{(}\FunctionTok{match}\NormalTok{(v, uniqv)))]}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
-
-Una vez definida la función se puede llamar como las incorporadas en las
-librerías.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -572,22 +617,22 @@ librerías.
 \begin{itemize}
 \tightlist
 \item
-  La media es 9.3
+  La Media es 9.3
 \item
-  La mediana es 10
+  La Mediana es 10
 \item
-  La moda es 10
+  La Moda es 10
 \end{itemize}
 
 \textbf{Conclusiones}
 
-La \emph{media aritmética}: 9.3 está muy influida la altísima frecuencia
-de los valores más altos, sobretodo del máximo. Pese que la
-\emph{mediana} nos de como resultado 10, el total de casos con valor
-inferior no llega a ser el 50\%.
+La \emph{media aritmética}: 9.3 está muy influida por la altísima
+frecuencia de los valores más altos, sobretodo del máximo (10). Pese a
+que la \emph{Mediana} nos de como resultado 10, el total de casos con
+valor inferior no llega a ser el 50\%.
 
-La moda sin duda es el valor 10 a la vista del porcentaje reflejado en
-la tabla de frecuencia.
+La moda sin duda es el valor 10 como ya se podía deducir a partir del
+porcentaje reflejado en la tabla de frecuencia.
 
 \hypertarget{comparaciuxf3n-entre-moda-media-y-mediana.}{%
 \subsection{5.2 Comparación entre Moda, Media y
@@ -596,17 +641,21 @@ Mediana.}\label{comparaciuxf3n-entre-moda-media-y-mediana.}}
 \textbf{Histograma}
 
 El histograma mostrará una asimetría positiva (sesgo a la izquierda)
-donde la Media y a Moda coinciden y la Media es el valor más bajo
+donde la media y a moda coinciden y la media es el valor más bajo
+
 \textbf{X\textless Me=Mo}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Eliminar filas con NA}
-\NormalTok{df\_cisProbVotoSinNA }\OtherTok{\textless{}{-}}\NormalTok{ df\_cisProbVoto[}\FunctionTok{complete.cases}\NormalTok{(df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO), ]}
+\NormalTok{df\_cisProbVotoSinNA }\OtherTok{\textless{}{-}}\NormalTok{ df\_cisProbVoto[}\FunctionTok{complete.cases}\NormalTok{(}
+\NormalTok{                                      df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO), ]}
 
-\FunctionTok{hist}\NormalTok{(df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO, }\AttributeTok{col =} \StringTok{"lightblue"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Probabilidad de voto"}\NormalTok{, }
-     \AttributeTok{ylab =} \StringTok{"Frecuencia"}\NormalTok{,}
-     \AttributeTok{main =} \StringTok{"Gráfico 2. Histograma de la probabilidad de votar"}\NormalTok{)}
+\FunctionTok{hist}\NormalTok{(df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO, }\AttributeTok{col =} \StringTok{"lightblue"}\NormalTok{, }
+                                          \AttributeTok{xlab =} \StringTok{"Probabilidad de voto"}\NormalTok{, }
+                                                     \AttributeTok{ylab =} \StringTok{"Frecuencia"}\NormalTok{,}
+              \AttributeTok{main =} \StringTok{"Gráfico 2. Histograma de la probabilidad de votar"}\NormalTok{)}
+
 \FunctionTok{lines}\NormalTok{(}\FunctionTok{density}\NormalTok{(df\_cisProbVotoSinNA}\SpecialCharTok{$}\NormalTok{recPROBVOTO), }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -614,11 +663,11 @@ donde la Media y a Moda coinciden y la Media es el valor más bajo
 \includegraphics{probabilidadVoto_files/figure-latex/histograma-1.pdf}
 \#\#\# Conclusión sobre las medidas de posición central
 
-Viendo el sesgo (a la derecha) se entiende que la Mediana tenga un valor
-mayor que la Moda y menor que la Media. La Mediada debería ser una
-medida de posición central mejor que la Media ya que esta quedaría
-distorsionada por los extremos. La Moda viene definida por la repetición
-de un valor. En nuestro caso, en cambio, la Mediana coincide con la
+Viendo el sesgo (a la derecha) se entiende que la mediana tenga un valor
+mayor que la moda y menor que la Media. La mediana debería ser una
+medida de posición central mejor que la media ya que esta quedaría
+distorsionada por los extremos. La moda viene definida por la repetición
+de un valor. En nuestro caso, en cambio, la mediana coincide con la
 Moda.
 
 \hypertarget{medidas-de-posiciuxf3n-no-central}{%
@@ -631,8 +680,9 @@ Mínimo}\label{valores-extremos-muxe1ximo-y-muxednimo}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# Se guardan en variables los retorno de las funciones predefinidas de R}
+\CommentTok{\# así se pueden leer desde le MD}
 \NormalTok{maximo}\OtherTok{\textless{}{-}}\FunctionTok{max}\NormalTok{(df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
-
 \NormalTok{minimo}\OtherTok{\textless{}{-}}\FunctionTok{min}\NormalTok{(df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -649,27 +699,29 @@ Los valores extremos son:
 
 Al tratarse de una pregunta cerrada con una ordenación entre las
 respuestas (variable cualitativa ordinal), estos valores indican el par
-de respuestas más dispares. La coincidencia de máximo y mínimo con las
-opciones más extremas implica que ha habido casos donde el encuestado ha
-elegido estos valores, simplemente.
+de respuestas más dispares entre si de nuestra muestra. La coincidencia
+de máximo y mínimo con las opciones más extremas posibles significa
+simplemente que en nuestra muestra ha habido, al menos, un caso (persona
+encuestada) que ha elegido un extremo.
 
 \hypertarget{cuartiles-y-percentiles}{%
 \subsubsection{Cuartiles y percentiles}\label{cuartiles-y-percentiles}}
 
 En una distribución de valores de una muestra tan sesgada, un cuartil no
 da demasiada información. La inmensa mayoría de valores son 10 y el
-resto son tratados como valores atípicos ( 1,5 veces la caja).
+resto son tratados como valores atípicos (1,5 veces la caja).
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Crear el diagrama de caja}
 \FunctionTok{boxplot}\NormalTok{(df\_cisProbVotoSinNA}\SpecialCharTok{$}\NormalTok{recPROBVOTO, }
-        \AttributeTok{main =} \StringTok{"Grafico 3. Cuartiles probabilidad de votar"}\NormalTok{,}
+        \AttributeTok{main =} \StringTok{"Gráfico 3. Cuartiles probabilidad de votar"}\NormalTok{,}
         \AttributeTok{ylab =} \StringTok{"Valores de 0 a 10"}\NormalTok{, }
         \AttributeTok{col =} \StringTok{"lightblue"}\NormalTok{)}
 
 \CommentTok{\# Calcular los cuartiles}
-\NormalTok{cuartiles }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(df\_cisProbVotoSinNA}\SpecialCharTok{$}\NormalTok{recPROBVOTO, }\AttributeTok{probs =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.75}\NormalTok{))}
+\NormalTok{cuartiles }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(df\_cisProbVotoSinNA}\SpecialCharTok{$}\NormalTok{recPROBVOTO, }
+                            \AttributeTok{probs =} \FunctionTok{c}\NormalTok{(}\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.75}\NormalTok{))}
 
 \CommentTok{\# Agregar las líneas de los los cuartiles}
 \FunctionTok{abline}\NormalTok{(}\AttributeTok{h =}\NormalTok{ cuartiles, }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"green"}\NormalTok{, }\StringTok{"blue"}\NormalTok{))}
@@ -682,9 +734,12 @@ Se puede usar los percentiles para analizar mejor la información.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{percentiles}\OtherTok{\textless{}{-}}\FunctionTok{quantile}\NormalTok{(df\_cisProbVotoSinNA, }\FunctionTok{c}\NormalTok{(.}\DecValTok{10}\NormalTok{,.}\DecValTok{20}\NormalTok{,.}\DecValTok{30}\NormalTok{,.}\DecValTok{40}\NormalTok{,.}\DecValTok{50}\NormalTok{,.}\DecValTok{60}\NormalTok{,.}\DecValTok{70}\NormalTok{,.}\DecValTok{80}\NormalTok{,.}\DecValTok{90}\NormalTok{), }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
-\FunctionTok{boxplot}\NormalTok{(df\_cisProbVotoSinNA}\SpecialCharTok{$}\NormalTok{recPROBVOTO, }\AttributeTok{main =} \StringTok{"Grafico 3. Percentiles probabilidad de votar"}\NormalTok{,}
-        \AttributeTok{ylab =} \StringTok{"Valores de 0 a 10"}\NormalTok{, }\AttributeTok{col =} \StringTok{"lightblue"}\NormalTok{)}
+\NormalTok{percentiles}\OtherTok{\textless{}{-}}\FunctionTok{quantile}\NormalTok{(df\_cisProbVotoSinNA, }\FunctionTok{c}\NormalTok{(.}\DecValTok{10}\NormalTok{,.}\DecValTok{20}\NormalTok{,.}\DecValTok{30}\NormalTok{,.}\DecValTok{40}\NormalTok{,.}\DecValTok{50}\NormalTok{,.}\DecValTok{60}\NormalTok{,.}\DecValTok{70}\NormalTok{,}
+\NormalTok{                                                  .}\DecValTok{80}\NormalTok{,.}\DecValTok{90}\NormalTok{), }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{boxplot}\NormalTok{(df\_cisProbVotoSinNA}\SpecialCharTok{$}\NormalTok{recPROBVOTO, }
+                    \AttributeTok{main =} \StringTok{"Gráfico 4. Percentiles probabilidad de votar"}\NormalTok{,}
+                            \AttributeTok{ylab =} \StringTok{"Valores de 0 a 10"}\NormalTok{, }\AttributeTok{col =} \StringTok{"lightblue"}\NormalTok{)}
+
 \CommentTok{\# Agregar las líneas de los los cuartiles}
 \FunctionTok{abline}\NormalTok{(}\AttributeTok{h =}\NormalTok{ percentiles, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{)}
 \end{Highlighting}
@@ -694,26 +749,32 @@ Se puede usar los percentiles para analizar mejor la información.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{percentiles}\OtherTok{\textless{}{-}}\FunctionTok{quantile}\NormalTok{(df\_cisProbVotoSinNA, }\FunctionTok{c}\NormalTok{(.}\DecValTok{02}\NormalTok{,.}\DecValTok{03}\NormalTok{,.}\DecValTok{04}\NormalTok{,.}\DecValTok{05}\NormalTok{,.}\DecValTok{06}\NormalTok{,.}\DecValTok{07}\NormalTok{,.}\DecValTok{08}\NormalTok{,.}\DecValTok{09}\NormalTok{,.}\DecValTok{10}\NormalTok{,.}\DecValTok{20}\NormalTok{,.}\DecValTok{30}\NormalTok{,.}\DecValTok{40}\NormalTok{,}
-\NormalTok{                                             .}\DecValTok{50}\NormalTok{,.}\DecValTok{60}\NormalTok{,.}\DecValTok{70}\NormalTok{,.}\DecValTok{80}\NormalTok{,.}\DecValTok{90}\NormalTok{), }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
-\FunctionTok{boxplot}\NormalTok{(df\_cisProbVotoSinNA}\SpecialCharTok{$}\NormalTok{recPROBVOTO, }\AttributeTok{main =} \StringTok{"Grafico 3. Percentiles probabilidad de votar"}\NormalTok{,}
-        \AttributeTok{ylab =} \StringTok{"Valores de 0 a 10"}\NormalTok{, }\AttributeTok{col =} \StringTok{"lightblue"}\NormalTok{)}
+\NormalTok{percentiles}\OtherTok{\textless{}{-}}\FunctionTok{quantile}\NormalTok{(df\_cisProbVotoSinNA, }\FunctionTok{c}\NormalTok{(.}\DecValTok{02}\NormalTok{,.}\DecValTok{03}\NormalTok{,.}\DecValTok{04}\NormalTok{,.}\DecValTok{05}\NormalTok{,.}\DecValTok{06}\NormalTok{,.}\DecValTok{07}\NormalTok{,.}\DecValTok{08}\NormalTok{,}
+\NormalTok{                  .}\DecValTok{09}\NormalTok{,.}\DecValTok{10}\NormalTok{,.}\DecValTok{20}\NormalTok{,.}\DecValTok{30}\NormalTok{,.}\DecValTok{40}\NormalTok{,.}\DecValTok{50}\NormalTok{,.}\DecValTok{60}\NormalTok{,.}\DecValTok{70}\NormalTok{,.}\DecValTok{80}\NormalTok{,.}\DecValTok{90}\NormalTok{), }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{boxplot}\NormalTok{(df\_cisProbVotoSinNA}\SpecialCharTok{$}\NormalTok{recPROBVOTO, }
+                    \AttributeTok{main =} \StringTok{"Gráfico 5. Percentiles probabilidad de votar"}\NormalTok{,}
+                            \AttributeTok{ylab =} \StringTok{"Valores de 0 a 10"}\NormalTok{, }\AttributeTok{col =} \StringTok{"lightblue"}\NormalTok{)}
+
 \CommentTok{\# Agregar las líneas de los los cuartiles}
-\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =}\NormalTok{ percentiles, }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"green"}\NormalTok{, }\StringTok{"blue"}\NormalTok{,}\StringTok{"red"}\NormalTok{, }\StringTok{"green"}\NormalTok{,}\StringTok{"blue"}\NormalTok{,}\StringTok{"red"}\NormalTok{, }\StringTok{"green"}\NormalTok{,}
-                \StringTok{"blue"}\NormalTok{,}\StringTok{"red"}\NormalTok{, }\StringTok{"green"}\NormalTok{, }\StringTok{"blue"}\NormalTok{,}\StringTok{"red"}\NormalTok{, }\StringTok{"green"}\NormalTok{, }\StringTok{"blue"}\NormalTok{,}\StringTok{"red"}\NormalTok{, }\StringTok{"green"}\NormalTok{, }\StringTok{"blue"}\NormalTok{))}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{h =}\NormalTok{ percentiles, }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"green"}\NormalTok{, }\StringTok{"blue"}\NormalTok{,}\StringTok{"red"}\NormalTok{, }\StringTok{"green"}\NormalTok{,}
+                                \StringTok{"blue"}\NormalTok{,}\StringTok{"red"}\NormalTok{, }\StringTok{"green"}\NormalTok{,}\StringTok{"blue"}\NormalTok{,}\StringTok{"red"}\NormalTok{,}
+                                \StringTok{"green"}\NormalTok{, }\StringTok{"blue"}\NormalTok{,}\StringTok{"red"}\NormalTok{, }\StringTok{"green"}\NormalTok{, }
+                                \StringTok{"blue"}\NormalTok{,}\StringTok{"red"}\NormalTok{, }\StringTok{"green"}\NormalTok{, }\StringTok{"blue"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{probabilidadVoto_files/figure-latex/percentiles-1.pdf}
-\emph{Conclusión:} SOlo un porcentaje inferior al 9\% de la muestra ha
-respuesto un valor inferior al `8'. Algo que se puede ver también en la
-columna de frecuencias acumuladas ( Tabla de frecuencia) donde el valor
-8 acumula el 8,5\%.
+\emph{Conclusión:}
+
+Solo un porcentaje inferior al 9\% de la muestra ha respondido un valor
+inferior al `8'. Un hecho que se puede apreciar también en la columna de
+\emph{frecuencias acumuladas} (Tabla de frecuencia) donde el valor 8
+acumula el 8,5\%.
 
 \hypertarget{medidas-de-dispersiuxf3n}{%
 \subsection{5.4 Medidas de dispersión}\label{medidas-de-dispersiuxf3n}}
 
-Se procedera a obtener las medidas de varibilidad o dispersión que
+Se procederá a obtener las medidas de variabilidad o dispersión que
 informan del comportamiento de la variable y complementan la información
 sobre la centralidad.
 
@@ -723,9 +784,8 @@ típica}\label{varianza-o-desviaciuxf3n-tuxedpica}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{varianza}\OtherTok{\textless{}{-}}\FunctionTok{var}\NormalTok{(df\_cisProbVotoSinNA}\SpecialCharTok{$}\NormalTok{recPROBVOTO) }
-\NormalTok{varianza}\OtherTok{\textless{}{-}}\FunctionTok{var}\NormalTok{(df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO,}\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)  }\CommentTok{\# Si en el data frame aún están }
-\CommentTok{\# los valores perdidos.}
+\CommentTok{\# na.rm = TRUE. Si en el data frame existen valores perdidos.}
+\NormalTok{varianza}\OtherTok{\textless{}{-}}\FunctionTok{var}\NormalTok{(df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO,}\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -736,6 +796,7 @@ La desviación típica es: 4.2
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# na.rm = TRUE. Si en el data frame existen valores perdidos.}
 \NormalTok{desviacionEstandar}\OtherTok{\textless{}{-}}\FunctionTok{sd}\NormalTok{(df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -747,6 +808,7 @@ La desviación estándar es: 2
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# na.rm = TRUE. Si en el data frame existen valores perdidos.}
 \NormalTok{iqr}\OtherTok{\textless{}{-}}\FunctionTok{IQR}\NormalTok{(df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -757,11 +819,12 @@ El rango intercuartílico es 0
 \subsubsection{Curtosis}\label{curtosis}}
 
 El coeficiente de curtosis indica el nivel de apuntamiento achatamiento
-que presenta una distribución de valores. Solo tien sentidos en
+que presenta una distribución de valores. Solo tiene sentidos en
 distribuciones unimodales y simétricas. No es este nuestro caso.
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# na.rm = TRUE. Si en el data frame existen valores perdidos.}
 \NormalTok{coeficienteKurtosis}\OtherTok{\textless{}{-}}\FunctionTok{kurtosis}\NormalTok{(df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -778,15 +841,15 @@ Asimetría}\label{coeficiente-de-asimetruxeda}}
 \end{Highlighting}
 \end{Shaded}
 
-El coeficiente de asimetŕia es: -3.5101093
+El coeficiente de asimetría es: -3.5101093
 
 \hypertarget{grafico-de-densidad}{%
 \subsubsection{Grafico de densidad}\label{grafico-de-densidad}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{plot}\NormalTok{(df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO,}\AttributeTok{main =} \StringTok{"Gráfico de densidad"}\NormalTok{,}\AttributeTok{xlab =} \StringTok{"Casos"}\NormalTok{,}
-     \AttributeTok{ylab =} \StringTok{"Probabilidad de voto"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO,}\AttributeTok{main=}\StringTok{"Gráfico 6. Gráfico de densidad"}
+\NormalTok{                        ,}\AttributeTok{xlab=}\StringTok{"Casos"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Probabilidad de voto"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -797,14 +860,16 @@ El coeficiente de asimetŕia es: -3.5101093
 \hypertarget{resumen-valores}{%
 \section{6 RESUMEN VALORES}\label{resumen-valores}}
 
+Tabla 3: Resumen de valores de las mediciones
+
 \begin{longtable}[]{@{}lr@{}}
 \toprule\noalign{}
-MEDICIÓN & \\
+\textbf{Medición} & \textbf{Valor} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-\textbf{POSICION CENTRAL (Medidas de tendencia central)} & \\
+\textbf{POSICIÓN CENTRAL (Medidas de tendencia central)} & \\
 MODA & 10 \\
 MEDIANA & 10 \\
 MEDIA & 9.3 \\
@@ -822,6 +887,53 @@ DESVIACIÓN TÍPICA & 2 \\
 \textbf{MEDIDAS DE FORMA} & \\
 COEFICIENTE DE ASIMETRÍA & -3.5 \\
 COEFICIENTE DE KURTOSIS & 12 \\
+\end{longtable}
+
+\newpage
+
+\hypertarget{id-github}{%
+\section{7 EJECUCIÓN DEL Rmd Y REPOSITORIO DE
+FICHEROS}\label{id-github}}
+
+Para la ejecución del código R, está disponible el fichero ejecutable
+Rmd y el fichero de datos \emph{sav} en el repositorio GitHub. En el
+mismo repositorio se encuentra este PDF y un fichero HTML renderizados a
+partir del Rmd.
+
+El fichero \textbf{datosjulio2023.sav} debe ubicarse en una subcarpeta
+del directorio de trabajo con nombre \emph{DATA}.
+
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+\includegraphics[width=0.1\textwidth,height=\textheight]{../../recursos/iconohyperlink.jpg}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Enlace a GitHub
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/estudioCIS3415/DATOS/datosjulio2023.sav}{\includegraphics[width=0.1\textwidth,height=\textheight]{../../recursos/iconosav.png}}
+& Fichero de datos tipo sav &
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/estudioCIS3415/DATOS/datosjulio2023.sav}{datosjulio2023.sav} \\
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/estudioCIS3415/probabilidadVoto.Rmd}{\includegraphics[width=0.1\textwidth,height=\textheight]{../../recursos/rmarkdown.png}}
+& Fichero Rmd &
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/estudioCIS3415/probabilidadVoto.Rmd}{probabilidadVoto.Rmd} \\
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/estudioCIS3415/probabilidadVoto.html}{\includegraphics[width=0.1\textwidth,height=\textheight]{../../recursos/iconohtml.png}}
+& Fichero HTML &
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/estudioCIS3415/probabilidadVoto.html}{probabilidadVoto.html} \\
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/estudioCIS3415/probabilidadVoto.pdf}{\includegraphics[width=0.1\textwidth,height=\textheight]{../../recursos/iconopdf.png}}
+& Fichero PDF &
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/estudioCIS3415/probabilidadVoto.pdf}{probabilidadVoto.pdf} \\
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/}{\includegraphics[width=0.2\textwidth,height=\textheight]{../../recursos/iconogithub.png}}
+& &
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/}{Repositorio
+tofermos} \\
 \end{longtable}
 
 \end{document}
