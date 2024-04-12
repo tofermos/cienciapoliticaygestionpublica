@@ -32,10 +32,10 @@ output:
 
 # 1. INTRODUCCIÓN
 
-Esta actividad corresponde al apartado 3º de la Práctica 1 de Técnicas de Investigación en Ciencia Política. Se trata de un *análisis univariado* sobre la variable PREFPTE del Barómetro del CIS de julio de 2023 (Estudio 3415) concretamente se trata de la pregunta P8    : *De los/las principales líderes políticos/as, ¿quién preferiría que fuese el/la presidente/a del Gobierno tras las elecciones?* . 
+Esta actividad corresponde al apartado 3º de la Práctica 1 de Técnicas de Investigación en Ciencia Política. Se trata de un *análisis univariado* sobre la variable PREFPTE del Barómetro del CIS de julio de 2023 (Estudio 3415) concretamente se trata de la pregunta P8 que dice concretamente: *De los/las principales líderes políticos/as, ¿quién preferiría que fuese el/la presidente/a del Gobierno tras las elecciones?* . 
 Obviamente al tratarse de análisis univariado solo puede ser descriptivo.
 
-Para el análisis de los datos se usa el lenguaje de programación R. Se incorpora el código en los documentos renderizados (HTML y PDF) activando la opción "echo" de los chunks (**echo=TRUE**). En algunos chunks no interesa la impresión del resultado por lo que se configuran con  **results='hide'**. Si se desea ver el resultado de la ejecución correcta de alguno de estos chunks bastará con eliminar esta parametrización en el fichero Rmd descargado (ver [punto 8](#id-github) ).
+Para el análisis de los datos se usa el **lenguaje de programación R**. Se incorpora el código en los documentos renderizados (HTML y PDF) activando la opción *echo* de los chunks (*echo=TRUE*). En algunos chunks no interesa la impresión del resultado por lo que se configuran con *results='hide'*. Si se desea ver el resultado de la ejecución correcta de alguno de estos chunks bastará con eliminar el parametro *results='hide'* en el fichero Rmd descargado (ver [punto 8](#id-github) para descarga ).
 
 
 

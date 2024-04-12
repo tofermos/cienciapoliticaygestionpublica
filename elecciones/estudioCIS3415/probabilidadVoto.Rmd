@@ -30,15 +30,14 @@ output:
   
 # 1 INTRODUCCIÓN
 
-Esta actividad corresponde al apartado 4º de la Práctica 1 de Técnicas de Investigación en Ciencia Política. Se trata de un *análisis univariado* sobre la variable PROBVOTO (pregunta P1) de la encuesta del Barómetro de julio de 2023 (estudio 3415) vista en el apartado 3 y que pregunta: *Como Ud. sabe, el domingo 23 de julio se van a celebrar elecciones generales en España. Para comenzar me gustaría que me dijera cuál es la probabilidad de que Ud. vaya a votar. Para contestar utilice una escala de 0 a 10 en la que el 0 significa “con toda seguridad no iría a votar” y 10 “con toda seguridad, iría a votar”*.
+Esta actividad corresponde al apartado 4º de la Práctica 1 de la asignatura de Técnicas de Investigación en Ciencia Política I. Se trata de un *análisis univariado* sobre la variable PROBVOTO "Escala de probabilidad de ir a votar (0-10) en las elecciones generales de 2023" de la encuesta del Barómetro de julio de 2023 (estudio 3415) vista en la actividad anterior.
+La pregunta en concreto es: *Como Ud. sabe, el domingo 23 de julio se van a celebrar elecciones generales en España. Para comenzar me gustaría que me dijera cuál es la probabilidad de que Ud. vaya a votar. Para contestar utilice una escala de 0 a 10 en la que el 0 significa “con toda seguridad no iría a votar” y 10 “con toda seguridad, iría a votar”*. (pregunta P1) 
 
-Por lo tanto se trata también de un *análisis univariado*, descriptivo por tanto, aunque se le dará un tratamiento distinto.
-
-Pese a ser un variable cualitativa ordinal, esta será manipulada como si fuese una cuantitativa para obtener más información estadística. Se trata de una práctica habitual en ciencias sociales que debe justificarse en este caso porqué se observa se puede  obtener más información coherente.
+Al tratarse también de un *análisis univariado* este será descriptivo aunque se le dará un tratamiento distinto. Pese a ser una variable cualitativa ordinal (Valores de 0 a 10. Siendo 0, con toda seguridad no iría a votar y 10, con toda seguridad iría a votar), esta será manipulada como si fuese una variable cuantitativa para obtener más información estadística. Se trata de una práctica habitual en ciencias sociales que debe justificarse en este caso porqué se observa se puede  obtener más información coherente.
 
 Obviamente al tratarse de análisis univariado solo puede ser descriptivo.
 
-Como en la anterior actividad se incorpora el código R en los documentos renderizados (HTML y PDF) opción **echo=TRUE** de los chunks. En algunos chunks no interesa la impresión del resultado por lo que se configuran con  **results='hide'**. Si se desea ver el resultado de la ejecución correcta de alguno de estos chunks bastará con eliminar esta parametrización en el fichero Rmd descargado (ver [punto 7](#id-github) ).
+Como en la anterior actividad se incorpora el código del **lenguaje R** en los documentos renderizados (HTML y PDF) activando la opción *echo=TRUE* de los chunks. En algunos chunks no interesa la impresión del resultado por lo que se configuran con  *results='hide'*. Si se desea ver el resultado de la ejecución correcta bastará con eliminar esta parametrización en el fichero Rmd descargado (ver cómo descargar en el [punto 7](#id-github) ).
 
 
 
