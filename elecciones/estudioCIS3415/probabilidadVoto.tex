@@ -197,9 +197,8 @@ descargado (ver cómo descargar en el \protect\hyperlink{id-github}{punto
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# INSTALACIÓN (si no están instalados ) DE PAQUETES CON LAS LIBRERÍAS }
-\CommentTok{\# NECESARIAS DE R (Se ocultan los mensajes de la instalación )}
-\FunctionTok{suppressMessages}\NormalTok{(\{}
+\CommentTok{\# INSTALAR (si no están) PAQUETES de LIBRERÍAS R NECESARIAS }
+\FunctionTok{suppressMessages}\NormalTok{(\{  }\CommentTok{\# Se ocultan mensajes instalación}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(epiDisplay))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"epiDisplay"}\NormalTok{)\}}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(e1071))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"e1071"}\NormalTok{)\}}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(stats))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"stats"}\NormalTok{)\}}
@@ -221,7 +220,7 @@ Abierto}\label{fichero-y-datos-en-abierto}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# El fichero .sav lo debe estar en una subcarpeta DATOS}
+\CommentTok{\# El fichero .sav debe estar en una subcarpeta DATOS}
 \NormalTok{nombreFichero}\OtherTok{\textless{}{-}}\StringTok{"datosjulio2023.sav"}
 \NormalTok{directorioTrabajo}\OtherTok{\textless{}{-}}\FunctionTok{getwd}\NormalTok{()}
 \NormalTok{rutaFichero}\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(directorioTrabajo,}\StringTok{"DATOS"}\NormalTok{,nombreFichero,}\AttributeTok{sep=}\StringTok{"/"}\NormalTok{)}
@@ -335,7 +334,7 @@ data frame innecesarias para nuestro análisis univariado.
 \end{Highlighting}
 \end{Shaded}
 
-Se ha reducido de 141 columna a 1 sola.
+Se ha reducido de 141 columnas a 1 sola.
 
 \hypertarget{recodificciuxf3n}{%
 \subsection{3.2 Recodificción}\label{recodificciuxf3n}}
@@ -532,7 +531,7 @@ segundo cuartil equivale a la mediana.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{summary}\NormalTok{(df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO,}\AttributeTok{digits=}\DecValTok{2}\NormalTok{)  }\CommentTok{\#Digits: dígitos significativos}
+\FunctionTok{summary}\NormalTok{(df\_cisProbVoto}\SpecialCharTok{$}\NormalTok{recPROBVOTO,}\AttributeTok{digits=}\DecValTok{2}\NormalTok{) }\CommentTok{\# 2 dígitos significativos}
 \end{Highlighting}
 \end{Shaded}
 
@@ -771,8 +770,8 @@ Se puede usar los percentiles para analizar mejor la información.
 
 Solo un porcentaje inferior al 9\% de la muestra ha respondido un valor
 inferior al `8'. Un hecho que se puede apreciar también en la columna de
-\emph{frecuencias acumuladas} (Tabla de frecuencia) donde el valor 8
-acumula el 8,5\%.
+\emph{frecuencias acumuladas} de la Tabla de frecuencias donde el valor
+8 acumula el 8,5\%.
 
 \hypertarget{medidas-de-dispersiuxf3n}{%
 \subsection{5.4 Medidas de dispersión}\label{medidas-de-dispersiuxf3n}}

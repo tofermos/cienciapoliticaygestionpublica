@@ -43,9 +43,8 @@ Como en la anterior actividad se incorpora el código del **lenguaje R** en los 
 
 
 ```{r paquetes, echo=TRUE}
-# INSTALACIÓN (si no están instalados ) DE PAQUETES CON LAS LIBRERÍAS 
-# NECESARIAS DE R (Se ocultan los mensajes de la instalación )
-suppressMessages({
+# INSTALAR (si no están) PAQUETES de LIBRERÍAS R NECESARIAS 
+suppressMessages({  # Se ocultan mensajes instalación
 if (!require(epiDisplay)){install.packages("epiDisplay")}
 if (!require(e1071)){install.packages("e1071")}
 if (!require(stats)){install.packages("stats")}
@@ -62,7 +61,7 @@ if (!require(haven)){install.packages("haven")}
 ## 2.1 Fichero y Datos en Abierto
 
 ```{r fichero, echo=TRUE}
-# El fichero .sav lo debe estar en una subcarpeta DATOS
+# El fichero .sav debe estar en una subcarpeta DATOS
 nombreFichero<-"datosjulio2023.sav"
 directorioTrabajo<-getwd()
 rutaFichero<-paste(directorioTrabajo,"DATOS",nombreFichero,sep="/")
@@ -111,7 +110,7 @@ El data frame inicial contiene `r ncol(df_cisjulio)` columnas correspondientes a
 df_cisProbVoto<-df_cisjulio [, "PROBVOTO"]
 # ncol(df_cisjulio) # Para ver el número de columnas
 ```
-Se ha reducido de `r ncol(df_cisjulio)` columna a 1 sola.
+Se ha reducido de `r ncol(df_cisjulio)` columnas a 1 sola.
 
 ## 3.2 Recodificción
 
@@ -214,7 +213,7 @@ Este planteamiento, excepcional, se justifica por la necesidad de obtener los va
 Esta función nos aporta las medidas de posición central (moda, media y mediana) y las de posición no central (valores extremos y cuartiles). El segundo cuartil equivale a la mediana.
 
 ```{r summary, echo=TRUE}
-summary(df_cisProbVoto$recPROBVOTO,digits=2)  #Digits: dígitos significativos
+summary(df_cisProbVoto$recPROBVOTO,digits=2) # 2 dígitos significativos
 
 ```
 ### Media, Mediana y Moda
@@ -369,8 +368,7 @@ abline(h = percentiles, col = c("red", "green", "blue","red", "green",
 ```
 *Conclusión:*
 
-Solo un porcentaje inferior al 9% de la muestra ha respondido un valor inferior al '8'. Un hecho que se puede apreciar también en la columna de *frecuencias acumuladas* (Tabla de frecuencia) donde el valor 8 acumula el 8,5%.
-
+Solo un porcentaje inferior al 9% de la muestra ha respondido un valor inferior al '8'. Un hecho que se puede apreciar también en la columna de *frecuencias acumuladas* de la Tabla de frecuencias donde el valor 8 acumula el 8,5%.
 
 
 ## 5.4 Medidas de dispersión

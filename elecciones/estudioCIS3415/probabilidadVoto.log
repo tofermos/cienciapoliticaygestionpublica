@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.16)  12 APR 2024 10:38
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.16)  12 APR 2024 10:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1044,49 +1044,49 @@ LaTeX Font Info:    Font shape `TU/TimesNewRoman(2)/m/it' will be
 
 ]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 202.
-[2] [3]
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 201.
+[2]
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(2)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 220.
+(Font)              scaled to size 14.4pt on input line 219.
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(2)/b/it' will be
-(Font)              scaled to size 14.4pt on input line 233.
-[4] [5] [6] [7]
+(Font)              scaled to size 14.4pt on input line 232.
+[3] [4] [5] [6]
 File: probabilidadVoto_files/figure-latex/graficoBarras-1.pdf Graphic file (typ
 e pdf)
 <use probabilidadVoto_files/figure-latex/graficoBarras-1.pdf>
-[8] [9]
+[7] [8]
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(2)/b/it' will be
-(Font)              scaled to size 12.0pt on input line 527.
-[10] [11]
+(Font)              scaled to size 12.0pt on input line 526.
+[9] [10]
 File: probabilidadVoto_files/figure-latex/histograma-1.pdf Graphic file (type p
 df)
 <use probabilidadVoto_files/figure-latex/histograma-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 666--668
+Underfull \hbox (badness 10000) in paragraph at lines 665--667
 [][]
  []
 
-[12] [13]
+[11] [12]
 File: probabilidadVoto_files/figure-latex/cuartiles-1.pdf Graphic file (type pd
 f)
 <use probabilidadVoto_files/figure-latex/cuartiles-1.pdf>
 File: probabilidadVoto_files/figure-latex/percentiles0-1.pdf Graphic file (type
  pdf)
 <use probabilidadVoto_files/figure-latex/percentiles0-1.pdf>
-[14]
+[13]
 File: probabilidadVoto_files/figure-latex/percentiles-1.pdf Graphic file (type 
 pdf)
 <use probabilidadVoto_files/figure-latex/percentiles-1.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 769--771
+Underfull \hbox (badness 10000) in paragraph at lines 768--770
 [][]
  []
 
-[15] [16]
+[14] [15]
 File: probabilidadVoto_files/figure-latex/graficoDensidad-1.pdf Graphic file (t
 ype pdf)
 <use probabilidadVoto_files/figure-latex/graficoDensidad-1.pdf>
-[17] [18] [19]
+[16] [17] [18]
 File: ../../recursos/iconohyperlink.jpg Graphic file (type bmp)
 <../../recursos/iconohyperlink.jpg>
 File: ../../recursos/iconosav.png Graphic file (type bmp)
@@ -1099,14 +1099,14 @@ File: ../../recursos/iconopdf.png Graphic file (type bmp)
 <../../recursos/iconopdf.png>
 File: ../../recursos/iconogithub.png Graphic file (type bmp)
 <../../recursos/iconogithub.png>
-[20] (./probabilidadVoto.aux) ) 
+[19] (./probabilidadVoto.aux) ) 
 Here is how much of TeX's memory you used:
  20659 strings out of 476191
  382854 string characters out of 5812072
- 874115 words of memory out of 5000000
+ 874110 words of memory out of 5000000
  41077 multiletter control sequences out of 15000+600000
  475816 words of font info for 95 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  86i,8n,137p,1013b,484s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on probabilidadVoto.pdf (20 pages).
+Output written on probabilidadVoto.pdf (19 pages).

@@ -142,7 +142,7 @@ GOBIERNO SEGÚN BARÓMETRO DEL CIS DE JULIO 2023\\
   \apptocmd{\@title}{\par {\large #1 \par}}{}{}
 }
 \makeatother
-\subtitle{Técnicas de Investigación en Ciencias Políticas. UBU\\
+\subtitle{Técnicas de Investigación en Ciencia Política I. UBU\\
 Práctica 1. Apartado 3}
 \author{Tomàs Ferrandis Moscardó}
 \date{2023-03-18}
@@ -162,21 +162,21 @@ Práctica 1. Apartado 3}
 \section{1. INTRODUCCIÓN}\label{introducciuxf3n}}
 
 Esta actividad corresponde al apartado 3º de la Práctica 1 de Técnicas
-de Investigación en Ciencia Política. Se trata de un \emph{análisis
+de Investigación en Ciencia Política I. Se trata de un \emph{análisis
 univariado} sobre la variable PREFPTE del Barómetro del CIS de julio de
-2023 (Estudio 3415) concretamente se trata de la pregunta P8 : \emph{De
-los/las principales líderes políticos/as, ¿quién preferiría que fuese
-el/la presidente/a del Gobierno tras las elecciones?} . Obviamente al
-tratarse de análisis univariado solo puede ser descriptivo.
+2023 (Estudio 3415). Concretamente se trata de la pregunta P8 que dice:
+\emph{De los/las principales líderes políticos/as, ¿quién preferiría que
+fuese el/la presidente/a del Gobierno tras las elecciones?} . Obviamente
+al tratarse de análisis univariado solo puede ser descriptivo.
 
-Para el análisis de los datos se usa el lenguaje de programación R. Se
-incorpora el código en los documentos renderizados (HTML y PDF)
-activando la opción ``echo'' de los chunks (\textbf{echo=TRUE}). En
+Para el análisis de los datos se usa el \textbf{lenguaje de programación
+R}. Se incorpora el código en los documentos renderizados (HTML y PDF)
+activando la opción \emph{echo} de los chunks (\emph{echo=TRUE}). En
 algunos chunks no interesa la impresión del resultado por lo que se
-configuran con \textbf{results=`hide'}. Si se desea ver el resultado de
-la ejecución correcta de alguno de estos chunks bastará con eliminar
-esta parametrización en el fichero Rmd descargado (ver
-\protect\hyperlink{id-github}{punto 8} ).
+configuran con \emph{results=`hide'}. Si se desea ver el resultado de la
+ejecución correcta de alguno de estos chunks bastará con eliminar el
+parametro \emph{results=`hide'} en el fichero Rmd descargado (ver
+\protect\hyperlink{id-github}{punto 8} para descarga ).
 
 \hypertarget{obtenciuxf3n-de-datos}{%
 \section{2. OBTENCIÓN DE DATOS}\label{obtenciuxf3n-de-datos}}
@@ -435,8 +435,8 @@ también los valores NA (remove missing values = FALSE)
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Totaliza por valores, incluyendo NA)}
-\FunctionTok{kable}\NormalTok{(}\FunctionTok{summary}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE, }\AttributeTok{na.rm=}\ConstantTok{FALSE}\NormalTok{), }\AttributeTok{col.names =} \FunctionTok{c}\NormalTok{(}\StringTok{"Líder"}\NormalTok{,}\StringTok{"Repeticiones"}\NormalTok{), }
-                                                                   \AttributeTok{caption=}\StringTok{"Summary"}\NormalTok{)}
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{summary}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE, }\AttributeTok{na.rm=}\ConstantTok{FALSE}\NormalTok{), }
+      \AttributeTok{col.names =} \FunctionTok{c}\NormalTok{(}\StringTok{"Líder"}\NormalTok{,}\StringTok{"Repeticiones"}\NormalTok{),}\AttributeTok{caption=}\StringTok{"Summary"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -641,8 +641,7 @@ diagrama de barras.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Este vector tendrá los colores para cada candidato que }
-\CommentTok{\# los identifica con su opción política. Se usará en todos los gráficos.}
+\CommentTok{\# Se adoptan los colores identificativos de la opción política}
 \NormalTok{colores}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"blue"}\NormalTok{,}\StringTok{"\#FF33FF"}\NormalTok{,}\StringTok{"\#2ecc71"}\NormalTok{,}\StringTok{"\#2980b9"}\NormalTok{,}\StringTok{"\#ab47bc"}\NormalTok{,}\StringTok{"\#c8e6c9"}\NormalTok{)}
 \NormalTok{coloresInvertidos}\OtherTok{\textless{}{-}}\FunctionTok{rev}\NormalTok{(colores)}
 \NormalTok{grafico }\OtherTok{\textless{}{-}} \FunctionTok{tab1}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE,}\AttributeTok{cum.percent =} \ConstantTok{TRUE}\NormalTok{,}

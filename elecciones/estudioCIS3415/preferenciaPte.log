@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.16)  12 APR 2024 01:19
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.16)  12 APR 2024 10:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1062,12 +1062,12 @@ File: preferenciaPte_files/figure-latex/graficoPareto-1.pdf Graphic file (type
 pdf)
 <use preferenciaPte_files/figure-latex/graficoPareto-1.pdf>
 [15] [16]
-Overfull \hbox (7.70274pt too wide) in paragraph at lines 766--767
+Overfull \hbox (7.70274pt too wide) in paragraph at lines 765--766
  []\TU/TimesNewRoman(2)/m/n/12 %_acumulado
  []
 
 
-Overfull \hbox (7.70274pt too wide) in paragraph at lines 781--782
+Overfull \hbox (7.70274pt too wide) in paragraph at lines 780--781
  []\TU/TimesNewRoman(2)/m/n/12 %_acumulado
  []
 

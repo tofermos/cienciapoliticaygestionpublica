@@ -2795,9 +2795,8 @@ no interesa la impresión del resultado por lo que se configuran con
 correcta bastará con eliminar esta parametrización en el fichero Rmd
 descargado (ver cómo descargar en el <a href="#id-github">punto 7</a>
 ).</p>
-<pre class="r"><code># INSTALACIÓN (si no están instalados ) DE PAQUETES CON LAS LIBRERÍAS 
-# NECESARIAS DE R (Se ocultan los mensajes de la instalación )
-suppressMessages({
+<pre class="r"><code># INSTALAR (si no están) PAQUETES de LIBRERÍAS R NECESARIAS 
+suppressMessages({  # Se ocultan mensajes instalación
 if (!require(epiDisplay)){install.packages(&quot;epiDisplay&quot;)}
 if (!require(e1071)){install.packages(&quot;e1071&quot;)}
 if (!require(stats)){install.packages(&quot;stats&quot;)}
@@ -2811,7 +2810,7 @@ if (!require(haven)){install.packages(&quot;haven&quot;)}
 <h1>2 OBTENCIÓN DE DATOS</h1>
 <div id="fichero-y-datos-en-abierto" class="section level2">
 <h2>2.1 Fichero y Datos en Abierto</h2>
-<pre class="r"><code># El fichero .sav lo debe estar en una subcarpeta DATOS
+<pre class="r"><code># El fichero .sav debe estar en una subcarpeta DATOS
 nombreFichero&lt;-&quot;datosjulio2023.sav&quot;
 directorioTrabajo&lt;-getwd()
 rutaFichero&lt;-paste(directorioTrabajo,&quot;DATOS&quot;,nombreFichero,sep=&quot;/&quot;)</code></pre>
@@ -2925,7 +2924,7 @@ las preguntas de la encuesta. Se puede prescindir del resto de columnas
 del data frame innecesarias para nuestro análisis univariado.</p>
 <pre class="r"><code>df_cisProbVoto&lt;-df_cisjulio [, &quot;PROBVOTO&quot;]
 # ncol(df_cisjulio) # Para ver el número de columnas</code></pre>
-<p>Se ha reducido de 141 columna a 1 sola.</p>
+<p>Se ha reducido de 141 columnas a 1 sola.</p>
 </div>
 <div id="recodificción" class="section level2">
 <h2>3.2 Recodificción</h2>
@@ -3152,7 +3151,7 @@ allá de la <em>moda</em>.</p>
 <p>Esta función nos aporta las medidas de posición central (moda, media
 y mediana) y las de posición no central (valores extremos y cuartiles).
 El segundo cuartil equivale a la mediana.</p>
-<pre class="r"><code>summary(df_cisProbVoto$recPROBVOTO,digits=2)  #Digits: dígitos significativos</code></pre>
+<pre class="r"><code>summary(df_cisProbVoto$recPROBVOTO,digits=2) # 2 dígitos significativos</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
 ##     0.0    10.0    10.0     9.3    10.0    10.0      31</code></pre>
 </div>
@@ -3302,8 +3301,8 @@ abline(h = percentiles, col = c(&quot;red&quot;, &quot;green&quot;, &quot;blue&q
 <em>Conclusión:</em></p>
 <p>Solo un porcentaje inferior al 9% de la muestra ha respondido un
 valor inferior al ‘8’. Un hecho que se puede apreciar también en la
-columna de <em>frecuencias acumuladas</em> (Tabla de frecuencia) donde
-el valor 8 acumula el 8,5%.</p>
+columna de <em>frecuencias acumuladas</em> de la Tabla de frecuencias
+donde el valor 8 acumula el 8,5%.</p>
 </div>
 </div>
 <div id="medidas-de-dispersión" class="section level2">

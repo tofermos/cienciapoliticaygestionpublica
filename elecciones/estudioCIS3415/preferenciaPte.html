@@ -2938,8 +2938,8 @@ también los valores NA (remove missing values = FALSE)</p>
 <pre class="r"><code>numero_na&lt;-sum(is.na(df_cis$recPREFPTE)) # Guarda valor en variable para...
 porcentaje_na&lt;-round(mean(is.na(df_cis$recPREFPTE))*100,1) #calcular % NA</code></pre>
 <pre class="r"><code># Totaliza por valores, incluyendo NA)
-kable(summary(df_cis$recPREFPTE, na.rm=FALSE), col.names = c(&quot;Líder&quot;,&quot;Repeticiones&quot;), 
-                                                                   caption=&quot;Summary&quot;)</code></pre>
+kable(summary(df_cis$recPREFPTE, na.rm=FALSE), 
+      col.names = c(&quot;Líder&quot;,&quot;Repeticiones&quot;),caption=&quot;Summary&quot;)</code></pre>
 <table>
 <caption>Summary</caption>
 <thead>

@@ -191,8 +191,8 @@ porcentaje_na<-round(mean(is.na(df_cis$recPREFPTE))*100,1) #calcular % NA
 
 ```{r importanciaNA2, echo=TRUE}
 # Totaliza por valores, incluyendo NA)
-kable(summary(df_cis$recPREFPTE, na.rm=FALSE), col.names = c("Líder","Repeticiones"), 
-                                                                   caption="Summary")
+kable(summary(df_cis$recPREFPTE, na.rm=FALSE), 
+      col.names = c("Líder","Repeticiones"),caption="Summary")
 
 ```
 *Importancia de los valores perdidos NA*
