@@ -2796,14 +2796,19 @@ correcta bastará con eliminar esta parametrización en el fichero Rmd
 descargado (ver cómo descargar en el <a href="#id-github">punto 7</a>
 ).</p>
 <pre class="r"><code># INSTALAR (si no están) PAQUETES de LIBRERÍAS R NECESARIAS 
-suppressMessages({  # Se ocultan mensajes instalación
+# Se ocultan mensajes instalación(message=FALSE)
 if (!require(epiDisplay)){install.packages(&quot;epiDisplay&quot;)}
 if (!require(e1071)){install.packages(&quot;e1071&quot;)}
 if (!require(stats)){install.packages(&quot;stats&quot;)}
 if (!require(tibble)){install.packages(&quot;tibble&quot;)}
 if (!require(knitr)){install.packages(&quot;knitr&quot;)}
 if (!require(haven)){install.packages(&quot;haven&quot;)}
-})</code></pre>
+library(epiDisplay)
+library(e1071)
+library(stats)
+library(knitr)
+library(tibble)
+library(haven)</code></pre>
 <div style="page-break-after: always;"></div>
 </div>
 <div id="obtención-de-datos" class="section level1">
@@ -2998,8 +3003,8 @@ respecto al total de casos válidos. En este caso, como ya se ha apuntado
 anteriormente, la diferencia es insignificante.</p>
 <pre class="r"><code># Mediante el atributo output.table se exporta una tabla
 tabla&lt;-tablaGrafico$output.table
-#Para mejor la comprensión se puede cambiar los nombres de las columnas e 
-# imprimir la tabla con Rmd
+# Para mejor la comprensión se puede cambiar los nombres de las columnas
+# e imprimir la tabla con Rmd
 colnames(tabla)&lt;-c(&quot;Frecuencia&quot;,&quot;%&quot;,&quot;%_acumulado&quot;, &quot;%_válido&quot;,
                                           &quot;%_acumulado válido&quot;)
 
@@ -3124,7 +3129,7 @@ kable(tabla,column.width = c(&quot;10%&quot;,&quot;20%&quot;,&quot;20%&quot;,&qu
 </tr>
 </tbody>
 </table>
-<pre class="r"><code># print(tabla)  # En R estrictamente (no Rmd)
+<pre class="r"><code># print(tabla)  #En R estrictamente (no Rmd)
 
 # Para calcular solo las frecuencias de cada valor directamente:
 # round(prop.table(table(df_cisProbVoto$recPROBVOTO, useNA=&quot;no&quot;))*100,1)</code></pre>

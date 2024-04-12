@@ -183,13 +183,18 @@ parametro \emph{results=`hide'} en el fichero Rmd descargado (ver
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{suppressMessages}\NormalTok{(\{ }\CommentTok{\# Suprimimos mensajes de salida al...}
-\CommentTok{\# instalar paquetes (si no están) con las funciones...}
+\CommentTok{\# Instalar paquetes (si no están) con las funciones necesarias}
+\CommentTok{\# Supresión de mensajes del proceso (message=FALSE)}
 \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(haven))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"haven"}\NormalTok{)\} }\CommentTok{\# para abrir fichero .sav}
 \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(epiDisplay))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"epiDisplay"}\NormalTok{)\} }\CommentTok{\# para gráfico }
 \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(knitr))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"knitr"}\NormalTok{)\}}\CommentTok{\#tabla dinámica Rmd y otros}
 \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(xlsx))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"xlsx"}\NormalTok{)\} }\CommentTok{\# manejo de ficheros .xlsx}
-\NormalTok{\})}
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(qcc))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"qcc"}\NormalTok{)\}}\CommentTok{\# diagrama Pareto    }
+\FunctionTok{library}\NormalTok{(qcc)}
+\FunctionTok{library}\NormalTok{(haven)}
+\FunctionTok{library}\NormalTok{(epiDisplay)}
+\FunctionTok{library}\NormalTok{(knitr)}
+\FunctionTok{library}\NormalTok{(xlsx)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -339,7 +344,7 @@ Lógicamente el número de casos es 8798 en ambos \emph{data frames}.
 variable}\label{duplicaciuxf3n-de-la-variable}}
 
 Lo más prudente cuando se va a editar datos es que estos se realicen
-sobre una copia. Por esta razón duplicaremos la columna del \emph{data
+sobre una copia. Por esta razón se duplica la columna del \emph{data
 frame}
 
 \begin{Shaded}
@@ -354,7 +359,7 @@ válidos}\label{valores-vuxe1lidos-y-no-vuxe1lidos}}
 
 Una vez examinados los datos en el apartado 3.2 anterior, ya se puede
 decidir qué valores de la variable son válidos y cuales no interesan
-para nuestro análisis.
+para este análisis.
 
 \emph{Valores válidos: niveles y etiquetas}
 
@@ -420,7 +425,7 @@ solo cambiándolos a {[}1,2,3,4,5,6 7{]}.
 
 El tratamiento de los valores no válidos es doble. Se excluirán del
 análisis pero se deberá valorar su importancia. Para ello se debe ver su
-peso en relación al conjunto de valores. En R tenemos la función
+peso en relación al conjunto de valores. En R se dispone de la función
 \emph{summary} que devuelve los valores de posición central (media,
 mediana y moda) y los cuartiles. Se puede parametrizar para que cuente
 también los valores NA (remove missing values = FALSE)
@@ -677,8 +682,16 @@ Alternativamente se podría usar el gráfico de sectores.
 
 \includegraphics{preferenciaPte_files/figure-latex/graficoPIE-1.pdf}
 
-Como se puede observar, el gráfico de sectores no muestra con la misma
-claridad los porcentajes que el gráfico de barras.
+\emph{Inconvenientes del gráfico de sectores}
+
+\begin{itemize}
+\item
+  No muestra con la misma claridad los porcentajes que el gráfico de
+  barras.
+\item
+  Presenta el problema de solapar etiquetas continuas cuando los valores
+  son muy pequeños.
+\end{itemize}
 
 \hypertarget{gruxe1fico-de-pareto}{%
 \subsection{6.3 Gráfico de Pareto}\label{gruxe1fico-de-pareto}}
@@ -686,39 +699,6 @@ claridad los porcentajes que el gráfico de barras.
 Esta otra alternativa ordena los datos y las frecuencias en sentido
 decreciente y muestra qué porcentaje acumulan en total las opciones
 representadas.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{valores}\OtherTok{\textless{}{-}}\FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{round}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE))}\SpecialCharTok{*}\DecValTok{100}\NormalTok{,}
-                                                              \AttributeTok{digits=}\DecValTok{1}\NormalTok{))}
-\NormalTok{nombres}\OtherTok{\textless{}{-}}\FunctionTok{names}\NormalTok{(}\FunctionTok{round}\NormalTok{(}\FunctionTok{prop.table}\NormalTok{(}\FunctionTok{table}\NormalTok{(df\_cis}\SpecialCharTok{$}\NormalTok{recPREFPTE))}\SpecialCharTok{*}\DecValTok{100}\NormalTok{,}\AttributeTok{digits=}\DecValTok{1}\NormalTok{))}
-\CommentTok{\# vector con los índices ordenados según valor decreciente}
-\NormalTok{orden}\OtherTok{\textless{}{-}}\FunctionTok{order}\NormalTok{(valores,}\AttributeTok{decreasing=}\ConstantTok{TRUE}\NormalTok{)}
-\NormalTok{valoresOrdenados}\OtherTok{\textless{}{-}}\NormalTok{valores[orden]}
-\NormalTok{nombresOrdenados}\OtherTok{\textless{}{-}}\NormalTok{nombres[orden]}
-\NormalTok{colores}\OtherTok{=}\FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"blue"}\NormalTok{,}\StringTok{"\#FF33FF"}\NormalTok{,}\StringTok{"\#2ecc71"}\NormalTok{,}\StringTok{"\#2980b9"}\NormalTok{,}\StringTok{"\#ab47bc"}\NormalTok{,}\StringTok{"\#c8e6c9"}\NormalTok{)}
-
-\CommentTok{\# Calcular el porcentaje acumulado}
-\NormalTok{porcentajeAcumulado}\OtherTok{\textless{}{-}}\FunctionTok{cumsum}\NormalTok{(valoresOrdenados}\SpecialCharTok{/}
-                              \FunctionTok{sum}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(valoresOrdenados)))}\SpecialCharTok{*}\DecValTok{100}
-
-\CommentTok{\# Crear el gráfico de Pareto}
-\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{2}\NormalTok{))  }\CommentTok{\# Ajustar los márgenes del gráfico}
-\NormalTok{ylim }\OtherTok{\textless{}{-}} \FunctionTok{range}\NormalTok{(}\FunctionTok{c}\NormalTok{(valoresOrdenados, porcentajeAcumulado))}
-\NormalTok{ylim[}\DecValTok{2}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ ylim[}\DecValTok{2}\NormalTok{] }\SpecialCharTok{+} \DecValTok{10}
-\FunctionTok{barplot}\NormalTok{(valoresOrdenados, }
-        \AttributeTok{main =} \StringTok{"Gráfico 3. Preferencia Presidencia de Gobierno."}\NormalTok{, }
-        \AttributeTok{xlab =} \StringTok{"Candidatos"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Frecuencia"}\NormalTok{, }\AttributeTok{col =} \StringTok{"lightblue"}\NormalTok{)}
-        \FunctionTok{lines}\NormalTok{(porcentajeAcumulado, }
-                \AttributeTok{type =} \StringTok{"b"}\NormalTok{, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{pch =} \DecValTok{21}\NormalTok{, }\AttributeTok{bg =} \StringTok{"red"}\NormalTok{, }\AttributeTok{yaxt =} \StringTok{"n"}\NormalTok{)}
-        \FunctionTok{axis}\NormalTok{(}\DecValTok{4}\NormalTok{, }\AttributeTok{at =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{100}\NormalTok{, }\AttributeTok{by =} \DecValTok{10}\NormalTok{), }
-                \AttributeTok{labels =} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{100}\NormalTok{, }\AttributeTok{by =} \DecValTok{10}\NormalTok{),}\StringTok{"\%"}\NormalTok{),}
-                \AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{las =} \DecValTok{1}\NormalTok{)}
-        \FunctionTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{, }\AttributeTok{legend =}\FunctionTok{c}\NormalTok{(}\StringTok{"Frecuencia"}\NormalTok{,}\StringTok{"Porcentaje acumulado"}\NormalTok{),}
-                \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"lightblue"}\NormalTok{, }\StringTok{"red"}\NormalTok{),}
-                \AttributeTok{lty =} \DecValTok{1}\NormalTok{, }\AttributeTok{pch =} \FunctionTok{c}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\DecValTok{21}\NormalTok{), }\AttributeTok{pt.bg =} \FunctionTok{c}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\StringTok{"red"}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
 
 \includegraphics{preferenciaPte_files/figure-latex/graficoPareto-1.pdf}
 
@@ -824,12 +804,20 @@ Una segunda opción sería crear una hoja de cálculo de MS Excel.
 \begin{Highlighting}[]
 \CommentTok{\# file= nombre del fichero hoja de cálculo de MSOffice}
 \FunctionTok{write.xlsx}\NormalTok{(grafico, }\AttributeTok{file =} \StringTok{"DATOS/tablafrecResultado.xlsx"}\NormalTok{,}
-           \AttributeTok{sheetName =} \StringTok{"prefpte"}\NormalTok{, }\AttributeTok{append =} \ConstantTok{FALSE}\NormalTok{)           }
+           \AttributeTok{sheetName =} \StringTok{"prefpte"}\NormalTok{, }\AttributeTok{append =} \ConstantTok{FALSE}\NormalTok{)    }
 \end{Highlighting}
 \end{Shaded}
 
 Alternativamente se puede añadir una nueva página en un fichero excel ya
 existente.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# file= nombre del fichero hoja de cálculo de MSOffice}
+\FunctionTok{write.xlsx}\NormalTok{(grafico, }\AttributeTok{file =} \StringTok{"DATOS/tablafrecResultado.xlsx"}\NormalTok{,}
+           \AttributeTok{sheetName =} \StringTok{"prefpte2"}\NormalTok{, }\AttributeTok{append =} \ConstantTok{TRUE}\NormalTok{)    }
+\end{Highlighting}
+\end{Shaded}
 
 \newpage
 

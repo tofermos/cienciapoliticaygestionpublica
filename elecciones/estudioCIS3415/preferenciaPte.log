@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.16)  12 APR 2024 10:51
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.16)  12 APR 2024 18:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1044,30 +1044,30 @@ LaTeX Font Info:    Font shape `TU/TimesNewRoman(2)/m/it' will be
 
 [2]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 186.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 188.
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(2)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 198.
+(Font)              scaled to size 14.4pt on input line 203.
 [3]
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(2)/b/it' will be
-(Font)              scaled to size 14.4pt on input line 218.
-[4] [5] [6] [7] [8] [9] [10] [11]
+(Font)              scaled to size 14.4pt on input line 223.
+[4] [5] [6] [7] [8] [9] [10] [11] [12]
 File: preferenciaPte_files/figure-latex/grafico-1.pdf Graphic file (type pdf)
 <use preferenciaPte_files/figure-latex/grafico-1.pdf>
-[12] [13]
+[13] [14]
 File: preferenciaPte_files/figure-latex/graficoPIE-1.pdf Graphic file (type pdf
 )
 <use preferenciaPte_files/figure-latex/graficoPIE-1.pdf>
-[14]
+[15]
 File: preferenciaPte_files/figure-latex/graficoPareto-1.pdf Graphic file (type 
 pdf)
 <use preferenciaPte_files/figure-latex/graficoPareto-1.pdf>
-[15] [16]
-Overfull \hbox (7.70274pt too wide) in paragraph at lines 765--766
+[16]
+Overfull \hbox (7.70274pt too wide) in paragraph at lines 745--746
  []\TU/TimesNewRoman(2)/m/n/12 %_acumulado
  []
 
 
-Overfull \hbox (7.70274pt too wide) in paragraph at lines 780--781
+Overfull \hbox (7.70274pt too wide) in paragraph at lines 760--761
  []\TU/TimesNewRoman(2)/m/n/12 %_acumulado
  []
 
@@ -1088,7 +1088,7 @@ File: ../../recursos/iconogithub.png Graphic file (type bmp)
 Here is how much of TeX's memory you used:
  20630 strings out of 476191
  381168 string characters out of 5812072
- 879880 words of memory out of 5000000
+ 879882 words of memory out of 5000000
  41052 multiletter control sequences out of 15000+600000
  475808 words of font info for 94 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191

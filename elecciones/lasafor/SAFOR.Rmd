@@ -3,16 +3,16 @@ title: "Ejemplo de R Markdown: *El voto autonómico en la comarca de la Safor (V
 author: "Tomàs Ferrandis Moscardó"
 date: "2024-01-26"
 output:
-  pdf_document:
-    latex_engine: pdflatex
-    toc: true
-    keep_tex: true
   html_document:
     toc: true
     toc_float: true
     toc_depth: 4
     df_print: paged
     number_sections: false
+  pdf_document:
+    latex_engine: pdflatex
+    toc: true
+    keep_tex: true
 ---
 
 
@@ -29,34 +29,20 @@ Las librerías se cargan solo si previamente se ha instalado el paquete que las 
 
 Para ello, primero se intenta cargar una librería mediante *require()* . Si da error, require devuelve un valor FALSE (!require()), entonces se ejecuta la instalación del paquete (que carga también la librería).
 
-```{r 0, include=FALSE,eval=TRUE}
+```{r 0, echo=TRUE}
 
-# Requisitos previes. Paquetes y librerías
+# Requisitos previos. Paquetes de librerías
 if (!require("dplyr")) {install.packages("dplyr")}
 if (!require("stringr")) {install.packages("stringr")}
 if (!require("curl")) {install.packages("curl")}
 if (!require("rsconnect")){install.packages("rsconnect")}
 if (!require("kableExtra")){install.packages("kableExtra")}
 if (!require("tidyverse")){install.packages("tidyverse")}
-library(data.table)
-library(knitr)
-library(ggplot2)
-# Este código lo duplicamos para imprimir, sin ejecutar ( eval=FALSE)
-```
-
-```{r 0b, include=TRUE,eval=FALSE}
-
-# Requisitos previes. Paquetes y librerías
-if (!require("dplyr")) {install.packages("dplyr")}
-if (!require("stringr")) {install.packages("stringr")}
-if (!require("curl")) {install.packages("curl")}
-if (!require("rsconnect")){install.packages("rsconnect")}
-if (!require("kableExtra")){install.packages("kableExtra")}
-if (!require("tidyverse")){install.packages("tidyverse")}
-library(data.table)
-library(knitr)
-library(stringr)
+if (!require("tidyverse")){install.packages("openxlsx")}
+library(openxlsx)
 library(dplyr)
+library(data.table)
+library(knitr)
 library(ggplot2)
 ```
 
@@ -66,7 +52,7 @@ library(ggplot2)
 
 A partir de la base de datos de ARGOS descargamos el resumen de resultados electorales en las distintas convocatorias y procesos electorales en un fichero *CSV*.
 
-```{r 1, include=TRUE}
+```{r 1, echo=TRUE}
   df1<-read.csv("CSV/SAFOR.csv",header=TRUE, sep=",",quote="\"'", dec=",",fill=TRUE,
                 comment.char = "")
   # View(df1) # Para ver en consola
@@ -74,7 +60,7 @@ A partir de la base de datos de ARGOS descargamos el resumen de resultados elect
 
 Veamos como ejemplo las primeras líneas con la función *head*
 
-```{r 1b, include=TRUE}
+```{r 1b, echo=TRUE}
 head(df1)
 ```
 
@@ -84,53 +70,61 @@ Asumimos como **universo o población** el conjunto de todas las todas eleccione
 
 ## Filtraremos por el campo correspondiente
 
-```{r 2, include=TRUE}
+En nuestro caso las elecciones autonómicas. Selleccionamos las que el campo *Elecció* empiece por 'A'
+```{r 2, echo=TRUE}
 df_autonomicas<-df1 %>% filter(str_detect(df1$Elecció,"A-"))
 ```
 
 ## 2.3 Vemos las primeras lineas de ejemplo
-```{r 2b, include=TRUE}
-head(df_autonomicas)
+
+Algunos ejemplos de uso de funciones de lectura. Ver las 3 primeras filas o las 2 últimas del data frame
+```{r 2b, true=TRUE}
+head(df_autonomicas,3)
+tail(df_autonomicas,2)
 ```
 
 ## 2.4 Tratamiento de los NA
+ 
+ **¿Qué valores serán no válidos a efectos estadísticos?**
 
 En nuestro caso los NA se deben a la ausencia de resultados por no haberse presentado la fuerza política en una convocatoria o por haberse integrado en una coalición electoral. Entendemos que el valor que debe sustituir NA para poder realizar cálculos estadísticos de forma correcta y sin errores de computación es el 0. Podríamos recorrer solo las columnas de partidos pero lo simplificamos y aplicamos la sustitución NA -\> 0 en todo el data frame.
 
-```{r 3, include=TRUE}
+```{r 3, echo=TRUE}
 df_autonomicas[is.na(df_autonomicas)]<-0
-
 ```
+
 Mostramos los datos en formato de tabla de RMarkdown
 
-```{r 3b, include=TRUE}
-knitr::kable(df_autonomicas, caption = "ELECCIONES AUTONÓMICAS EN LA SAFOR")
+```{r 3b, echo=TRUE}
+#kable es una función del paquete knitr que permite formatear tablas. Existen más alternativa
+kable(df_autonomicas, caption = "ELECCIONES AUTONÓMICAS EN LA SAFOR")
 ```
  
 ## 2.5 Creamos un vector con las candidaturas.
 
-```{r 4, include=TRUE}
-# Recogemos los nombres de columnas a partir de la 4ª
+```{r 4, echo=TRUE}
+# Recogemos los nombres de columnas a partir de la 4ª columna
 partits<-names(df1[4:length(df1)])
-
-# Para nuestro caso podríamos anotarlo directamente
+# Para nuestro caso podríamos anotarlo directamente al ser 8 valores
 # partits<-c("PP","PSPV","COMPROMÍS","VOX","PODEMOS","Cs","EUPV","RESTA")
 ```
 Los visualizamos en formato de tabla de RMarkdown
-```{r 4b, include=TRUE}
+```{r 4b, echo=TRUE}
 
-knitr::kable(partits, caption = "CANDIDATURAS")
+kable(partits, caption = "CANDIDATURAS")
 ```
 
 # 3. CÁLCULO DE VALORES DE MEDIDAS de TENDENCIA CENTRAL y DISPERSIÓN
 
-1.- Media o promedio
+1.- Media o promedio aritmético
 2.- Máximos
 3.- Míninos
 4.- Rango de variación
 
-```{r 5, include=TRUE}
-mitjana<-summarise_at(df_autonomicas,partits,mean)
+```{r 5, echo=TRUE}
+mean(df_autonomicas)
+media<-summarise_at(df_autonomicas,partits,mean())
+mitjana<-summarise_at(df_autonomicas,partits,min())
 maxims<-summarise_at(df_autonomicas,partits,max)
 minims<-summarise_at(df_autonomicas,partits,~min(.[. != 0])) #Descartamos los 0
 rangodevariacion<-maxims - minims
@@ -138,7 +132,7 @@ rangodevariacion<-maxims - minims
 
 ## 3.1 Creamos un data frame. cada vector anterior será una columna
 
-```{r 5b, include=TRUE}
+```{r 5b, echo=TRUE}
 df_resultats<-rbind(mitjana)
 df_resultats<-rbind(df_resultats,maxims)
 df_resultats<-rbind(df_resultats,minims)
@@ -148,11 +142,11 @@ df_resultats<-df_resultats %>% mutate_at(partits, as.integer)
 ```
 ## 3.2 Añadimos al final del data frame una columna con el nombre del "cálculo"
 
-```{r 5c, include=TRUE}
+```{r 5c, echo=TRUE}
 df_resultats<-cbind(df_resultats,ESTADÍSTICA=c("MEDIA","MÁXIMO","MÍNIMO","RANGO"))
 ```
 
-```{r 5d, include=TRUE}
+```{r 5d, echo=TRUE}
 # la resituamos en la posición 1 ( estática)
 df_resultats<-df_resultats %>% select("ESTADÍSTICA",everything())
 ```
@@ -161,12 +155,12 @@ df_resultats<-df_resultats %>% select("ESTADÍSTICA",everything())
 
 La columna RESTA es la que contiene los datos de el "resto de partidos". Como está en la útlima posición, usamos la función *length* que nos dará su índice y con el *-* se elimina.
 
-```{r 5d2, include=TRUE}
+```{r 5d2, echo=TRUE}
 df_resultats <- df_resultats[,-length(df_resultats)]
 ```
 
 ## 3.3 Imprimimos en Markdown una tabla con los resultados
-```{r 5e, include=TRUE}
+```{r 5e, echo=TRUE}
 knitr::kable(df_resultats, caption = "ESTADÍSTICA SAFOR")
 ```
 
@@ -194,7 +188,7 @@ for ( i in 2:length(df_resultats)){
 barplot(df_estPartit$VALORS, 
         main=paste("Valores estadísticos de",df_estPartit$PARTIT[1]),
         names.arg=df_estPartit$ESTADÍSTICA,
-        col=c("#5fe10b","red","#48b7f7","#ede12e"),
+        col=c("gray","green","red","#ede12e"),
         ylab="VOTOS")
 
 
@@ -205,7 +199,6 @@ df_estPartit <- df_estPartit[, !(names(df_estPartit) %in% "PARTIT")]
 knitr::kable(df_estPartit, caption = paste( "ESTADÍSTICA SAFOR", 
                         candidatura )) %>% print()
 
-
 }
 
 ```
@@ -215,85 +208,96 @@ knitr::kable(df_estPartit, caption = paste( "ESTADÍSTICA SAFOR",
 ## 5.1 Guardar datos en formato .xlsx (MS Excel)
 
 Se instala el paquete solo si hace falta
-```{r 7, include=TRUE}
+```{r 7, echo=TRUE}
 if (!require("xlsx")) {install.packages("xlsx")}
 ```
 Se creará un fichero de tipo MS Excel: *resultats.xlsx* 
 
-```{r 8, include=TRUE}
-### Creando un nuevo fichero xlsx
+```{r 8, echo=TRUE}
 
+# Si existe lo borramos 
+if (file.exists("resultats.xlsx")){file.remove("resultats.xlsx")}
+# Ahora, lo creamos de nuevo
 write.xlsx(df_resultats, file = "resultats.xlsx", sheetName = "resultats", append = FALSE)
+
 ```
 
 ## 5.2 Añadiendo una hoja en un ficher xlsx existente
 Aquí añadiremos una página más a un fichero MS Excel existente (append=TRUE). Si *ficheroAnterior.xlsx* no existe dará error.
 
 
-```{r 9, include=TRUE}
+```{r 9, eval=FALSE}
 
-write.xlsx(df_resultats, file = "ficheroAnterior.xlsx", sheetName="resultats", append=TRUE)
+# El objeto Workbook de R sirve para carcar un xlsx MS Office 2007 o posterior
+# Lo cargamos en la varibel de este tipo wb con la función pertinente 
+# No comporbamos la existencia del fichero pues se ha creado en el anterior chunk
+wb<-loadWorkbook("resultats.xlsx")
+# Comprobamos que NO exista la página 
+if ("resultats" %in% names(wb)) {
+  # Si la hoja existe, se remobra (no se puede borrar, tiene que existir al menos 1)
+   renameWorksheet(wb, "resultats", "resultatsOLD")
+
+}
+
+# write.xlsx(df_resultats, file="resultats.xlsx", sheetName="resultats1", append=TRUE)
+addWorksheet(wb, "resultats")
+writeData(wb, sheet = "resultats", x = df_resultats)
+saveWorkbook(wb, file="resultats.xlsx",overwrite = TRUE) #guardamos en disco (fichero)
+
 ```
 
 
 ## 5.3 Guardar datos en formato .dta / Stata.
-```{r 10, include=FALSE}
+```{r 10, echo=TRUE}
 if (!require("foreign")) {install.packages("foreign")}
 write.dta(df_resultats, "resultats.dta")
 ```
 
-```{r 10b, include=TRUE, EVAL=FALSE}
-if (!require("foreign")) {install.packages("foreign")}
-write.dta(df_resultats, "resultats.dta")
-```
+
 
 ## 5.4 Guardar datos en formato .csv
-```{r 11, include=FALSE}
+```{r 11, echo=TRUE}
 if (!require("tidyverse")) {install.packages("tidyverse")}
 write_csv(df_resultats, "resultats.csv")
 ```
 
-```{r 11b, include=TRUE, EVAL=FALSE}
-if (!require("tidyverse")) {install.packages("tidyverse")}
-write_csv(df_resultats, "resultats.csv")
-```
+
 
 ## 5.5 Guardar datos en formato .sav / SPSS
-```{r 12, include=FALSE}
+```{r 12, echo=FALSE}
 if (!require("haven")) {install.packages("haven")}
 write_sav(df_resultats, "resultats.sav")
 ```
 
-```{r 12b, include=TRUE, eval=FALSE}
+```{r 12b, echo=TRUE, eval=FALSE}
 if (!require("haven")) {install.packages("haven")}
 write_sav(df_resultats, "resultats.sav")
 ```
 ## 5.6 Guardar y abrir datos en formato RStudio.
 
-No es lo más usado, porque la costumbre es compartir los datos en formatos como .csv u otros que sean más comunes. No obstante, conviene conocer estos 
-formatos, que se manejan muy fácilmente. No requieren librería, pues estos comandos trabajan con las funciones que trae **RStudio**.
+Quizás estemos más habituados a compartir los datos en formatos "comma separated values" u hojas de cálculo. Ahora conoceremos otro tipo de fichero que se manejan muy fácilmente. No requieren librería, pues R ya incorpora funciones para su manejo.
 
 > 
 > RData - permite guardar más de una base de datos en un mismo archivo.
 
-```{r 13, include=TRUE}
+```{r 13, echo=TRUE}
 save(df_resultats, file="resultats.RData")
 ```
 ## 5.7 Lectura de datos RData
 El parámetro *verbose=TRUE* es opcional. Sirve para que en la carga (lectura) nos muestre los datos (dataframe en este caso) existentes en el fichero de tipo *.Rdata*.
 en nuestro ejemplo vemos que contiene el dataframe: *df_resultats*
 
-```{r 14, include=TRUE}
+```{r 14, echo=TRUE}
 load("resultats.RData",verbose=TRUE)
 ```
 
 ## 5.8 RDS - guarda un solo archivo de datos
-```{r 15, include=TRUE}
+```{r 15, echo=TRUE}
 saveRDS(df_resultats, "resultats.rds")
 ```
 
 ## 5.9 Lectura de datos RDS
-```{r 16, include=TRUE}
+```{r 16, echo=TRUE}
 df_resultats2 <- readRDS("resultats.rds")
 ```
 

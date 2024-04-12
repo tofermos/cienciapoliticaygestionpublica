@@ -198,14 +198,19 @@ descargado (ver cómo descargar en el \protect\hyperlink{id-github}{punto
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# INSTALAR (si no están) PAQUETES de LIBRERÍAS R NECESARIAS }
-\FunctionTok{suppressMessages}\NormalTok{(\{  }\CommentTok{\# Se ocultan mensajes instalación}
+\CommentTok{\# Se ocultan mensajes instalación(message=FALSE)}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(epiDisplay))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"epiDisplay"}\NormalTok{)\}}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(e1071))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"e1071"}\NormalTok{)\}}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(stats))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"stats"}\NormalTok{)\}}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(tibble))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tibble"}\NormalTok{)\}}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(knitr))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"knitr"}\NormalTok{)\}}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(haven))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"haven"}\NormalTok{)\}}
-\NormalTok{\})}
+\FunctionTok{library}\NormalTok{(epiDisplay)}
+\FunctionTok{library}\NormalTok{(e1071)}
+\FunctionTok{library}\NormalTok{(stats)}
+\FunctionTok{library}\NormalTok{(knitr)}
+\FunctionTok{library}\NormalTok{(tibble)}
+\FunctionTok{library}\NormalTok{(haven)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -452,8 +457,8 @@ anteriormente, la diferencia es insignificante.
 \begin{Highlighting}[]
 \CommentTok{\# Mediante el atributo output.table se exporta una tabla}
 \NormalTok{tabla}\OtherTok{\textless{}{-}}\NormalTok{tablaGrafico}\SpecialCharTok{$}\NormalTok{output.table}
-\CommentTok{\#Para mejor la comprensión se puede cambiar los nombres de las columnas e }
-\CommentTok{\# imprimir la tabla con Rmd}
+\CommentTok{\# Para mejor la comprensión se puede cambiar los nombres de las columnas}
+\CommentTok{\# e imprimir la tabla con Rmd}
 \FunctionTok{colnames}\NormalTok{(tabla)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"Frecuencia"}\NormalTok{,}\StringTok{"\%"}\NormalTok{,}\StringTok{"\%\_acumulado"}\NormalTok{, }\StringTok{"\%\_válido"}\NormalTok{,}
                                           \StringTok{"\%\_acumulado válido"}\NormalTok{)}
 
@@ -491,7 +496,7 @@ Total & 8798 & 100.0 & 100.0 & 100.0 & 100.0 \\
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# print(tabla)  \# En R estrictamente (no Rmd)}
+\CommentTok{\# print(tabla)  \#En R estrictamente (no Rmd)}
 
 \CommentTok{\# Para calcular solo las frecuencias de cada valor directamente:}
 \CommentTok{\# round(prop.table(table(df\_cisProbVoto$recPROBVOTO, useNA="no"))*100,1)}

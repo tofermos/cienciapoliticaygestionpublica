@@ -14,16 +14,16 @@ papersize: A4
 linestretch: 1.5
 output:
  
-  pdf_document:
-    toc: true
-    keep_tex: true
-    latex_engine: xelatex
   html_document:
     toc: true
     toc_float: true
     toc_depth: 3
     df_print: paged
     number_sections: false
+  pdf_document:
+    toc: true
+    keep_tex: true
+    latex_engine: xelatex
 ---
 \newpage
 \renewcommand\tablename{Tabla}
@@ -42,14 +42,20 @@ Para el análisis de los datos se usa el **lenguaje de programación R**. Se inc
 
 # 2. OBTENCIÓN DE DATOS
 
-```{r paquetes, echo=TRUE}
-suppressMessages({ # Suprimimos mensajes de salida al...
-# instalar paquetes (si no están) con las funciones...
+```{r paquetes, echo=TRUE,message=FALSE}
+
+# Instalar paquetes (si no están) con las funciones necesarias
+# Supresión de mensajes del proceso (message=FALSE)
 if(!require(haven)){install.packages("haven")} # para abrir fichero .sav
 if(!require(epiDisplay)){install.packages("epiDisplay")} # para gráfico 
 if(!require(knitr)){install.packages("knitr")}#tabla dinámica Rmd y otros
 if(!require(xlsx)){install.packages("xlsx")} # manejo de ficheros .xlsx
-})
+if(!require(qcc)){install.packages("qcc")}# diagrama Pareto    
+library(qcc)
+library(haven)
+library(epiDisplay)
+library(knitr)
+library(xlsx)
 ```
 ## 2.1 Fichero y Datos en Abierto
 
@@ -68,7 +74,6 @@ rutaFichero<-paste(directorioTrabajo,"DATOS",nombreFichero,sep="/")
 A partir del fichero de tipo *sav* se creará el objeto *data frame* de R. Este data frame será la base de datos inicial con todos los datos obtenidos de la muestra mediante la encuesta.
 
 ```{r, lecturaDatos, echo=TRUE, results='hide'}
-
 df_cisjulio<-read_sav(rutaFichero)
 ```
 
@@ -137,7 +142,7 @@ Lógicamente el número de casos es `r nrow(df_cis)` en ambos *data frames*.
 
 ### Duplicación de la variable
 
-Lo más prudente cuando se va a editar datos es que estos se realicen sobre una copia. Por esta razón duplicaremos la columna del *data frame*
+Lo más prudente cuando se va a editar datos es que estos se realicen sobre una copia. Por esta razón se duplica la columna del *data frame*
 
 ```{r duplicarVar, echo=TRUE}
 df_cis$recPREFPTE<-df_cis$PREFPTE
@@ -145,7 +150,7 @@ df_cis$recPREFPTE<-df_cis$PREFPTE
 
 ### Valores válidos y no válidos
 
-Una vez examinados los datos en el apartado 3.2 anterior, ya se puede decidir qué valores de la variable son válidos y cuales no interesan para nuestro análisis.
+Una vez examinados los datos en el apartado 3.2 anterior, ya se puede decidir qué valores de la variable son válidos y cuales no interesan para este análisis.
 
 *Valores válidos: niveles y etiquetas*
 
@@ -182,7 +187,7 @@ df_cis$recPREFPTE<-factor(df_cis$recPREFPTE,
                    "Íñigo Errejón","Isabel Díaz Ayuso"))
 ```
 
-El tratamiento de los valores no válidos es doble. Se excluirán del análisis pero se deberá valorar su importancia. Para ello se debe ver su peso en relación al conjunto de valores. En R tenemos la función *summary* que devuelve los valores de posición central (media, mediana y moda) y los cuartiles. Se puede parametrizar para que cuente también los valores NA (remove missing values = FALSE)
+El tratamiento de los valores no válidos es doble. Se excluirán del análisis pero se deberá valorar su importancia. Para ello se debe ver su peso en relación al conjunto de valores. En R se dispone de la función *summary* que devuelve los valores de posición central (media, mediana y moda) y los cuartiles. Se puede parametrizar para que cuente también los valores NA (remove missing values = FALSE)
 
 ```{r importanciaNA, echo=TRUE, results='hide'}
 numero_na<-sum(is.na(df_cis$recPREFPTE)) # Guarda valor en variable para...
@@ -314,41 +319,46 @@ pie(valores, labels = nombres,
     col = colores, cex=0.8)
 ```
 
-Como se puede observar, el gráfico de sectores no muestra con la misma claridad los porcentajes que el gráfico de barras.
+*Inconvenientes del gráfico de sectores*
+
+*   No muestra con la misma claridad los porcentajes que el
+gráfico de barras.
+
+*   Presenta el problema de solapar etiquetas continuas cuando los valores son muy pequeños.
 
 ## 6.3 Gráfico de Pareto
 
 Esta otra alternativa ordena los datos y las frecuencias en sentido decreciente y muestra qué porcentaje acumulan en total las opciones representadas.
 
-```{r graficoPareto,echo=TRUE}
-valores<-as.numeric(round(prop.table(table(df_cis$recPREFPTE))*100,
-                                                              digits=1))
+```{r graficoPareto, echo=FALSE}
+
+# Vector con los %
+valores<-as.numeric(round(prop.table(table(df_cis$recPREFPTE))*100,                                                              digits=1))
+# Vector con los nombres de líderes
 nombres<-names(round(prop.table(table(df_cis$recPREFPTE))*100,digits=1))
-# vector con los índices ordenados según valor decreciente
+
+# vector con los índices en orden decreciente (para ordenar)
 orden<-order(valores,decreasing=TRUE)
+
+# Se ordenan los dos vectores
 valoresOrdenados<-valores[orden]
 nombresOrdenados<-nombres[orden]
-colores=c("red","blue","#FF33FF","#2ecc71","#2980b9","#ab47bc","#c8e6c9")
 
-# Calcular el porcentaje acumulado
-porcentajeAcumulado<-cumsum(valoresOrdenados/
-                              sum(as.numeric(valoresOrdenados)))*100
+#fusionamos
+ordenados<-valoresOrdenados
+names(ordenados)<-nombresOrdenados
 
-# Crear el gráfico de Pareto
-par(mar = c(1, 2, 10, 2))  # Ajustar los márgenes del gráfico
-ylim <- range(c(valoresOrdenados, porcentajeAcumulado))
-ylim[2] <- ylim[2] + 10
-barplot(valoresOrdenados, 
-        main = "Gráfico 3. Preferencia Presidencia de Gobierno.", 
-        xlab = "Candidatos", ylab = "Frecuencia", col = "lightblue")
-        lines(porcentajeAcumulado, 
-                type = "b", col = "red", pch = 21, bg = "red", yaxt = "n")
-        axis(4, at = seq(0, 100, by = 10), 
-                labels = paste0(seq(0, 100, by = 10),"%"),
-                col = "red", las = 1)
-        legend("topright", legend =c("Frecuencia","Porcentaje acumulado"),
-                col = c("lightblue", "red"),
-                lty = 1, pch = c(NA, 21), pt.bg = c(NA, "red"))
+#colores=c("red","blue","#FF33FF","#2ecc71","#2980b9","#ab47bc","#c8e6c9")
+#en Pareto usaremos un solo color
+# Ahora ya creamos el gráfico de Pareto
+
+p<-pareto.chart(ordenados, ylab = " % Preferencia", xlab = "",
+             main="Gráfico 3. Preferencia Presidencia de Gobierno",
+             col="lightblue",
+             las = 2,
+             
+             )
+
 ```
 
 \newpage
@@ -388,11 +398,22 @@ Una segunda opción sería crear una hoja de cálculo de MS Excel.
 ```{r guardarTablaXLSX, echo=TRUE}
 # file= nombre del fichero hoja de cálculo de MSOffice
 write.xlsx(grafico, file = "DATOS/tablafrecResultado.xlsx",
-           sheetName = "prefpte", append = FALSE)           
+           sheetName = "prefpte", append = FALSE)    
+
+
 
 ```
 
 Alternativamente se puede añadir una nueva página en un fichero excel ya existente.
+
+```{r guardarTablaXLSXadd, echo=TRUE}
+# file= nombre del fichero hoja de cálculo de MSOffice
+write.xlsx(grafico, file = "DATOS/tablafrecResultado.xlsx",
+           sheetName = "prefpte2", append = TRUE)    
+
+
+
+```
 
   \newpage
   

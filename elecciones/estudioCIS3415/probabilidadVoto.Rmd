@@ -40,18 +40,22 @@ Obviamente al tratarse de análisis univariado solo puede ser descriptivo.
 Como en la anterior actividad se incorpora el código del **lenguaje R** en los documentos renderizados (HTML y PDF) activando la opción *echo=TRUE* de los chunks. En algunos chunks no interesa la impresión del resultado por lo que se configuran con  *results='hide'*. Si se desea ver el resultado de la ejecución correcta bastará con eliminar esta parametrización en el fichero Rmd descargado (ver cómo descargar en el [punto 7](#id-github) ).
 
 
-
-
-```{r paquetes, echo=TRUE}
+```{r paquetes, echo=TRUE, message=FALSE}
 # INSTALAR (si no están) PAQUETES de LIBRERÍAS R NECESARIAS 
-suppressMessages({  # Se ocultan mensajes instalación
+# Se ocultan mensajes instalación(message=FALSE)
 if (!require(epiDisplay)){install.packages("epiDisplay")}
 if (!require(e1071)){install.packages("e1071")}
 if (!require(stats)){install.packages("stats")}
 if (!require(tibble)){install.packages("tibble")}
 if (!require(knitr)){install.packages("knitr")}
 if (!require(haven)){install.packages("haven")}
-})
+library(epiDisplay)
+library(e1071)
+library(stats)
+library(knitr)
+library(tibble)
+library(haven)
+
 ```
 
 \newpage
@@ -185,15 +189,15 @@ En la tabla de frecuencias siguiente se muestra el total casos de la muestra por
 ```{r tablaFrecuencias, echo=TRUE}
 # Mediante el atributo output.table se exporta una tabla
 tabla<-tablaGrafico$output.table
-#Para mejor la comprensión se puede cambiar los nombres de las columnas e 
-# imprimir la tabla con Rmd
+# Para mejor la comprensión se puede cambiar los nombres de las columnas
+# e imprimir la tabla con Rmd
 colnames(tabla)<-c("Frecuencia","%","%_acumulado", "%_válido",
                                           "%_acumulado válido")
 
 kable(tabla,column.width = c("10%","20%","20%","20%","20%"),
                 caption="Tabla de distribución de frecuencias") 
 
-# print(tabla)  # En R estrictamente (no Rmd)
+# print(tabla)  #En R estrictamente (no Rmd)
 
 # Para calcular solo las frecuencias de cada valor directamente:
 # round(prop.table(table(df_cisProbVoto$recPROBVOTO, useNA="no"))*100,1)
