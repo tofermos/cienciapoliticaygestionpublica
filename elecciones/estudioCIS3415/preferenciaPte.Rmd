@@ -3,7 +3,7 @@ title: |
   | ANÁLISIS UNIVARIABLE SOBRE PREFERENCIA DE PRESIDENTE/A DE GOBIERNO SEGÚN BARÓMETRO DEL CIS DE JULIO 2023
   | (ESTUDIO 3415)
 subtitle: | 
-  | Técnicas de Investigación en Ciencias Políticas. UBU
+  | Técnicas de Investigación en Ciencia Política I. UBU
   | Práctica 1. Apartado 3
 author: "Tomàs Ferrandis Moscardó"
 date: "2023-03-18"
@@ -32,7 +32,7 @@ output:
 
 # 1. INTRODUCCIÓN
 
-Esta actividad corresponde al apartado 3º de la Práctica 1 de Técnicas de Investigación en Ciencia Política. Se trata de un *análisis univariado* sobre la variable PREFPTE del Barómetro del CIS de julio de 2023 (Estudio 3415) concretamente se trata de la pregunta P8 que dice concretamente: *De los/las principales líderes políticos/as, ¿quién preferiría que fuese el/la presidente/a del Gobierno tras las elecciones?* . 
+Esta actividad corresponde al apartado 3º de la Práctica 1 de Técnicas de Investigación en Ciencia Política I. Se trata de un *análisis univariado* sobre la variable PREFPTE del Barómetro del CIS de julio de 2023 (Estudio 3415). Concretamente se trata de la pregunta P8 que dice: *De los/las principales líderes políticos/as, ¿quién preferiría que fuese el/la presidente/a del Gobierno tras las elecciones?* . 
 Obviamente al tratarse de análisis univariado solo puede ser descriptivo.
 
 Para el análisis de los datos se usa el **lenguaje de programación R**. Se incorpora el código en los documentos renderizados (HTML y PDF) activando la opción *echo* de los chunks (*echo=TRUE*). En algunos chunks no interesa la impresión del resultado por lo que se configuran con *results='hide'*. Si se desea ver el resultado de la ejecución correcta de alguno de estos chunks bastará con eliminar el parametro *results='hide'* en el fichero Rmd descargado (ver [punto 8](#id-github) para descarga ).
@@ -285,8 +285,7 @@ En los siguientes subapartados ser verán los resultados en las diferentes opcio
 
 Para una variable nominal como es el caso, el gráfico más adecuado es el diagrama de barras.
 ```{r grafico, echo=TRUE}
-# Este vector tendrá los colores para cada candidato que 
-# los identifica con su opción política. Se usará en todos los gráficos.
+# Se adoptan los colores identificativos de la opción política
 colores<-c("red","blue","#FF33FF","#2ecc71","#2980b9","#ab47bc","#c8e6c9")
 coloresInvertidos<-rev(colores)
 grafico <- tab1(df_cis$recPREFPTE,cum.percent = TRUE,

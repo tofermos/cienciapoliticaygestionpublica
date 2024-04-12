@@ -3,7 +3,7 @@ title: |
   | ANÁLISIS UNIVARIABLE SOBRE PROBABILIDAD DE VOTO SEGÚN BARÓMETRO DEL CIS DE JULIO 2023
   | (ESTUDIO 3415)
 subtitle: | 
-  | Técnicas de Investigación en Ciencias Políticas-UBU.
+  | Técnicas de Investigación en Ciencia Política I. UBU
   | Práctica 1.  Apartado 4
 author: "Tomàs Ferrandis Moscardó"
 date: "2023-03-22"

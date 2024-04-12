@@ -2755,7 +2755,7 @@ UNIVARIABLE SOBRE PREFERENCIA DE PRESIDENTE/A DE GOBIERNO SEGÚN
 BARÓMETRO DEL CIS DE JULIO 2023<br />
 (ESTUDIO 3415)</div></h1>
 <h3 class="subtitle"><div class="line-block">Técnicas de Investigación
-en Ciencias Políticas. UBU<br />
+en Ciencia Política I. UBU<br />
 Práctica 1. Apartado 3</div></h3>
 <h4 class="author">Tomàs Ferrandis Moscardó</h4>
 <h4 class="date">2023-03-18</h4>
@@ -2766,13 +2766,13 @@ Práctica 1. Apartado 3</div></h3>
 <div id="introducción" class="section level1">
 <h1>1. INTRODUCCIÓN</h1>
 <p>Esta actividad corresponde al apartado 3º de la Práctica 1 de
-Técnicas de Investigación en Ciencia Política. Se trata de un
+Técnicas de Investigación en Ciencia Política I. Se trata de un
 <em>análisis univariado</em> sobre la variable PREFPTE del Barómetro del
-CIS de julio de 2023 (Estudio 3415) concretamente se trata de la
-pregunta P8 que dice concretamente: <em>De los/las principales líderes
-políticos/as, ¿quién preferiría que fuese el/la presidente/a del
-Gobierno tras las elecciones?</em> . Obviamente al tratarse de análisis
-univariado solo puede ser descriptivo.</p>
+CIS de julio de 2023 (Estudio 3415). Concretamente se trata de la
+pregunta P8 que dice: <em>De los/las principales líderes políticos/as,
+¿quién preferiría que fuese el/la presidente/a del Gobierno tras las
+elecciones?</em> . Obviamente al tratarse de análisis univariado solo
+puede ser descriptivo.</p>
 <p>Para el análisis de los datos se usa el <strong>lenguaje de
 programación R</strong>. Se incorpora el código en los documentos
 renderizados (HTML y PDF) activando la opción <em>echo</em> de los
@@ -3147,8 +3147,7 @@ diferentes opciones.</p>
 <h2>6.1 Gráfico de barras</h2>
 <p>Para una variable nominal como es el caso, el gráfico más adecuado es
 el diagrama de barras.</p>
-<pre class="r"><code># Este vector tendrá los colores para cada candidato que 
-# los identifica con su opción política. Se usará en todos los gráficos.
+<pre class="r"><code># Se adoptan los colores identificativos de la opción política
 colores&lt;-c(&quot;red&quot;,&quot;blue&quot;,&quot;#FF33FF&quot;,&quot;#2ecc71&quot;,&quot;#2980b9&quot;,&quot;#ab47bc&quot;,&quot;#c8e6c9&quot;)
 coloresInvertidos&lt;-rev(colores)
 grafico &lt;- tab1(df_cis$recPREFPTE,cum.percent = TRUE,
