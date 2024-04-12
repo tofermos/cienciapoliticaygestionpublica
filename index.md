@@ -6,13 +6,13 @@ output:
 # Ciencia política y gestión pública
 |||
 |:---------|--:|
-|![](recursos/llibres.jpeg){width=100%}|Tomàs Ferrandis Moscardó<br>tomasferrandis@gmail.com <br> ![](recursos/CC_BY-NC-ND.png){width=30%}| |
+|![](recursos/llibres0.png){width=100%}|Tomàs Ferrandis Moscardó<br>tomasferrandis@gmail.com <br> ![](recursos/CC_BY-NC-ND.png){width=40%}| |
 
 El contenido de este repositorio está relacionado con el _Grado Universitario de Ciencia Política y Gestión Pública_ de la [_Universidad de Burgos (online)_](https://www.ubu.es/).
 
-Principalmente se trata de trabajos de las asignaturas cursadas, aunque también hay alguna modesta tarea de investigación y artículos sin relación directa con las actividades propias del Grado.
+Principalmente se trata de trabajos de las asignaturas cursadas y alguna simple de investigación o artículo sin relación directa con las actividades propias del Grado.
 
-El procesamiento de datos se hrealiza mediante el [lenguaje de programación R](https://smowl.net/es/blog/lenguaje-r/) y el código estará visible en anexos, cuando no en el propio texto. Los documentos *html* y *pdf* han sido generados a partir de los originales codificados en Markdown o R-Markdown, estando todos diponibles.
+El procesamiento de datos se realiza mediante el [lenguaje de programación R](https://smowl.net/es/blog/lenguaje-r/) y el código estará visible en anexos, cuando no en el propio texto. Los documentos *html* y *pdf* han sido generados a partir de los originales codificados en Markdown o RMarkdown, estando todos disponibles.
 
 ## Elecciones y encuestas
 |||
