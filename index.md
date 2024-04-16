@@ -46,7 +46,7 @@ El procesamiento de datos se realiza mediante el [lenguaje de programación R](h
 
 ### Supuestos Derecho Administrativo
 2. [Sobre federaciones deportivas](administracion/supuestosderechoadministrativo/Casopractico1.html)
-3. [Sobre orden autonómica de restricción por pandemia](administracion/supuestosderechoadministrativo/Casopractico1.html)
+3. [Sobre orden autonómica de restricción por pandemia](administracion/supuestosderechoadministrativo/Casopractico2.html)
 
 
  

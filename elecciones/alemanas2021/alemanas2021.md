@@ -1,7 +1,9 @@
 ---
 title: "EL SISTEMA DE PARTIDOS ALEMÁN TRAS LAS ELECCIONES DEL 2021"
+subtitle: "Examen Take Home"
 author: "Tomàs Ferrandis Moscardó"
 date: "2021-12-10"
+lang: "es-ES"
 output:
   html_document:
     toc: true
