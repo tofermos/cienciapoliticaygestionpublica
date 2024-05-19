@@ -442,20 +442,18 @@ tipo \emph{factor} en los nuevos campos duplicados.
 \CommentTok{\# Recodifcación para que se muestre los valores de las etiquetas}
 \CommentTok{\# De la variable independiente: "Me daría vergüenza que un familiar..."}
 \NormalTok{ df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_hmsfmlsh }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_hmsfmlsh,}
-                               \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{),}
-                               \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Muy de acuerdo"}\NormalTok{, }\StringTok{"De acuerdo"}\NormalTok{, }
-                                        \StringTok{"Ni de acuerdo ni en desacuerdo"}\NormalTok{,}
-                                         \StringTok{"En desacuerdo"}\NormalTok{, }
-                                        \StringTok{"Muy en desacuerdo"}\NormalTok{)) }
+                            \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{),}
+                            \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Muy de acuerdo"}\NormalTok{, }\StringTok{"De acuerdo"}\NormalTok{, }
+                                  \StringTok{"Ni de acuerdo ni en desacuerdo"}\NormalTok{,}
+                                  \StringTok{"En desacuerdo"}\NormalTok{,}\StringTok{"Muy en desacuerdo"}\NormalTok{)) }
 
 \CommentTok{\# De la variable dependiente: "Los gays y lesbianas deberían tener }
 \CommentTok{\# libertad para..."}
 \NormalTok{ df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_freehms }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_freehms,}
-                             \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{),}
-                              \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Muy de acuerdo"}\NormalTok{, }\StringTok{"De acuerdo"}\NormalTok{, }
-                                        \StringTok{"Ni de acuerdo ni en desacuerdo"}\NormalTok{,}
-                                        \StringTok{"En desacuerdo"}\NormalTok{, }
-                                        \StringTok{"Muy en desacuerdo"}\NormalTok{)) }
+                            \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{),}
+                            \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Muy de acuerdo"}\NormalTok{, }\StringTok{"De acuerdo"}\NormalTok{, }
+                                  \StringTok{"Ni de acuerdo ni en desacuerdo"}\NormalTok{,}
+                                  \StringTok{"En desacuerdo"}\NormalTok{,}\StringTok{"Muy en desacuerdo"}\NormalTok{)) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -489,7 +487,8 @@ variable independiente. Se usará la función \emph{prop.table}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{freqtabla\_100xFila}\OtherTok{\textless{}{-}}\FunctionTok{prop.table}\NormalTok{((freqtabla),}\DecValTok{1}\NormalTok{)}\SpecialCharTok{*}\DecValTok{100} \CommentTok{\# El Parámetro 1 indica \% por fila}
+\CommentTok{\# El Parámetro 1 de prop.table indica  \% por fila}
+\NormalTok{freqtabla\_100xFila}\OtherTok{\textless{}{-}}\FunctionTok{prop.table}\NormalTok{((freqtabla),}\DecValTok{1}\NormalTok{)}\SpecialCharTok{*}\DecValTok{100} 
 \end{Highlighting}
 \end{Shaded}
 
@@ -509,47 +508,49 @@ cruzada} mediante la función \emph{rbind}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{tablaContingencia }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{rbind}\NormalTok{(freqtabla\_100xFila, Totales),}\DecValTok{2}\NormalTok{)}
-\FunctionTok{kable}\NormalTok{(tablaContingencia, }\AttributeTok{caption=}\StringTok{"Opiniones sobre la libertad de gays y lesbianas para vivir como quieran (Variable Dependiente en columnas) según la vergüenza de tener un familiar cercano gay o lesbiana (Variable Independiente en filas)"}\NormalTok{)}
+\FunctionTok{kable}\NormalTok{(tablaContingencia, }
+\AttributeTok{caption=}\StringTok{"Opinión sobre la libertad de gays y lesbianas (columnas)}
+\StringTok{según sentimiento de vergüenza por un familiar gay o lesbiana (filas)"}\NormalTok{,}
+\AttributeTok{align=}\FunctionTok{c}\NormalTok{(}\StringTok{"c"}\NormalTok{,}\StringTok{"c"}\NormalTok{,}\StringTok{"c"}\NormalTok{,}\StringTok{"c"}\NormalTok{,}\StringTok{"c"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2583}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1250}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0917}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2583}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1167}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1500}}@{}}
-\caption{Opiniones sobre la libertad de gays y lesbianas para vivir como
-quieran (Variable Dependiente en columnas) según la vergüenza de tener
-un familiar cercano gay o lesbiana (Variable Independiente en
-filas)}\tabularnewline
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2480}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1280}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0960}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2560}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1200}}
+  >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1520}}@{}}
+\caption{Opinión sobre la libertad de gays y lesbianas (columnas) según
+sentimiento de vergüenza por un familiar gay o lesbiana
+(filas)}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 Muy de acuerdo
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 De acuerdo
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 Ni de acuerdo ni en desacuerdo
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 En desacuerdo
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 Muy en desacuerdo
 \end{minipage} \\
 \midrule\noalign{}
 \endfirsthead
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 Muy de acuerdo
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 De acuerdo
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 Ni de acuerdo ni en desacuerdo
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 En desacuerdo
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 Muy en desacuerdo
 \end{minipage} \\
 \midrule\noalign{}
@@ -629,6 +630,8 @@ Cuando se examina columna a columna toda la tabla, se observa que los
 valores de cada columna varían respecto a su correspondiente valor
 marginal. De hecho no se observa ninguna coincidencia lo que nos lleva a
 concluir una dependencia entre las variables.
+
+\newpage
 
 \subsection{3.6 CÁLCULO DEL COEFICIENTE CHI
 CUADRADO}\label{cuxe1lculo-del-coeficiente-chi-cuadrado}

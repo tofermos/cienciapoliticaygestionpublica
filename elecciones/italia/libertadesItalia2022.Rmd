@@ -185,20 +185,18 @@ Se añaden las etiquetas correspondientes a los valores en los campos tipo *fact
 # Recodifcación para que se muestre los valores de las etiquetas
 # De la variable independiente: "Me daría vergüenza que un familiar..."
  df_ronda10$rec_hmsfmlsh <- factor(df_ronda10$rec_hmsfmlsh,
-                               levels = c(1,2,3,4,5),
-                               labels = c("Muy de acuerdo", "De acuerdo", 
-                                        "Ni de acuerdo ni en desacuerdo",
-                                         "En desacuerdo", 
-                                        "Muy en desacuerdo")) 
+                            levels = c(1,2,3,4,5),
+                            labels = c("Muy de acuerdo", "De acuerdo", 
+                                  "Ni de acuerdo ni en desacuerdo",
+                                  "En desacuerdo","Muy en desacuerdo")) 
 
 # De la variable dependiente: "Los gays y lesbianas deberían tener 
 # libertad para..."
  df_ronda10$rec_freehms <- factor(df_ronda10$rec_freehms,
-                             levels = c(1,2,3,4,5),
-                              labels = c("Muy de acuerdo", "De acuerdo", 
-                                        "Ni de acuerdo ni en desacuerdo",
-                                        "En desacuerdo", 
-                                        "Muy en desacuerdo")) 
+                            levels = c(1,2,3,4,5),
+                            labels = c("Muy de acuerdo", "De acuerdo", 
+                                  "Ni de acuerdo ni en desacuerdo",
+                                  "En desacuerdo","Muy en desacuerdo")) 
 ```
 
 ## 3.3 HIPÓTESIS
@@ -217,7 +215,8 @@ freqtabla <- xtabs(~rec_hmsfmlsh + rec_freehms, data = df_ronda10)
 Pero lo que interesa es tener en cada celda el % de casos respecto a la fila. Teniendo en cuenta que cada fila representa una categoría de la variable independiente. Se usará la función *prop.table*.
 
 ```{r tablaCruzadaFilas, echo=TRUE}
-freqtabla_100xFila<-prop.table((freqtabla),1)*100 # El Parámetro 1 indica % por fila
+# El Parámetro 1 de prop.table indica  % por fila
+freqtabla_100xFila<-prop.table((freqtabla),1)*100 
 
 ```
 
@@ -233,7 +232,10 @@ Se combinan las dos matrices (*freqtabla_100xFila* y *Totales*) para elaborar la
 
 ```{r tablaContingencia, echo=TRUE}
 tablaContingencia <- round(rbind(freqtabla_100xFila, Totales),2)
-kable(tablaContingencia, caption="Opiniones sobre la libertad de gays y lesbianas para vivir como quieran (Variable Dependiente en columnas) según la vergüenza de tener un familiar cercano gay o lesbiana (Variable Independiente en filas)")
+kable(tablaContingencia, 
+caption="Opinión sobre la libertad de gays y lesbianas (columnas)
+según sentimiento de vergüenza por un familiar gay o lesbiana (filas)",
+align=c("c","c","c","c","c"))
 ```
 
 ## 3.5 CONCLUSIONES SOBRE LA TABLA DE CONTINGENCIA
@@ -260,6 +262,7 @@ En resumen, entre los que no sentirían vergüenza por tener un familiar homosex
 
 Cuando se examina columna a columna toda la tabla, se observa que los valores de cada columna varían respecto a su correspondiente valor marginal. De hecho no se observa ninguna coincidencia lo que nos lleva a concluir una dependencia entre las variables. 
 
+\newpage
 
 ## 3.6 CÁLCULO DEL COEFICIENTE CHI CUADRADO
 

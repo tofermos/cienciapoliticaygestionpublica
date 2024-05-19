@@ -2958,20 +2958,18 @@ tipo <em>factor</em> en los nuevos campos duplicados.</p>
 <pre class="r"><code># Recodifcación para que se muestre los valores de las etiquetas
 # De la variable independiente: &quot;Me daría vergüenza que un familiar...&quot;
  df_ronda10$rec_hmsfmlsh &lt;- factor(df_ronda10$rec_hmsfmlsh,
-                               levels = c(1,2,3,4,5),
-                               labels = c(&quot;Muy de acuerdo&quot;, &quot;De acuerdo&quot;, 
-                                        &quot;Ni de acuerdo ni en desacuerdo&quot;,
-                                         &quot;En desacuerdo&quot;, 
-                                        &quot;Muy en desacuerdo&quot;)) 
+                            levels = c(1,2,3,4,5),
+                            labels = c(&quot;Muy de acuerdo&quot;, &quot;De acuerdo&quot;, 
+                                  &quot;Ni de acuerdo ni en desacuerdo&quot;,
+                                  &quot;En desacuerdo&quot;,&quot;Muy en desacuerdo&quot;)) 
 
 # De la variable dependiente: &quot;Los gays y lesbianas deberían tener 
 # libertad para...&quot;
  df_ronda10$rec_freehms &lt;- factor(df_ronda10$rec_freehms,
-                             levels = c(1,2,3,4,5),
-                              labels = c(&quot;Muy de acuerdo&quot;, &quot;De acuerdo&quot;, 
-                                        &quot;Ni de acuerdo ni en desacuerdo&quot;,
-                                        &quot;En desacuerdo&quot;, 
-                                        &quot;Muy en desacuerdo&quot;)) </code></pre>
+                            levels = c(1,2,3,4,5),
+                            labels = c(&quot;Muy de acuerdo&quot;, &quot;De acuerdo&quot;, 
+                                  &quot;Ni de acuerdo ni en desacuerdo&quot;,
+                                  &quot;En desacuerdo&quot;,&quot;Muy en desacuerdo&quot;)) </code></pre>
 </div>
 </div>
 <div id="hipótesis-1" class="section level2">
@@ -2991,7 +2989,8 @@ entre las variables</li>
 <p>Pero lo que interesa es tener en cada celda el % de casos respecto a
 la fila. Teniendo en cuenta que cada fila representa una categoría de la
 variable independiente. Se usará la función <em>prop.table</em>.</p>
-<pre class="r"><code>freqtabla_100xFila&lt;-prop.table((freqtabla),1)*100 # El Parámetro 1 indica % por fila</code></pre>
+<pre class="r"><code># El Parámetro 1 de prop.table indica  % por fila
+freqtabla_100xFila&lt;-prop.table((freqtabla),1)*100 </code></pre>
 <p>Se ve que la función no aporta los marginales (fila de totales). Para
 ello R dispone de otra función, <em>margin.table</em> :</p>
 <pre class="r"><code>Totales&lt;- margin.table((prop.table(freqtabla)*100), 2)</code></pre>
@@ -2999,78 +2998,80 @@ ello R dispone de otra función, <em>margin.table</em> :</p>
 <em>Totales</em>) para elaborar la <strong>Tabla de contingencia o Tabla
 cruzada</strong> mediante la función <em>rbind</em></p>
 <pre class="r"><code>tablaContingencia &lt;- round(rbind(freqtabla_100xFila, Totales),2)
-kable(tablaContingencia, caption=&quot;Opiniones sobre la libertad de gays y lesbianas para vivir como quieran (Variable Dependiente en columnas) según la vergüenza de tener un familiar cercano gay o lesbiana (Variable Independiente en filas)&quot;)</code></pre>
+kable(tablaContingencia, 
+caption=&quot;Opinión sobre la libertad de gays y lesbianas (columnas)
+según sentimiento de vergüenza por un familiar gay o lesbiana (filas)&quot;,
+align=c(&quot;c&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;))</code></pre>
 <table>
-<caption>Opiniones sobre la libertad de gays y lesbianas para vivir como
-quieran (Variable Dependiente en columnas) según la vergüenza de tener
-un familiar cercano gay o lesbiana (Variable Independiente en
-filas)</caption>
+<caption>Opinión sobre la libertad de gays y lesbianas (columnas) según
+sentimiento de vergüenza por un familiar gay o lesbiana
+(filas)</caption>
 <colgroup>
-<col width="25%" />
+<col width="24%" />
 <col width="12%" />
 <col width="9%" />
 <col width="25%" />
-<col width="11%" />
+<col width="12%" />
 <col width="15%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th align="left"></th>
-<th align="right">Muy de acuerdo</th>
-<th align="right">De acuerdo</th>
-<th align="right">Ni de acuerdo ni en desacuerdo</th>
-<th align="right">En desacuerdo</th>
-<th align="right">Muy en desacuerdo</th>
+<th align="center">Muy de acuerdo</th>
+<th align="center">De acuerdo</th>
+<th align="center">Ni de acuerdo ni en desacuerdo</th>
+<th align="center">En desacuerdo</th>
+<th align="center">Muy en desacuerdo</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left">Muy de acuerdo</td>
-<td align="right">22.97</td>
-<td align="right">10.81</td>
-<td align="right">8.11</td>
-<td align="right">24.32</td>
-<td align="right">33.78</td>
+<td align="center">22.97</td>
+<td align="center">10.81</td>
+<td align="center">8.11</td>
+<td align="center">24.32</td>
+<td align="center">33.78</td>
 </tr>
 <tr class="even">
 <td align="left">De acuerdo</td>
-<td align="right">4.07</td>
-<td align="right">36.65</td>
-<td align="right">25.79</td>
-<td align="right">26.24</td>
-<td align="right">7.24</td>
+<td align="center">4.07</td>
+<td align="center">36.65</td>
+<td align="center">25.79</td>
+<td align="center">26.24</td>
+<td align="center">7.24</td>
 </tr>
 <tr class="odd">
 <td align="left">Ni de acuerdo ni en desacuerdo</td>
-<td align="right">6.92</td>
-<td align="right">40.71</td>
-<td align="right">46.05</td>
-<td align="right">4.94</td>
-<td align="right">1.38</td>
+<td align="center">6.92</td>
+<td align="center">40.71</td>
+<td align="center">46.05</td>
+<td align="center">4.94</td>
+<td align="center">1.38</td>
 </tr>
 <tr class="even">
 <td align="left">En desacuerdo</td>
-<td align="right">17.39</td>
-<td align="right">67.34</td>
-<td align="right">12.26</td>
-<td align="right">2.79</td>
-<td align="right">0.22</td>
+<td align="center">17.39</td>
+<td align="center">67.34</td>
+<td align="center">12.26</td>
+<td align="center">2.79</td>
+<td align="center">0.22</td>
 </tr>
 <tr class="odd">
 <td align="left">Muy en desacuerdo</td>
-<td align="right">66.87</td>
-<td align="right">28.80</td>
-<td align="right">1.69</td>
-<td align="right">0.60</td>
-<td align="right">2.05</td>
+<td align="center">66.87</td>
+<td align="center">28.80</td>
+<td align="center">1.69</td>
+<td align="center">0.60</td>
+<td align="center">2.05</td>
 </tr>
 <tr class="even">
 <td align="left">Totales</td>
-<td align="right">30.54</td>
-<td align="right">45.02</td>
-<td align="right">16.61</td>
-<td align="right">5.18</td>
-<td align="right">2.65</td>
+<td align="center">30.54</td>
+<td align="center">45.02</td>
+<td align="center">16.61</td>
+<td align="center">5.18</td>
+<td align="center">2.65</td>
 </tr>
 </tbody>
 </table>
@@ -3127,6 +3128,7 @@ este colectivo.</p>
 valores de cada columna varían respecto a su correspondiente valor
 marginal. De hecho no se observa ninguna coincidencia lo que nos lleva a
 concluir una dependencia entre las variables.</p>
+<div style="page-break-after: always;"></div>
 </div>
 <div id="cálculo-del-coeficiente-chi-cuadrado" class="section level2">
 <h2>3.6 CÁLCULO DEL COEFICIENTE CHI CUADRADO</h2>
