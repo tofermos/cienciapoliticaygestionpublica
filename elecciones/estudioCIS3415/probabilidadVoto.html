@@ -2797,10 +2797,8 @@ descargado (ver cómo descargar en el <a href="#id-github">punto 7</a>
 ).</p>
 <pre class="r"><code># INSTALAR (si no están) PAQUETES de LIBRERÍAS R NECESARIAS 
 # Se ocultan mensajes instalación(message=FALSE)
-if (!require(epiDisplay)){install.packages(&quot;epiDisplay&quot;)}</code></pre>
-<pre><code>## Warning in library(package, lib.loc = lib.loc, character.only = TRUE,
-## logical.return = TRUE, : no hi ha cap paquet anomenat &#39;epiDisplay&#39;</code></pre>
-<pre class="r"><code>if (!require(e1071)){install.packages(&quot;e1071&quot;)}
+if (!require(epiDisplay)){install.packages(&quot;epiDisplay&quot;)}
+if (!require(e1071)){install.packages(&quot;e1071&quot;)}
 if (!require(stats)){install.packages(&quot;stats&quot;)}
 if (!require(tibble)){install.packages(&quot;tibble&quot;)}
 if (!require(knitr)){install.packages(&quot;knitr&quot;)}
