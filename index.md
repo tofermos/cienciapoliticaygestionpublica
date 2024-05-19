@@ -10,7 +10,7 @@ output:
 
 El contenido de este repositorio está relacionado con el _Grado Universitario de Ciencia Política y Gestión Pública_ de la [_Universidad de Burgos (online)_](https://www.ubu.es/) y está compartido bajo licencia CC BY-NC-ND.
 
-Principalmente se trata de trabajos de las asignaturas cursadas o alguna artículo simple sin relación directa con las actividades propias del Grado.
+Principalmente se trata de trabajos de las asignaturas cursadas y algún artículo sencillo sin relación directa con las actividades propias del Grado.
 
 El procesamiento de datos se realiza mediante el [lenguaje de programación R](https://smowl.net/es/blog/lenguaje-r/) y el código estará visible en anexos, cuando no en el propio texto. Los documentos *html* y *pdf* han sido generados a partir de los originales codificados en Markdown o RMarkdown.
 
