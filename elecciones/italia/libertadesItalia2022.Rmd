@@ -36,6 +36,8 @@ Las variables que se analizarán en las siguientes actividades corresponden al c
 
 La práctica está relacionada con los temas 5 y 6 de la asignatura Técnicas de la Investigación en Ciencia Política I del Grado Universitario de Ciencia Política y Gestión Pública de la Universidad de Burgos, curso 2023-2024.
 
+## 1.2 LIBRERÍAS R
+
 Un primer paso será asegurar que en nuestra instalación de R están disponibles algunas funciones necesarias para abrir el fichero de datos externo (tipo .sav), para algún cálculo estadístico o formateo de datos en Rmd.
 
 ```{r paquetes, echo=TRUE, message=FALSE}
@@ -47,11 +49,10 @@ if(!require(DescTools)){install.packages("DescTools")} #actividad 3
 library(DescTools)
 ```
 
-Se parte de un fichero .sav con los resultados de la encuesta que se descargará o copiará en una subcarpeta DATOS del directorio donde se esté este mismo fichero .Rmd.
 
-## 1.2    GESTIÓN DE FICHEROS DE DATOS
+## 1.3    GESTIÓN DE FICHEROS DE DATOS
 
-Tanto el fichero de los datos de la encuesta (*datosparc2.sav*) como cualquier fichero de resultados se ubicarán en un subdirectorio DATOS.
+Tanto el fichero de los datos de la encuesta (*datosprac2.sav*) como cualquier fichero de resultados se ubicarán en una subcarpeta DATOS del directorio donde se esté este mismo fichero Rmd.
 
 ```{r fichero, echo=TRUE}
 # El fichero .sav debe estar en una subcarpeta DATOS
@@ -67,6 +68,8 @@ df_ronda10<-read_sav(rutaFichero)
 ```
 
 
+\newpage
+  
 # 2    ACTIVIDAD 1. CONTRASTE DE MEDIAS PARA DATOS RELACIONADOS. 
 
 ## 2.1 DESCRIPCIÓN DE LA ACTIVIDAD 1
@@ -78,7 +81,7 @@ Las variables son:
 * **fairelcc: Las elecciones son libres y limpias en Italia** (Pregunta B3 del cuestionario). 
 * **cttresac: Los tribunales en Italia tratan a todo el mundo por igual** (Pregunta B18 del cuestionario). 
 
-Ambas son Variables cualitativas ordinarias y admiten un valor que va desde 0 ("No es válida en absoluto") a 10 ("Es completamente válido") además de los valores considerados como no válidos a efectos estadísticos 77, 88 y 99 ("Rechaza responder", "NS" y "NC" respectivamente).
+Ambas son Variables cualitativas ordinarias y admiten un valor que va desde 0 ("No es válida en absoluto") a 10 ("Es completamente válido") además de los valores considerados como no válidos a efectos estadísticos 77, 88 y 99 ("Rechaza responder", "NS No sabe" y "NC No contesta" respectivamente).
 
 
 ## 2.2 PREPARACIÓN DE LA BASE DE DATOS
@@ -86,7 +89,7 @@ Ambas son Variables cualitativas ordinarias y admiten un valor que va desde 0 ("
 
 ### Recodificación de valores no válidos
 
-Se comprueba si hay valores que necesitan recodificarse. Serían los valores externos al intervalo [0--10] que según el codebook de la encuesta podrían ser 77, 88 ó 99 ya explicados.
+Se comprueba si hay valores que necesitan recodificarse. Serían los valores externos al intervalo [0-10] que según el codebook de la encuesta podrían ser 77, 88 ó 99 ya explicados.
 ```{r novalidos, echo=TRUE}
 unique(df_ronda10$fairelcc)
 unique(df_ronda10$cttresac)
@@ -118,7 +121,7 @@ df_ronda10$rec_cttresac[df_ronda10$rec_cttresac >=77 &
     
 ## 2.4 APLICACIÓN DE T-STUDENT
 
-En estos datos en que todos los valores de ambas variables estan entre 0 y 10 podría aplicarse sobre los capos originales.
+Aplicaremos la función que implementa el método T-Student sobre los campos duplicados en nuestro caso.
 
 *   *paired = T*, indica a la función que operará con 2 muestras emparejadas.
 
@@ -141,13 +144,14 @@ A la vista del resultado de *t_test*, se comprueba que hay una diferencia signif
 Por lo que **se debe rechazar la hipótesis nula que plantea la igualdad de las medias: las medias son distintas**.
 
 
-Lo que significa que existe una percepción distinta en los encuestados entre la libertad y limpieza del proceso electoral en Italia y el trato igualitario de su sistema judicial.
+Esto se traduce en que existe una percepción distinta en los encuestados entre la libertad y limpieza del proceso electoral en Italia y el trato igualitario de su sistema judicial.
 
 **Dirección de la diferencia en la función de R**
 
-El valor positivo del estadístico *t-valor*, de los intervalos y de la *diferencia de medias* nos indica el orden de la diferencia. Viendo el orden de las variables en la función R, la primera variable "fairelecc" tiene una media en promedio mayor que la segunda "cttresac", por lo que la percepción de los encuestado sobre la limpieza de las elecciones es más postiva que la que tienen sobre la igualdad de trato del sistema judicial.
+El valor positivo del estadístico *t-valor*, de los intervalos y de la *diferencia de medias* nos indica el orden de la diferencia. Viendo el orden de las variables en la función R, la primera variable "fairelecc" tiene una media en promedio mayor que la segunda "cttresac", por lo que la percepción de los encuestados sobre la limpieza de las elecciones es más postiva que la que tienen sobre la igualdad de trato del sistema judicial.
 
-Si se inviertese el orden de las variables en la función de R nos dará los mismos valores absolutos de *t*, de *intervalos* y de *diferencia de media* pero con signo negativo (cambiaría la dirección de la diferencia). El valor *p-value* seguirá igualmente positivo o absoluto puesto que indica la significancia estadística. 
+Si se invierte el orden de las variables en la función de R dará los mismos valores absolutos de *t*, de *intervalos* y de *diferencia de media* pero con signo negativo (cambiaría la dirección de la diferencia). El valor *p-value* seguirá igualmente positivo o absoluto puesto que indica la significancia estadística. 
+
 
 \newpage
 
@@ -159,15 +163,15 @@ En esta actividad se procederá a comprobar la asociación entre dos variables c
 
 Las variables a analizar serán:
 
-*   **rec_hmsfmlsh**, *Me daría vergüenza que un familiar cercano fuese gay o lesbiana*, representa la **variable independiente** y, por lo tanto sus categorías corresponderán a filas en la tabla de contingencia (Pregunta A48 del cuestionario).
+*   **rec_hmsfmlsh**, *Me daría vergüenza que un familiar cercano fuese gay o lesbiana*, representa la **variable independiente** y, por lo tanto, sus categorías corresponderán a filas en la tabla de contingencia (Pregunta A48 del cuestionario).
 
-*   **rec_freehms**, *Los gays y lesbianas deberían tener libertad para vivir como quieran*, representa la **variable dependiente** y consecuentemente sus categorías corresponderán a columnas en la tabla (Pregunta A47 del cuestionario)
+*   **rec_freehms**, *Los gays y lesbianas deberían tener libertad para vivir como quieran*, representa la **variable dependiente**. Sus categorías corresponderán a columnas en la tabla (Pregunta A47 del cuestionario).
 
 ## 3.2 PREPARAR DATOS
 
 ### Duplicación de campos
 
-Se duplicarán las columnas del dataframe a manipular. En estos nuevos campos se asignan las etiquetas a sus valores correspondientes.
+Se duplicarán las columnas del dataframe a manipular puesto que vamos a manipularlos.
 
 ```{r prepararDatos, echo=TRUE}
 df_ronda10$rec_hmsfmlsh<-df_ronda10$hmsfmlsh
@@ -175,7 +179,8 @@ df_ronda10$rec_freehms<-df_ronda10$freehms
 ```
 ### Recodificación. Etiquetas de valores
 
-Se añaden las etiquetas correspondientes a los valores en los campos tipo *factor*.
+Se añaden las etiquetas correspondientes a los valores en los campos tipo *factor* en los nuevos campos duplicados.
+
 ```{r etiquetas,echo=TRUE}
 # Recodifcación para que se muestre los valores de las etiquetas
 # De la variable independiente: "Me daría vergüenza que un familiar..."
@@ -196,8 +201,6 @@ Se añaden las etiquetas correspondientes a los valores en los campos tipo *fact
                                         "Muy en desacuerdo")) 
 ```
 
-
-
 ## 3.3 HIPÓTESIS
  
  *    Hipótesis nula: **No hay asociación estadísticamente significativa entre las variables**. 
@@ -205,16 +208,17 @@ Se añaden las etiquetas correspondientes a los valores en los campos tipo *fact
  
 ## 3.4 LA TABLA DE CONTINGENCIA (TABLA CRUZADA)
 
-Se obtiene los valores de frecuencia absolutos.
+Se obtienen los valores de frecuencia absolutos con la función *xtabs*.
+
 ```{r tablaFrecuencia, echo=TRUE}
 freqtabla <- xtabs(~rec_hmsfmlsh + rec_freehms, data = df_ronda10)
 ```
 
-Pero lo que interesa es tener en cada celda el % de casos respecto a la fila. Teniendo en cuenta que cada fila representa una categoría de la variable independiente.
+Pero lo que interesa es tener en cada celda el % de casos respecto a la fila. Teniendo en cuenta que cada fila representa una categoría de la variable independiente. Se usará la función *prop.table*.
 
-Esto se indica con el parámetro "1" en la función de R *prop.table*
 ```{r tablaCruzadaFilas, echo=TRUE}
-freqtabla_100xFila<-prop.table((freqtabla),1)*100
+freqtabla_100xFila<-prop.table((freqtabla),1)*100 # El Parámetro 1 indica % por fila
+
 ```
 
 Se ve que la función no aporta los marginales (fila de totales). Para ello R dispone de otra función, *margin.table* :
@@ -224,7 +228,8 @@ Totales<- margin.table((prop.table(freqtabla)*100), 2)
 ```
 
 
-Combinación de las dos matrices de R (*freqtabla_100xFila* y *Totales*) para elaborar la **Tabla de contingencia o Tabla cruzada** mediante la función *rbind*
+
+Se combinan las dos matrices (*freqtabla_100xFila* y *Totales*) para elaborar la **Tabla de contingencia o Tabla cruzada** mediante la función *rbind*
 
 ```{r tablaContingencia, echo=TRUE}
 tablaContingencia <- round(rbind(freqtabla_100xFila, Totales),2)
@@ -238,31 +243,31 @@ En una primera observación sobre los  **valores marginales** o totales se debe 
 
 Al observar los valores de las diferentes **categorías de la variable independiente** o filas se tiene un primer bloque con las dos categorías de encuestados que reconocen que sentirían algún tipo de vergüenza por tener un familiar homosexual. Aquí se ve una diferencia notable entre ambas categorías:
 
-  *   Por un parte los que responden estar "Muy de acuerdo" con este sentimiento de vergüenza, la respuesta mayoritaria es contraria a la libertad, decantándose un 33,78% por "Muy en desacuerdo" y un 24,32% por "En desacuerdo". No obstante aparece un dato muy interesant: un importante 22,97% que se manifiesta "Muy de acuerdo" con la libertad. 
-  *   Por otra parte, los que se muestran "De acuerdo" con la afirmación de vergüenza, ºsu posición mayoritaria respecto a la libertad es "De acuerdo" (36,65%) con la libertad, un dato también interesante. Seguidamente optan por "En desacuerdo" y "Ni de acuerdo ni en desacuerdo" con cifras similares (26,24% y 25,79% respectivamente).
+  *   Por un parte los que responden estar "Muy de acuerdo" con este sentimiento de vergüenza, su posicionamiento mayoritario es contrario a la libertad, decantándose un 33,78% por "Muy en desacuerdo" y un 24,32% por "En desacuerdo". No obstante aparece un dato muy interesante: un importante 22,97% que se manifiesta "Muy de acuerdo" con la libertad. 
+  *   Por otra parte, los que se muestran "De acuerdo" con la afirmación de vergüenza, su posición mayoritaria respecto a la libertad es estar "De acuerdo" (36,65%), un dato también interesante. Seguidamente optan por "En desacuerdo" y "Ni de acuerdo ni en desacuerdo" con cifras similares (26,24% y 25,79% respectivamente).
 
 
-En un nivel intermedio lo configuraría la categoría más "neutral": los que no están "Ni de acuerdo ni en desacuerdo" con el tema de la vergüenza y que también se decantan mayoritariamente por la misma posición neutra (central en la tabla) sobre la libertad mayoritariamente (46,05%). Aunque es importante señalar que su segunda opción es posicionarse "De acuerdo" con las libertades de gays y lesbianas (40,71%), se ve una relación "Ni de acuerdo ni en desacuerdo- Ni desacuerdo ni desacuerdo" 
+Un nivel intermedio lo configuraría la categoría más "neutral": los que no están "Ni de acuerdo ni en desacuerdo" con sentir vergüenza y que también se decantan mayoritariamente por la misma posición neutra, ocupando el centro de la tabla, con un 46,05%. Valores muy alejados del 4,94 o 1,38 de oposición a las libertades.
+Aunque es importante señalar que su segunda opción es posicionarse "De acuerdo" con las libertades de gays y lesbianas (40,71%), se ve una relación "Ni de acuerdo ni en desacuerdo- Ni desacuerdo ni desacuerdo" 
 
-En un tercer bloque estarían las dos categorías que manifiestan rechazo a la idea  de sentir vergüenza por tener un familiar homosexual. Aquí también se ven unas relaciones interesantes.
+En un tercer bloque estarían las dos categorías que manifiestan rechazo a la idea de sentir vergüenza por tener un familiar homosexual. Aquí también se ven unas relaciones con cierta lógica.
 
   * Los encuestados que están "En desacuerdo", son los que más se posicionan mayoritariamente también como "De acuerdo" con las libertades (67,34%).
   
   * Con cifras similares, en el extremo, los que están "Muy en desacuerdo" con la afirmación sobre avergonzarse se declaran "Muy de acuerdo con la libertad" (66,84%). 
  
-En definitiva, entre los que rechazan la idea de sentir vergüenza por un familiar homosexual se ve una coincidencia "De acuerdo-desacuerdo" y "Muy desacuerdo-muy de acuerdo" en lo que respeta a las libertades de este colectivo.
+En resumen, entre los que no sentirían vergüenza por tener un familiar homosexual se ve una coincidencia "De acuerdo-desacuerdo" y "Muy desacuerdo-muy de acuerdo" en lo que respeta a las libertades de este colectivo.
 
-La dependencia entre las variables se deduce fácilmente al ver cómo los valores en cada categoría de la variable dependiente varían respecto a su marginal. De hecho no se observan coincidencias.
-
+Cuando se examina columna a columna toda la tabla, se observa que los valores de cada columna varían respecto a su correspondiente valor marginal. De hecho no se observa ninguna coincidencia lo que nos lleva a concluir una dependencia entre las variables. 
 
 
 ## 3.6 CHI CUADRADO
 
 Este coeficiente se muestra junto a las tablas cruzadas y nos indica si existe asociación entre la variable independiente (filas) y la dependiente (columnas). Solo arroja un valor igual o mayor que cero. 
-Si vale 0 significa que no hay asociación.
-Si es >0, existe asociación. Cuanto mayor, más evidencia.
 
-Al dar valores positivos, no indica la dirección de la asociación. 
+* Si vale 0 significa que no hay asociación.
+* Si es >0, existe asociación, cuanto mayor sea, más evidencia hay.
+* Al dar siempre valores positivos (absolutos), no indica ninguna dirección de la asociación. 
 
 ### Ejecución de Chi cuadrado en R.
 En R existe la función *chisq* para el cálculo de *Chi cuadrado* con dos parametrizaciones posibles.
@@ -284,18 +289,10 @@ chi
 ## 3.7 CONCLUSIÓN
 
 El coeficiente indica la magnitud de la asociación. El valor de 1723,8 es muy superior a 0, lo que indica una asociación fuerte.
-Hay una evidencia para el rechazo de la H0 (independencia de las variables) y además, el *p-valor*  es muy inferior (2.2x10¹⁶) a *alpha*  (0,001) por lo que hay un nivel de confianza superior al 99,9%.
+Hay una evidencia para el rechazo de la H0 (independencia de las variables) y además, el *p-valor*  es muy inferior (2.2x10e16) a *alpha*  (0,001) por lo que hay un nivel de confianza superior al 99,9%.
 
 **Se debe rechazar la hipótesis nula: las variables están asociadas.**
 
-No obstante, se ve que la ejecución de la función R nos avisa:
-```
-Warning messages:
-
-1: In chisq.test(datos$rec_hmsfmlsh, datos$rec_freehms) :
-Chi-squared approximation may be incorrect
-2: In chisq.test(freqtab) : Chi-squared approximation may be incorrect
-```
 
 \newpage
 
@@ -329,7 +326,8 @@ Si fuese necesario recodificar por cualquier motivo (valores no válidos, añadi
 
 ## 4.4 COEFICIENTE DE TAU-B DE KENDALL
 
-Se trata del test más adecuado cuando se trata de dos variables cualitativas ordinales que tienen el mismo número de categorías com es este caso. 
+Se trata del test más adecuado para analizar dos variables cualitativas ordinales que tienen el mismo número de categorías como es este caso. Este coeficiente nos indica si hay asociación entre dos variables y la dirección de esta.
+Sus valores oscilan entre -1 y 1, siendo el 0 el valor resultante cuando no existe asociación. El signo nos indica la dirección de la asociacion: valor negativo si una variable aumenta mientras la otra disminuye y valor positivo si ambas aumentan o disminuyen a la vez.
 
 ```{r taubB, echo=TRUE}
 taub <- KendallTauB(df_ronda10$lrscale, df_ronda10$medcrgvc, 
@@ -342,7 +340,7 @@ Los valores *lwr.ci* y *upr.ci* (-0.043788752  0.025528540  respectivamente) son
 ## 4.5 CONCLUSIÓN
 
 **Sobre le coeficiente:**
-Aunque el coeficiente, al ser negativo indica que cuando aumenta una variable la otra disminuye ( dirección de la asociación), al tratarse de un valor tan cercano a 0 (-0.009130106) este sugiere que no hay asociación estadísticamente relevante entre las variables. 
+El coeficiente, al ser negativo, indicaría que cuando aumenta una variable la otra disminuye (dirección de la asociación) pero al tratarse de un valor tan cercano a 0 (-0.009130106) nos sugiere que no hay asociación estadísticamente relevante entre las variables. 
 
 **Sobre el intervalo de confianza:**
 Los valores de *lwr.ci* y *upr.ci* indican que, con un 95% de confianza, el verdadero valor del coeficiente de Kendall se encuentra dentro de él. 
@@ -350,11 +348,11 @@ Este intervalo incluye al 0 (-0.043788752 <0< 0.025528540) hecho que refuerza la
 
 Por todo esto: 
 
-**NO se puede rechazar la hipótesis nula. No hay asociación estadística entre las variables**
+**NO se puede rechazar la hipótesis nula y consecuentemente no hay asociación estadística entre las variables**
 
-## 4.6 COEFICIENTE DE SOMMERS. 
+## 4.6 COEFICIENTE DE SOMERS. 
 
-Se trata de otro test de asociación para variables cualitativas ordinales que también nos informa de la magnitud y la dirección de la asociación mediante un coeficiente que oscilará también entre -1 y 1. 
+Se trata de otro test de asociación para variables cualitativas ordinales que también nos informa de la magnitud y la dirección de la asociación mediante un coeficiente. Sus valores y la interpretación de estos es idéntica al Tau-B de Kendall: intervalo de -1 a 1, valor 0 para indicar la inexistencia de asociación y el signo para la dirección.
 
 ```{r somer, echo =TRUE }
 delta <- SomersDelta(df_ronda10$lrscale, df_ronda10$medcrgvc, 
@@ -369,7 +367,7 @@ Los valores *lwr.ci* y *upr.ci* (-0.043415457 y 0.025309971) son los límites in
 
 
 **Sobre le coeficiente:**
-Aunque el coeficiente, al ser negativo indica que cuando aumenta una variable la otra disminuye ( dirección de la asociación), al tratarse de un valor tan cercano a 0 (-0.009052743) este sugiere que no hay asociación estadísticamente relevante entre las variables. 
+Aunque el coeficiente, al ser negativo indica que cuando aumenta una variable la otra disminuye (dirección de la asociación), al tratarse de un valor tan cercano a 0 (-0.009052743) este sugiere que no hay asociación estadísticamente relevante entre las variables. 
 
 **Sobre el intervalo de confianza:**
 Los valores de *lwr.ci* y *upr.ci* indican que, con un 95% de confianza, el verdadero valor del coeficiente de Sommers se encuentra dentro de él. 
@@ -377,15 +375,21 @@ Este intervalo incluye al 0 (-0.043415457 <0 <0.025309971) hecho que refuerza la
 
 Por todo esto: 
 
-**NO se puede rechazar la hipótesis nula. No hay asociación estadística entre las variables**
+**NO se puede rechazar la hipótesis nula por lo tanto NO hay asociación estadística entre las variables**
 
-# 5 REFLEXIÓN SOBRE LOS ANÁLISIS
+Se comprueba que ambos coeficientes nos llevan a la misma conclusión.
 
-Las libertades vistas estan operacionalizadas como variables ordinales pero pueden ser tratadas como cuantitativas para obterne más información como se estudió en la anterior práctica. Así se puede ver que los italianos encuestados "aprueban" su sistema electoral con un 5,8 de media y una mediana de 6 mientras que están cerca de suspender a sus tribunales por el trato desigual (media de 4,52 y apenas una mediana de 5). Teniendo en cuenta que se compara la confianza en el proceso un de máxima participación y reglamentación con la práctica diaria de órganos de funcionarios y que Italia es una democracia consolidada, la poca confianza en la limpieza de las elecciones es un hecho preocupante. 
+  \newpage
 
-Los encuestados mayoritariamente no se identifican con el sentimiento de vergüenza por tener un familiar homosexual (media de 3,8 y mediana de 4 en un intervalo de 1 a 5). Un sentimiento relacionado con su  posicionamiento a favor de la igualdad de libertades de este colectivo (una media de 2,05 y una mediana de 2 en un intervalo de 1 a 5) esto es coherente con la dependencia entre varibles vista. Sería interesante un seguimiento de las rondas siguientes para ver la evolución. 
+# 5 VALORACIÓN CRÍTICA
 
-Con independencia de la ideología, los encuestados aprueban la independencia respecto al gobierno de sus medios de comunicación siendo los valores de 6 y 8 los más destacados ( entre 0 y 10). En una valoración bastante positiva tratándose de un modelo de prensa latino.
+Las libertades analizadas están operacionalizadas como variables ordinales pero pueden ser tratadas individualmente como cuantitativas para obtener más información como se estudió en la práctica anterior. Así se puede ver que los italianos encuestados "aprueban" su sistema electoral con un 5,8 de media y una mediana de 6 mientras que suspenderían a sus tribunales por trato desigual (media de 4,52 y apenas una mediana de 5). Considerando que se compara la confianza en un proceso de máxima participación y reglamentación con la práctica diaria de órganos de funcionarios y que Italia es una democracia consolidada esta poca confianza en la limpieza y libertad de las elecciones es un hecho preocupante. 
+
+Los encuestados mayoritariamente no se identifican con el sentimiento de vergüenza por tener un familiar homosexual (media de 3,8 y mediana de 4 en un intervalo de 1 a 5). Un sentimiento relacionado, como se ha visto, con su  posicionamiento favorable a la igualdad de libertades de este colectivo (una media de 2,05 y una mediana de 2 en un intervalo de 1 a 5). Ambas medidas distan un punto, aproximadamente, del extremo que definiría un sentimiento y posición más tolerante o progresista. Sería interesante un seguimiento de las rondas siguientes para ver la evolución. 
+
+Con bastante independencia de la ideología, los encuestados aprueban la independencia respecto del gobierno de sus medios de comunicación. Al observar la distribución de valores, tenemos que destacan los valores de 6 a 8 (entre 0 y 10). En una valoración bastante positiva tratándose de un modelo de prensa latino.
+
+\newpage
 
 # 6 EJECUCIÓN DEL Rmd Y REPOSITORIO DE FICHEROS
 

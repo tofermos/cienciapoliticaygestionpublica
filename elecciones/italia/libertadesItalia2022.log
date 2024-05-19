@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.16)  19 MAY 2024 17:55
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.16)  19 MAY 2024 18:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1049,20 +1049,20 @@ Overfull \vbox (0.57567pt too high) detected at line 212
  []
 
 [3] [4] [5] [6] [7] [8] [9] [10] [11]
-Overfull \hbox (4.35207pt too wide) in paragraph at lines 665--665
+Overfull \hbox (4.35207pt too wide) in paragraph at lines 667--667
 []\TU/lmtt/m/n/12 ## Warning in chisq.test(df_ronda10$rec_hmsfmlsh, df_ronda10$
 rec_freehms):[] 
  []
 
 
-Overfull \hbox (47.61208pt too wide) in paragraph at lines 695--695
+Overfull \hbox (47.61208pt too wide) in paragraph at lines 697--697
 []\TU/lmtt/m/n/12 ## Warning in chisq.test(freqtabla): L[]aproximació Chi-quadr
 at pot ser incorrecta[] 
  []
 
 Missing character: There is no ⁶ (U+2076) in font Times New Roman/OT:language=d
 flt;mapping=tex-text;!
-[12] [13] [14] [15] [16]
+[12] [13] [14] [15] [16] [17]
 File: ../../recursos/iconohyperlink.jpg Graphic file (type bmp)
 <../../recursos/iconohyperlink.jpg>
 File: ../../recursos/iconosav.png Graphic file (type bmp)
@@ -1075,7 +1075,7 @@ File: ../../recursos/iconopdf.png Graphic file (type bmp)
 <../../recursos/iconopdf.png>
 File: ../../recursos/iconogithub.png Graphic file (type bmp)
 <../../recursos/iconogithub.png>
-[17] [18] (./libertadesItalia2022.aux) ) 
+[18] (./libertadesItalia2022.aux) ) 
 Here is how much of TeX's memory you used:
  20607 strings out of 476191
  379960 string characters out of 5812072
