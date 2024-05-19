@@ -1,0 +1,900 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  12 pt,
+  a4paper,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{Times New Roman}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{spanish}
+\ifPDFTeX
+\else
+\babelfont{rm}[]{Times New Roman}
+\fi
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdfauthor={Tomàs Ferrandis Moscardó},
+  pdflang={es-ES},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{ANÁLISIS BIVARIADO SOBRE LIBERTADES EN ITALIA\\
+Encuesta Social Europea, 2020/2022. Ronda 10}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Técnicas de Investigación en Ciencia Política I. UBU\\
+Práctica 2.}
+\author{Tomàs Ferrandis Moscardó}
+\date{2024-05-10}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\setstretch{1.5}
+\newpage
+
+\renewcommand\tablename{Tabla}
+
+\section{1 INTRODUCCIÓN}\label{introducciuxf3n}
+
+\subsection{1.1 DESCRIPCIÓN DE LA
+PRÁCTICA}\label{descripciuxf3n-de-la-pruxe1ctica}
+
+Este trabajo versará sobre las libertades en Italia a partir de diversos
+\textbf{análisis bivariados} sobre datos de la Encuesta Social Europea
+de los años 2020 y 2022 ( Ronda 10). Se escogerá en cada caso el test
+más adecuado y, finalmente, se hará una valoración crítica a partir de
+los datos analizado. Las variables que se analizarán en las siguientes
+actividades corresponden al cuestionario de la encuesta.
+
+La práctica está relacionada con los temas 5 y 6 de la asignatura
+Técnicas de la Investigación en Ciencia Política I del Grado
+Universitario de Ciencia Política y Gestión Pública de la Universidad de
+Burgos, curso 2023-2024.
+
+Un primer paso será asegurar que en nuestra instalación de R están
+disponibles algunas funciones necesarias para abrir el fichero de datos
+externo (tipo .sav), para algún cálculo estadístico o formateo de datos
+en Rmd.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(haven))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"haven"}\NormalTok{)\} }\CommentTok{\# para abrir fichero .sav}
+\FunctionTok{library}\NormalTok{(haven)}
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(knitr))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"knitr"}\NormalTok{)\} }\CommentTok{\# Act. 2. Tabla Rd}
+\FunctionTok{library}\NormalTok{(knitr)}
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(DescTools))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"DescTools"}\NormalTok{)\} }\CommentTok{\#actividad 3}
+\FunctionTok{library}\NormalTok{(DescTools)}
+\end{Highlighting}
+\end{Shaded}
+
+Se parte de un fichero .sav con los resultados de la encuesta que se
+descargará o copiará en una subcarpeta DATOS del directorio donde se
+esté este mismo fichero .Rmd.
+
+\subsection{1.2 GESTIÓN DE FICHEROS DE
+DATOS}\label{gestiuxf3n-de-ficheros-de-datos}
+
+Tanto el fichero de los datos de la encuesta (\emph{datosparc2.sav})
+como cualquier fichero de resultados se ubicarán en un subdirectorio
+DATOS.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# El fichero .sav debe estar en una subcarpeta DATOS}
+\NormalTok{nombreFichero}\OtherTok{\textless{}{-}}\StringTok{"datosprac2.sav"}
+\NormalTok{directorioTrabajo}\OtherTok{\textless{}{-}}\FunctionTok{getwd}\NormalTok{()}
+\NormalTok{rutaFichero}\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(directorioTrabajo,}\StringTok{"DATOS"}\NormalTok{,nombreFichero,}\AttributeTok{sep=}\StringTok{"/"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+A partir del fichero de tipo sav (\textbf{datosprac2.sav}) de la
+Encuesta Social Europea, se creará el \emph{data frame} de R. Esta será
+la \textbf{base de datos} inicial con todos los datos de la encuesta.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_ronda10}\OtherTok{\textless{}{-}}\FunctionTok{read\_sav}\NormalTok{(rutaFichero)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{2 ACTIVIDAD 1. CONTRASTE DE MEDIAS PARA DATOS
+RELACIONADOS.}\label{actividad-1.-contraste-de-medias-para-datos-relacionados.}
+
+\subsection{2.1 DESCRIPCIÓN DE LA ACTIVIDAD
+1}\label{descripciuxf3n-de-la-actividad-1}
+
+En esta primera actividad se realizará un contraste de hipótesis para
+ver si dos variables presentan diferencias estadísticamente
+significativas entre si.
+
+Las variables son:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{fairelcc: Las elecciones son libres y limpias en Italia}
+  (Pregunta B3 del cuestionario).
+\item
+  \textbf{cttresac: Los tribunales en Italia tratan a todo el mundo por
+  igual} (Pregunta B18 del cuestionario).
+\end{itemize}
+
+Ambas son Variables cualitativas ordinarias y admiten un valor que va
+desde 0 (``No es válida en absoluto'') a 10 (``Es completamente
+válido'') además de los valores considerados como no válidos a efectos
+estadísticos 77, 88 y 99 (``Rechaza responder'', ``NS'' y ``NC''
+respectivamente).
+
+\subsection{2.2 PREPARACIÓN DE LA BASE DE
+DATOS}\label{preparaciuxf3n-de-la-base-de-datos}
+
+\subsubsection{Recodificación de valores no
+válidos}\label{recodificaciuxf3n-de-valores-no-vuxe1lidos}
+
+Se comprueba si hay valores que necesitan recodificarse. Serían los
+valores externos al intervalo {[}0--10{]} que según el codebook de la
+encuesta podrían ser 77, 88 ó 99 ya explicados.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{unique}\NormalTok{(df\_ronda10}\SpecialCharTok{$}\NormalTok{fairelcc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  7  6  2  5  8  1  0  3  9  4 NA 10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{unique}\NormalTok{(df\_ronda10}\SpecialCharTok{$}\NormalTok{cttresac)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  1  0  2  8  3  7  6  5  9  4 NA 10
+\end{verbatim}
+
+Se comprueba que ya deben estar recodificados o almenos no aparecen. No
+obstante, en caso de que no fuese así se procedería de la siguiente
+manera.
+
+En primer lugar, se duplicarán los campos para hacer las modificación
+sobre estos.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_cttresac }\OtherTok{\textless{}{-}}\NormalTok{ df\_ronda10}\SpecialCharTok{$}\NormalTok{cttresac}
+\NormalTok{df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_fairelecc }\OtherTok{\textless{}{-}}\NormalTok{df\_ronda10}\SpecialCharTok{$}\NormalTok{fairelcc}
+\end{Highlighting}
+\end{Shaded}
+
+Después, se recodifican los valores 77, 88 y 99 como NA
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_fairelecc[df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_fairelecc }\SpecialCharTok{\textgreater{}=}\DecValTok{77} \SpecialCharTok{\&} 
+\NormalTok{                            df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_fairelecc }\SpecialCharTok{\textless{}=}\DecValTok{99}\NormalTok{]}\OtherTok{\textless{}{-}}\ConstantTok{NA}
+
+\NormalTok{df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_cttresac[df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_cttresac }\SpecialCharTok{\textgreater{}=}\DecValTok{77} \SpecialCharTok{\&} 
+\NormalTok{                            df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_cttresac }\SpecialCharTok{\textless{}=}\DecValTok{99}\NormalTok{]}\OtherTok{\textless{}{-}}\ConstantTok{NA}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{2.3 HIPÓTESIS}\label{hipuxf3tesis}
+
+\begin{itemize}
+\tightlist
+\item
+  Se plantea como \textbf{hipótesis nula (H0) que ambas medias son
+  iguales}.
+\item
+  La hipótesis alternativa (H1) sería, por lo tanto, que las medias son
+  distintas.
+\end{itemize}
+
+\subsection{2.4 APLICACIÓN DE
+T-STUDENT}\label{aplicaciuxf3n-de-t-student}
+
+En estos datos en que todos los valores de ambas variables estan entre 0
+y 10 podría aplicarse sobre los capos originales.
+
+\begin{itemize}
+\item
+  \emph{paired = T}, indica a la función que operará con 2 muestras
+  emparejadas.
+\item
+  \emph{alternative = `two.sized'}, indica que la hipótesis alternativa
+  es que las medias no son iguales.
+\item
+  Se establece un \textbf{nivel de confianza} del 95\%.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t.test}\NormalTok{(df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_fairelecc,df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_cttresac,}
+       \AttributeTok{alternative =} \StringTok{\textquotesingle{}two.sided\textquotesingle{}}\NormalTok{,}
+       \AttributeTok{conf.level =}\NormalTok{ .}\DecValTok{95}\NormalTok{,}
+       \AttributeTok{paired =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Paired t-test
+## 
+## data:  df_ronda10$rec_fairelecc and df_ronda10$rec_cttresac
+## t = 22.183, df = 2503, p-value < 2.2e-16
+## alternative hypothesis: true mean difference is not equal to 0
+## 95 percent confidence interval:
+##  1.110378 1.325724
+## sample estimates:
+## mean difference 
+##        1.218051
+\end{verbatim}
+
+\subsection{2.5 CONCLUSIÓN}\label{conclusiuxf3n}
+
+A la vista del resultado de \emph{t\_test}, se comprueba que hay una
+diferencia significativa entre las medias de aproximadamente 1,22. El
+intervalo de confianza, con un nivel de confianza del 95\%, es de
+1.110378 a 1.325724. La probabilidad de errar por rechazar la hipótesis
+nula es prácticamente nula p=2.2x10e16; muy inferior al 0,05 que se
+establece habitualmente en ciencia política como límite para
+considerarlo un valor estadísticamente significativo.
+
+Por lo que \textbf{se debe rechazar la hipótesis nula que plantea la
+igualdad de las medias: las medias son distintas}.
+
+Lo que significa que existe una percepción distinta en los encuestados
+entre la libertad y limpieza del proceso electoral en Italia y el trato
+igualitario de su sistema judicial.
+
+\textbf{Dirección de la diferencia en la función de R}
+
+El valor positivo del estadístico \emph{t-valor}, de los intervalos y de
+la \emph{diferencia de medias} nos indica el orden de la diferencia.
+Viendo el orden de las variables en la función R, la primera variable
+``fairelecc'' tiene una media en promedio mayor que la segunda
+``cttresac'', por lo que la percepción de los encuestado sobre la
+limpieza de las elecciones es más postiva que la que tienen sobre la
+igualdad de trato del sistema judicial.
+
+Si se inviertese el orden de las variables en la función de R nos dará
+los mismos valores absolutos de \emph{t}, de \emph{intervalos} y de
+\emph{diferencia de media} pero con signo negativo (cambiaría la
+dirección de la diferencia). El valor \emph{p-value} seguirá igualmente
+positivo o absoluto puesto que indica la significancia estadística.
+
+\newpage
+
+\section{3 ACTIVIDAD 2. ASOCIACIÓN DE
+VARIABLES.}\label{actividad-2.-asociaciuxf3n-de-variables.}
+
+\subsection{3.1 DESCRIPCIÓN DE LA ACTIVIDAD
+2}\label{descripciuxf3n-de-la-actividad-2}
+
+En esta actividad se procederá a comprobar la asociación entre dos
+variables cualitativas ordinales.
+
+Las variables a analizar serán:
+
+\begin{itemize}
+\item
+  \textbf{rec\_hmsfmlsh}, \emph{Me daría vergüenza que un familiar
+  cercano fuese gay o lesbiana}, representa la \textbf{variable
+  independiente} y, por lo tanto sus categorías corresponderán a filas
+  en la tabla de contingencia.
+\item
+  \textbf{rec\_freehms}, \emph{Los gays y lesbianas deberían tener
+  libertad para vivir como quieran}, representa la \textbf{variable
+  dependiente} y consecuentemente sus categorías corresponderán a
+  columnas en la tabla.
+\end{itemize}
+
+\subsection{3.2 PREPARAR DATOS}\label{preparar-datos}
+
+\subsubsection{Duplicación de campos}\label{duplicaciuxf3n-de-campos}
+
+Se duplicarán las columnas del dataframe a manipular. En estos nuevos
+campos se asignan las etiquetas a sus valores correspondientes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_hmsfmlsh}\OtherTok{\textless{}{-}}\NormalTok{df\_ronda10}\SpecialCharTok{$}\NormalTok{hmsfmlsh}
+\NormalTok{df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_freehms}\OtherTok{\textless{}{-}}\NormalTok{df\_ronda10}\SpecialCharTok{$}\NormalTok{freehms}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Recodificación. Etiquetas de
+valores}\label{recodificaciuxf3n.-etiquetas-de-valores}
+
+Se añaden las etiquetas correspondientes a los valores en los campos
+tipo \emph{factor}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Recodifcación para que se muestre los valores de las etiquetas}
+\CommentTok{\# De la variable independiente: "Me daría vergüenza que un familiar..."}
+\NormalTok{ df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_hmsfmlsh }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_hmsfmlsh,}
+                               \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{),}
+                               \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Muy de acuerdo"}\NormalTok{, }\StringTok{"De acuerdo"}\NormalTok{, }
+                                        \StringTok{"Ni de acuerdo ni en desacuerdo"}\NormalTok{,}
+                                         \StringTok{"En desacuerdo"}\NormalTok{, }
+                                        \StringTok{"Muy en desacuerdo"}\NormalTok{)) }
+
+\CommentTok{\# De la variable dependiente: "Los gays y lesbianas deberían tener }
+\CommentTok{\# libertad para..."}
+\NormalTok{ df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_freehms }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_freehms,}
+                             \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{),}
+                              \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Muy de acuerdo"}\NormalTok{, }\StringTok{"De acuerdo"}\NormalTok{, }
+                                        \StringTok{"Ni de acuerdo ni en desacuerdo"}\NormalTok{,}
+                                        \StringTok{"En desacuerdo"}\NormalTok{, }
+                                        \StringTok{"Muy en desacuerdo"}\NormalTok{)) }
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{3.3 HIPÓTESIS}\label{hipuxf3tesis-1}
+
+\begin{itemize}
+\tightlist
+\item
+  Hipótesis nula: \textbf{No hay asociación estadísticamente
+  significativa entre las variables}.
+\item
+  Hipótesis alternativa: Hay asociación estadísticamente significativa
+  entre las variables
+\end{itemize}
+
+\subsection{3.4 LA TABLA DE CONTINGENCIA (TABLA
+CRUZADA)}\label{la-tabla-de-contingencia-tabla-cruzada}
+
+Se obtiene los valores de frecuencia absolutos.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{freqtabla }\OtherTok{\textless{}{-}} \FunctionTok{xtabs}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{rec\_hmsfmlsh }\SpecialCharTok{+}\NormalTok{ rec\_freehms, }\AttributeTok{data =}\NormalTok{ df\_ronda10)}
+\end{Highlighting}
+\end{Shaded}
+
+Pero lo que interesa es tener en cada celda el \% de casos respecto a la
+fila. Teniendo en cuenta que cada fila representa una categoría de la
+variable independiente.
+
+Esto se indica con el parámetro ``1'' en la función de R
+\emph{prop.table}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{freqtabla\_100xFila}\OtherTok{\textless{}{-}}\FunctionTok{prop.table}\NormalTok{((freqtabla),}\DecValTok{1}\NormalTok{)}\SpecialCharTok{*}\DecValTok{100}
+\end{Highlighting}
+\end{Shaded}
+
+Se ve que la función no aporta los marginales (fila de totales). Para
+ello R dispone de otra función, \emph{margin.table} :
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Totales}\OtherTok{\textless{}{-}} \FunctionTok{margin.table}\NormalTok{((}\FunctionTok{prop.table}\NormalTok{(freqtabla)}\SpecialCharTok{*}\DecValTok{100}\NormalTok{), }\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Combinación de las dos matrices de R (\emph{freqtabla\_100xFila} y
+\emph{Totales}) para elaborar la \textbf{Tabla de contingencia o Tabla
+cruzada} mediante la función \emph{rbind}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tablaContingencia }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{rbind}\NormalTok{(freqtabla\_100xFila, Totales),}\DecValTok{2}\NormalTok{)}
+\FunctionTok{kable}\NormalTok{(tablaContingencia, }\AttributeTok{caption=}\StringTok{"Opiniones sobre la libertad de gays y lesbianas para vivir como quieran (Variable Dependiente en columnas) según la vergüenza de tener un familiar cercano gay o lesbiana (Variable Independiente en filas)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2583}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1250}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.0917}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2583}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1167}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1500}}@{}}
+\caption{Opiniones sobre la libertad de gays y lesbianas para vivir como
+quieran (Variable Dependiente en columnas) según la vergüenza de tener
+un familiar cercano gay o lesbiana (Variable Independiente en
+filas)}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Muy de acuerdo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+De acuerdo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Ni de acuerdo ni en desacuerdo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+En desacuerdo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Muy en desacuerdo
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Muy de acuerdo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+De acuerdo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Ni de acuerdo ni en desacuerdo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+En desacuerdo
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Muy en desacuerdo
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Muy de acuerdo & 22.97 & 10.81 & 8.11 & 24.32 & 33.78 \\
+De acuerdo & 4.07 & 36.65 & 25.79 & 26.24 & 7.24 \\
+Ni de acuerdo ni en desacuerdo & 6.92 & 40.71 & 46.05 & 4.94 & 1.38 \\
+En desacuerdo & 17.39 & 67.34 & 12.26 & 2.79 & 0.22 \\
+Muy en desacuerdo & 66.87 & 28.80 & 1.69 & 0.60 & 2.05 \\
+Totales & 30.54 & 45.02 & 16.61 & 5.18 & 2.65 \\
+\end{longtable}
+
+\subsection{3.5 CONCLUSIONES SOBRE LA
+TABLA}\label{conclusiones-sobre-la-tabla}
+
+En una primera observación sobre los \textbf{valores marginales} o
+totales se debe destacar que la mayoría de encuestados está ``De acuerdo
+con las libertades de los gays y lesbianas'' (45.02\%) siendo la segunda
+opción ``Muy de acuerdo'' (30,54\%), además la respuesta con menor
+porcentaje es la de ``Muy en desacuerdo'' (2,65\%).
+
+Al observar los valores de las diferentes \textbf{categorías de la
+variable independiente} o filas se tiene un primer bloque con las dos
+categorías de encuestados que reconocen que sentirían algún tipo de
+vergüenza por tener un familiar homosexual. Aquí se ve una diferencia
+notable entre ambas categorías:
+
+\begin{itemize}
+\tightlist
+\item
+  Por un parte los que responden estar ``Muy de acuerdo'' con este
+  sentimiento de vergüenza, la respuesta mayoritaria es contraria a la
+  libertad, decantándose un 33,78\% por ``Muy en desacuerdo'' y un
+  24,32\% por ``En desacuerdo''. No obstante aparece un dato muy
+  interesant: un importante 22,97\% que se manifiesta ``Muy de acuerdo''
+  con la libertad.
+\item
+  Por otra parte, los que se muestran ``De acuerdo'' con la afirmación
+  de vergüenza, ºsu posición mayoritaria respecto a la libertad es ``De
+  acuerdo'' (36,65\%) con la libertad, un dato también interesante.
+  Seguidamente optan por ``En desacuerdo'' y ``Ni de acuerdo ni en
+  desacuerdo'' con cifras similares (26,24\% y 25,79\% respectivamente).
+\end{itemize}
+
+En un nivel intermedio lo configuraría la categoría más ``neutral'': los
+que no están ``Ni de acuerdo ni en desacuerdo'' con el tema de la
+vergüenza y que también se decantan mayoritariamente por la misma
+posición neutra (central en la tabla) sobre la libertad mayoritariamente
+(46,05\%). Aunque es importante señalar que su segunda opción es
+posicionarse ``De acuerdo'' con las libertades de gays y lesbianas
+(40,71\%), se ve una relación ``Ni de acuerdo ni en desacuerdo- Ni
+desacuerdo ni desacuerdo''
+
+En un tercer bloque estarían las dos categorías que manifiestan rechazo
+a la idea de sentir vergüenza por tener un familiar homosexual. Aquí
+también se ven unas relaciones interesantes.
+
+\begin{itemize}
+\item
+  Los encuestados que están ``En desacuerdo'', son los que más se
+  posicionan mayoritariamente también como ``De acuerdo'' con las
+  libertades (67,34\%).
+\item
+  Con cifras similares, en el extremo, los que están ``Muy en
+  desacuerdo'' con la afirmación sobre avergonzarse se declaran ``Muy de
+  acuerdo con la libertad'' (66,84\%).
+\end{itemize}
+
+En definitiva, entre los que rechazan la idea de sentir vergüenza por un
+familiar homosexual se ve una coincidencia ``De acuerdo-desacuerdo'' y
+``Muy desacuerdo-muy de acuerdo'' en lo que respeta a las libertades de
+este colectivo.
+
+La dependencia entre las variables se deduce fácilmente al ver cómo los
+valores en cada categoría de la variable dependiente varían respecto a
+su marginal. De hecho no se observan coincidencias.
+
+\subsection{3.6 CHI CUADRADO}\label{chi-cuadrado}
+
+Este coeficiente se muestra junto a las tablas cruzadas y nos indica si
+existe asociación entre la variable independiente (filas) y la
+dependiente (columnas). Solo arroja un valor igual o mayor que cero. Si
+vale 0 significa que no hay asociación. Si es \textgreater0, existe
+asociación. Cuanto mayor, más evidencia.
+
+Al dar valores positivos, no indica la dirección de la asociación.
+
+\subsubsection{Ejecución de Chi cuadrado en
+R.}\label{ejecuciuxf3n-de-chi-cuadrado-en-r.}
+
+En R existe la función \emph{chisq} para el cálculo de \emph{Chi
+cuadrado} con dos parametrizaciones posibles.
+
+\begin{itemize}
+\tightlist
+\item
+  Pasando como argumentos directamente las variables a la función
+  \emph{chisq.test}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chi }\OtherTok{\textless{}{-}} \FunctionTok{chisq.test}\NormalTok{( df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_hmsfmlsh, df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_freehms)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in chisq.test(df_ronda10$rec_hmsfmlsh, df_ronda10$rec_freehms):
+## L'aproximació Chi-quadrat pot ser incorrecta
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chi}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's Chi-squared test
+## 
+## data:  df_ronda10$rec_hmsfmlsh and df_ronda10$rec_freehms
+## X-squared = 1723.8, df = 16, p-value < 2.2e-16
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Pasando como argumento la tabla en \emph{chisq.test}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chi }\OtherTok{\textless{}{-}} \FunctionTok{chisq.test}\NormalTok{(freqtabla)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in chisq.test(freqtabla): L'aproximació Chi-quadrat pot ser incorrecta
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chi}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Pearson's Chi-squared test
+## 
+## data:  freqtabla
+## X-squared = 1723.8, df = 16, p-value < 2.2e-16
+\end{verbatim}
+
+\subsection{3.7 CONCLUSIÓN}\label{conclusiuxf3n-1}
+
+El coeficiente indica la magnitud de la asociación. El valor de 1723,8
+es muy superior a 0, lo que indica una asociación fuerte. Hay una
+evidencia para el rechazo de la H0 (independencia de las variables) y
+además, el \emph{p-valor} es muy inferior (2.2x10¹⁶) a \emph{alpha}
+(0,001) por lo que hay un nivel de confianza superior al 99,9\%.
+
+\textbf{Se debe rechazar la hipótesis nula: las variables están
+asociadas.}
+
+No obstante, se ve que la ejecución de la función R nos avisa:
+
+\begin{verbatim}
+Warning messages:
+
+1: In chisq.test(datos$rec_hmsfmlsh, datos$rec_freehms) :
+Chi-squared approximation may be incorrect
+2: In chisq.test(freqtab) : Chi-squared approximation may be incorrect
+\end{verbatim}
+
+\newpage
+
+\section{4 ACTIVIDAD 3. RESPECTO A LA LIBERTAD DE LOS MEDIOS DE
+COMUNICACIÓN}\label{actividad-3.-respecto-a-la-libertad-de-los-medios-de-comunicaciuxf3n}
+
+\subsection{4.1 DESCRIPCIÓN DE LA ACTIVIDAD
+3}\label{descripciuxf3n-de-la-actividad-3}
+
+En esta actividad se pretende analizar si existe una dependencia entre
+la autoubicación ideológica de los encuestados y su percepción sobre el
+nivel de crítica que ejercen los medios de comunicación respecto al
+gobierno italiano.
+
+Para ello se analizarán las variables:
+
+\begin{itemize}
+\item
+  \textbf{lrscale}, \emph{¿Dónde se colocaría usted en la escala? Escala
+  de 0 a 10 (0 representa la ubicación más a la izquierda y 10 la
+  ubicación más a la derecha}). Esta es la \emph{variable
+  independiente}.
+\item
+  \textbf{medcrgvc}, \emph{Los medios de comunicación en Italia pueden
+  criticar al gobierno. Escala de 0 a 10 ( 0 indica No es válida en
+  absolutao y 10, Es complettamente válida)}. Esta es la \emph{variable
+  dependiente}.
+\end{itemize}
+
+\subsection{4.2 PREPARACIÓN DE LA BASE DE
+DATOS}\label{preparaciuxf3n-de-la-base-de-datos-1}
+
+Se comprueba que no hay valores que recodificar como NA
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{unique}\NormalTok{(df\_ronda10}\SpecialCharTok{$}\NormalTok{lrscale)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] NA  5  8  6  4  3 10  1  2  7  9  0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{unique}\NormalTok{(df\_ronda10}\SpecialCharTok{$}\NormalTok{medcrgvc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  1  3  6  5  8 10  2  0  9  7  4 NA
+\end{verbatim}
+
+Si fuese necesario recodificar por cualquier motivo (valores no válidos,
+añadir etiquetas\ldots) que no es este el caso, convendría hacerlo sobre
+una duplicación de estos campos de forma análoga a lo realizado a
+apartados 2.2 de las dos actividades anteriores.
+
+\subsection{4.3 HIPÓTESIS}\label{hipuxf3tesis-2}
+
+\begin{itemize}
+\tightlist
+\item
+  H0, hipótesis nula: \textbf{No hay asociación estadísticamente
+  significativa entre las variables}.
+\item
+  H1, hipótesis alternativa: Hay asociación estadísticamente
+  significativa entre las variables.
+\end{itemize}
+
+\subsection{4.4 COEFICIENTE DE TAU-B DE
+KENDALL}\label{coeficiente-de-tau-b-de-kendall}
+
+Se trata del test más adecuado cuando dos variables cualitativas
+ordinales tienen el mismo número de categorías com es este caso.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{taub }\OtherTok{\textless{}{-}} \FunctionTok{KendallTauB}\NormalTok{(df\_ronda10}\SpecialCharTok{$}\NormalTok{lrscale, df\_ronda10}\SpecialCharTok{$}\NormalTok{medcrgvc, }
+                                          \AttributeTok{conf.level =} \FloatTok{0.95}\NormalTok{)}
+\NormalTok{taub}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        tau_b       lwr.ci       upr.ci 
+## -0.009130106 -0.043788752  0.025528540
+\end{verbatim}
+
+El coeficiente \emph{tau\_b} (-0.009130106) es negativo y cercano a 0
+Los valores \emph{lwr.ci} y \emph{upr.ci} (-0.043788752 0.025528540
+respectivamente) son los límites inferior y superior del intervalo de
+confianza del 95\%.
+
+\subsection{4.5 CONCLUSIÓN}\label{conclusiuxf3n-2}
+
+Aunque el valor negativo indicase que cuando aumentase una variable la
+otra disminuiría, un valor tan cercano a 0 como (-0.009130106) sugiere
+que no hay asociación entre las variables. lwr.ci y upr.ci son los
+límites inferior y superior del intervalo de confianza del 95\%, estos
+pasan por el 0 (-0.043788752 \textless0\textless{} 0.025528540) por lo
+que calculados para un alpha= 0,05, no se puede rechazar la hipótesis
+nula:
+
+\textbf{No hay asociación estadística entre las variables}
+
+\textbf{No hay asociación estadística entre las variables al no poder
+rechazar la hipótesis nula}
+
+\subsection{4.6 COEFICIENTE DE SOMMERS.}\label{coeficiente-de-sommers.}
+
+Se trata de otro test de asociación para variables cualitativas
+ordinales que también nos informa de la magnitud y la dirección de la
+asociación mediante un coeficiente que oscilará también entre -1 y 1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{delta }\OtherTok{\textless{}{-}} \FunctionTok{SomersDelta}\NormalTok{(df\_ronda10}\SpecialCharTok{$}\NormalTok{lrscale, df\_ronda10}\SpecialCharTok{$}\NormalTok{medcrgvc, }
+                                           \AttributeTok{conf.level =} \FloatTok{0.95}\NormalTok{)}
+\NormalTok{delta}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       somers       lwr.ci       upr.ci 
+## -0.009052743 -0.043415457  0.025309971
+\end{verbatim}
+
+El coeficiente de \emph{Somers} (-0,009052743) cercano a 0 y negativo.
+
+Los valores \emph{lwr.ci} y \emph{upr.ci} (-0.043415457 y 0.025309971)
+son los límites inferior y superior del intervalo de confianza del 95\%.
+
+\subsection{4.7 CONCLUSIÓN}\label{conclusiuxf3n-3}
+
+Aunque el valor negativo indicase que cuando aumentase una variable la
+otra disminuiría, un valor tan cercano a 0 como (-0.009052743) sugiere
+que no hay asociación. El intervalo incluye el valor 0 (-0.043415457
+\textless0 \textless0.025309971) por lo que calculados para un alpha=
+0,05, no se puede rechazar la hipótesis nula:
+
+\textbf{No hay asociación estadística entre las variables}
+
+\section{5 REFLEXIÓN SOBRE LOS
+ANÁLISIS}\label{reflexiuxf3n-sobre-los-anuxe1lisis}
+
+Los italianos encuestados ``aprueban'' su sistema electoral con un 5,8
+de media y una mediana de 6 mientras que suspenderían a sus tribunales
+por su trato desigual: media de 4,52 y apenas una mediana de 5. Pero
+cabe señalar que comparar la confianza en el proceso electoral ( con una
+participación y reglamentación máxima) con la práctica diaria de órganos
+de funcionarios. Además, Italia es una democracia consolidada. Por lo
+que entiendo como más preocupante la poca confianza en la limpieza de
+las elecciones.
+
+Los encuestados mayoritariamente rechazan la idea sentir vergüenza por
+tener un familiar homosexual (media de 3,8 y mediana de 4 en un
+intervalo de 1 a 5). Sentimiento relacionado con su posicionamiento a
+favor de la igualdad de libertades de este colectivo (una media de 2,05
+y una mediana de 2 en un intervalo de 1 a 5). Algo coherente dada la
+relación vista. Sería interesante un seguimiento de las rondas
+siguientes para ver la evolución.
+
+Con independencia de la ideología, los encuestados ven a sus medios
+aprueban a sus medios por sus independencia siendo los valores entre 6 y
+8 los más destacados pese a tratarse de un modelo de prensa latino como
+el nuestro distinto del liberal, por ejemplo.
+
+\end{document}
