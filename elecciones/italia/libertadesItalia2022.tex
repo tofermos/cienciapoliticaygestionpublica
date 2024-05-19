@@ -408,12 +408,12 @@ Las variables a analizar serán:
   \textbf{rec\_hmsfmlsh}, \emph{Me daría vergüenza que un familiar
   cercano fuese gay o lesbiana}, representa la \textbf{variable
   independiente} y, por lo tanto sus categorías corresponderán a filas
-  en la tabla de contingencia.
+  en la tabla de contingencia (Pregunta A48 del cuestionario).
 \item
   \textbf{rec\_freehms}, \emph{Los gays y lesbianas deberían tener
   libertad para vivir como quieran}, representa la \textbf{variable
   dependiente} y consecuentemente sus categorías corresponderán a
-  columnas en la tabla.
+  columnas en la tabla (Pregunta A47 del cuestionario)
 \end{itemize}
 
 \subsection{3.2 PREPARAR DATOS}\label{preparar-datos}
@@ -748,13 +748,13 @@ Para ello se analizarán las variables:
 \item
   \textbf{lrscale}, \emph{¿Dónde se colocaría usted en la escala? Escala
   de 0 a 10 (0 representa la ubicación más a la izquierda y 10 la
-  ubicación más a la derecha}). Esta es la \emph{variable
-  independiente}.
+  ubicación más a la derecha}). Esta es la \emph{variable independiente}
+  (Pregunta A39 del cuestionario)
 \item
   \textbf{medcrgvc}, \emph{Los medios de comunicación en Italia pueden
   criticar al gobierno. Escala de 0 a 10 ( 0 indica No es válida en
   absolutao y 10, Es complettamente válida)}. Esta es la \emph{variable
-  dependiente}.
+  dependiente} (Pregunta B15 del cuestionario)
 \end{itemize}
 
 \subsection{4.2 PREPARACIÓN DE LA BASE DE
@@ -802,8 +802,9 @@ apartados 2.2 de las dos actividades anteriores.
 \subsection{4.4 COEFICIENTE DE TAU-B DE
 KENDALL}\label{coeficiente-de-tau-b-de-kendall}
 
-Se trata del test más adecuado cuando dos variables cualitativas
-ordinales tienen el mismo número de categorías com es este caso.
+Se trata del test más adecuado cuando se trata de dos variables
+cualitativas ordinales que tienen el mismo número de categorías com es
+este caso.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -825,18 +826,23 @@ confianza del 95\%.
 
 \subsection{4.5 CONCLUSIÓN}\label{conclusiuxf3n-2}
 
-Aunque el valor negativo indicase que cuando aumentase una variable la
-otra disminuiría, un valor tan cercano a 0 como (-0.009130106) sugiere
-que no hay asociación entre las variables. lwr.ci y upr.ci son los
-límites inferior y superior del intervalo de confianza del 95\%, estos
-pasan por el 0 (-0.043788752 \textless0\textless{} 0.025528540) por lo
-que calculados para un alpha= 0,05, no se puede rechazar la hipótesis
-nula:
+\textbf{Sobre le coeficiente:} Aunque el coeficiente, al ser negativo
+indica que cuando aumenta una variable la otra disminuye ( dirección de
+la asociación), al tratarse de un valor tan cercano a 0 (-0.009130106)
+este sugiere que no hay asociación estadísticamente relevante entre las
+variables.
 
-\textbf{No hay asociación estadística entre las variables}
+\textbf{Sobre el intervalo de confianza:} Los valores de \emph{lwr.ci} y
+\emph{upr.ci} indican que, con un 95\% de confianza, el verdadero valor
+del coeficiente de Kendall se encuentra dentro de él. Este intervalo
+incluye al 0 (-0.043788752 \textless0\textless{} 0.025528540) hecho que
+refuerza la interpretación de que no hay una asociación estadísticamente
+significativa entre las variables.
 
-\textbf{No hay asociación estadística entre las variables al no poder
-rechazar la hipótesis nula}
+Por todo esto:
+
+\textbf{NO se puede rechazar la hipótesis nula. No hay asociación
+estadística entre las variables}
 
 \subsection{4.6 COEFICIENTE DE SOMMERS.}\label{coeficiente-de-sommers.}
 
@@ -864,37 +870,93 @@ son los límites inferior y superior del intervalo de confianza del 95\%.
 
 \subsection{4.7 CONCLUSIÓN}\label{conclusiuxf3n-3}
 
-Aunque el valor negativo indicase que cuando aumentase una variable la
-otra disminuiría, un valor tan cercano a 0 como (-0.009052743) sugiere
-que no hay asociación. El intervalo incluye el valor 0 (-0.043415457
-\textless0 \textless0.025309971) por lo que calculados para un alpha=
-0,05, no se puede rechazar la hipótesis nula:
+\textbf{Sobre le coeficiente:} Aunque el coeficiente, al ser negativo
+indica que cuando aumenta una variable la otra disminuye ( dirección de
+la asociación), al tratarse de un valor tan cercano a 0 (-0.009052743)
+este sugiere que no hay asociación estadísticamente relevante entre las
+variables.
 
-\textbf{No hay asociación estadística entre las variables}
+\textbf{Sobre el intervalo de confianza:} Los valores de \emph{lwr.ci} y
+\emph{upr.ci} indican que, con un 95\% de confianza, el verdadero valor
+del coeficiente de Sommers se encuentra dentro de él. Este intervalo
+incluye al 0 (-0.043415457 \textless0 \textless0.025309971) hecho que
+refuerza la interpretación de que no hay una asociación estadísticamente
+significativa entre las variables.
+
+Por todo esto:
+
+\textbf{NO se puede rechazar la hipótesis nula. No hay asociación
+estadística entre las variables}
 
 \section{5 REFLEXIÓN SOBRE LOS
 ANÁLISIS}\label{reflexiuxf3n-sobre-los-anuxe1lisis}
 
-Los italianos encuestados ``aprueban'' su sistema electoral con un 5,8
-de media y una mediana de 6 mientras que suspenderían a sus tribunales
-por su trato desigual: media de 4,52 y apenas una mediana de 5. Pero
-cabe señalar que comparar la confianza en el proceso electoral ( con una
-participación y reglamentación máxima) con la práctica diaria de órganos
-de funcionarios. Además, Italia es una democracia consolidada. Por lo
-que entiendo como más preocupante la poca confianza en la limpieza de
-las elecciones.
+Las libertades vistas estan operacionalizadas como variables ordinales
+pero pueden ser tratadas como cuantitativas para obterne más información
+como se estudió en la anterior práctica. Así se puede ver que los
+italianos encuestados ``aprueban'' su sistema electoral con un 5,8 de
+media y una mediana de 6 mientras que están cerca de suspender a sus
+tribunales por el trato desigual (media de 4,52 y apenas una mediana de
+5). Teniendo en cuenta que se compara la confianza en el proceso un de
+máxima participación y reglamentación con la práctica diaria de órganos
+de funcionarios y que Italia es una democracia consolidada, la poca
+confianza en la limpieza de las elecciones es un hecho preocupante.
 
-Los encuestados mayoritariamente rechazan la idea sentir vergüenza por
-tener un familiar homosexual (media de 3,8 y mediana de 4 en un
-intervalo de 1 a 5). Sentimiento relacionado con su posicionamiento a
-favor de la igualdad de libertades de este colectivo (una media de 2,05
-y una mediana de 2 en un intervalo de 1 a 5). Algo coherente dada la
-relación vista. Sería interesante un seguimiento de las rondas
-siguientes para ver la evolución.
+Los encuestados mayoritariamente no se identifican con el sentimiento de
+vergüenza por tener un familiar homosexual (media de 3,8 y mediana de 4
+en un intervalo de 1 a 5). Un sentimiento relacionado con su
+posicionamiento a favor de la igualdad de libertades de este colectivo
+(una media de 2,05 y una mediana de 2 en un intervalo de 1 a 5) esto es
+coherente con la dependencia entre varibles vista. Sería interesante un
+seguimiento de las rondas siguientes para ver la evolución.
 
-Con independencia de la ideología, los encuestados ven a sus medios
-aprueban a sus medios por sus independencia siendo los valores entre 6 y
-8 los más destacados pese a tratarse de un modelo de prensa latino como
-el nuestro distinto del liberal, por ejemplo.
+Con independencia de la ideología, los encuestados aprueban la
+independencia respecto al gobierno de sus medios de comunicación siendo
+los valores de 6 y 8 los más destacados ( entre 0 y 10). En una
+valoración bastante positiva tratándose de un modelo de prensa latino.
+
+\section{6 EJECUCIÓN DEL Rmd Y REPOSITORIO DE
+FICHEROS}\label{ejecuciuxf3n-del-rmd-y-repositorio-de-ficheros}
+
+Para la ejecución del código R, está disponible el fichero ejecutable
+Rmd y el fichero de datos \emph{sav} en el repositorio GitHub. En el
+mismo repositorio se encuentra este PDF y un fichero HTML renderizados a
+partir del Rmd.
+
+El fichero \textbf{datosprac2.sav} debe ubicarse en una subcarpeta del
+directorio de trabajo con nombre \emph{DATA}.
+
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+\includegraphics[width=0.1\textwidth,height=\textheight]{../../recursos/iconohyperlink.jpg}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Enlace a GitHub
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/italia/DATOS/datosprac2.sav}{\includegraphics[width=0.1\textwidth,height=\textheight]{../../recursos/iconosav.png}}
+& Fichero de datos tipo sav &
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/italia/DATOS/datosprac2.sav}{datosprac2.sav} \\
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/italia/libertadesItalia2022.Rmd}{\includegraphics[width=0.1\textwidth,height=\textheight]{../../recursos/rmarkdown.png}}
+& Fichero Rmd &
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/italia/libertadesItalia2022.Rmd}{libertadesItalia2022.Rmd} \\
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/italia/libertadesItalia2022.html}{\includegraphics[width=0.1\textwidth,height=\textheight]{../../recursos/iconohtml.png}}
+& Fichero HTML &
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/italia/libertadesItalia2022.html}{libertadesItalia2022.html} \\
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/italia/libertadesItalia2022.pdf}{\includegraphics[width=0.1\textwidth,height=\textheight]{../../recursos/iconopdf.png}}
+& Fichero PDF &
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/elecciones/italia/libertadesItalia2022.pdf}{libertadesItalia.pdf} \\
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/}{\includegraphics[width=0.2\textwidth,height=\textheight]{../../recursos/iconogithub.png}}
+& &
+\href{https://tofermos.github.io/cienciapoliticaygestionpublica/}{Repositorio
+tofermos} \\
+\end{longtable}
 
 \end{document}
