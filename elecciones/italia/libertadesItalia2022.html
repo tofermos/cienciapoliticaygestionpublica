@@ -2864,8 +2864,8 @@ iguales</strong>.</li>
 son distintas.</li>
 </ul>
 </div>
-<div id="aplicación-de-t-student" class="section level2">
-<h2>2.4 APLICACIÓN DE T-STUDENT</h2>
+<div id="prueba-de-t-student" class="section level2">
+<h2>2.4 PRUEBA DE T-STUDENT</h2>
 <p>Aplicaremos la función que implementa el método T-Student sobre los
 campos duplicados en nuestro caso.</p>
 <ul>
@@ -2892,8 +2892,8 @@ alternativa es que las medias no son iguales.</p></li>
 ## mean difference 
 ##        1.218051</code></pre>
 </div>
-<div id="conclusión" class="section level2">
-<h2>2.5 CONCLUSIÓN</h2>
+<div id="conclusión-sobre-t-student" class="section level2">
+<h2>2.5 CONCLUSIÓN SOBRE T-STUDENT</h2>
 <p>A la vista del resultado de <em>t_test</em>, se comprueba que hay una
 diferencia significativa entre las medias de aproximadamente 1,22. El
 intervalo de confianza, con un nivel de confianza del 95%, es de
@@ -2942,8 +2942,8 @@ tener libertad para vivir como quieran</em>, representa la
 columnas en la tabla (Pregunta A47 del cuestionario).</p></li>
 </ul>
 </div>
-<div id="preparar-datos" class="section level2">
-<h2>3.2 PREPARAR DATOS</h2>
+<div id="preparación-de-la-base-de-datos-1" class="section level2">
+<h2>3.2 PREPARACIÓN DE LA BASE DE DATOS</h2>
 <div id="duplicación-de-campos" class="section level3">
 <h3>Duplicación de campos</h3>
 <p>Se duplicarán las columnas del dataframe a manipular puesto que vamos
@@ -3075,8 +3075,8 @@ filas)</caption>
 </tbody>
 </table>
 </div>
-<div id="conclusiones-sobre-la-tabla" class="section level2">
-<h2>3.5 CONCLUSIONES SOBRE LA TABLA</h2>
+<div id="conclusiones-sobre-la-tabla-de-contingencia" class="section level2">
+<h2>3.5 CONCLUSIONES SOBRE LA TABLA DE CONTINGENCIA</h2>
 <p>En una primera observación sobre los <strong>valores
 marginales</strong> o totales se debe destacar que la mayoría de
 encuestados está “De acuerdo con las libertades de los gays y lesbianas”
@@ -3128,8 +3128,8 @@ valores de cada columna varían respecto a su correspondiente valor
 marginal. De hecho no se observa ninguna coincidencia lo que nos lleva a
 concluir una dependencia entre las variables.</p>
 </div>
-<div id="chi-cuadrado" class="section level2">
-<h2>3.6 CHI CUADRADO</h2>
+<div id="cálculo-del-coeficiente-chi-cuadrado" class="section level2">
+<h2>3.6 CÁLCULO DEL COEFICIENTE CHI CUADRADO</h2>
 <p>Este coeficiente se muestra junto a las tablas cruzadas y nos indica
 si existe asociación entre la variable independiente (filas) y la
 dependiente (columnas). Solo arroja un valor igual o mayor que cero.</p>
@@ -3140,8 +3140,6 @@ hay.</li>
 <li>Al dar siempre valores positivos (absolutos), no indica ninguna
 dirección de la asociación.</li>
 </ul>
-<div id="ejecución-de-chi-cuadrado-en-r." class="section level3">
-<h3>Ejecución de Chi cuadrado en R.</h3>
 <p>En R existe la función <em>chisq</em> para el cálculo de <em>Chi
 cuadrado</em> con dos parametrizaciones posibles.</p>
 <ul>
@@ -3169,9 +3167,8 @@ cuadrado</em> con dos parametrizaciones posibles.</p>
 ## data:  freqtabla
 ## X-squared = 1723.8, df = 16, p-value &lt; 2.2e-16</code></pre>
 </div>
-</div>
-<div id="conclusión-1" class="section level2">
-<h2>3.7 CONCLUSIÓN</h2>
+<div id="conclusión-sobre-chi-cuadrado" class="section level2">
+<h2>3.7 CONCLUSIÓN SOBRE CHI CUADRADO</h2>
 <p>El coeficiente indica la magnitud de la asociación. El valor de
 1723,8 es muy superior a 0, lo que indica una asociación fuerte. Hay una
 evidencia para el rechazo de la H0 (independencia de las variables) y
@@ -3203,7 +3200,7 @@ válida en absolutao y 10, Es complettamente válida)</em>. Esta es la
 <em>variable dependiente</em> (Pregunta B15 del cuestionario)</p></li>
 </ul>
 </div>
-<div id="preparación-de-la-base-de-datos-1" class="section level2">
+<div id="preparación-de-la-base-de-datos-2" class="section level2">
 <h2>4.2 PREPARACIÓN DE LA BASE DE DATOS</h2>
 <p>Se comprueba que no hay valores que recodificar como NA</p>
 <pre class="r"><code>unique(df_ronda10$lrscale)</code></pre>
@@ -3224,8 +3221,8 @@ significativa entre las variables</strong>.</li>
 significativa entre las variables.</li>
 </ul>
 </div>
-<div id="coeficiente-de-tau-b-de-kendall" class="section level2">
-<h2>4.4 COEFICIENTE DE TAU-B DE KENDALL</h2>
+<div id="coeficiente-tau-b-de-kendall" class="section level2">
+<h2>4.4 COEFICIENTE TAU-B DE KENDALL</h2>
 <p>Se trata del test más adecuado para analizar dos variables
 cualitativas ordinales que tienen el mismo número de categorías como es
 este caso. Este coeficiente nos indica si hay asociación entre dos
@@ -3244,9 +3241,9 @@ taub</code></pre>
 0.025528540 respectivamente) son los límites inferior y superior del
 intervalo de confianza del 95%.</p>
 </div>
-<div id="conclusión-2" class="section level2">
-<h2>4.5 CONCLUSIÓN</h2>
-<p><strong>Sobre le coeficiente:</strong> El coeficiente, al ser
+<div id="conclusión-sobre-tau-b-de-kendall" class="section level2">
+<h2>4.5 CONCLUSIÓN SOBRE TAU-B DE KENDALL</h2>
+<p><strong>Sobre el coeficiente:</strong> El coeficiente, al ser
 negativo, indicaría que cuando aumenta una variable la otra disminuye
 (dirección de la asociación) pero al tratarse de un valor tan cercano a
 0 (-0.009130106) nos sugiere que no hay asociación estadísticamente
@@ -3261,8 +3258,8 @@ estadísticamente significativa entre las variables.</p>
 <p><strong>NO se puede rechazar la hipótesis nula y consecuentemente no
 hay asociación estadística entre las variables</strong></p>
 </div>
-<div id="coeficiente-de-somers." class="section level2">
-<h2>4.6 COEFICIENTE DE SOMERS.</h2>
+<div id="coeficiente-delta-d-de-somers." class="section level2">
+<h2>4.6 COEFICIENTE DELTA (D) DE SOMERS.</h2>
 <p>Se trata de otro test de asociación para variables cualitativas
 ordinales que también nos informa de la magnitud y la dirección de la
 asociación mediante un coeficiente. Sus valores y la interpretación de
@@ -3279,8 +3276,8 @@ negativo.</p>
 0.025309971) son los límites inferior y superior del intervalo de
 confianza del 95%.</p>
 </div>
-<div id="conclusión-3" class="section level2">
-<h2>4.7 CONCLUSIÓN</h2>
+<div id="conclusión-sobre-delta-d-de-somers" class="section level2">
+<h2>4.7 CONCLUSIÓN SOBRE DELTA (D) DE SOMERS</h2>
 <p><strong>Sobre le coeficiente:</strong> Aunque el coeficiente, al ser
 negativo indica que cuando aumenta una variable la otra disminuye
 (dirección de la asociación), al tratarse de un valor tan cercano a 0

@@ -119,7 +119,7 @@ df_ronda10$rec_cttresac[df_ronda10$rec_cttresac >=77 &
 *   Se plantea como **hipótesis nula (H0) que ambas medias son iguales**.
 *   La hipótesis alternativa (H1) sería, por lo tanto, que las medias son distintas.
     
-## 2.4 APLICACIÓN DE T-STUDENT
+## 2.4 PRUEBA DE T-STUDENT
 
 Aplicaremos la función que implementa el método T-Student sobre los campos duplicados en nuestro caso.
 
@@ -137,7 +137,7 @@ t.test(df_ronda10$rec_fairelecc,df_ronda10$rec_cttresac,
 ```
 
 
-## 2.5 CONCLUSIÓN
+## 2.5 CONCLUSIÓN SOBRE T-STUDENT
 
 A la vista del resultado de *t_test*, se comprueba que hay una diferencia significativa entre las medias de aproximadamente 1,22. El intervalo de confianza, con un nivel de confianza del 95%, es de 1.110378 a 1.325724. La probabilidad de errar por rechazar la hipótesis nula es prácticamente nula p=2.2x10e16; muy inferior al 0,05 que se establece habitualmente en ciencia política como límite para considerarlo un valor estadísticamente significativo.
 
@@ -167,7 +167,7 @@ Las variables a analizar serán:
 
 *   **rec_freehms**, *Los gays y lesbianas deberían tener libertad para vivir como quieran*, representa la **variable dependiente**. Sus categorías corresponderán a columnas en la tabla (Pregunta A47 del cuestionario).
 
-## 3.2 PREPARAR DATOS
+## 3.2 PREPARACIÓN DE LA BASE DE DATOS
 
 ### Duplicación de campos
 
@@ -236,7 +236,7 @@ tablaContingencia <- round(rbind(freqtabla_100xFila, Totales),2)
 kable(tablaContingencia, caption="Opiniones sobre la libertad de gays y lesbianas para vivir como quieran (Variable Dependiente en columnas) según la vergüenza de tener un familiar cercano gay o lesbiana (Variable Independiente en filas)")
 ```
 
-## 3.5 CONCLUSIONES SOBRE LA TABLA
+## 3.5 CONCLUSIONES SOBRE LA TABLA DE CONTINGENCIA
 
 
 En una primera observación sobre los  **valores marginales** o totales se debe destacar que la mayoría de encuestados está "De acuerdo con las libertades de los gays y lesbianas" (45.02%) siendo la segunda opción "Muy de acuerdo" (30,54%), además la respuesta con menor porcentaje es la de "Muy en desacuerdo" (2,65%).
@@ -261,7 +261,7 @@ En resumen, entre los que no sentirían vergüenza por tener un familiar homosex
 Cuando se examina columna a columna toda la tabla, se observa que los valores de cada columna varían respecto a su correspondiente valor marginal. De hecho no se observa ninguna coincidencia lo que nos lleva a concluir una dependencia entre las variables. 
 
 
-## 3.6 CHI CUADRADO
+## 3.6 CÁLCULO DEL COEFICIENTE CHI CUADRADO
 
 Este coeficiente se muestra junto a las tablas cruzadas y nos indica si existe asociación entre la variable independiente (filas) y la dependiente (columnas). Solo arroja un valor igual o mayor que cero. 
 
@@ -269,7 +269,6 @@ Este coeficiente se muestra junto a las tablas cruzadas y nos indica si existe a
 * Si es >0, existe asociación, cuanto mayor sea, más evidencia hay.
 * Al dar siempre valores positivos (absolutos), no indica ninguna dirección de la asociación. 
 
-### Ejecución de Chi cuadrado en R.
 En R existe la función *chisq* para el cálculo de *Chi cuadrado* con dos parametrizaciones posibles.
 
 *   Pasando como argumentos directamente las variables a la función *chisq.test*
@@ -286,7 +285,7 @@ chi
 ```
 
 
-## 3.7 CONCLUSIÓN
+## 3.7 CONCLUSIÓN SOBRE CHI CUADRADO
 
 El coeficiente indica la magnitud de la asociación. El valor de 1723,8 es muy superior a 0, lo que indica una asociación fuerte.
 Hay una evidencia para el rechazo de la H0 (independencia de las variables) y además, el *p-valor*  es muy inferior (2.2x10e16) a *alpha*  (0,001) por lo que hay un nivel de confianza superior al 99,9%.
@@ -324,7 +323,7 @@ Si fuese necesario recodificar por cualquier motivo (valores no válidos, añadi
  *    H1, hipótesis alternativa: Hay asociación estadísticamente significativa entre las variables.
  
 
-## 4.4 COEFICIENTE DE TAU-B DE KENDALL
+## 4.4 COEFICIENTE TAU-B DE KENDALL
 
 Se trata del test más adecuado para analizar dos variables cualitativas ordinales que tienen el mismo número de categorías como es este caso. Este coeficiente nos indica si hay asociación entre dos variables y la dirección de esta.
 Sus valores oscilan entre -1 y 1, siendo el 0 el valor resultante cuando no existe asociación. El signo nos indica la dirección de la asociacion: valor negativo si una variable aumenta mientras la otra disminuye y valor positivo si ambas aumentan o disminuyen a la vez.
@@ -337,9 +336,9 @@ taub
 El coeficiente *tau_b* (-0.009130106) es negativo y cercano a 0 
 Los valores *lwr.ci* y *upr.ci* (-0.043788752  0.025528540  respectivamente) son los límites inferior y superior del intervalo de confianza del 95%.
 
-## 4.5 CONCLUSIÓN
+## 4.5 CONCLUSIÓN SOBRE TAU-B DE KENDALL
 
-**Sobre le coeficiente:**
+**Sobre el coeficiente:**
 El coeficiente, al ser negativo, indicaría que cuando aumenta una variable la otra disminuye (dirección de la asociación) pero al tratarse de un valor tan cercano a 0 (-0.009130106) nos sugiere que no hay asociación estadísticamente relevante entre las variables. 
 
 **Sobre el intervalo de confianza:**
@@ -350,7 +349,7 @@ Por todo esto:
 
 **NO se puede rechazar la hipótesis nula y consecuentemente no hay asociación estadística entre las variables**
 
-## 4.6 COEFICIENTE DE SOMERS. 
+## 4.6 COEFICIENTE DELTA (D) DE SOMERS. 
 
 Se trata de otro test de asociación para variables cualitativas ordinales que también nos informa de la magnitud y la dirección de la asociación mediante un coeficiente. Sus valores y la interpretación de estos es idéntica al Tau-B de Kendall: intervalo de -1 a 1, valor 0 para indicar la inexistencia de asociación y el signo para la dirección.
 
@@ -363,7 +362,7 @@ El coeficiente de *Somers* (-0,009052743) cercano a 0 y negativo.
 
 Los valores *lwr.ci* y *upr.ci* (-0.043415457 y 0.025309971) son los límites inferior y superior del intervalo de confianza del 95%.
 
-## 4.7 CONCLUSIÓN
+## 4.7 CONCLUSIÓN SOBRE DELTA (D) DE SOMERS
 
 
 **Sobre le coeficiente:**

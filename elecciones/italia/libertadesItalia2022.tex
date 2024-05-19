@@ -175,6 +175,8 @@ Técnicas de la Investigación en Ciencia Política I del Grado
 Universitario de Ciencia Política y Gestión Pública de la Universidad de
 Burgos, curso 2023-2024.
 
+\subsection{1.2 LIBRERÍAS R}\label{libreruxedas-r}
+
 Un primer paso será asegurar que en nuestra instalación de R están
 disponibles algunas funciones necesarias para abrir el fichero de datos
 externo (tipo .sav), para algún cálculo estadístico o formateo de datos
@@ -191,16 +193,12 @@ en Rmd.
 \end{Highlighting}
 \end{Shaded}
 
-Se parte de un fichero .sav con los resultados de la encuesta que se
-descargará o copiará en una subcarpeta DATOS del directorio donde se
-esté este mismo fichero .Rmd.
-
-\subsection{1.2 GESTIÓN DE FICHEROS DE
+\subsection{1.3 GESTIÓN DE FICHEROS DE
 DATOS}\label{gestiuxf3n-de-ficheros-de-datos}
 
-Tanto el fichero de los datos de la encuesta (\emph{datosparc2.sav})
-como cualquier fichero de resultados se ubicarán en un subdirectorio
-DATOS.
+Tanto el fichero de los datos de la encuesta (\emph{datosprac2.sav})
+como cualquier fichero de resultados se ubicarán en una subcarpeta DATOS
+del directorio donde se esté este mismo fichero Rmd.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -248,8 +246,8 @@ Las variables son:
 Ambas son Variables cualitativas ordinarias y admiten un valor que va
 desde 0 (``No es válida en absoluto'') a 10 (``Es completamente
 válido'') además de los valores considerados como no válidos a efectos
-estadísticos 77, 88 y 99 (``Rechaza responder'', ``NS'' y ``NC''
-respectivamente).
+estadísticos 77, 88 y 99 (``Rechaza responder'', ``NS No sabe'' y ``NC
+No contesta'' respectivamente).
 
 \subsection{2.2 PREPARACIÓN DE LA BASE DE
 DATOS}\label{preparaciuxf3n-de-la-base-de-datos}
@@ -258,7 +256,7 @@ DATOS}\label{preparaciuxf3n-de-la-base-de-datos}
 válidos}\label{recodificaciuxf3n-de-valores-no-vuxe1lidos}
 
 Se comprueba si hay valores que necesitan recodificarse. Serían los
-valores externos al intervalo {[}0--10{]} que según el codebook de la
+valores externos al intervalo {[}0-10{]} que según el codebook de la
 encuesta podrían ser 77, 88 ó 99 ya explicados.
 
 \begin{Shaded}
@@ -322,8 +320,8 @@ Después, se recodifican los valores 77, 88 y 99 como NA
 \subsection{2.4 APLICACIÓN DE
 T-STUDENT}\label{aplicaciuxf3n-de-t-student}
 
-En estos datos en que todos los valores de ambas variables estan entre 0
-y 10 podría aplicarse sobre los capos originales.
+Aplicaremos la función que implementa el método T-Student sobre los
+campos duplicados en nuestro caso.
 
 \begin{itemize}
 \item
@@ -359,7 +357,8 @@ y 10 podría aplicarse sobre los capos originales.
 ##        1.218051
 \end{verbatim}
 
-\subsection{2.5 CONCLUSIÓN}\label{conclusiuxf3n}
+\subsection{2.5 CONCLUSIÓN SOBRE
+T-STUDENT}\label{conclusiuxf3n-sobre-t-student}
 
 A la vista del resultado de \emph{t\_test}, se comprueba que hay una
 diferencia significativa entre las medias de aproximadamente 1,22. El
@@ -372,7 +371,7 @@ considerarlo un valor estadísticamente significativo.
 Por lo que \textbf{se debe rechazar la hipótesis nula que plantea la
 igualdad de las medias: las medias son distintas}.
 
-Lo que significa que existe una percepción distinta en los encuestados
+Esto se traduce en que existe una percepción distinta en los encuestados
 entre la libertad y limpieza del proceso electoral en Italia y el trato
 igualitario de su sistema judicial.
 
@@ -382,12 +381,12 @@ El valor positivo del estadístico \emph{t-valor}, de los intervalos y de
 la \emph{diferencia de medias} nos indica el orden de la diferencia.
 Viendo el orden de las variables en la función R, la primera variable
 ``fairelecc'' tiene una media en promedio mayor que la segunda
-``cttresac'', por lo que la percepción de los encuestado sobre la
+``cttresac'', por lo que la percepción de los encuestados sobre la
 limpieza de las elecciones es más postiva que la que tienen sobre la
 igualdad de trato del sistema judicial.
 
-Si se inviertese el orden de las variables en la función de R nos dará
-los mismos valores absolutos de \emph{t}, de \emph{intervalos} y de
+Si se invierte el orden de las variables en la función de R dará los
+mismos valores absolutos de \emph{t}, de \emph{intervalos} y de
 \emph{diferencia de media} pero con signo negativo (cambiaría la
 dirección de la diferencia). El valor \emph{p-value} seguirá igualmente
 positivo o absoluto puesto que indica la significancia estadística.
@@ -409,21 +408,22 @@ Las variables a analizar serán:
 \item
   \textbf{rec\_hmsfmlsh}, \emph{Me daría vergüenza que un familiar
   cercano fuese gay o lesbiana}, representa la \textbf{variable
-  independiente} y, por lo tanto sus categorías corresponderán a filas
+  independiente} y, por lo tanto, sus categorías corresponderán a filas
   en la tabla de contingencia (Pregunta A48 del cuestionario).
 \item
   \textbf{rec\_freehms}, \emph{Los gays y lesbianas deberían tener
   libertad para vivir como quieran}, representa la \textbf{variable
-  dependiente} y consecuentemente sus categorías corresponderán a
-  columnas en la tabla (Pregunta A47 del cuestionario)
+  dependiente}. Sus categorías corresponderán a columnas en la tabla
+  (Pregunta A47 del cuestionario).
 \end{itemize}
 
-\subsection{3.2 PREPARAR DATOS}\label{preparar-datos}
+\subsection{3.2 PREPARACIÓN DE LA BASE DE
+DATOS}\label{preparaciuxf3n-de-la-base-de-datos-1}
 
 \subsubsection{Duplicación de campos}\label{duplicaciuxf3n-de-campos}
 
-Se duplicarán las columnas del dataframe a manipular. En estos nuevos
-campos se asignan las etiquetas a sus valores correspondientes.
+Se duplicarán las columnas del dataframe a manipular puesto que vamos a
+manipularlos.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -436,7 +436,7 @@ campos se asignan las etiquetas a sus valores correspondientes.
 valores}\label{recodificaciuxf3n.-etiquetas-de-valores}
 
 Se añaden las etiquetas correspondientes a los valores en los campos
-tipo \emph{factor}.
+tipo \emph{factor} en los nuevos campos duplicados.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -475,7 +475,8 @@ tipo \emph{factor}.
 \subsection{3.4 LA TABLA DE CONTINGENCIA (TABLA
 CRUZADA)}\label{la-tabla-de-contingencia-tabla-cruzada}
 
-Se obtiene los valores de frecuencia absolutos.
+Se obtienen los valores de frecuencia absolutos con la función
+\emph{xtabs}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -485,14 +486,11 @@ Se obtiene los valores de frecuencia absolutos.
 
 Pero lo que interesa es tener en cada celda el \% de casos respecto a la
 fila. Teniendo en cuenta que cada fila representa una categoría de la
-variable independiente.
-
-Esto se indica con el parámetro ``1'' en la función de R
-\emph{prop.table}
+variable independiente. Se usará la función \emph{prop.table}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{freqtabla\_100xFila}\OtherTok{\textless{}{-}}\FunctionTok{prop.table}\NormalTok{((freqtabla),}\DecValTok{1}\NormalTok{)}\SpecialCharTok{*}\DecValTok{100}
+\NormalTok{freqtabla\_100xFila}\OtherTok{\textless{}{-}}\FunctionTok{prop.table}\NormalTok{((freqtabla),}\DecValTok{1}\NormalTok{)}\SpecialCharTok{*}\DecValTok{100} \CommentTok{\# El Parámetro 1 indica \% por fila}
 \end{Highlighting}
 \end{Shaded}
 
@@ -505,7 +503,7 @@ ello R dispone de otra función, \emph{margin.table} :
 \end{Highlighting}
 \end{Shaded}
 
-Combinación de las dos matrices de R (\emph{freqtabla\_100xFila} y
+Se combinan las dos matrices (\emph{freqtabla\_100xFila} y
 \emph{Totales}) para elaborar la \textbf{Tabla de contingencia o Tabla
 cruzada} mediante la función \emph{rbind}
 
@@ -567,8 +565,8 @@ Muy en desacuerdo & 66.87 & 28.80 & 1.69 & 0.60 & 2.05 \\
 Totales & 30.54 & 45.02 & 16.61 & 5.18 & 2.65 \\
 \end{longtable}
 
-\subsection{3.5 CONCLUSIONES SOBRE LA
-TABLA}\label{conclusiones-sobre-la-tabla}
+\subsection{3.5 CONCLUSIONES SOBRE LA TABLA DE
+CONTINGENCIA}\label{conclusiones-sobre-la-tabla-de-contingencia}
 
 En una primera observación sobre los \textbf{valores marginales} o
 totales se debe destacar que la mayoría de encuestados está ``De acuerdo
@@ -586,31 +584,31 @@ notable entre ambas categorías:
 \tightlist
 \item
   Por un parte los que responden estar ``Muy de acuerdo'' con este
-  sentimiento de vergüenza, la respuesta mayoritaria es contraria a la
-  libertad, decantándose un 33,78\% por ``Muy en desacuerdo'' y un
+  sentimiento de vergüenza, su posicionamiento mayoritario es contrario
+  a la libertad, decantándose un 33,78\% por ``Muy en desacuerdo'' y un
   24,32\% por ``En desacuerdo''. No obstante aparece un dato muy
-  interesant: un importante 22,97\% que se manifiesta ``Muy de acuerdo''
-  con la libertad.
+  interesante: un importante 22,97\% que se manifiesta ``Muy de
+  acuerdo'' con la libertad.
 \item
   Por otra parte, los que se muestran ``De acuerdo'' con la afirmación
-  de vergüenza, ºsu posición mayoritaria respecto a la libertad es ``De
-  acuerdo'' (36,65\%) con la libertad, un dato también interesante.
-  Seguidamente optan por ``En desacuerdo'' y ``Ni de acuerdo ni en
-  desacuerdo'' con cifras similares (26,24\% y 25,79\% respectivamente).
+  de vergüenza, su posición mayoritaria respecto a la libertad es estar
+  ``De acuerdo'' (36,65\%), un dato también interesante. Seguidamente
+  optan por ``En desacuerdo'' y ``Ni de acuerdo ni en desacuerdo'' con
+  cifras similares (26,24\% y 25,79\% respectivamente).
 \end{itemize}
 
-En un nivel intermedio lo configuraría la categoría más ``neutral'': los
-que no están ``Ni de acuerdo ni en desacuerdo'' con el tema de la
-vergüenza y que también se decantan mayoritariamente por la misma
-posición neutra (central en la tabla) sobre la libertad mayoritariamente
-(46,05\%). Aunque es importante señalar que su segunda opción es
-posicionarse ``De acuerdo'' con las libertades de gays y lesbianas
-(40,71\%), se ve una relación ``Ni de acuerdo ni en desacuerdo- Ni
-desacuerdo ni desacuerdo''
+Un nivel intermedio lo configuraría la categoría más ``neutral'': los
+que no están ``Ni de acuerdo ni en desacuerdo'' con sentir vergüenza y
+que también se decantan mayoritariamente por la misma posición neutra,
+ocupando el centro de la tabla, con un 46,05\%. Valores muy alejados del
+4,94 o 1,38 de oposición a las libertades. Aunque es importante señalar
+que su segunda opción es posicionarse ``De acuerdo'' con las libertades
+de gays y lesbianas (40,71\%), se ve una relación ``Ni de acuerdo ni en
+desacuerdo- Ni desacuerdo ni desacuerdo''
 
 En un tercer bloque estarían las dos categorías que manifiestan rechazo
 a la idea de sentir vergüenza por tener un familiar homosexual. Aquí
-también se ven unas relaciones interesantes.
+también se ven unas relaciones con cierta lógica.
 
 \begin{itemize}
 \item
@@ -623,24 +621,34 @@ también se ven unas relaciones interesantes.
   acuerdo con la libertad'' (66,84\%).
 \end{itemize}
 
-En definitiva, entre los que rechazan la idea de sentir vergüenza por un
-familiar homosexual se ve una coincidencia ``De acuerdo-desacuerdo'' y
-``Muy desacuerdo-muy de acuerdo'' en lo que respeta a las libertades de
-este colectivo.
+En resumen, entre los que no sentirían vergüenza por tener un familiar
+homosexual se ve una coincidencia ``De acuerdo-desacuerdo'' y ``Muy
+desacuerdo-muy de acuerdo'' en lo que respeta a las libertades de este
+colectivo.
 
-La dependencia entre las variables se deduce fácilmente al ver cómo los
-valores en cada categoría de la variable dependiente varían respecto a
-su marginal. De hecho no se observan coincidencias.
+Cuando se examina columna a columna toda la tabla, se observa que los
+valores de cada columna varían respecto a su correspondiente valor
+marginal. De hecho no se observa ninguna coincidencia lo que nos lleva a
+concluir una dependencia entre las variables.
 
-\subsection{3.6 CHI CUADRADO}\label{chi-cuadrado}
+\subsection{3.6 APLICACIÓN DE CHI
+CUADRADO}\label{aplicaciuxf3n-de-chi-cuadrado}
 
 Este coeficiente se muestra junto a las tablas cruzadas y nos indica si
 existe asociación entre la variable independiente (filas) y la
-dependiente (columnas). Solo arroja un valor igual o mayor que cero. Si
-vale 0 significa que no hay asociación. Si es \textgreater0, existe
-asociación. Cuanto mayor, más evidencia.
+dependiente (columnas). Solo arroja un valor igual o mayor que cero.
 
-Al dar valores positivos, no indica la dirección de la asociación.
+\begin{itemize}
+\tightlist
+\item
+  Si vale 0 significa que no hay asociación.
+\item
+  Si es \textgreater0, existe asociación, cuanto mayor sea, más
+  evidencia hay.
+\item
+  Al dar siempre valores positivos (absolutos), no indica ninguna
+  dirección de la asociación.
+\end{itemize}
 
 \subsubsection{Ejecución de Chi cuadrado en
 R.}\label{ejecuciuxf3n-de-chi-cuadrado-en-r.}
@@ -710,26 +718,17 @@ cuadrado} con dos parametrizaciones posibles.
 ## X-squared = 1723.8, df = 16, p-value < 2.2e-16
 \end{verbatim}
 
-\subsection{3.7 CONCLUSIÓN}\label{conclusiuxf3n-1}
+\subsection{3.7 CONCLUSIÓN SOBRE CHI
+CUADRADO}\label{conclusiuxf3n-sobre-chi-cuadrado}
 
 El coeficiente indica la magnitud de la asociación. El valor de 1723,8
 es muy superior a 0, lo que indica una asociación fuerte. Hay una
 evidencia para el rechazo de la H0 (independencia de las variables) y
-además, el \emph{p-valor} es muy inferior (2.2x10¹⁶) a \emph{alpha}
+además, el \emph{p-valor} es muy inferior (2.2x10e16) a \emph{alpha}
 (0,001) por lo que hay un nivel de confianza superior al 99,9\%.
 
 \textbf{Se debe rechazar la hipótesis nula: las variables están
 asociadas.}
-
-No obstante, se ve que la ejecución de la función R nos avisa:
-
-\begin{verbatim}
-Warning messages:
-
-1: In chisq.test(datos$rec_hmsfmlsh, datos$rec_freehms) :
-Chi-squared approximation may be incorrect
-2: In chisq.test(freqtab) : Chi-squared approximation may be incorrect
-\end{verbatim}
 
 \newpage
 
@@ -760,7 +759,7 @@ Para ello se analizarán las variables:
 \end{itemize}
 
 \subsection{4.2 PREPARACIÓN DE LA BASE DE
-DATOS}\label{preparaciuxf3n-de-la-base-de-datos-1}
+DATOS}\label{preparaciuxf3n-de-la-base-de-datos-2}
 
 Se comprueba que no hay valores que recodificar como NA
 
@@ -801,12 +800,17 @@ apartados 2.2 de las dos actividades anteriores.
   significativa entre las variables.
 \end{itemize}
 
-\subsection{4.4 COEFICIENTE DE TAU-B DE
-KENDALL}\label{coeficiente-de-tau-b-de-kendall}
+\subsection{4.4 COEFICIENTE TAU-B DE
+KENDALL}\label{coeficiente-tau-b-de-kendall}
 
-Se trata del test más adecuado cuando se trata de dos variables
-cualitativas ordinales que tienen el mismo número de categorías com es
-este caso.
+Se trata del test más adecuado para analizar dos variables cualitativas
+ordinales que tienen el mismo número de categorías como es este caso.
+Este coeficiente nos indica si hay asociación entre dos variables y la
+dirección de esta. Sus valores oscilan entre -1 y 1, siendo el 0 el
+valor resultante cuando no existe asociación. El signo nos indica la
+dirección de la asociacion: valor negativo si una variable aumenta
+mientras la otra disminuye y valor positivo si ambas aumentan o
+disminuyen a la vez.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -826,13 +830,14 @@ Los valores \emph{lwr.ci} y \emph{upr.ci} (-0.043788752 0.025528540
 respectivamente) son los límites inferior y superior del intervalo de
 confianza del 95\%.
 
-\subsection{4.5 CONCLUSIÓN}\label{conclusiuxf3n-2}
+\subsection{4.5 CONCLUSIÓN SOBRE TAU-B DE
+KENDALL}\label{conclusiuxf3n-sobre-tau-b-de-kendall}
 
-\textbf{Sobre le coeficiente:} Aunque el coeficiente, al ser negativo
-indica que cuando aumenta una variable la otra disminuye ( dirección de
-la asociación), al tratarse de un valor tan cercano a 0 (-0.009130106)
-este sugiere que no hay asociación estadísticamente relevante entre las
-variables.
+\textbf{Sobre el coeficiente:} El coeficiente, al ser negativo,
+indicaría que cuando aumenta una variable la otra disminuye (dirección
+de la asociación) pero al tratarse de un valor tan cercano a 0
+(-0.009130106) nos sugiere que no hay asociación estadísticamente
+relevante entre las variables.
 
 \textbf{Sobre el intervalo de confianza:} Los valores de \emph{lwr.ci} y
 \emph{upr.ci} indican que, con un 95\% de confianza, el verdadero valor
@@ -843,14 +848,17 @@ significativa entre las variables.
 
 Por todo esto:
 
-\textbf{NO se puede rechazar la hipótesis nula. No hay asociación
-estadística entre las variables}
+\textbf{NO se puede rechazar la hipótesis nula y consecuentemente no hay
+asociación estadística entre las variables}
 
-\subsection{4.6 COEFICIENTE DE SOMMERS.}\label{coeficiente-de-sommers.}
+\subsection{4.6 COEFICIENTE DELTA (D) DE
+SOMERS.}\label{coeficiente-delta-d-de-somers.}
 
 Se trata de otro test de asociación para variables cualitativas
 ordinales que también nos informa de la magnitud y la dirección de la
-asociación mediante un coeficiente que oscilará también entre -1 y 1.
+asociación mediante un coeficiente. Sus valores y la interpretación de
+estos es idéntica al Tau-B de Kendall: intervalo de -1 a 1, valor 0 para
+indicar la inexistencia de asociación y el signo para la dirección.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -870,10 +878,11 @@ El coeficiente de \emph{Somers} (-0,009052743) cercano a 0 y negativo.
 Los valores \emph{lwr.ci} y \emph{upr.ci} (-0.043415457 y 0.025309971)
 son los límites inferior y superior del intervalo de confianza del 95\%.
 
-\subsection{4.7 CONCLUSIÓN}\label{conclusiuxf3n-3}
+\subsection{4.7 CONCLUSIÓN SOBRE DELTA (D) DE
+SOMERS}\label{conclusiuxf3n-sobre-delta-d-de-somers}
 
 \textbf{Sobre le coeficiente:} Aunque el coeficiente, al ser negativo
-indica que cuando aumenta una variable la otra disminuye ( dirección de
+indica que cuando aumenta una variable la otra disminuye (dirección de
 la asociación), al tratarse de un valor tan cercano a 0 (-0.009052743)
 este sugiere que no hay asociación estadísticamente relevante entre las
 variables.
@@ -887,37 +896,42 @@ significativa entre las variables.
 
 Por todo esto:
 
-\textbf{NO se puede rechazar la hipótesis nula. No hay asociación
-estadística entre las variables}
+\textbf{NO se puede rechazar la hipótesis nula por lo tanto NO hay
+asociación estadística entre las variables}
+
+Se comprueba que ambos coeficientes nos llevan a la misma conclusión.
 
 \newpage
 
-\section{5 REFLEXIÓN SOBRE LOS
-ANÁLISIS}\label{reflexiuxf3n-sobre-los-anuxe1lisis}
+\section{5 VALORACIÓN CRÍTICA}\label{valoraciuxf3n-cruxedtica}
 
-Las libertades vistas estan operacionalizadas como variables ordinales
-pero pueden ser tratadas como cuantitativas para obterne más información
-como se estudió en la anterior práctica. Así se puede ver que los
-italianos encuestados ``aprueban'' su sistema electoral con un 5,8 de
-media y una mediana de 6 mientras que están cerca de suspender a sus
-tribunales por el trato desigual (media de 4,52 y apenas una mediana de
-5). Teniendo en cuenta que se compara la confianza en el proceso un de
-máxima participación y reglamentación con la práctica diaria de órganos
-de funcionarios y que Italia es una democracia consolidada, la poca
-confianza en la limpieza de las elecciones es un hecho preocupante.
+Las libertades analizadas están operacionalizadas como variables
+ordinales pero pueden ser tratadas individualmente como cuantitativas
+para obtener más información como se estudió en la práctica anterior.
+Así se puede ver que los italianos encuestados ``aprueban'' su sistema
+electoral con un 5,8 de media y una mediana de 6 mientras que
+suspenderían a sus tribunales por trato desigual (media de 4,52 y apenas
+una mediana de 5). Considerando que se compara la confianza en un
+proceso de máxima participación y reglamentación con la práctica diaria
+de órganos de funcionarios y que Italia es una democracia consolidada
+esta poca confianza en la limpieza y libertad de las elecciones es un
+hecho preocupante.
 
 Los encuestados mayoritariamente no se identifican con el sentimiento de
 vergüenza por tener un familiar homosexual (media de 3,8 y mediana de 4
-en un intervalo de 1 a 5). Un sentimiento relacionado con su
-posicionamiento a favor de la igualdad de libertades de este colectivo
-(una media de 2,05 y una mediana de 2 en un intervalo de 1 a 5) esto es
-coherente con la dependencia entre varibles vista. Sería interesante un
-seguimiento de las rondas siguientes para ver la evolución.
+en un intervalo de 1 a 5). Un sentimiento relacionado, como se ha visto,
+con su posicionamiento favorable a la igualdad de libertades de este
+colectivo (una media de 2,05 y una mediana de 2 en un intervalo de 1 a
+5). Ambas medidas distan un punto, aproximadamente, del extremo que
+definiría un sentimiento y posición más tolerante o progresista. Sería
+interesante un seguimiento de las rondas siguientes para ver la
+evolución.
 
-Con independencia de la ideología, los encuestados aprueban la
-independencia respecto al gobierno de sus medios de comunicación siendo
-los valores de 6 y 8 los más destacados ( entre 0 y 10). En una
-valoración bastante positiva tratándose de un modelo de prensa latino.
+Con bastante independencia de la ideología, los encuestados aprueban la
+independencia respecto del gobierno de sus medios de comunicación. Al
+observar la distribución de valores, tenemos que destacan los valores de
+6 a 8 (entre 0 y 10). En una valoración bastante positiva tratándose de
+un modelo de prensa latino.
 
 \newpage
 
