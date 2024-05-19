@@ -134,7 +134,7 @@
   pdfcreator={LaTeX via pandoc}}
 
 \title{ANÁLISIS BIVARIADO SOBRE LIBERTADES EN ITALIA\\
-Encuesta Social Europea, 2020/2022. Ronda 10}
+Encuesta Social Europea, 2020/2022 (Ronda 10)}
 \usepackage{etoolbox}
 \makeatletter
 \providecommand{\subtitle}[1]{% add subtitle to \maketitle
@@ -144,7 +144,7 @@ Encuesta Social Europea, 2020/2022. Ronda 10}
 \subtitle{Técnicas de Investigación en Ciencia Política I. UBU\\
 Práctica 2.}
 \author{Tomàs Ferrandis Moscardó}
-\date{2024-05-10}
+\date{2024-05-19}
 
 \begin{document}
 \maketitle
@@ -317,8 +317,7 @@ Después, se recodifican los valores 77, 88 y 99 como NA
   distintas.
 \end{itemize}
 
-\subsection{2.4 APLICACIÓN DE
-T-STUDENT}\label{aplicaciuxf3n-de-t-student}
+\subsection{2.4 PRUEBA DE T-STUDENT}\label{prueba-de-t-student}
 
 Aplicaremos la función que implementa el método T-Student sobre los
 campos duplicados en nuestro caso.
@@ -631,8 +630,8 @@ valores de cada columna varían respecto a su correspondiente valor
 marginal. De hecho no se observa ninguna coincidencia lo que nos lleva a
 concluir una dependencia entre las variables.
 
-\subsection{3.6 APLICACIÓN DE CHI
-CUADRADO}\label{aplicaciuxf3n-de-chi-cuadrado}
+\subsection{3.6 CÁLCULO DEL COEFICIENTE CHI
+CUADRADO}\label{cuxe1lculo-del-coeficiente-chi-cuadrado}
 
 Este coeficiente se muestra junto a las tablas cruzadas y nos indica si
 existe asociación entre la variable independiente (filas) y la
@@ -649,9 +648,6 @@ dependiente (columnas). Solo arroja un valor igual o mayor que cero.
   Al dar siempre valores positivos (absolutos), no indica ninguna
   dirección de la asociación.
 \end{itemize}
-
-\subsubsection{Ejecución de Chi cuadrado en
-R.}\label{ejecuciuxf3n-de-chi-cuadrado-en-r.}
 
 En R existe la función \emph{chisq} para el cálculo de \emph{Chi
 cuadrado} con dos parametrizaciones posibles.

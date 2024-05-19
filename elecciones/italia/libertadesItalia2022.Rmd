@@ -1,12 +1,12 @@
 ---
 title: |
   | ANÁLISIS BIVARIADO SOBRE LIBERTADES EN ITALIA
-  | Encuesta Social Europea, 2020/2022. Ronda 10
+  | Encuesta Social Europea, 2020/2022 (Ronda 10)
 subtitle: | 
   | Técnicas de Investigación en Ciencia Política I. UBU
   | Práctica 2.
 author: "Tomàs Ferrandis Moscardó"
-date: "2024-05-10"
+date: "2024-05-19"
 lang: "es-ES"
 fontsize: 12 pt
 mainfont: "Times New Roman"
