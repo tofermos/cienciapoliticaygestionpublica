@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.16)  20 MAY 2024 11:31
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.16)  20 MAY 2024 13:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1043,34 +1043,34 @@ LaTeX Font Info:    Font shape `TU/TimesNewRoman(2)/b/n' will be
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
 (Font)              Font shape `TU/lmtt/b/n' tried instead on input line 186.
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(2)/m/it' will be
-(Font)              scaled to size 12.0pt on input line 202.
+(Font)              scaled to size 12.0pt on input line 205.
 [3] [4] [5] [6] [7] [8] [9] [10] [11]
-Overfull \hbox (4.35207pt too wide) in paragraph at lines 678--678
+Overfull \hbox (4.35207pt too wide) in paragraph at lines 689--689
 []\TU/lmtt/m/n/12 ## Warning in chisq.test(df_ronda10$rec_hmsfmlsh, df_ronda10$
 rec_freehms):[] 
  []
 
 
-Overfull \hbox (47.61208pt too wide) in paragraph at lines 708--708
+Overfull \hbox (47.61208pt too wide) in paragraph at lines 719--719
 []\TU/lmtt/m/n/12 ## Warning in chisq.test(freqtabla): L[]aproximació Chi-quadr
 at pot ser incorrecta[] 
  []
 
 [12]
-Overfull \hbox (10.52002pt too wide) in paragraph at lines 759--759
+Overfull \hbox (10.52002pt too wide) in paragraph at lines 771--771
 []\TU/lmtt/m/n/12 El intervalo de confianza del 95% para el coeficiente gamma t
 iene un límite[] 
  []
 
 [13] [14] [15] [16] [17] [18]
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(2)/b/it' will be
-(Font)              scaled to size 12.0pt on input line 1020.
+(Font)              scaled to size 12.0pt on input line 1030.
 [19]
 File: libertadesItalia2022_files/figure-latex/dist-1.pdf Graphic file (type pdf
 )
 <use libertadesItalia2022_files/figure-latex/dist-1.pdf>
 
-Overfull \vbox (2.55144pt too high) detected at line 1107
+Overfull \vbox (2.55144pt too high) detected at line 1117
  []
 
 [20]
@@ -1092,10 +1092,10 @@ File: ../../recursos/iconogithub.png Graphic file (type bmp)
 <../../recursos/iconogithub.png>
 [22] (./libertadesItalia2022.aux) ) 
 Here is how much of TeX's memory you used:
- 20632 strings out of 476191
- 381226 string characters out of 5812072
- 879222 words of memory out of 5000000
- 41055 multiletter control sequences out of 15000+600000
+ 20630 strings out of 476191
+ 381201 string characters out of 5812072
+ 879184 words of memory out of 5000000
+ 41053 multiletter control sequences out of 15000+600000
  475808 words of font info for 94 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  86i,8n,128p,1017b,569s stack positions out of 5000i,500n,10000p,200000b,80000s
