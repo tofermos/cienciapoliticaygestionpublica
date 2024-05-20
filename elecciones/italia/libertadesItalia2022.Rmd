@@ -5,16 +5,16 @@ title: |
 author: "Tomàs Ferrandis Moscardó"
 date: "2024-05-19"
 output:
+  pdf_document:
+    toc: true
+    keep_tex: true
+    latex_engine: xelatex
   html_document:
     toc: true
     toc_float: true
     toc_depth: 2
     df_print: paged
     number_sections: false
-  pdf_document:
-    toc: true
-    keep_tex: true
-    latex_engine: xelatex
   word_document:
     toc: true
     toc_depth: '3'
@@ -69,9 +69,9 @@ nombreFichero<-"datosprac2.sav"
 directorioTrabajo<-getwd()
 rutaFichero<-paste(directorioTrabajo,"DATOS",nombreFichero,sep="/")
 ```
-**Creación de la vbase de datos**
+**Creación de la base de datos**
 
-A partir del fichero de tipo sav (**datosprac2.sav**) de la Encuesta Social Europea, se creará el *data frame* de R. Esta será la **base de datos** inicial con todos los datos de la encuesta.
+A partir del fichero de tipo sav (**datosprac2.sav**) de la Encuesta Social Europea, se creará el *dataframe* de R. Esta será la **base de datos** inicial con todos los datos de la encuesta.
 
 ```{r dataframe, echo=TRUE}
 df_ronda10<-read_sav(rutaFichero)
@@ -82,7 +82,7 @@ df_ronda10<-read_sav(rutaFichero)
 
 ## 2.1 DESCRIPCIÓN DE LA ACTIVIDAD 1
 
-En esta primera actividad se realizará un contraste de hipótesis para ver si dos variables presentan diferencias estadísticamente significativas entre si. 
+En esta primera actividad se realizará un contraste de hipótesis para ver si dos variables presentan diferencias estadísticamente significativas entre sí. 
 
 Las variables son:
 
@@ -103,9 +103,9 @@ unique(df_ronda10$fairelcc)
 unique(df_ronda10$cttresac)
 ```
 
-Se comprueba que ya deben estar recodificados o almenos no aparecen. No obstante, en caso de que no fuese así, se procedería de la siguiente manera.
+Se comprueba que ya deben estar recodificados o al menos no aparecen. No obstante, en caso de que no fuese así, se procedería de la siguiente manera.
 
-*   En primer lugar, se duplicarán los campos para hacer las modificación sobre estos.
+*   En primer lugar, se duplicarán los campos para hacer las modificaciones sobre estos.
 
 ```{r duplicacion, echo=TRUE}
 df_ronda10$rec_cttresac <- df_ronda10$cttresac
@@ -255,7 +255,7 @@ En una primera observación sobre los  **valores marginales** o totales se debe 
 
 Al observar los valores de las diferentes **categorías de la variable independiente** o filas se tiene un primer bloque con las dos categorías de encuestados que reconocen que sentirían algún tipo de vergüenza por tener un familiar homosexual. Aquí se ve una diferencia notable entre ambas categorías:
 
-  *   Por un parte los que responden estar "Muy de acuerdo" con este sentimiento de vergüenza, su posicionamiento mayoritario es contrario a la libertad, decantándose un 33,78% por "Muy en desacuerdo" y un 24,32% por "En desacuerdo". No obstante aparece un dato muy interesante: un importante 22,97% que se manifiesta "Muy de acuerdo" con la libertad. 
+  *   Por un parte los que responden estar "Muy de acuerdo" con este sentimiento de vergüenza, su posicionamiento mayoritario es contrario a la libertad, decantándose un 33,78% por "Muy en desacuerdo" y un 24,32% por "En desacuerdo". No obstante, aparece un dato muy interesante: un importante 22,97% que se manifiesta "Muy de acuerdo" con la libertad. 
   *   Por otra parte, los que se muestran "De acuerdo" con la afirmación de vergüenza, su posición mayoritaria respecto a la libertad es estar "De acuerdo" (36,65%), un dato también muy interesante. Seguidamente optan por "En desacuerdo" y "Ni de acuerdo ni en desacuerdo" con cifras similares (26,24% y 25,79% respectivamente).
 
 
@@ -270,7 +270,7 @@ En un tercer bloque estarían las dos categorías que manifiestan rechazo a la i
  
 En resumen, entre los que no sentirían vergüenza por tener un familiar homosexual se ve una coincidencia "De acuerdo-desacuerdo" y "Muy desacuerdo-muy de acuerdo" en lo que respeta a las libertades de este colectivo.
 
-Finalmente al **comparar todos los valores con el marginal de su columna** no se observa ninguna coincidencia. Esto nos lleva aceptar la dependencia entre las variables y, consecuentemente, a rechazar la hipótesis nula.
+Finalmente, al **comparar todos los valores con el marginal de su columna** no se observa ninguna coincidencia. Esto nos lleva aceptar la dependencia entre las variables y, consecuentemente, a rechazar la hipótesis nula.
 
 \newpage
 
@@ -345,7 +345,7 @@ Para ello se analizarán las variables:
 
 *   **lrscale**, *¿Dónde se colocaría usted en la escala? Escala de 0 a 10 (0 representa la ubicación más a la izquierda y 10 la ubicación más a la derecha*). Esta es la *variable independiente* (Pregunta A39 del cuestionario)
 
-*   **medcrgvc**, *Los medios de comunicación en Italia pueden criticar al gobierno. Escala de 0 a 10 ( 0 indica No es válida en absolutao y 10, Es complettamente válida)*. Esta es la *variable dependiente* (Pregunta B15 del cuestionario)
+*   **medcrgvc**, *Los medios de comunicación en Italia pueden criticar al gobierno. Escala de 0 a 10 ( 0 indica No es válida en absoluto y 10, Es completamente válida)*. Esta es la *variable dependiente* (Pregunta B15 del cuestionario)
 
 ## 4.2 PREPARACIÓN DE LA BASE DE DATOS
 
@@ -389,7 +389,7 @@ Por todo esto, **no se puede rechazar la hipótesis nula y consecuentemente no h
 
 ## 4.6 COEFICIENTE DELTA (D) DE SOMERS. 
 
-Se trata de otro test de asociación para variables cualitativas ordinales que también nos informa de la magnitud y la dirección de la asociación mediante un coeficiente. La interpretación de los resultado que arroja es idéntica a lo visto en Tau-B de Kendall: intervalo de -1 a 1, valor 0 para indicar la inexistencia de asociación y el signo para la dirección.
+Se trata de otro test de asociación para variables cualitativas ordinales que también nos informa de la magnitud y la dirección de la asociación mediante un coeficiente. La interpretación de los resultados que arroja es idéntica a lo visto en Tau-B de Kendall: intervalo de -1 a 1, valor 0 para indicar la inexistencia de asociación y el signo para la dirección.
 
 ```{r somer, echo =TRUE }
 delta <- SomersDelta(df_ronda10$lrscale, df_ronda10$medcrgvc, 
@@ -403,7 +403,7 @@ Los valores *lwr.ci* y *upr.ci* (-0.043415457 y 0.025309971) son los límites in
 ## 4.7 CONCLUSIÓN SOBRE DELTA (D) DE SOMERS
 
 
-**Sobre le coeficiente:**
+**Sobre el coeficiente:**
 Aunque el coeficiente, al ser negativo indica que cuando aumenta una variable la otra disminuye (dirección de la asociación), al tratarse de un valor tan cercano a 0 (-0.009052743) este sugiere que no hay asociación estadísticamente relevante entre las variables. 
 
 **Sobre el intervalo de confianza:**
@@ -413,7 +413,7 @@ Este intervalo incluye al 0 (-0.043415457 <0 <0.025309971) hecho que refuerza la
 Por todo esto, **no se puede rechazar la hipótesis nula y, por lo tanto, no hay asociación estadística entre las variables**. 
 Lo que viene a decir que la opinión sobre la capacidad de criticar al gobierno por parte de la prensa es independiente de la autoubicación ideológica de las personas encuestadas.
 
-Además se ha comprobado que ambos coeficientes nos llevan a la misma conclusión.
+Además, se ha comprobado que ambos coeficientes nos llevan a la misma conclusión.
 
   \newpage
 

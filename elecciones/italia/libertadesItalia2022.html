@@ -2805,9 +2805,9 @@ esté este mismo fichero Rmd.</p>
 nombreFichero&lt;-&quot;datosprac2.sav&quot;
 directorioTrabajo&lt;-getwd()
 rutaFichero&lt;-paste(directorioTrabajo,&quot;DATOS&quot;,nombreFichero,sep=&quot;/&quot;)</code></pre>
-<p><strong>Creación de la vbase de datos</strong></p>
+<p><strong>Creación de la base de datos</strong></p>
 <p>A partir del fichero de tipo sav (<strong>datosprac2.sav</strong>) de
-la Encuesta Social Europea, se creará el <em>data frame</em> de R. Esta
+la Encuesta Social Europea, se creará el <em>dataframe</em> de R. Esta
 será la <strong>base de datos</strong> inicial con todos los datos de la
 encuesta.</p>
 <pre class="r"><code>df_ronda10&lt;-read_sav(rutaFichero)</code></pre>
@@ -2820,7 +2820,7 @@ encuesta.</p>
 <h2>2.1 DESCRIPCIÓN DE LA ACTIVIDAD 1</h2>
 <p>En esta primera actividad se realizará un contraste de hipótesis para
 ver si dos variables presentan diferencias estadísticamente
-significativas entre si.</p>
+significativas entre sí.</p>
 <p>Las variables son:</p>
 <ul>
 <li><strong>fairelcc: Las elecciones son libres y limpias en
@@ -2844,12 +2844,12 @@ encuesta podrían ser 77, 88 ó 99 ya explicados.</p>
 <pre><code>##  [1]  7  6  2  5  8  1  0  3  9  4 NA 10</code></pre>
 <pre class="r"><code>unique(df_ronda10$cttresac)</code></pre>
 <pre><code>##  [1]  1  0  2  8  3  7  6  5  9  4 NA 10</code></pre>
-<p>Se comprueba que ya deben estar recodificados o almenos no aparecen.
+<p>Se comprueba que ya deben estar recodificados o al menos no aparecen.
 No obstante, en caso de que no fuese así, se procedería de la siguiente
 manera.</p>
 <ul>
 <li>En primer lugar, se duplicarán los campos para hacer las
-modificación sobre estos.</li>
+modificaciones sobre estos.</li>
 </ul>
 <pre class="r"><code>df_ronda10$rec_cttresac &lt;- df_ronda10$cttresac
 df_ronda10$rec_fairelecc &lt;-df_ronda10$fairelcc</code></pre>
@@ -3099,7 +3099,7 @@ notable entre ambas categorías:</p>
 <li>Por un parte los que responden estar “Muy de acuerdo” con este
 sentimiento de vergüenza, su posicionamiento mayoritario es contrario a
 la libertad, decantándose un 33,78% por “Muy en desacuerdo” y un 24,32%
-por “En desacuerdo”. No obstante aparece un dato muy interesante: un
+por “En desacuerdo”. No obstante, aparece un dato muy interesante: un
 importante 22,97% que se manifiesta “Muy de acuerdo” con la
 libertad.</li>
 <li>Por otra parte, los que se muestran “De acuerdo” con la afirmación
@@ -3131,7 +3131,7 @@ acuerdo con la libertad” (66,84%).</p></li>
 familiar homosexual se ve una coincidencia “De acuerdo-desacuerdo” y
 “Muy desacuerdo-muy de acuerdo” en lo que respeta a las libertades de
 este colectivo.</p>
-<p>Finalmente al <strong>comparar todos los valores con el marginal de
+<p>Finalmente, al <strong>comparar todos los valores con el marginal de
 su columna</strong> no se observa ninguna coincidencia. Esto nos lleva
 aceptar la dependencia entre las variables y, consecuentemente, a
 rechazar la hipótesis nula.</p>
@@ -3243,7 +3243,7 @@ escala? Escala de 0 a 10 (0 representa la ubicación más a la izquierda y
 independiente</em> (Pregunta A39 del cuestionario)</p></li>
 <li><p><strong>medcrgvc</strong>, <em>Los medios de comunicación en
 Italia pueden criticar al gobierno. Escala de 0 a 10 ( 0 indica No es
-válida en absolutao y 10, Es complettamente válida)</em>. Esta es la
+válida en absoluto y 10, Es completamente válida)</em>. Esta es la
 <em>variable dependiente</em> (Pregunta B15 del cuestionario)</p></li>
 </ul>
 </div>
@@ -3309,7 +3309,7 @@ variables</strong></p>
 <h2>4.6 COEFICIENTE DELTA (D) DE SOMERS.</h2>
 <p>Se trata de otro test de asociación para variables cualitativas
 ordinales que también nos informa de la magnitud y la dirección de la
-asociación mediante un coeficiente. La interpretación de los resultado
+asociación mediante un coeficiente. La interpretación de los resultados
 que arroja es idéntica a lo visto en Tau-B de Kendall: intervalo de -1 a
 1, valor 0 para indicar la inexistencia de asociación y el signo para la
 dirección.</p>
@@ -3326,7 +3326,7 @@ confianza del 95%.</p>
 </div>
 <div id="conclusión-sobre-delta-d-de-somers" class="section level2">
 <h2>4.7 CONCLUSIÓN SOBRE DELTA (D) DE SOMERS</h2>
-<p><strong>Sobre le coeficiente:</strong> Aunque el coeficiente, al ser
+<p><strong>Sobre el coeficiente:</strong> Aunque el coeficiente, al ser
 negativo indica que cuando aumenta una variable la otra disminuye
 (dirección de la asociación), al tratarse de un valor tan cercano a 0
 (-0.009052743) este sugiere que no hay asociación estadísticamente
@@ -3342,7 +3342,7 @@ lo tanto, no hay asociación estadística entre las variables</strong>. Lo
 que viene a decir que la opinión sobre la capacidad de criticar al
 gobierno por parte de la prensa es independiente de la autoubicación
 ideológica de las personas encuestadas.</p>
-<p>Además se ha comprobado que ambos coeficientes nos llevan a la misma
+<p>Además, se ha comprobado que ambos coeficientes nos llevan a la misma
 conclusión.</p>
 <p></p>
 </div>

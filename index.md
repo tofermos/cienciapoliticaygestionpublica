@@ -17,13 +17,14 @@ El procesamiento de datos se realiza mediante el [lenguaje de programación R](h
 ## Elecciones y encuestas
 |||
 ------------------------- | -- | --
-1. [Ejemplo sencilo dde *R Markdown*. Resultados en elecciones autonómicas en la comarca de La Safor (Valencia)](elecciones/lasafor/SAFOR.html)|[![](recursos/iconopdf.png)](elecciones/lasafor/SAFOR.pdf)|[![](recursos/rmarkdown.png)](elecciones/lasafor/SAFOR.Rmd)
-2. [Investigación sobre el voto valencianista en las Elecciones Autonómicas del 2023](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023.html)|[![](recursos/iconopdf.png)](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023.pdf)|[![](recursos/rmarkdown.png)](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023.Rmd)
-3. [El sistema de partidos políticos alemán tras las elecciones de 2021](elecciones/alemanas2021/alemanas2021.html)|[![](recursos/iconopdf.png)](elecciones/alemanas2021/alemanas2021.pdf)|[![](recursos/iconomd.png)](elecciones/alemanas2021/alemanas2021.md)
-4. [La polarización a les Corts Valencianes](elecciones/polarizacionvalenciana/polarizacionvalenciana.html)|[![](recursos/iconopdf.png)](elecciones/polarizacionvalenciana/polarizacionvalenciana.pdf)|[![](recursos/iconomd.png)](elecciones/polarizacionvalenciana/polarizacionvalenciana.md)
-5. [Análisis univariable sobre preferencia de presidente/a de Gobierno según barómetro de julio de 2023 (Estudio 3415)](elecciones/estudioCIS3415/preferenciaPte.html)|[![](recursos/iconopdf.png)](elecciones/estudioCIS3415/preferenciaPte.pdf)|[![](recursos/rmarkdown.png)](elecciones/estudioCIS3415/preferenciaPte.Rmd)
-6. [Análisis univariable sobre probabilidad de voto según barómetro de julio de 2023 (Estudio 3415)](elecciones/estudioCIS3415/probabilidadVoto.html)|[![](recursos/iconopdf.png)](elecciones/estudioCIS3415/probabilidadVoto.pdf)|[![](recursos/rmarkdown.png)](elecciones/estudioCIS3415/probabilidadVoto.Rmd)
-7. [Análisis bivariado sobre las libertades en Italia (Encuesta Social Europea, 2020/2022. Ronda 10)](elecciones/italia/libertadesItalia2022.html)|[![](recursos/iconopdf.png)](elecciones/italia/libertadesItalia2022.pdf)|[![](recursos/rmarkdown.png)](elecciones/italia/libertadesItalia2022.Rmd)
+1. [Análisis bivariado sobre las libertades en Italia (Encuesta Social Europea, 2020/2022(Ronda 10)](elecciones/italia/libertadesItalia2022.html)|[![](recursos/iconopdf.png)](elecciones/italia/libertadesItalia2022.pdf)|[![](recursos/rmarkdown.png)](elecciones/italia/libertadesItalia2022.Rmd)
+2. [Análisis univariable sobre preferencia de presidente/a de Gobierno según barómetro de julio de 2023 (Estudio 3415)](elecciones/estudioCIS3415/preferenciaPte.html)|[![](recursos/iconopdf.png)](elecciones/estudioCIS3415/preferenciaPte.pdf)|[![](recursos/rmarkdown.png)](elecciones/estudioCIS3415/preferenciaPte.Rmd)
+3. [Análisis univariable sobre probabilidad de voto según barómetro de julio de 2023 (Estudio 3415)](elecciones/estudioCIS3415/probabilidadVoto.html)|[![](recursos/iconopdf.png)](elecciones/estudioCIS3415/probabilidadVoto.pdf)|[![](recursos/rmarkdown.png)](elecciones/estudioCIS3415/probabilidadVoto.Rmd)
+4. [Ejemplo sencilo de *R Markdown*. Resultados en elecciones autonómicas en la comarca de La Safor (Valencia)](elecciones/lasafor/SAFOR.html)|[![](recursos/iconopdf.png)](elecciones/lasafor/SAFOR.pdf)|[![](recursos/rmarkdown.png)](elecciones/lasafor/SAFOR.Rmd)
+5. [Investigación sobre el voto valencianista en las Elecciones Autonómicas del 2023](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023.html)|[![](recursos/iconopdf.png)](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023.pdf)|[![](recursos/rmarkdown.png)](elecciones/elvotovalencianistaEA2023/votovalencianista-ea2023.Rmd)
+6. [El sistema de partidos políticos alemán tras las elecciones de 2021](elecciones/alemanas2021/alemanas2021.html)|[![](recursos/iconopdf.png)](elecciones/alemanas2021/alemanas2021.pdf)|[![](recursos/iconomd.png)](elecciones/alemanas2021/alemanas2021.md)
+7. [La polarización a les Corts Valencianes](elecciones/polarizacionvalenciana/polarizacionvalenciana.html)|[![](recursos/iconopdf.png)](elecciones/polarizacionvalenciana/polarizacionvalenciana.pdf)|[![](recursos/iconomd.png)](elecciones/polarizacionvalenciana/polarizacionvalenciana.md)
+
 
 ## Economía pública
 ||
