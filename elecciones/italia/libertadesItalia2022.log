@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.16)  20 MAY 2024 10:55
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.16)  20 MAY 2024 11:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1057,14 +1057,14 @@ at pot ser incorrecta[]
  []
 
 [12]
-Overfull \hbox (325.68796pt too wide) in paragraph at lines 759--759
+Overfull \hbox (10.52002pt too wide) in paragraph at lines 759--759
 []\TU/lmtt/m/n/12 El intervalo de confianza del 95% para el coeficiente gamma t
-iene un límite inferior de -0.747 y un límite superior de -0.683.[] 
+iene un límite[] 
  []
 
 [13] [14] [15] [16] [17] [18]
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(2)/b/it' will be
-(Font)              scaled to size 12.0pt on input line 1014.
+(Font)              scaled to size 12.0pt on input line 1015.
 [19]
 File: libertadesItalia2022_files/figure-latex/dist-1.pdf Graphic file (type pdf
 )

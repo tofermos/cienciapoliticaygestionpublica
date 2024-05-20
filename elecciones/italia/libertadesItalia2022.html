@@ -3178,7 +3178,7 @@ cuadrado</em> con dos parametrizaciones posibles.</p>
 <p>Al tener valores de frecuencias menores de 5 en una proporción
 superior al 20% (8 de 25), Chi cuadrado advierte mediante un WARNING de
 un posible error.</p>
-<p>Se puede optar por usar otro coeficiente como el <strong>coeficiente
+<p>Se puede usar otro coeficiente como el <strong>coeficiente
 Gamma</strong> válido para variables ordinales. Los posibles resultados
 de Gamma son:</p>
 <ul>
@@ -3190,26 +3190,28 @@ de Gamma son:</p>
 <pre><code>##      gamma     lwr.ci     upr.ci 
 ## -0.7150679 -0.7472630 -0.6828728</code></pre>
 <pre><code>El coeficiente gamma de Goodman y Kruskal es aproximadamente -0.715.
-El intervalo de confianza del 95% para el coeficiente gamma tiene un límite inferior de -0.747 y un límite superior de -0.683.</code></pre>
-<p>Este resultado de -0,747 debe interpretarse como asociación negativa
-importante (-0,747 está más cerca del -1 que del 0 ) entre las dos
-variables de la tabla de contingencia. El signo negativo indica la
-dirección de la asociación. En caso negativo, cuando una variable
-aumenta muy probablemente la otra disminuya y viceversa.</p>
+El intervalo de confianza del 95% para el coeficiente gamma tiene un límite 
+inferior de -0.747 y un límite superior de -0.683.</code></pre>
+<p>Este resultado de -0,747 debe interpretarse como una asociación
+negativa importante (-0,747 está más cerca del -1 que del 0 ) entre las
+dos variables de la tabla de contingencia. El signo negativo indica la
+dirección de la asociación: cuando una variable aumenta muy
+probablemente la otra disminuya y viceversa.</p>
 <p>Los límites del intervalo de confianza no incluyen el cero
 (0&gt;-0.6828728&gt;-0.7472630) lo que redunda en la conclusión de
 rechazar la hipótesis nula.</p>
 </div>
 <div id="conclusión-sobre-chi-cuadrado" class="section level2">
 <h2>3.7 CONCLUSIÓN SOBRE CHI CUADRADO</h2>
-<p>El coeficiente indica la magnitud de la asociación. El valor de
-1723,8 es muy superior a 0, lo que indica una asociación fuerte. Hay una
-evidencia para el rechazo de la H0 (independencia de las variables) y
-además, el <em>p-valor</em> es muy inferior (2.2x10e16) a <em>alpha</em>
-(0,001) por lo que hay un nivel de confianza superior al 99,9%.</p>
+<p>El coeficiente Chi cuadrado indica la magnitud de la asociación. El
+valor de 1723,8 es muy superior a 0, lo que indica una asociación
+fuerte. Hay una evidencia para el rechazo de la H0 (independencia de las
+variables) y además, el <em>p-valor</em> es muy inferior (2.2x10e16) a
+<em>alpha</em> (0,001) por lo que hay un nivel de confianza superior al
+99,9%.</p>
 <p>No obstante, al advertir R de la posibilidad de error que se produce
 por la cantidad de valores inferiores a 5, se ha optado por usar otro
-coeficiente para asegurar el resultado.</p>
+coeficiente y asegurar así este resultado.</p>
 <p><strong>Se debe rechazar la hipótesis nula: las variables están
 asociadas.</strong> tal y como se ha podido observar en la tabla de
 contingencia al comparar los valores en cada columna con su marginal
@@ -3376,9 +3378,9 @@ ideológicos.</p>
 crítica.</p>
 <div id="actividad-1." class="section level2">
 <h2>Actividad 1.</h2>
-<p>Pese a no ser variables cuantitativas, tal como se ha estudiado, se
-analizan individualmente los valores de tendencia central de dos
-variables ordinales con valores de 0 a 10:</p>
+<p>Las dos variables cualitativas ordinales de esta actividad se
+tratarán como variables cuantitativas, tal como se ha estudiado, para
+obtener valores de tendencia central. Sus valores varían de 0 a 10:</p>
 <p>0: No es válido en absoluto. 10: Es totalmente válido.</p>
 <p><strong>Variable <em>fairelecc</em>. Sobre elecciones libres y
 limpias en Italia.</strong></p>
@@ -3393,9 +3395,9 @@ todo el mundo por igual</strong></p>
 </div>
 <div id="actividad-2." class="section level2">
 <h2>Actividad 2.</h2>
-<p>Pese a no ser variables cuantitativas, tal como se ha estudiado, se
-analizan individualmente los valores de tendencia central dos variables
-ordinales con valores de 1 a 5:</p>
+<p>Las dos variables cualitativas ordinales de esta actividad se
+tratarán como variables cuantitativas, tal como se ha estudiado, para
+obtener valores de tendencia central. Sus valores varían de 1 a 5:</p>
 <p>1: Muy de acuerdo. 2: De acuerdo. 3: Ni de acuerdo ni en desacuerdo.
 4: En desacuerdo. 5: Muy en desacuerdo. 10: Es totalmente válido.</p>
 <p><strong>Variable <em>freehms</em>. Los gays y las lesbianas deberían
@@ -3411,9 +3413,10 @@ familiar cercano fuese gay o lesbiana</strong></p>
 </div>
 <div id="actividad-3." class="section level2">
 <h2>Actividad 3.</h2>
-<p>Se analiza la distribución de valores de una variable.
-<strong>Variable <em>medcrgvc</em>: Los medios de comunicación en Italia
-pueden criticar al gobierno.</strong></p>
+<p>En este caso, se analiza la distribución de valores de solo una
+variable ordinal.</p>
+<p><strong>Variable <em>medcrgvc</em>: Los medios de comunicación en
+Italia pueden criticar al gobierno.</strong></p>
 <p>0: No es válido en absoluto. 10: Es totalmente válido.</p>
 <pre class="r"><code>tablaGrafico &lt;- tab1(df_ronda10$medcrgvc, cum.percent = TRUE, 
                       bar.values = &quot;percent&quot;, missing = FALSE,
