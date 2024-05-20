@@ -479,8 +479,8 @@ En este caso, se analiza la distribución de valores de solo una variable ordina
 ```{r dist}
 tablaGrafico <- tab1(df_ronda10$medcrgvc, cum.percent = TRUE, 
                       bar.values = "percent", missing = FALSE,
-                      xlab="% probabilidad", decimal=1,
-                      main="Gráfico 1. Capacidad de criticar")
+                      xlab="Capacidad de crítica (1-10)", decimal=1,
+                      main="Gráfico 1. Capacidad de criticar de los medios al gobierno")
 
 ```
 
@@ -492,7 +492,7 @@ df_ronda10SinNA <- df_ronda10[complete.cases(
                                       df_ronda10$medcrgvc), ]
 
 hist(df_ronda10$medcrgvc, col = "lightblue", 
-                                          xlab = "Capacidad de criticar", 
+                                          xlab = "Capacidad de crítica (1-10)", 
                                                      ylab = "Frecuencia",
               main = "Gráfico 2. Histograma de la Capacidad de criticar")
 
