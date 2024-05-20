@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.16)  20 MAY 2024 11:22
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.16)  20 MAY 2024 11:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1064,11 +1064,15 @@ iene un límite[]
 
 [13] [14] [15] [16] [17] [18]
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(2)/b/it' will be
-(Font)              scaled to size 12.0pt on input line 1015.
+(Font)              scaled to size 12.0pt on input line 1020.
 [19]
 File: libertadesItalia2022_files/figure-latex/dist-1.pdf Graphic file (type pdf
 )
 <use libertadesItalia2022_files/figure-latex/dist-1.pdf>
+
+Overfull \vbox (2.55144pt too high) detected at line 1107
+ []
+
 [20]
 File: libertadesItalia2022_files/figure-latex/histograma-1.pdf Graphic file (ty
 pe pdf)
@@ -1088,10 +1092,10 @@ File: ../../recursos/iconogithub.png Graphic file (type bmp)
 <../../recursos/iconogithub.png>
 [22] (./libertadesItalia2022.aux) ) 
 Here is how much of TeX's memory you used:
- 20638 strings out of 476191
- 381286 string characters out of 5812072
- 879330 words of memory out of 5000000
- 41061 multiletter control sequences out of 15000+600000
+ 20632 strings out of 476191
+ 381226 string characters out of 5812072
+ 879222 words of memory out of 5000000
+ 41055 multiletter control sequences out of 15000+600000
  475808 words of font info for 94 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  86i,8n,128p,1017b,569s stack positions out of 5000i,500n,10000p,200000b,80000s

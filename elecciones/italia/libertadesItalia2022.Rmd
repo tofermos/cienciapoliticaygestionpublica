@@ -13,16 +13,16 @@ mainfont: "Times New Roman"
 papersize: A4
 linestretch: 1.5
 output:
-  pdf_document:
-    toc: true
-    keep_tex: true
-    latex_engine: xelatex
   html_document:
     toc: true
     toc_float: true
     toc_depth: 3
     df_print: paged
     number_sections: false
+  pdf_document:
+    toc: true
+    keep_tex: true
+    latex_engine: xelatex
 ---
 \newpage
 \renewcommand\tablename{Tabla}
@@ -426,16 +426,7 @@ Con bastante independencia de la ideología, los encuestados aprueban la capacid
 
 Análisis univariado en los que se apoyan aspectos de  la valoración crítica.
 
-## Actividad 1.
-
-Las dos variables cualitativas ordinales de esta actividad se tratarán como variables cuantitativas, tal como se ha estudiado, para obtener valores de tendencia central.
-Sus valores varían de 0 a 10:
-
-0: No es válido en absoluto.
-10: Es totalmente válido.
-
-
-**Variable *fairelecc*. Sobre elecciones libres y limpias en Italia.**
+**ACTIVIDAD 1**
 
 ```{r tendeciascentralesActividad1}
 summary(df_ronda10$rec_fairelecc)
@@ -446,7 +437,7 @@ summary(df_ronda10$rec_fairelecc)
 summary(df_ronda10$rec_cttresac)
 ```
 
-## Actividad 2.
+**ACTIVIDAD 2**
 
 Las dos variables cualitativas ordinales de esta actividad se tratarán como variables cuantitativas, tal como se ha estudiado, para obtener valores de tendencia central.
 Sus valores varían de 1 a 5:
@@ -466,7 +457,9 @@ summary(df_ronda10$freehms)
 ```{r tendeciascentralesActividad2b}
 summary(df_ronda10$hmsfmlsh)
 ```
-## Actividad 3. 
+\newpage
+
+**ACTIVIDAD 3** 
 
 En este caso, se analiza la distribución de valores de solo una variable ordinal.
 

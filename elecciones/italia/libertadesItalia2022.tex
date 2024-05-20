@@ -1003,16 +1003,7 @@ VARIABLES}\label{anexo-1.-anuxe1lisis-univariado-de-algunas-variables}
 Análisis univariado en los que se apoyan aspectos de la valoración
 crítica.
 
-\subsection{Actividad 1.}\label{actividad-1.}
-
-Las dos variables cualitativas ordinales de esta actividad se tratarán
-como variables cuantitativas, tal como se ha estudiado, para obtener
-valores de tendencia central. Sus valores varían de 0 a 10:
-
-0: No es válido en absoluto. 10: Es totalmente válido.
-
-\textbf{Variable \emph{fairelecc}. Sobre elecciones libres y limpias en
-Italia.}
+\textbf{ACTIVIDAD 1}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1039,7 +1030,7 @@ el mundo por igual}
 ##   0.000   3.000   5.000   4.522   6.000  10.000      73
 \end{verbatim}
 
-\subsection{Actividad 2.}\label{actividad-2.}
+\textbf{ACTIVIDAD 2}
 
 Las dos variables cualitativas ordinales de esta actividad se tratarán
 como variables cuantitativas, tal como se ha estudiado, para obtener
@@ -1076,7 +1067,9 @@ cercano fuese gay o lesbiana}
 ##   1.000   3.000   4.000   3.857   5.000   5.000      91
 \end{verbatim}
 
-\subsection{Actividad 3.}\label{actividad-3.}
+\newpage
+
+\textbf{ACTIVIDAD 3}
 
 En este caso, se analiza la distribución de valores de solo una variable
 ordinal.
@@ -1090,8 +1083,8 @@ pueden criticar al gobierno.}
 \begin{Highlighting}[]
 \NormalTok{tablaGrafico }\OtherTok{\textless{}{-}} \FunctionTok{tab1}\NormalTok{(df\_ronda10}\SpecialCharTok{$}\NormalTok{medcrgvc, }\AttributeTok{cum.percent =} \ConstantTok{TRUE}\NormalTok{, }
                       \AttributeTok{bar.values =} \StringTok{"percent"}\NormalTok{, }\AttributeTok{missing =} \ConstantTok{FALSE}\NormalTok{,}
-                      \AttributeTok{xlab=}\StringTok{"\% probabilidad"}\NormalTok{, }\AttributeTok{decimal=}\DecValTok{1}\NormalTok{,}
-                      \AttributeTok{main=}\StringTok{"Gráfico 1. Capacidad de criticar"}\NormalTok{)}
+                      \AttributeTok{xlab=}\StringTok{"Capacidad de crítica (1{-}10)"}\NormalTok{, }\AttributeTok{decimal=}\DecValTok{1}\NormalTok{,}
+                      \AttributeTok{main=}\StringTok{"Gráfico 1. Capacidad de criticar de los medios al gobierno"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1105,7 +1098,7 @@ pueden criticar al gobierno.}
 \NormalTok{                                      df\_ronda10}\SpecialCharTok{$}\NormalTok{medcrgvc), ]}
 
 \FunctionTok{hist}\NormalTok{(df\_ronda10}\SpecialCharTok{$}\NormalTok{medcrgvc, }\AttributeTok{col =} \StringTok{"lightblue"}\NormalTok{, }
-                                          \AttributeTok{xlab =} \StringTok{"Capacidad de criticar"}\NormalTok{, }
+                                          \AttributeTok{xlab =} \StringTok{"Capacidad de crítica (1{-}10)"}\NormalTok{, }
                                                      \AttributeTok{ylab =} \StringTok{"Frecuencia"}\NormalTok{,}
               \AttributeTok{main =} \StringTok{"Gráfico 2. Histograma de la Capacidad de criticar"}\NormalTok{)}
 
