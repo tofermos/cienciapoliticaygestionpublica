@@ -155,7 +155,6 @@ Práctica 2.}
 }
 \setstretch{1.5}
 \newpage
-
 \renewcommand\tablename{Tabla}
 
 \section{1 INTRODUCCIÓN}\label{introducciuxf3n}
@@ -189,6 +188,10 @@ en Rmd.
 \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(knitr))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"knitr"}\NormalTok{)\} }\CommentTok{\# Act. 2. Tabla Rd}
 \FunctionTok{library}\NormalTok{(knitr)}
 \ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(DescTools))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"DescTools"}\NormalTok{)\} }\CommentTok{\#actividad 3}
+\FunctionTok{library}\NormalTok{(DescTools)}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(epiDisplay))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"epiDisplay"}\NormalTok{)\}}
+\FunctionTok{library}\NormalTok{(epiDisplay)}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(DescTools))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"DescTools"}\NormalTok{)\}}
 \FunctionTok{library}\NormalTok{(DescTools)}
 \end{Highlighting}
 \end{Shaded}
@@ -629,7 +632,8 @@ colectivo.
 Cuando se examina columna a columna toda la tabla, se observa que los
 valores de cada columna varían respecto a su correspondiente valor
 marginal. De hecho no se observa ninguna coincidencia lo que nos lleva a
-concluir una dependencia entre las variables.
+concluir una dependencia entre las variables y, consecuentemente, a
+rechazar la hipótesis nula.
 
 \newpage
 
@@ -717,6 +721,53 @@ cuadrado} con dos parametrizaciones posibles.
 ## X-squared = 1723.8, df = 16, p-value < 2.2e-16
 \end{verbatim}
 
+\subsection{Comprobación con el Coeficiente
+Gamma}\label{comprobaciuxf3n-con-el-coeficiente-gamma}
+
+Al tener valores de frecuencias menores de 5 en una proporción superior
+al 20\% (8 de 25), Chi cuadrado advierte mediante un WARNING de un
+posible error.
+
+Se puede optar por usar otro coeficiente como el \textbf{coeficiente
+Gamma} válido para variables ordinales. Los posibles resultados de Gamma
+son:
+
+\begin{itemize}
+\tightlist
+\item
+  Entre -1 y 0: asociación negativa.
+\item
+  0: No existe asociación.
+\item
+  Entre 0 y 1: asociación positiva.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{GoodmanKruskalGamma}\NormalTok{(freqtabla,}\AttributeTok{conf.level =} \FloatTok{0.95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      gamma     lwr.ci     upr.ci 
+## -0.7150679 -0.7472630 -0.6828728
+\end{verbatim}
+
+\begin{verbatim}
+El coeficiente gamma de Goodman y Kruskal es aproximadamente -0.715.
+El intervalo de confianza del 95% para el coeficiente gamma tiene un límite inferior de -0.747 y un límite superior de -0.683.
+\end{verbatim}
+
+Este resultado de -0,747 debe interpretarse como asociación negativa
+importante (-0,747 está más cerca del -1 que del 0 ) entre las dos
+variables de la tabla de contingencia. El signo negativo indica la
+dirección de la asociación. En caso negativo, cuando una variable
+aumenta muy probablemente la otra disminuya y viceversa.
+
+Los límites del intervalo de confianza no incluyen el cero
+(0\textgreater-0.6828728\textgreater-0.7472630) lo que redunda en la
+conclusión de rechazar la hipótesis nula.
+
 \subsection{3.7 CONCLUSIÓN SOBRE CHI
 CUADRADO}\label{conclusiuxf3n-sobre-chi-cuadrado}
 
@@ -726,8 +777,18 @@ evidencia para el rechazo de la H0 (independencia de las variables) y
 además, el \emph{p-valor} es muy inferior (2.2x10e16) a \emph{alpha}
 (0,001) por lo que hay un nivel de confianza superior al 99,9\%.
 
+No obstante, al advertir R de la posibilidad de error que se produce por
+la cantidad de valores inferiores a 5, se ha optado por usar otro
+coeficiente para asegurar el resultado.
+
 \textbf{Se debe rechazar la hipótesis nula: las variables están
-asociadas.}
+asociadas.} tal y como se ha podido observar en la tabla de contingencia
+al comparar los valores en cada columna con su marginal correspondiente.
+
+De las tres observaciones llegamos a la siguiente conclusión: la
+posición a favor o en contra de una igualdad en libertades de gays y
+lesbianas sería una variable dependiente del sentimiento de rechazo que
+causaría tener un familiar cercano homosexual.
 
 \newpage
 
@@ -783,9 +844,9 @@ Se comprueba que no hay valores que recodificar como NA
 \end{verbatim}
 
 Si fuese necesario recodificar por cualquier motivo (valores no válidos,
-añadir etiquetas\ldots) que no es este el caso, convendría hacerlo sobre
-una duplicación de estos campos de forma análoga a lo realizado a
-apartados 2.2 de las dos actividades anteriores.
+añadir etiquetas\ldots), convendría hacerlo sobre una duplicación de
+estos campos de forma análoga a lo realizado en los apartados 2.2 y 3.2
+de la actividad anteriores.
 
 \subsection{4.3 HIPÓTESIS}\label{hipuxf3tesis-2}
 
@@ -893,10 +954,11 @@ incluye al 0 (-0.043415457 \textless0 \textless0.025309971) hecho que
 refuerza la interpretación de que no hay una asociación estadísticamente
 significativa entre las variables.
 
-Por todo esto:
-
-\textbf{NO se puede rechazar la hipótesis nula por lo tanto NO hay
-asociación estadística entre las variables}
+Por todo esto, \textbf{NO se puede rechazar la hipótesis nula por lo
+tanto NO hay asociación estadística entre las variables} Lo que viene a
+decir que la opinión sobre la capacidad de criticar al gobierno por
+parte de la prensa es independiente de la autoubicación ideológica de
+las personas encuestadas.
 
 Se comprueba que ambos coeficientes nos llevan a la misma conclusión.
 
@@ -904,38 +966,156 @@ Se comprueba que ambos coeficientes nos llevan a la misma conclusión.
 
 \section{5 VALORACIÓN CRÍTICA}\label{valoraciuxf3n-cruxedtica}
 
-Las libertades analizadas están operacionalizadas como variables
-ordinales pero pueden ser tratadas individualmente como cuantitativas
-para obtener más información como se estudió en la práctica anterior.
-Así se puede ver que los italianos encuestados ``aprueban'' su sistema
-electoral con un 5,8 de media y una mediana de 6 mientras que
-suspenderían a sus tribunales por trato desigual (media de 4,52 y apenas
-una mediana de 5). Considerando que se compara la confianza en un
-proceso de máxima participación y reglamentación con la práctica diaria
-de órganos de funcionarios y que Italia es una democracia consolidada
-esta poca confianza en la limpieza y libertad de las elecciones es un
-hecho preocupante.
+Las libertades analizadas, operacionalizadas como variables ordinales,
+pueden estudiarse individualmente como cuantitativas como se estudió en
+la práctica anterior (Ver Anexo1). Así, se puede ver que los italianos
+encuestados ``aprueban'' su sistema electoral con un 5,8 de media y un 6
+de mediana mientras que suspenderían a sus tribunales por trato desigual
+con una media de 4,52 y apenas una mediana de 5. Considerando que se
+compara la confianza en un proceso de máxima participación y
+reglamentación con la práctica diaria de funcionarios en una democracia
+consolidada, esta poca confianza en la limpieza y libertad de las
+elecciones es un hecho preocupante.
 
-Los encuestados mayoritariamente no se identifican con el sentimiento de
-vergüenza por tener un familiar homosexual (media de 3,8 y mediana de 4
-en un intervalo de 1 a 5). Un sentimiento relacionado, como se ha visto,
-con su posicionamiento favorable a la igualdad de libertades de este
-colectivo (una media de 2,05 y una mediana de 2 en un intervalo de 1 a
-5). Ambas medidas distan un punto, aproximadamente, del extremo que
-definiría un sentimiento y posición más tolerante o progresista. Sería
-interesante un seguimiento de las rondas siguientes para ver la
-evolución.
+Los encuestados mayoritariamente rechazan la idea de sentir vergüenza
+por tener un familiar homosexual (media de 3,8 y mediana de 4 en un
+intervalo de 1 a 5). Un sentimiento relacionado, como se ha visto, con
+su posicionamiento favorable a las libertades de este colectivo (una
+media de 2,05 y una mediana de 2 en un intervalo de 1 a 5). Ambas
+medidas distan un punto, aproximadamente, del extremo más inclusivo.
+Sería interesante estudiar las rondas siguientes para ver la evolución
+en una época de polarización y megaidentidades.
 
 Con bastante independencia de la ideología, los encuestados aprueban la
-independencia respecto del gobierno de sus medios de comunicación. Al
-observar la distribución de valores, tenemos que destacan los valores de
-6 a 8 (entre 0 y 10). En una valoración bastante positiva tratándose de
-un modelo de prensa latino.
+capacidad crítica de sus medios de comunicación respecto al gobierno. En
+la distribución de valores, tenemos que destacan los valores de 6 a 7
+(entre 0 y 10) siendo los únicos con porcentajes superiores al 15\%. Se
+puede entender que es una valoración bastante positiva tratándose de un
+modelo de prensa latino y, además ser transversal a los sectores
+ideológicos.
 
 \newpage
 
-\section{6 EJECUCIÓN DEL Rmd Y REPOSITORIO DE
-FICHEROS}\label{ejecuciuxf3n-del-rmd-y-repositorio-de-ficheros}
+\section{ANEXO 1. ANÁLISIS UNIVARIADO DE ALGUNAS
+VARIABLES}\label{anexo-1.-anuxe1lisis-univariado-de-algunas-variables}
+
+Análisis univariado en los que se apoyan aspectos de la valoración
+crítica.
+
+\subsection{Actividad 1.}\label{actividad-1.}
+
+Pese a no ser variables cuantitativas, tal como se ha estudiado, se
+analizan individualmente los valores de tendencia central de dos
+variables ordinales con valores de 0 a 10:
+
+0: No es válido en absoluto. 10: Es totalmente válido.
+
+\textbf{Variable \emph{fairelecc}. Sobre elecciones libres y limpias en
+Italia.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_fairelecc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+##   0.000   4.000   6.000   5.739   8.000  10.000      99
+\end{verbatim}
+
+\textbf{Variable \emph{cttresac}. Los tribunales en Italia tratan a todo
+el mundo por igual}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(df\_ronda10}\SpecialCharTok{$}\NormalTok{rec\_cttresac)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+##   0.000   3.000   5.000   4.522   6.000  10.000      73
+\end{verbatim}
+
+\subsection{Actividad 2.}\label{actividad-2.}
+
+Pese a no ser variables cuantitativas, tal como se ha estudiado, se
+analizan individualmente los valores de tendencia central dos variables
+ordinales con valores de 1 a 5:
+
+1: Muy de acuerdo. 2: De acuerdo. 3: Ni de acuerdo ni en desacuerdo. 4:
+En desacuerdo. 5: Muy en desacuerdo. 10: Es totalmente válido.
+
+\textbf{Variable \emph{freehms}. Los gays y las lesbianas deberían tener
+libertad para vivir como quieran}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(df\_ronda10}\SpecialCharTok{$}\NormalTok{freehms)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+##    1.00    1.00    2.00    2.05    2.00    5.00      65
+\end{verbatim}
+
+\textbf{Variable \emph{hmsfmlsh}: Me daría vergüenza que un familiar
+cercano fuese gay o lesbiana}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(df\_ronda10}\SpecialCharTok{$}\NormalTok{hmsfmlsh)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+##   1.000   3.000   4.000   3.857   5.000   5.000      91
+\end{verbatim}
+
+\subsection{Actividad 3.}\label{actividad-3.}
+
+Se analiza la distribución de valores de una variable. \textbf{Variable
+\emph{medcrgvc}: Los medios de comunicación en Italia pueden criticar al
+gobierno.}
+
+0: No es válido en absoluto. 10: Es totalmente válido.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tablaGrafico }\OtherTok{\textless{}{-}} \FunctionTok{tab1}\NormalTok{(df\_ronda10}\SpecialCharTok{$}\NormalTok{medcrgvc, }\AttributeTok{cum.percent =} \ConstantTok{TRUE}\NormalTok{, }
+                      \AttributeTok{bar.values =} \StringTok{"percent"}\NormalTok{, }\AttributeTok{missing =} \ConstantTok{FALSE}\NormalTok{,}
+                      \AttributeTok{xlab=}\StringTok{"\% probabilidad"}\NormalTok{, }\AttributeTok{decimal=}\DecValTok{1}\NormalTok{,}
+                      \AttributeTok{main=}\StringTok{"Gráfico 1. Capacidad de criticar"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{libertadesItalia2022_files/figure-latex/dist-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Histograma}
+
+\NormalTok{df\_ronda10SinNA }\OtherTok{\textless{}{-}}\NormalTok{ df\_ronda10[}\FunctionTok{complete.cases}\NormalTok{(}
+\NormalTok{                                      df\_ronda10}\SpecialCharTok{$}\NormalTok{medcrgvc), ]}
+
+\FunctionTok{hist}\NormalTok{(df\_ronda10}\SpecialCharTok{$}\NormalTok{medcrgvc, }\AttributeTok{col =} \StringTok{"lightblue"}\NormalTok{, }
+                                          \AttributeTok{xlab =} \StringTok{"Capacidad de criticar"}\NormalTok{, }
+                                                     \AttributeTok{ylab =} \StringTok{"Frecuencia"}\NormalTok{,}
+              \AttributeTok{main =} \StringTok{"Gráfico 2. Histograma de la Capacidad de criticar"}\NormalTok{)}
+
+\FunctionTok{lines}\NormalTok{(}\FunctionTok{density}\NormalTok{(df\_ronda10SinNA}\SpecialCharTok{$}\NormalTok{medcrgvc), }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{lwd =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{libertadesItalia2022_files/figure-latex/histograma-1.pdf}
+
+\newpage
+
+\section{ANEXO 2. EJECUCIÓN DEL Rmd Y REPOSITORIO DE
+FICHEROS}\label{anexo-2.-ejecuciuxf3n-del-rmd-y-repositorio-de-ficheros}
 
 Para la ejecución del código R, está disponible el fichero ejecutable
 Rmd y el fichero de datos \emph{sav} en el repositorio GitHub. En el

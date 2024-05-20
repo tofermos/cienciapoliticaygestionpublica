@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.16)  19 MAY 2024 23:47
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2024.3.16)  20 MAY 2024 10:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1039,24 +1039,41 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 
 [2]
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(2)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 164.
+(Font)              scaled to size 14.4pt on input line 163.
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 187.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 186.
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(2)/m/it' will be
-(Font)              scaled to size 12.0pt on input line 199.
+(Font)              scaled to size 12.0pt on input line 202.
 [3] [4] [5] [6] [7] [8] [9] [10] [11]
-Overfull \hbox (4.35207pt too wide) in paragraph at lines 674--674
+Overfull \hbox (4.35207pt too wide) in paragraph at lines 678--678
 []\TU/lmtt/m/n/12 ## Warning in chisq.test(df_ronda10$rec_hmsfmlsh, df_ronda10$
 rec_freehms):[] 
  []
 
 
-Overfull \hbox (47.61208pt too wide) in paragraph at lines 704--704
+Overfull \hbox (47.61208pt too wide) in paragraph at lines 708--708
 []\TU/lmtt/m/n/12 ## Warning in chisq.test(freqtabla): L[]aproximació Chi-quadr
 at pot ser incorrecta[] 
  []
 
-[12] [13] [14] [15] [16] [17]
+[12]
+Overfull \hbox (325.68796pt too wide) in paragraph at lines 759--759
+[]\TU/lmtt/m/n/12 El intervalo de confianza del 95% para el coeficiente gamma t
+iene un límite inferior de -0.747 y un límite superior de -0.683.[] 
+ []
+
+[13] [14] [15] [16] [17] [18]
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(2)/b/it' will be
+(Font)              scaled to size 12.0pt on input line 1014.
+[19]
+File: libertadesItalia2022_files/figure-latex/dist-1.pdf Graphic file (type pdf
+)
+<use libertadesItalia2022_files/figure-latex/dist-1.pdf>
+[20]
+File: libertadesItalia2022_files/figure-latex/histograma-1.pdf Graphic file (ty
+pe pdf)
+<use libertadesItalia2022_files/figure-latex/histograma-1.pdf>
+[21]
 File: ../../recursos/iconohyperlink.jpg Graphic file (type bmp)
 <../../recursos/iconohyperlink.jpg>
 File: ../../recursos/iconosav.png Graphic file (type bmp)
@@ -1069,14 +1086,14 @@ File: ../../recursos/iconopdf.png Graphic file (type bmp)
 <../../recursos/iconopdf.png>
 File: ../../recursos/iconogithub.png Graphic file (type bmp)
 <../../recursos/iconogithub.png>
-[18] (./libertadesItalia2022.aux) ) 
+[22] (./libertadesItalia2022.aux) ) 
 Here is how much of TeX's memory you used:
- 20608 strings out of 476191
- 380074 string characters out of 5812072
- 879079 words of memory out of 5000000
- 41035 multiletter control sequences out of 15000+600000
- 475800 words of font info for 93 fonts, out of 8000000 for 9000
+ 20638 strings out of 476191
+ 381286 string characters out of 5812072
+ 879330 words of memory out of 5000000
+ 41061 multiletter control sequences out of 15000+600000
+ 475808 words of font info for 94 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  86i,8n,128p,1017b,569s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on libertadesItalia2022.pdf (18 pages).
+Output written on libertadesItalia2022.pdf (22 pages).
