@@ -6,7 +6,7 @@ output:
 # Ciencia política y gestión pública
 |||
 |:---------|--:|
-|![](recursos/llibres0.png){width=100%}|Tomàs Ferrandis Moscardó<br>tomasferrandis@gmail.com <br> ![](recursos/CC_BY-NC-ND.png){width=40%}| |
+|![](recursos/llibres.jpeg){width=100%}|Tomàs Ferrandis Moscardó<br>tomasferrandis@gmail.com <br> ![](recursos/CC_BY-NC-ND.png){width=40%}| |
 
 El contenido de este repositorio está relacionado con el _Grado Universitario de Ciencia Política y Gestión Pública_ de la [_Universidad de Burgos (online)_](https://www.ubu.es/) y está compartido bajo licencia CC BY-NC-ND.
 
