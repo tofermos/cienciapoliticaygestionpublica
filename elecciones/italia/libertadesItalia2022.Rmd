@@ -5,16 +5,15 @@ title: |
 author: "Tomàs Ferrandis Moscardó"
 date: "2024-05-19"
 output:
-  pdf_document:
-    toc: true
-    keep_tex: true
-    latex_engine: xelatex
   html_document:
     toc: true
     toc_float: true
     toc_depth: 2
     df_print: paged
     number_sections: false
+  pdf_document: 
+    toc: true
+    keep_tex: true
   word_document:
     toc: true
     toc_depth: '3'
@@ -34,7 +33,7 @@ subtitle: |
 # 1    INTRODUCCIÓN 
 ## 1.1    DESCRIPCIÓN DE LA PRÁCTICA
 
-Este trabajo versará sobre las libertades en Italia a partir de diversos **análisis bivariados** sobre datos de la Encuesta Social Europea de los años 2020 y 2022 ( Ronda 10). Se escogerá en cada caso el test más adecuado y, finalmente, se hará una valoración crítica a partir de los datos analizados.
+Este trabajo versará sobre las libertades en Italia a partir de diversos **análisis bivariados** sobre datos de la Encuesta Social Europea de los años 2020 y 2022 (Ronda 10). Se escogerá en cada caso el test más adecuado y, finalmente, se hará una valoración crítica a partir de los datos analizados.
 Las variables que se estudiarán en las siguientes actividades corresponden al cuestionario de la encuesta. 
 
 La práctica está relacionada con los temas 5 y 6 de la asignatura Técnicas de la Investigación en Ciencia Política I del Grado Universitario de Ciencia Política y Gestión Pública de la Universidad de Burgos, curso 2023-2024.
@@ -54,6 +53,9 @@ if (!require(epiDisplay)){install.packages("epiDisplay")}
 library(epiDisplay)
 if (!require(DescTools)){install.packages("DescTools")}
 library(DescTools)
+if (!require(kableExtra)){install.packages("kableExtra")}
+library(kableExtra)
+
 ```
 
 
@@ -238,15 +240,18 @@ Totales<- margin.table((prop.table(freqtabla)*100), 2)
 
 
 
-Se combinan las dos matrices (*freqtabla_100xFila* y *Totales*) para elaborar la **Tabla de contingencia o Tabla cruzada** mediante la función *rbind*
+Se combinan las dos matrices (*freqtabla_100xFila* y *Totales*) para elaborar la **Tabla de contingencia o Tabla cruzada** mediante la función *rbind*. 
+En estas tablas, la variable dependiente ("Los gays y lesbianas deberían tener libertad...") se representa en las columnas y la independiente ("Me daría vergüenza que un familiar cercano fuese gay o lesbiana"), en las filas.
 
 ```{r tablaContingencia, echo=TRUE}
 tablaContingencia <- round(rbind(freqtabla_100xFila, Totales),2)
 kable(tablaContingencia, 
-caption="Opinión sobre la libertad de gays y lesbianas (columnas)
-según sentimiento de vergüenza por un familiar gay o lesbiana (filas)",
-align=c("c","c","c","c","c"))
+caption="Opinión sobre la libertad de gays y lesbianas (según sentimiento
+de vergüenza por un familiar gay o lesbiana) (% filas)",
+align=c("c","c","c","c","c")) 
+
 ```
+*Fuente: Elaboración propia a partir de la Encuesta Social Europea de los años 2020 y 2022 (Ronda 10. Preguntas A48 y A47)*
 
 ## 3.5 CONCLUSIONES SOBRE LA TABLA DE CONTINGENCIA
 
@@ -272,7 +277,7 @@ En resumen, entre los que no sentirían vergüenza por tener un familiar homosex
 
 Finalmente, al **comparar todos los valores con el marginal de su columna** no se observa ninguna coincidencia. Esto nos lleva aceptar la dependencia entre las variables y, consecuentemente, a rechazar la hipótesis nula.
 
-\newpage
+
 
 ## 3.6 CÁLCULO DEL COEFICIENTE CHI CUADRADO
 
@@ -331,7 +336,6 @@ No obstante, al advertir R de la posibilidad de error que se produce por la cant
 **Se debe rechazar la hipótesis nula: las variables están asociadas** tal y como se ha podido observar en la tabla de contingencia al comparar los valores en cada columna con su marginal correspondiente.
 
 De las tres observaciones llegamos a la misma interpretación: la posición a favor o en contra de una igualdad en libertades de gays y lesbianas sería una variable dependiente del sentimiento de rechazo que causaría tener un familiar cercano homosexual.
-
 
 \newpage
 
@@ -462,7 +466,7 @@ summary(df_ronda10$freehms)
 ```{r tendeciascentralesActividad2b}
 summary(df_ronda10$hmsfmlsh)
 ```
-\newpage
+
 
 **ACTIVIDAD 3** 
 

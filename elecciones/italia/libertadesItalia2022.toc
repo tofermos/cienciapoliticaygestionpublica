@@ -2,7 +2,7 @@
 \contentsline {section}{1 INTRODUCCIÓN}{3}{section*.2}%
 \contentsline {subsection}{1.1 DESCRIPCIÓN DE LA PRÁCTICA}{3}{section*.3}%
 \contentsline {subsection}{1.2 LIBRERÍAS R}{3}{section*.4}%
-\contentsline {subsection}{1.3 GESTIÓN DE FICHEROS Y CREACIÓN DE LA BASE DE DATOS}{3}{section*.5}%
+\contentsline {subsection}{1.3 GESTIÓN DE FICHEROS Y CREACIÓN DE LA BASE DE DATOS}{4}{section*.5}%
 \contentsline {section}{2 ACTIVIDAD 1. CONTRASTE DE MEDIAS PARA DATOS RELACIONADOS.}{5}{section*.6}%
 \contentsline {subsection}{2.1 DESCRIPCIÓN DE LA ACTIVIDAD 1}{5}{section*.7}%
 \contentsline {subsection}{2.2 PREPARACIÓN DE LA BASE DE DATOS}{5}{section*.8}%

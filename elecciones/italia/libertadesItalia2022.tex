@@ -121,6 +121,20 @@
 % get rid of language-specific shorthands (see #6817):
 \let\LanguageShortHands\languageshorthands
 \def\languageshorthands#1{}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -164,9 +178,9 @@ PRÁCTICA}\label{descripciuxf3n-de-la-pruxe1ctica}
 
 Este trabajo versará sobre las libertades en Italia a partir de diversos
 \textbf{análisis bivariados} sobre datos de la Encuesta Social Europea
-de los años 2020 y 2022 ( Ronda 10). Se escogerá en cada caso el test
-más adecuado y, finalmente, se hará una valoración crítica a partir de
-los datos analizados. Las variables que se estudiarán en las siguientes
+de los años 2020 y 2022 (Ronda 10). Se escogerá en cada caso el test más
+adecuado y, finalmente, se hará una valoración crítica a partir de los
+datos analizados. Las variables que se estudiarán en las siguientes
 actividades corresponden al cuestionario de la encuesta.
 
 La práctica está relacionada con los temas 5 y 6 de la asignatura
@@ -193,6 +207,8 @@ en Rmd.
 \FunctionTok{library}\NormalTok{(epiDisplay)}
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(DescTools))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"DescTools"}\NormalTok{)\}}
 \FunctionTok{library}\NormalTok{(DescTools)}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(kableExtra))\{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"kableExtra"}\NormalTok{)\}}
+\FunctionTok{library}\NormalTok{(kableExtra)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -518,15 +534,18 @@ ello R dispone de otra función, \emph{margin.table} :
 
 Se combinan las dos matrices (\emph{freqtabla\_100xFila} y
 \emph{Totales}) para elaborar la \textbf{Tabla de contingencia o Tabla
-cruzada} mediante la función \emph{rbind}
+cruzada} mediante la función \emph{rbind}. En estas tablas, la variable
+dependiente (``Los gays y lesbianas deberían tener libertad\ldots{}'')
+se representa en las columnas y la independiente (``Me daría vergüenza
+que un familiar cercano fuese gay o lesbiana''), en las filas.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{tablaContingencia }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{rbind}\NormalTok{(freqtabla\_100xFila, Totales),}\DecValTok{2}\NormalTok{)}
 \FunctionTok{kable}\NormalTok{(tablaContingencia, }
-\AttributeTok{caption=}\StringTok{"Opinión sobre la libertad de gays y lesbianas (columnas)}
-\StringTok{según sentimiento de vergüenza por un familiar gay o lesbiana (filas)"}\NormalTok{,}
-\AttributeTok{align=}\FunctionTok{c}\NormalTok{(}\StringTok{"c"}\NormalTok{,}\StringTok{"c"}\NormalTok{,}\StringTok{"c"}\NormalTok{,}\StringTok{"c"}\NormalTok{,}\StringTok{"c"}\NormalTok{))}
+\AttributeTok{caption=}\StringTok{"Opinión sobre la libertad de gays y lesbianas (según sentimiento}
+\StringTok{de vergüenza por un familiar gay o lesbiana) (\% filas)"}\NormalTok{,}
+\AttributeTok{align=}\FunctionTok{c}\NormalTok{(}\StringTok{"c"}\NormalTok{,}\StringTok{"c"}\NormalTok{,}\StringTok{"c"}\NormalTok{,}\StringTok{"c"}\NormalTok{,}\StringTok{"c"}\NormalTok{)) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -537,9 +556,9 @@ cruzada} mediante la función \emph{rbind}
   >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.2560}}
   >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1200}}
   >{\centering\arraybackslash}p{(\columnwidth - 10\tabcolsep) * \real{0.1520}}@{}}
-\caption{Opinión sobre la libertad de gays y lesbianas (columnas) según
-sentimiento de vergüenza por un familiar gay o lesbiana
-(filas)}\tabularnewline
+\caption{Opinión sobre la libertad de gays y lesbianas (según
+sentimiento de vergüenza por un familiar gay o lesbiana) (\%
+filas)}\tabularnewline
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -579,6 +598,9 @@ En desacuerdo & 17.39 & 67.34 & 12.26 & 2.79 & 0.22 \\
 Muy en desacuerdo & 66.87 & 28.80 & 1.69 & 0.60 & 2.05 \\
 Totales & 30.54 & 45.02 & 16.61 & 5.18 & 2.65 \\
 \end{longtable}
+
+\emph{Fuente: Elaboración propia a partir de la Encuesta Social Europea
+de los años 2020 y 2022 (Ronda 10. Preguntas A48 y A47)}
 
 \subsection{3.5 CONCLUSIONES SOBRE LA TABLA DE
 CONTINGENCIA}\label{conclusiones-sobre-la-tabla-de-contingencia}
@@ -645,8 +667,6 @@ Finalmente, al \textbf{comparar todos los valores con el marginal de su
 columna} no se observa ninguna coincidencia. Esto nos lleva aceptar la
 dependencia entre las variables y, consecuentemente, a rechazar la
 hipótesis nula.
-
-\newpage
 
 \subsection{3.6 CÁLCULO DEL COEFICIENTE CHI
 CUADRADO}\label{cuxe1lculo-del-coeficiente-chi-cuadrado}
@@ -1076,8 +1096,6 @@ cercano fuese gay o lesbiana}
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
 ##   1.000   3.000   4.000   3.857   5.000   5.000      91
 \end{verbatim}
-
-\newpage
 
 \textbf{ACTIVIDAD 3}
 

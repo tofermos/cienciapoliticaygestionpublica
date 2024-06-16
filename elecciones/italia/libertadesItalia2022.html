@@ -2768,7 +2768,7 @@ Práctica 2.</div></h3>
 <h2>1.1 DESCRIPCIÓN DE LA PRÁCTICA</h2>
 <p>Este trabajo versará sobre las libertades en Italia a partir de
 diversos <strong>análisis bivariados</strong> sobre datos de la Encuesta
-Social Europea de los años 2020 y 2022 ( Ronda 10). Se escogerá en cada
+Social Europea de los años 2020 y 2022 (Ronda 10). Se escogerá en cada
 caso el test más adecuado y, finalmente, se hará una valoración crítica
 a partir de los datos analizados. Las variables que se estudiarán en las
 siguientes actividades corresponden al cuestionario de la encuesta.</p>
@@ -2792,7 +2792,9 @@ library(DescTools)
 if (!require(epiDisplay)){install.packages(&quot;epiDisplay&quot;)}
 library(epiDisplay)
 if (!require(DescTools)){install.packages(&quot;DescTools&quot;)}
-library(DescTools)</code></pre>
+library(DescTools)
+if (!require(kableExtra)){install.packages(&quot;kableExtra&quot;)}
+library(kableExtra)</code></pre>
 </div>
 <div id="gestión-de-ficheros-y-creación-de-la-base-de-datos" class="section level2">
 <h2>1.3 GESTIÓN DE FICHEROS Y CREACIÓN DE LA BASE DE DATOS</h2>
@@ -3003,16 +3005,19 @@ ello R dispone de otra función, <em>margin.table</em> :</p>
 <pre class="r"><code>Totales&lt;- margin.table((prop.table(freqtabla)*100), 2)</code></pre>
 <p>Se combinan las dos matrices (<em>freqtabla_100xFila</em> y
 <em>Totales</em>) para elaborar la <strong>Tabla de contingencia o Tabla
-cruzada</strong> mediante la función <em>rbind</em></p>
+cruzada</strong> mediante la función <em>rbind</em>. En estas tablas, la
+variable dependiente (“Los gays y lesbianas deberían tener libertad…”)
+se representa en las columnas y la independiente (“Me daría vergüenza
+que un familiar cercano fuese gay o lesbiana”), en las filas.</p>
 <pre class="r"><code>tablaContingencia &lt;- round(rbind(freqtabla_100xFila, Totales),2)
 kable(tablaContingencia, 
-caption=&quot;Opinión sobre la libertad de gays y lesbianas (columnas)
-según sentimiento de vergüenza por un familiar gay o lesbiana (filas)&quot;,
-align=c(&quot;c&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;))</code></pre>
+caption=&quot;Opinión sobre la libertad de gays y lesbianas (según sentimiento
+de vergüenza por un familiar gay o lesbiana) (% filas)&quot;,
+align=c(&quot;c&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;)) </code></pre>
 <table>
-<caption>Opinión sobre la libertad de gays y lesbianas (columnas) según
-sentimiento de vergüenza por un familiar gay o lesbiana
-(filas)</caption>
+<caption>Opinión sobre la libertad de gays y lesbianas (según
+sentimiento de vergüenza por un familiar gay o lesbiana) (%
+filas)</caption>
 <colgroup>
 <col width="24%" />
 <col width="12%" />
@@ -3082,6 +3087,8 @@ sentimiento de vergüenza por un familiar gay o lesbiana
 </tr>
 </tbody>
 </table>
+<p><em>Fuente: Elaboración propia a partir de la Encuesta Social Europea
+de los años 2020 y 2022 (Ronda 10. Preguntas A48 y A47)</em></p>
 </div>
 <div id="conclusiones-sobre-la-tabla-de-contingencia" class="section level2">
 <h2>3.5 CONCLUSIONES SOBRE LA TABLA DE CONTINGENCIA</h2>
@@ -3135,7 +3142,6 @@ este colectivo.</p>
 su columna</strong> no se observa ninguna coincidencia. Esto nos lleva
 aceptar la dependencia entre las variables y, consecuentemente, a
 rechazar la hipótesis nula.</p>
-<div style="page-break-after: always;"></div>
 </div>
 <div id="cálculo-del-coeficiente-chi-cuadrado" class="section level2">
 <h2>3.6 CÁLCULO DEL COEFICIENTE CHI CUADRADO</h2>
@@ -3403,7 +3409,6 @@ familiar cercano fuese gay o lesbiana</strong></p>
 <pre class="r"><code>summary(df_ronda10$hmsfmlsh)</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
 ##   1.000   3.000   4.000   3.857   5.000   5.000      91</code></pre>
-<div style="page-break-after: always;"></div>
 <p><strong>ACTIVIDAD 3</strong></p>
 <p>En este caso, se analiza la distribución de valores de solo una
 variable ordinal.</p>
